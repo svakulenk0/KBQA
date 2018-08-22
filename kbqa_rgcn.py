@@ -142,7 +142,7 @@ class KBQA_RGCN:
         for i in range(self.decoder_depth):
             answer_decoder.append(GRU(
                 self.rnn_units, 
-                return_state=True,
+                # return_state=True,
                 return_sequences=True, 
                 name='answer_decoder_%i'%i,
                 ))
