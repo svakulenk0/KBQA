@@ -179,9 +179,12 @@ class KBQA_RGCN:
 
 
 if __name__ == '__main__':
+
     # load embeddings
-    if not os.path.exists(GLOVE_EMBEDDINGS_PATH):
+    if not os.path.exists(EMBEDDINGS_PATH):
         os.makedirs(EMBEDDINGS_PATH)
+
+    if not os.path.exists(GLOVE_EMBEDDINGS_PATH):
         wget.download('http://nlp.stanford.edu/data/glove.6B.zip', EMBEDDINGS_PATH+"glove.6B.zip")
         with zipfile.ZipFile(EMBEDDINGS_PATH+"glove.6B.zip","r") as zip_ref:
             zip_ref.extractall(EMBEDDINGS_PATH)
