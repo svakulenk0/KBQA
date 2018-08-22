@@ -118,6 +118,8 @@ class KBQA_RGCN:
         support = 100
         # num_entities = X.shape[1]
         num_entities = 1000
+        # y_train.shape[1]
+        num_entities = 1000
 
         A_in = [InputAdj(sparse=True) for _ in range(support)]
         X_in = Input(shape=(num_entities,), sparse=True)
@@ -127,14 +129,15 @@ class KBQA_RGCN:
         # E'' - KB entities initial embedding
         # entity_embedding = 
 
-        kb_encoder = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
+        # kb_encoder
+        # kb_encoder_output = kb_encoder(kb_encoder_input)
+        kb_encoder_output = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
                              activation='relu',
-                             W_regularizer=l2(self.l2norm))([X_in] + A_in)
-        kb_encoder = Dropout(self.dropout_rate)(kb_encoder)
-        kb_encoder = GraphConvolution(y_train.shape[1], support, num_bases=self.bases,
-                             activation='softmax')([kb_encoder] + A_in)
+                             W_regularizer=l2(self.l2norm))(kb_encoder_input)
+        # kb_encoder = Dropout(self.dropout_rate)(kb_encoder)
+        # kb_encoder = GraphConvolution(, support, num_bases=self.bases,
+                             # activation='softmax')([kb_encoder] + A_in)
 
-        kb_encoder_output = kb_encoder(kb_encoder_input)
         
         # A' - answer decoder
         answer_decoder = []
