@@ -25,10 +25,11 @@ from rgcn.layers.graph import GraphConvolution
 from rgcn.layers.input_adj import InputAdj
 
 EMBEDDINGS_PATH = "./embeddings/"
+GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 
 
 # Prepare Glove File
-def readGloveFile(gloveFile=EMBEDDINGS_PATH+'glove.6B.50d.txt'):
+def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
     '''
     https://stackoverflow.com/questions/48677077/how-do-i-create-a-keras-embedding-layer-from-a-pre-trained-word-embedding-datase
     '''
@@ -179,10 +180,10 @@ class KBQA_RGCN:
 
 if __name__ == '__main__':
     # load embeddings
-    if not os.path.exists(EMBEDDINGS_PATH):
+    if not os.path.exists(GLOVE_EMBEDDINGS_PATH):
         os.makedirs(EMBEDDINGS_PATH)
-        wget.download('http://nlp.stanford.edu/data/glove.6B.zip', EMBEDDINGS_PATH)
-        with zipfile.ZipFile(EMBEDDINGS_PATH + "glove.6B.zip","r") as zip_ref:
+        wget.download('http://nlp.stanford.edu/data/glove.6B.zip', EMBEDDINGS_PATH+"glove.6B.zip")
+        with zipfile.ZipFile(EMBEDDINGS_PATH+"glove.6B.zip","r") as zip_ref:
             zip_ref.extractall(EMBEDDINGS_PATH)
 
     # define QA model architecture parameters
