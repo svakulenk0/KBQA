@@ -12,6 +12,9 @@ Neural network model with R-GCN layer for KBQA
 Based on https://github.com/DSTC-MSR-NLP/DSTC7-End-to-End-Conversation-Modeling/blob/master/baseline/baseline.py 
 
 '''
+import os
+import zipfile
+
 import numpy as np
 
 from keras.layers import Input, GRU, Dropout, Embedding, Dense
@@ -20,11 +23,11 @@ from keras.regularizers import l2
 from rgcn.layers.graph import GraphConvolution
 from rgcn.layers.input_adj import InputAdj
 
-PATH_TO_GLOVE = "./embeddings/glove.6B.50d.txt"
+EMBEDDINGS_PATH = "./embeddings/"
 
 
 # Prepare Glove File
-def readGloveFile(gloveFile=PATH_TO_GLOVE):
+def readGloveFile(gloveFile=EMBEDDINGS_PATH+'glove.6B.50d.txt'):
     '''
     https://stackoverflow.com/questions/48677077/how-do-i-create-a-keras-embedding-layer-from-a-pre-trained-word-embedding-datase
     '''
@@ -174,6 +177,13 @@ class KBQA_RGCN:
 
 
 if __name__ == '__main__':
+    # load embeddings
+    if not os.path.exists(EMBEDDINGS_PATH):
+        os.makedirs(EMBEDDINGS_PATH)
+        wget.download('http://nlp.stanford.edu/data/glove.6B.zip', EMBEDDINGS_PATH)
+        with zipfile.ZipFile(EMBEDDINGS_PATH + "glove.6B.zip","r") as zip_ref:
+            zip_ref.extractall(EMBEDDINGS_PATH)
+
     # define QA model architecture parameters
     rnn_units = 512
     encoder_depth = 2
