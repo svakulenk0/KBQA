@@ -13,6 +13,7 @@ Based on https://github.com/DSTC-MSR-NLP/DSTC7-End-to-End-Conversation-Modeling/
 
 '''
 import os
+import wget
 import zipfile
 
 import numpy as np
