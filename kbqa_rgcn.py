@@ -118,8 +118,6 @@ class KBQA_RGCN:
         support = 100
         # num_entities = X.shape[1]
         num_entities = 1000
-        # y_train.shape[1]
-        num_entities = 1000
 
         A_in = [InputAdj(sparse=True) for _ in range(support)]
         X_in = Input(shape=(num_entities,), sparse=True)
