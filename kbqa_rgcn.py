@@ -133,7 +133,6 @@ class KBQA_RGCN:
         kb_encoder = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
                              activation='relu',
                              W_regularizer=l2(self.l2norm))
-        kb_encoder_output = kb_encoder(kb_encoder_input)
         # kb_encoder_output = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
                              # activation='relu',
                              # W_regularizer=l2(self.l2norm))(kb_encoder_input)
@@ -156,18 +155,18 @@ class KBQA_RGCN:
                                 activation='softmax', name='decoder_softmax')
 
         # network architecture
-        question_encoder_output = self._stacked_rnn(
-                question_encoder, word_embedding(question_encoder_input))
+        question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_encoder_input))
+        kb_encoder_output = kb_encoder(kb_encoder_input)
         
-        print question_encoder_output
-        print kb_encoder_output
+        # to do join outputs of the encoders and decoder
 
         # decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output, [question_encoder_states[-1]] * self.decoder_depth)
-        decoder_outputs = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
-        question_encoder_output = Dropout(self.dropout_rate)(question_encoder_output)
-        kb_encoder_output = Dropout(self.dropout_rate)(kb_encoder_output)
-        decoder_outputs = decoder_softmax(decoder_outputs)
-        # decoder_outputs = decoder_softmax(question_encoder_output + kb_encoder_output)
+        # decoder_outputs = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
+        # question_encoder_output = Dropout(self.dropout_rate)(question_encoder_output)
+        # kb_encoder_output = Dropout(self.dropout_rate)(kb_encoder_output)
+        # decoder_outputs = decoder_softmax(decoder_outputs)
+        
+        decoder_outputs = decoder_softmax(question_encoder_output + kb_encoder_output)
 
         self.model_train = Model(
                 [question_encoder_input, [X_in] + A_in],   # [input question, input KB],
@@ -219,11 +218,12 @@ if __name__ == '__main__':
 
     # initialize the model
     model = KBQA_RGCN(rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
-    
+
     # set mode
     mode = 'train'
     
     # modes
     if mode == 'train':
         model.build_model_train()
+        print model.summary()
         model.train(batch_size, epochs, lr=learning_rate)
