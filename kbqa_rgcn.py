@@ -191,7 +191,8 @@ class KBQA_RGCN:
 
         # encode questions and answers using embeddings vocabulary
         assert len(questions) == len(answers)
-        num_samples = len(questions)
+        # num_samples = len(questions)
+        num_samples = 102
 
         questions_data = []
         answers_data = []
@@ -199,16 +200,12 @@ class KBQA_RGCN:
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
-            questions_data.append([self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex])
-            answers_data.append([self.wordToIndex[word] for word in text_to_word_sequence(answers[i]) if word in self.wordToIndex])
+            questions_data.append([self.wordToIndex[word] for word in text_to_word_sequence(questions[0]) if word in self.wordToIndex])
+            answers_data.append([self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex])
         
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         answers_data = np.asarray(pad_sequences(answers_data, padding='post'))
-
-        # create batches TODO
-        questions_data = [questions_data] * 102
-        answers_data = [answers_data] * 102
 
         return (questions_data, (X, A), answers_data)
 
