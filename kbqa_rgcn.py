@@ -51,7 +51,7 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
 
         tokens = sorted(wordToGlove.keys())
         for idx, tok in enumerate(tokens):
-            kerasIdx = idx + 1  # 0 is reserved for masking in Keras (see above)
+            kerasIdx = idx + 1  # 0 is reserved for masking in Keras
             wordToIndex[tok] = kerasIdx # associate an index to a token (word)
             indexToWord[kerasIdx] = tok # associate a word to a token (word). Note: inverse of dictionary above
 
@@ -198,9 +198,9 @@ class KBQA_RGCN:
         
         # iterate over samples
         for i in range(num_samples):
-            # encode words
-            questions_data.append([self.wordToIndex[word] for word in text_to_word_sequence(questions[i])])
-            answers_data.append([self.wordToIndex[word] for word in text_to_word_sequence(answers[i])])
+            # encode words (ignore OOV words)
+            questions_data.append([self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex])
+            answers_data.append([self.wordToIndex[word] for word in text_to_word_sequence(answers[i]) if word in self.wordToIndex])
         
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
