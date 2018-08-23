@@ -131,8 +131,7 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn/blob/master/rgcn/train.py
 
         A_in = [InputAdj(sparse=True) for _ in range(self.support)]
-        # todo fix to entity vocab len
-        X_in = Input(shape=(self.word_vocab_len,), sparse=True)
+        X_in = Input(shape=(self.entity_vocab_len,), sparse=True)
 
         kb_encoder_input = [X_in] + A_in
         input=[X_in] + A_in
@@ -161,8 +160,7 @@ class KBQA_RGCN:
                 name='answer_decoder_%i'%i,
                 ))
 
-        decoder_softmax = Dense(num_entities + 1,        # +1 as mask_zero
-                                activation='softmax', name='decoder_softmax')
+        decoder_softmax = Dense(self.entity_vocab_len, activation='softmax', name='decoder_softmax')
 
         # network architecture
         question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_encoder_input))
@@ -191,12 +189,13 @@ class KBQA_RGCN:
         X = sp.csr_matrix(A[0].shape)
         # self.entityToIndex = {}
 
+        # todo generate entity index
         self.entityToIndex = {}
-        # self.entity_vocab_len = self.word_vocab_len
+        self.entity_vocab_len = self.word_vocab_len ## X.shape[1]
 
         # define KB parameters for input to R-GCN 
         self.support = len(A)
-        self.num_entities = X.shape[1]
+        # self.num_entities = X.shape[1]
 
         # encode questions and answers using embeddings vocabulary
         assert len(questions) == len(answers)
@@ -204,7 +203,7 @@ class KBQA_RGCN:
         num_samples = 1
 
         questions_data = []
-        answers_data = np.zeros((num_samples, self.max_seq_len, self.word_vocab_len))
+        answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
