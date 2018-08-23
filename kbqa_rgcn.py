@@ -235,8 +235,8 @@ class KBQA_RGCN:
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
             self.model_train.fit(questions, answers, batch_size=batch_size,)
 
-            self.save_model('model_epoch%i.h5'%(epoch + 1))
-        self.save_model('model.h5')
+            # self.save_model('model_epoch%i.h5'%(epoch + 1))
+        # self.save_model('model.h5')
 
 
 def download_glove_embeddings():
