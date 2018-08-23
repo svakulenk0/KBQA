@@ -179,7 +179,8 @@ class KBQA_RGCN:
         # fix: add output of the KB encoder
         answer_decoder_output = decoder_softmax(question_encoder_output)
 
-        self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
+        # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
+        self.model_train = Model(question_encoder_input,   # [input question, input KB],
                                  answer_decoder_output)                        # ground-truth target answer
         print self.model_train.summary()
 
@@ -220,7 +221,8 @@ class KBQA_RGCN:
         for epoch in range(epochs):
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
-            self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
+            # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
+            self.model_train.fit(questions, answers, batch_size=batch_size,)
 
             self.save_model('model_epoch%i.h5'%(epoch + 1))
         self.save_model('model.h5')
