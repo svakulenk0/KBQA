@@ -209,14 +209,14 @@ class KBQA_RGCN:
             # encode words (ignore OOV words)
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[0]) if word in self.wordToIndex]
             for t, token_index in enumerate(questions_sequence):
-                encoder_input_data[i, t] = token_index
+                questions_data[i, t] = token_index
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
             answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
             for t, token_index in enumerate(answers_sequence):
                 answers_data[i, t, token_index] = 1.
         
         # normalize length
-        questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
+        # questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
        
         print questions_data
         print answers_data
