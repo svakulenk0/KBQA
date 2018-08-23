@@ -11,6 +11,7 @@ Sample data to test the KBQA network
 format based on LC-QuAD https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json
 
 '''
+import pickle as pkl
 
 QS = ["What is the river whose mouth is in deadsea?"]
 AS = ["http://dbpedia.org/resource/Jordan_River"]
