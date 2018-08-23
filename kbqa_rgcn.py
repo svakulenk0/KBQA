@@ -58,21 +58,6 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
     return wordToIndex, indexToWord, wordToGlove
 
 
-def create_pretrained_embedding_layer(wordToGlove, wordToIndex, isTrainable):
-    '''
-    Create pre-trained Keras embedding layer
-    '''
-    vocabLen = len(wordToIndex) + 1  # adding 1 to account for masking
-    embDim = next(iter(wordToGlove.values())).shape[0]  # works with any glove dimensions (e.g. 50)
-
-    embeddingMatrix = np.zeros((vocabLen, embDim))  # initialize with zeros
-    for word, index in wordToIndex.items():
-        embeddingMatrix[index, :] = wordToGlove[word] # create embedding: word index to Glove word embedding
-
-    embeddingLayer = Embedding(vocabLen, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
-    return embeddingLayer
-
-
 class KBQA_RGCN:
     '''
     NN model for KBQA with R-GCN for KB embedding training
@@ -100,6 +85,20 @@ class KBQA_RGCN:
             # states.append(state)
         return outputs
 
+    def create_pretrained_embedding_layer(self, isTrainable=False):
+        '''
+        Create pre-trained Keras embedding layer
+        '''
+        self.vocab_len = len(self.wordToIndex) + 1  # adding 1 to account for masking
+        embDim = next(iter(self.wordToGlove.values())).shape[0]  # works with any glove dimensions (e.g. 50)
+
+        embeddingMatrix = np.zeros((self.vocab_len, embDim))  # initialize with zeros
+        for word, index in self.wordToIndex.items():
+            embeddingMatrix[index, :] = self.wordToGlove[word] # create embedding: word index to Glove word embedding
+
+        embeddingLayer = Embedding(self.vocabLen, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
+        return embeddingLayer
+
     def build_model_train(self):
         '''
         build layers
@@ -108,10 +107,8 @@ class KBQA_RGCN:
         question_encoder_input = Input(shape=(None,), name='question_encoder_input')
 
         # E' - question words embedding
-        wordToIndex, indexToWord, wordToGlove = readGloveFile()
-        self.wordToIndex = wordToIndex
-        self.indexToWord = indexToWord
-        word_embedding = create_pretrained_embedding_layer(wordToGlove, wordToIndex, False)
+        self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
+        word_embedding = self.create_pretrained_embedding_layer()
 
         question_encoder = []
         for i in range(self.encoder_depth):
@@ -196,18 +193,18 @@ class KBQA_RGCN:
         num_samples = 1
 
         questions_data = []
-        answers_data = []
+        answers_data = np.zeros((num_samples, self.max_seq_len, self.vocab_len))
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
             questions_data.append([self.wordToIndex[word] for word in text_to_word_sequence(questions[0]) if word in self.wordToIndex])
-            answers_data.append([self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex])
+            # encode answer into a one-hot-encoding with a 3 dimensional tensor
+            answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
+            for t, token_index in enumerate(answers_sequence):
+                answers_data[i, t, token_index] = 1.
         
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
-        print questions_data
-        answers_data = np.asarray(pad_sequences(answers_data, padding='post'))
-        print answers_data
 
         return (questions_data, (X, A), answers_data)
 
