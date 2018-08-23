@@ -129,18 +129,18 @@ class KBQA_RGCN:
         # K' - KB encoder layer: (entities, relations) adjacency matrix as input via R-GCN architecture
         # https://github.com/tkipf/relational-gcn/blob/master/rgcn/train.py
 
-        A_in = [InputAdj(sparse=True) for _ in range(self.support)]
-        X_in = Input(shape=(self.entity_vocab_len,), sparse=True)
+            # A_in = [InputAdj(sparse=True) for _ in range(self.support)]
+            # X_in = Input(shape=(self.entity_vocab_len,), sparse=True)
 
-        kb_encoder_input = [X_in] + A_in
-        input=[X_in] + A_in
+            # kb_encoder_input = [X_in] + A_in
+            # input=[X_in] + A_in
 
-        # E'' - KB entities initial embedding
-        # entity_embedding = 
+            # # E'' - KB entities initial embedding
+            # # entity_embedding = 
 
-        kb_encoder = GraphConvolution(self.num_hidden_units, self.support, num_bases=self.bases, featureless=True,
-                                      activation='relu',
-                                      W_regularizer=l2(self.l2norm))
+            # kb_encoder = GraphConvolution(self.num_hidden_units, self.support, num_bases=self.bases, featureless=True,
+            #                               activation='relu',
+            #                               W_regularizer=l2(self.l2norm))
         # kb_encoder_output = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
                              # activation='relu',
                              # W_regularizer=l2(self.l2norm))(kb_encoder_input)
@@ -163,7 +163,7 @@ class KBQA_RGCN:
 
         # network architecture
         question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_encoder_input))
-        kb_encoder_output = kb_encoder(kb_encoder_input)
+            # kb_encoder_output = kb_encoder(kb_encoder_input)
         
         # to do join outputs of the encoders and decoder
 
@@ -214,6 +214,10 @@ class KBQA_RGCN:
         
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
+        
+        print questions_data
+        print answers_data
+
         self.dataset = (questions_data, (X, A), answers_data)
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
