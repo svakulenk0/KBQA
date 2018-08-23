@@ -169,7 +169,7 @@ class KBQA_RGCN:
 
         answer_decoder_output = decoder_softmax(question_encoder_output)
 
-        self.model_train = Model(input=[question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
+        self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
                                  answer_decoder_output)                        # ground-truth target answer
 
         def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
