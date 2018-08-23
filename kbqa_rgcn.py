@@ -104,7 +104,7 @@ class KBQA_RGCN:
         embeddingLayer = Embedding(self.word_vocab_len, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
         return embeddingLayer
 
-    def build_model_train(self):
+    def build_model_train(self, dataset):
         '''
         build layers
         '''
@@ -114,6 +114,9 @@ class KBQA_RGCN:
         # E' - question words embedding
         self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         word_embedding = self.create_pretrained_embedding_layer()
+
+        # load data
+        self.load_data(dataset)
 
         question_encoder = []
         for i in range(self.encoder_depth):
@@ -215,8 +218,7 @@ class KBQA_RGCN:
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         self.dataset = (questions_data, (X, A), answers_data)
 
-    def train(self, dataset, batch_size, epochs, batch_per_load=10, lr=0.001):
-        self.load_data(dataset)
+    def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
         
         questions, (X, A), answers = self.dataset
@@ -264,14 +266,15 @@ def test_train():
     # initialize the model
     model = KBQA_RGCN(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
-    # build model
-    model.build_model_train()
-    
-    # load toy data
+     # load toy data
     from toy_data import *
     dataset = (QS, KB, AS)
+
+    # build model
+    model.build_model_train(dataset)
+   
     # train model
-    model.train(dataset, batch_size, epochs, lr=learning_rate)
+    model.train(batch_size, epochs, lr=learning_rate)
 
 
 if __name__ == '__main__':
