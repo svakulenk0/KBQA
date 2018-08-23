@@ -15,9 +15,9 @@ Based on https://github.com/DSTC-MSR-NLP/DSTC7-End-to-End-Conversation-Modeling/
 import os
 import wget
 import zipfile
-
 import numpy as np
 
+from keras.models import Model
 from keras.layers import Input, GRU, Dropout, Embedding, Dense
 from keras.regularizers import l2
 
