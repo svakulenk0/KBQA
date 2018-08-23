@@ -10,6 +10,11 @@ Created on Aug 22, 2018
 Neural network model with R-GCN layer for KBQA
 
 Based on https://github.com/DSTC-MSR-NLP/DSTC7-End-to-End-Conversation-Modeling/blob/master/baseline/baseline.py 
+and RGCN https://github.com/tkipf/relational-gcn
+
+Question - text as the sequence of words (word index)
+Answer - entity from KB (entity index)
+
 
 '''
 import os
@@ -89,14 +94,14 @@ class KBQA_RGCN:
         '''
         Create pre-trained Keras embedding layer
         '''
-        self.vocab_len = len(self.wordToIndex) + 1  # adding 1 to account for masking
+        self.word_vocab_len = len(self.wordToIndex) + 1  # adding 1 to account for masking
         embDim = next(iter(self.wordToGlove.values())).shape[0]  # works with any glove dimensions (e.g. 50)
 
-        embeddingMatrix = np.zeros((self.vocab_len, embDim))  # initialize with zeros
+        embeddingMatrix = np.zeros((self.word_vocab_len, embDim))  # initialize with zeros
         for word, index in self.wordToIndex.items():
             embeddingMatrix[index, :] = self.wordToGlove[word] # create embedding: word index to Glove word embedding
 
-        embeddingLayer = Embedding(self.vocab_len, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
+        embeddingLayer = Embedding(self.word_vocab_len, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
         return embeddingLayer
 
     def build_model_train(self):
@@ -121,15 +126,9 @@ class KBQA_RGCN:
 
         # K' - KB encoder layer: (entities, relations) adjacency matrix as input via R-GCN architecture
         # https://github.com/tkipf/relational-gcn/blob/master/rgcn/train.py
-        
-        # define KB parameters for input to R-GCN 
-        # support = len(A)
-        support = 100
-        # num_entities = X.shape[1]
-        num_entities = 1000
 
-        A_in = [InputAdj(sparse=True) for _ in range(support)]
-        X_in = Input(shape=(num_entities,), sparse=True)
+        A_in = [InputAdj(sparse=True) for _ in range(self.support)]
+        X_in = Input(shape=(self.entity_vocab_len,), sparse=True)
 
         kb_encoder_input = [X_in] + A_in
         input=[X_in] + A_in
@@ -138,8 +137,8 @@ class KBQA_RGCN:
         # entity_embedding = 
 
         kb_encoder = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
-                             activation='relu',
-                             W_regularizer=l2(self.l2norm))
+                                      activation='relu',
+                                      W_regularizer=l2(self.l2norm))
         # kb_encoder_output = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
                              # activation='relu',
                              # W_regularizer=l2(self.l2norm))(kb_encoder_input)
@@ -186,6 +185,14 @@ class KBQA_RGCN:
 
         # encode entities with one-hot-vector encoding
         X = sp.csr_matrix(A[0].shape)
+        # self.entityToIndex = {}
+
+        self.entityToIndex = {}
+        self.entity_vocab_len = self.word_vocab_len
+
+        # define KB parameters for input to R-GCN 
+        self.support = len(A)
+        self.num_entities = X.shape[1]
 
         # encode questions and answers using embeddings vocabulary
         assert len(questions) == len(answers)
@@ -193,7 +200,7 @@ class KBQA_RGCN:
         num_samples = 1
 
         questions_data = []
-        answers_data = np.zeros((num_samples, self.max_seq_len, self.vocab_len))
+        answers_data = np.zeros((num_samples, self.max_seq_len, self.word_vocab_len))
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
@@ -205,15 +212,12 @@ class KBQA_RGCN:
         
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
-
-        return (questions_data, (X, A), answers_data)
+        self.dataset = (questions_data, (X, A), answers_data)
 
     def train(self, dataset, batch_size, epochs, batch_per_load=10, lr=0.001):
-        '''
-        '''
         self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
         
-        questions, (X, A), answers = self.load_data(dataset)
+        questions, (X, A), answers = self.dataset
 
         for epoch in range(epochs):
             # load training dataset
@@ -258,12 +262,13 @@ def test_train():
     # initialize the model
     model = KBQA_RGCN(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
-    model.build_model_train()
-
-    # load test data
-    from test_data import *
+    # load toy data
+    from toy_data import *
     dataset = (QS, KB, AS)
-
+    model.load_data(dataset)
+    
+    # train model
+    model.build_model_train()
     model.train(dataset, batch_size, epochs, lr=learning_rate)
 
 
