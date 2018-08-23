@@ -216,6 +216,7 @@ class KBQA_RGCN:
         self.dataset = (questions_data, (X, A), answers_data)
 
     def train(self, dataset, batch_size, epochs, batch_per_load=10, lr=0.001):
+        self.load_data(dataset)
         self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
         
         questions, (X, A), answers = self.dataset
@@ -263,13 +264,13 @@ def test_train():
     # initialize the model
     model = KBQA_RGCN(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
+    # build model
+    model.build_model_train()
+    
     # load toy data
     from toy_data import *
     dataset = (QS, KB, AS)
-    model.load_data(dataset)
-    
     # train model
-    model.build_model_train()
     model.train(dataset, batch_size, epochs, lr=learning_rate)
 
 
