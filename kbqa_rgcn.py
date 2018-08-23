@@ -128,7 +128,8 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn/blob/master/rgcn/train.py
 
         A_in = [InputAdj(sparse=True) for _ in range(self.support)]
-        X_in = Input(shape=(self.entity_vocab_len,), sparse=True)
+        # todo fix to entity vocab len
+        X_in = Input(shape=(self.word_vocab_len,), sparse=True)
 
         kb_encoder_input = [X_in] + A_in
         input=[X_in] + A_in
@@ -188,7 +189,7 @@ class KBQA_RGCN:
         # self.entityToIndex = {}
 
         self.entityToIndex = {}
-        self.entity_vocab_len = self.word_vocab_len
+        # self.entity_vocab_len = self.word_vocab_len
 
         # define KB parameters for input to R-GCN 
         self.support = len(A)
