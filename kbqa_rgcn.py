@@ -96,7 +96,7 @@ class KBQA_RGCN:
         for word, index in self.wordToIndex.items():
             embeddingMatrix[index, :] = self.wordToGlove[word] # create embedding: word index to Glove word embedding
 
-        embeddingLayer = Embedding(self.vocabLen, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
+        embeddingLayer = Embedding(self.vocab_len, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
         return embeddingLayer
 
     def build_model_train(self):
