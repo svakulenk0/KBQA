@@ -201,13 +201,15 @@ class KBQA_RGCN:
         # num_samples = len(questions)
         num_samples = 1
 
-        questions_data = []
-        answers_data = np.zeros((num_samples, self.max_seq_len, self.word_vocab_len))
+        questions_data = np.zeros((num_samples, self.max_seq_len))
+        answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
         
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
-            questions_data.append([self.wordToIndex[word] for word in text_to_word_sequence(questions[0]) if word in self.wordToIndex])
+            questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[0]) if word in self.wordToIndex]
+            for t, token_index in enumerate(questions_sequence):
+                encoder_input_data[i, t] = token_index
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
             answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
             for t, token_index in enumerate(answers_sequence):
