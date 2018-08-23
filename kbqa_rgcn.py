@@ -24,6 +24,9 @@ from keras.layers import Input, GRU, Dropout, Embedding, Dense
 from keras.regularizers import l2
 from keras.optimizers import Adam
 
+from keras.preprocessing.text import text_to_word_sequence
+from keras.preprocessing.sequence import pad_sequences
+
 from rgcn.layers.graph import GraphConvolution
 from rgcn.layers.input_adj import InputAdj
 
@@ -74,7 +77,8 @@ class KBQA_RGCN:
     '''
     NN model for KBQA with R-GCN for KB embedding training
     '''
-    def __init__(self, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate=0.2):
+    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate=0.2):
+        self.max_seq_len = max_seq_len
         self.rnn_units = rnn_units
         self.encoder_depth = encoder_depth
         self.decoder_depth = decoder_depth
@@ -177,14 +181,37 @@ class KBQA_RGCN:
                                  answer_decoder_output)                        # ground-truth target answer
         print self.model_train.summary()
 
+    def load_data(self, dataset, wordToIndex):
+        questions, A, answers = dataset
+
+        # encode entities with one-hot-vector encoding
+        X = sp.csr_matrix(A[0].shape)
+
+        # encode questions and answers using embeddings vocabulary
+        assert len(questions) == len(answers)
+        num_samples = len(questions)
+
+        questions_data = []
+        answers_data = []
+        
+        # iterate over samples
+        for i in range(num_samples):
+            # encode words
+            questions_data.append([wordToIndex[word] for word in text_to_word_sequence(questions[i])])
+            answers_data.append([wordToIndex[word] for word in text_to_word_sequence(answers[i])])
+        
+        # normalize length
+        questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
+        answers_data = np.asarray(pad_sequences(answers_data, padding='post')
+
+        return questions_data, (X, A), answers_data
 
     def train(self, dataset, batch_size, epochs, batch_per_load=10, lr=0.001):
         '''
         '''
         self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
         
-        questions, A, answers = dataset
-        X = sp.csr_matrix(A[0].shape)
+        questions, (X, A), answers = self.load_data(dataset)
 
         for epoch in range(epochs):
             # load training dataset
@@ -209,6 +236,7 @@ def test_train():
     download_glove_embeddings()
 
     # define QA model architecture parameters
+    max_seq_len = 32
     rnn_units = 512
     encoder_depth = 2
     decoder_depth = 2
@@ -225,7 +253,7 @@ def test_train():
     learning_rate = 1e-3
 
     # initialize the model
-    model = KBQA_RGCN(rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
+    model = KBQA_RGCN(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
     model.build_model_train()
 
