@@ -140,7 +140,7 @@ class KBQA_RGCN:
         # E'' - KB entities initial embedding
         # entity_embedding = 
 
-        kb_encoder = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
+        kb_encoder = GraphConvolution(self.num_hidden_units, self.support, num_bases=self.bases, featureless=True,
                                       activation='relu',
                                       W_regularizer=l2(self.l2norm))
         # kb_encoder_output = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
