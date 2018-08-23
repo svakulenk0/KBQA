@@ -181,8 +181,7 @@ class KBQA_RGCN:
                 # load training dataset
                 # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
 
-                self.model_train.fit(
-                    [question_encoder_input_data, kb_encoder_input_data], 
+                self.model_train.fit(question_encoder_input_data + kb_encoder_input_data, 
                      answer_decoder_target_data, batch_size=batch_size,)
 
                 self.save_model('model_epoch%i.h5'%(epoch + 1))
