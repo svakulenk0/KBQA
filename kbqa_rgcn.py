@@ -187,6 +187,7 @@ class KBQA_RGCN:
         questions, A, answers = dataset
 
         # encode entities with one-hot-vector encoding
+        print A[0].shape
         X = sp.csr_matrix(A[0].shape)
 
         # encode questions and answers using embeddings vocabulary
