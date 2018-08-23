@@ -109,6 +109,8 @@ class KBQA_RGCN:
 
         # E' - question words embedding
         wordToIndex, indexToWord, wordToGlove = readGloveFile()
+        self.wordToIndex = wordToIndex
+        self.indexToWord = indexToWord
         word_embedding = create_pretrained_embedding_layer(wordToGlove, wordToIndex, False)
 
         question_encoder = []
@@ -181,7 +183,7 @@ class KBQA_RGCN:
                                  answer_decoder_output)                        # ground-truth target answer
         print self.model_train.summary()
 
-    def load_data(self, dataset, wordToIndex):
+    def load_data(self, dataset):
         questions, A, answers = dataset
 
         # encode entities with one-hot-vector encoding
@@ -197,8 +199,8 @@ class KBQA_RGCN:
         # iterate over samples
         for i in range(num_samples):
             # encode words
-            questions_data.append([wordToIndex[word] for word in text_to_word_sequence(questions[i])])
-            answers_data.append([wordToIndex[word] for word in text_to_word_sequence(answers[i])])
+            questions_data.append([self.wordToIndex[word] for word in text_to_word_sequence(questions[i])])
+            answers_data.append([self.wordToIndex[word] for word in text_to_word_sequence(answers[i])])
         
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
