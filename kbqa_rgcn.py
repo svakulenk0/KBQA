@@ -81,6 +81,7 @@ class KBQA_RGCN:
         self.dropout_rate = dropout_rate
 
     def _stacked_rnn(self, rnns, inputs, initial_states=None):
+        print inputs
         # if initial_states is None:
         #     initial_states = [None] * len(rnns)
         # outputs, state = rnns[0](inputs, initial_state=initial_states[0])
@@ -129,11 +130,13 @@ class KBQA_RGCN:
         # E'' - KB entities initial embedding
         # entity_embedding = 
 
-        # kb_encoder
-        # kb_encoder_output = kb_encoder(kb_encoder_input)
-        kb_encoder_output = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
+        kb_encoder = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
                              activation='relu',
-                             W_regularizer=l2(self.l2norm))(kb_encoder_input)
+                             W_regularizer=l2(self.l2norm))
+        kb_encoder_output = kb_encoder(kb_encoder_input)
+        # kb_encoder_output = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
+                             # activation='relu',
+                             # W_regularizer=l2(self.l2norm))(kb_encoder_input)
         # kb_encoder = Dropout(self.dropout_rate)(kb_encoder)
         # kb_encoder = GraphConvolution(, support, num_bases=self.bases,
                              # activation='softmax')([kb_encoder] + A_in)
@@ -153,9 +156,11 @@ class KBQA_RGCN:
                                 activation='softmax', name='decoder_softmax')
 
         # network architecture
-        print(question_encoder)
         question_encoder_output = self._stacked_rnn(
                 question_encoder, word_embedding(question_encoder_input))
+        
+        print question_encoder_output
+        print kb_encoder_output
 
         # decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output, [question_encoder_states[-1]] * self.decoder_depth)
         decoder_outputs = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
