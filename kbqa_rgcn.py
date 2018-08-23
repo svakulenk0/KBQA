@@ -204,7 +204,7 @@ class KBQA_RGCN:
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         answers_data = np.asarray(pad_sequences(answers_data, padding='post')
 
-        return questions_data, (X, A), answers_data
+        return (questions_data, (X, A), answers_data)
 
     def train(self, dataset, batch_size, epochs, batch_per_load=10, lr=0.001):
         '''
