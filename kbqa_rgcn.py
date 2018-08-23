@@ -166,7 +166,7 @@ class KBQA_RGCN:
         # kb_encoder_output = Dropout(self.dropout_rate)(kb_encoder_output)
         # decoder_outputs = decoder_softmax(decoder_outputs)
 
-        decoder_outputs = decoder_softmax(question_encoder_output)
+        answer_decoder_output = decoder_softmax(question_encoder_output)
 
         self.model_train = Model(
                 [question_encoder_input, [X_in] + A_in],   # [input question, input KB],
