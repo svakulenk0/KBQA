@@ -78,7 +78,6 @@ class KBQA_RGCN:
         self.dropout_rate = dropout_rate
 
     def _stacked_rnn(self, rnns, inputs, initial_states=None):
-        print inputs
         # if initial_states is None:
         #     initial_states = [None] * len(rnns)
         # outputs, state = rnns[0](inputs, initial_state=initial_states[0])
@@ -223,6 +222,7 @@ class KBQA_RGCN:
         questions, (X, A), answers = self.dataset
 
         for epoch in range(epochs):
+            print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
@@ -259,7 +259,7 @@ def test_train():
 
     # define training parameters
     batch_size = 100
-    epochs = 10
+    epochs = 2  # 10
     learning_rate = 1e-3
 
     # initialize the model
