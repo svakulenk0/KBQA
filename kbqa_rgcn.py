@@ -83,10 +83,12 @@ class KBQA_RGCN:
     def _stacked_rnn(self, rnns, inputs, initial_states=None):
         if initial_states is None:
             initial_states = [None] * len(rnns)
-        outputs, state = rnns[0](inputs, initial_state=initial_states[0])
+        # outputs, state = rnns[0](inputs, initial_state=initial_states[0])
+        outputs, state = rnns[0](inputs)
         states = [state]
         for i in range(1, len(rnns)):
-            outputs, state = rnns[i](outputs, initial_state=initial_states[i])
+            # outputs, state = rnns[i](outputs, initial_state=initial_states[i])
+            outputs, state = rnns[i](outputs)
             states.append(state)
         return outputs, states
 
@@ -154,7 +156,8 @@ class KBQA_RGCN:
         question_encoder_output, question_encoder_states = self._stacked_rnn(
                 question_encoder, word_embedding(question_encoder_input))
 
-        decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, kb_encoder_output, [question_encoder_states[-1]] * self.decoder_depth)
+        # decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output, [question_encoder_states[-1]] * self.decoder_depth)
+        decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
         decoder_outputs = Dropout(self.dropout_rate)(decoder_outputs)
         decoder_outputs = decoder_softmax(decoder_outputs)
 
