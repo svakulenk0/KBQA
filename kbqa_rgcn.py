@@ -81,8 +81,8 @@ class KBQA_RGCN:
         self.dropout_rate = dropout_rate
 
     def _stacked_rnn(self, rnns, inputs, initial_states=None):
-        if initial_states is None:
-            initial_states = [None] * len(rnns)
+        # if initial_states is None:
+        #     initial_states = [None] * len(rnns)
         # outputs, state = rnns[0](inputs, initial_state=initial_states[0])
         outputs, state = rnns[0](inputs)
         states = [state]
@@ -153,6 +153,7 @@ class KBQA_RGCN:
                                 activation='softmax', name='decoder_softmax')
 
         # network architecture
+        print(question_encoder)
         question_encoder_output, question_encoder_states = self._stacked_rnn(
                 question_encoder, word_embedding(question_encoder_input))
 
