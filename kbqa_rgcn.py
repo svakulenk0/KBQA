@@ -20,6 +20,7 @@ import numpy as np
 from keras.models import Model
 from keras.layers import Input, GRU, Dropout, Embedding, Dense
 from keras.regularizers import l2
+from keras.optimizers import Adam
 
 from rgcn.layers.graph import GraphConvolution
 from rgcn.layers.input_adj import InputAdj
