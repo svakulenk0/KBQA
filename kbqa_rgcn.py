@@ -192,7 +192,7 @@ class KBQA_RGCN:
         # encode questions and answers using embeddings vocabulary
         assert len(questions) == len(answers)
         # num_samples = len(questions)
-        num_samples = 102
+        num_samples = 500
 
         questions_data = []
         answers_data = []
