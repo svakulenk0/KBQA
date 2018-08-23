@@ -84,13 +84,13 @@ class KBQA_RGCN:
         # if initial_states is None:
         #     initial_states = [None] * len(rnns)
         # outputs, state = rnns[0](inputs, initial_state=initial_states[0])
-        outputs, state = rnns[0](inputs)
-        states = [state]
+        outputs = rnns[0](inputs)
+        # states = [state]
         for i in range(1, len(rnns)):
             # outputs, state = rnns[i](outputs, initial_state=initial_states[i])
-            outputs, state = rnns[i](outputs)
-            states.append(state)
-        return outputs, states
+            outputs = rnns[i](outputs)
+            # states.append(state)
+        return outputs
 
     def build_model_train(self):
         '''
@@ -154,11 +154,11 @@ class KBQA_RGCN:
 
         # network architecture
         print(question_encoder)
-        question_encoder_output, question_encoder_states = self._stacked_rnn(
+        question_encoder_output = self._stacked_rnn(
                 question_encoder, word_embedding(question_encoder_input))
 
         # decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output, [question_encoder_states[-1]] * self.decoder_depth)
-        decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
+        decoder_outputs = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
         decoder_outputs = Dropout(self.dropout_rate)(decoder_outputs)
         decoder_outputs = decoder_softmax(decoder_outputs)
 
