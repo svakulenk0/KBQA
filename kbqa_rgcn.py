@@ -187,18 +187,15 @@ class KBQA_RGCN:
         questions, A, answers = dataset
 
         # encode entities with one-hot-vector encoding
-        print A[0].shape
-        print A[1].shape
         X = sp.csr_matrix(A[0].shape)
 
         # encode questions and answers using embeddings vocabulary
         assert len(questions) == len(answers)
         # num_samples = len(questions)
-        num_samples = 500
+        num_samples = 1
 
         questions_data = []
         answers_data = []
-        print len(questions[0])
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
@@ -207,7 +204,9 @@ class KBQA_RGCN:
         
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
+        print questions_data
         answers_data = np.asarray(pad_sequences(answers_data, padding='post'))
+        print answers_data
 
         return (questions_data, (X, A), answers_data)
 
