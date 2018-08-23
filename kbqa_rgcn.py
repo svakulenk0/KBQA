@@ -202,7 +202,7 @@ class KBQA_RGCN:
         
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
-        answers_data = np.asarray(pad_sequences(answers_data, padding='post')
+        answers_data = np.asarray(pad_sequences(answers_data, padding='post'))
 
         return (questions_data, (X, A), answers_data)
 
