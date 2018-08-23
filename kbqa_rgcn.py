@@ -163,9 +163,11 @@ class KBQA_RGCN:
         print kb_encoder_output
 
         # decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output, [question_encoder_states[-1]] * self.decoder_depth)
-        decoder_outputs = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
-        decoder_outputs = Dropout(self.dropout_rate)(decoder_outputs)
-        decoder_outputs = decoder_softmax(decoder_outputs)
+        # decoder_outputs = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
+        question_encoder_output = Dropout(self.dropout_rate)(question_encoder_output)
+        kb_encoder_output = Dropout(self.dropout_rate)(kb_encoder_output)
+        # decoder_outputs = decoder_softmax(decoder_outputs)
+        decoder_outputs = decoder_softmax(question_encoder_output + kb_encoder_output)
 
         self.model_train = Model(
                 [question_encoder_input, kb_encoder_input],   # [input question, input KB],
