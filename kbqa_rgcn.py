@@ -173,26 +173,27 @@ class KBQA_RGCN:
 
         self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
                                  answer_decoder_output)                        # ground-truth target answer
+        print self.model_train.summary()
 
-    def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
+
+    def train(self, dataset, batch_size, epochs, batch_per_load=10, lr=0.001):
         '''
         '''
         self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
+        
+        questions, A, answers = dataset
+        X = sp.csr_matrix(A[0].shape)
 
         for epoch in range(epochs):
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
-
-            self.model_train.fit(question_encoder_input_data + kb_encoder_input_data, 
-                 answer_decoder_target_data, batch_size=batch_size,)
+            self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
 
             self.save_model('model_epoch%i.h5'%(epoch + 1))
         self.save_model('model.h5')
 
 
-if __name__ == '__main__':
-
-    # load embeddings
+def download_glove_embeddings():
     if not os.path.exists(EMBEDDINGS_PATH):
         os.makedirs(EMBEDDINGS_PATH)
 
@@ -200,6 +201,10 @@ if __name__ == '__main__':
         wget.download('http://nlp.stanford.edu/data/glove.6B.zip', EMBEDDINGS_PATH+"glove.6B.zip")
         with zipfile.ZipFile(EMBEDDINGS_PATH+"glove.6B.zip","r") as zip_ref:
             zip_ref.extractall(EMBEDDINGS_PATH)
+
+
+def test_train():
+    download_glove_embeddings()
 
     # define QA model architecture parameters
     rnn_units = 512
@@ -220,11 +225,20 @@ if __name__ == '__main__':
     # initialize the model
     model = KBQA_RGCN(rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
+    model.build_model_train()
+
+    # load test data
+    from test_data import *
+    dataset = (QS, KB, AS)
+
+    model.train(dataset, batch_size, epochs, lr=learning_rate)
+
+
+if __name__ == '__main__':
+    test_train()
+
     # set mode
-    mode = 'train'
+    # mode = 'train'
     
-    # modes
-    if mode == 'train':
-        model.build_model_train()
-        # print model.summary()
-        model.train(batch_size, epochs, lr=learning_rate)
+    # # modes
+    # if mode == 'train':
