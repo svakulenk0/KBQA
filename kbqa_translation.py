@@ -34,6 +34,7 @@ from keras.preprocessing.sequence import pad_sequences
 
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
+# rdf2vec embeddings 200 dimensions
 KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 
 
@@ -74,11 +75,12 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
             # match the entity labels in vector embeddings
             entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
             embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+            n_dimensions = len(embedding_vector)
             entity2vec[entity] = embedding_vector
 
-    print("%d KB embeddings loaded"%len(entity2vec))
+    print("Loaded %d embeddings with %d dimensions" % (len(entity2vec), n_dimensions))
 
-    return entity2vec
+    return (entity2vec, n_dimensions)
 
 
 class KBQA_Translation:
@@ -126,14 +128,14 @@ class KBQA_Translation:
         build layers
         '''
         # Q' - question encoder
-        question_encoder_input = Input(shape=(None,), name='question_encoder_input')
+        question_input = Input(shape=(None,), name='question_input')
 
         # E' - question words embedding
         self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         word_embedding = self.create_pretrained_embedding_layer()
 
         # E'' - answer entities (KB) embedding
-        self.entity2vec = load_KB_embeddings()
+        self.entity2vec, self.kb_embeddings_dimension = load_KB_embeddings()
         # self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         # word_embedding = self.create_pretrained_embedding_layer()
 
@@ -185,7 +187,7 @@ class KBQA_Translation:
         # decoder_softmax = Dense(self.entity_vocab_len, activation='softmax', name='decoder_softmax')
 
         # network architecture
-        question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_encoder_input))
+        question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_input))
             # kb_encoder_output = kb_encoder(kb_encoder_input)
         
         # to do join outputs of the encoders and decoder
@@ -199,9 +201,12 @@ class KBQA_Translation:
         # fix: add output of the KB encoder
         # answer_decoder_output = decoder_softmax(question_encoder_output)
 
+        # reshape question_encoder_output to the answer embedding vector size
+        answer_output = Reshape((self.kb_embeddings_dimension))(question_encoder_output)
+
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
-        self.model_train = Model(question_encoder_input,   # [input question, input KB],
-                                 question_encoder_output)                        # ground-truth target answer
+        self.model_train = Model(question_input,   # [input question, input KB],
+                                 answer_output)                        # ground-truth target answer
         print self.model_train.summary()
 
     def load_data(self, dataset):
@@ -293,7 +298,7 @@ def train_model(dataset_name):
 
     # define QA model architecture parameters
     max_seq_len = 32
-    rnn_units = 512
+    rnn_units = 512  # dimension of the GRU output layer (hidden question representation) 
     encoder_depth = 2
     decoder_depth = 2
     dropout_rate = 0.5
