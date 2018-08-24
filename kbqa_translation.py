@@ -34,6 +34,7 @@ from keras.preprocessing.sequence import pad_sequences
 
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
+KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 
 
 # Prepare Glove File
@@ -58,6 +59,24 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
             indexToWord[kerasIdx] = tok # associate a word to a token (word). Note: inverse of dictionary above
 
     return wordToIndex, indexToWord, wordToGlove
+
+
+def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
+    '''
+    load all embeddings from file
+    '''
+    with open(KB_embeddings_file) as embs_file:
+        entity2vec = {}
+
+        # embeddings in a text file one per line for Global vectors and glove word embeddings
+        for line in embs_file:
+            entityAndVector = line.split(None, 1)
+            # match the entity labels in vector embeddings
+            entity = wordAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
+            embedding_vector = np.asarray(wordAndVector[1].split(), dtype='float32')
+            entity2vec[entity] = embedding_vector
+
+        print("%d KB embeddings loaded"%len(entity2vec))
 
 
 class KBQA_Translation:
@@ -112,6 +131,7 @@ class KBQA_Translation:
         word_embedding = self.create_pretrained_embedding_layer()
 
         # E'' - answer entities (KB) embedding
+        load_KB_embeddings()
         # self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         # word_embedding = self.create_pretrained_embedding_layer()
 
@@ -298,8 +318,10 @@ def train_model(dataset_name):
 
 
 if __name__ == '__main__':
-    dataset_name = 'dbnqa'
-    train_model(dataset_name)
+    load_KB_embeddings()
+    
+    # dataset_name = 'dbnqa'
+    # train_model(dataset_name)
 
     # set mode
     # mode = 'train'
