@@ -203,7 +203,7 @@ class KBQA_Translation:
 
         # reshape question_encoder_output to the answer embedding vector size
         # answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
-        answer_output = Flatten(input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
+        answer_output = Flatten(input_shape=(self.num_samples, self.max_seq_len, self.rnn_units))(question_encoder_output)
 
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_input,   # [input question, input KB],
@@ -227,15 +227,15 @@ class KBQA_Translation:
         # self.num_entities = X.shape[1]
 
         # encode questions and answers using embeddings vocabulary
-        num_samples = len(questions)
+        self.num_samples = len(questions)
         # num_samples = 1
 
-        questions_data = np.zeros((num_samples, self.max_seq_len))
+        questions_data = np.zeros((self.num_samples, self.max_seq_len))
         # answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
         answers_data = []
         
         # iterate over samples
-        for i in range(num_samples):
+        for i in range(self.num_samples):
             # encode words (ignore OOV words)
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
             for t, token_index in enumerate(questions_sequence):
