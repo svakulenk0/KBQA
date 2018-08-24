@@ -311,9 +311,9 @@ def train_model(dataset_name):
     # initialize the model
     model = KBQA_Translation(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
-    if dataset == 'toy':
+    if dataset_name == 'toy':
         dataset = load_toy_data()
-    elif dataset == 'dbnqa':
+    elif dataset_name == 'dbnqa':
         dataset = load_dbnqa()
 
     # build model
