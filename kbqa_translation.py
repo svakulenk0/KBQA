@@ -203,7 +203,7 @@ class KBQA_Translation:
 
         # reshape question_encoder_output to the answer embedding vector size
         # answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
-        answer_output = Flatten()(question_encoder_output)
+        answer_output = Flatten(input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
 
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_input,   # [input question, input KB],
