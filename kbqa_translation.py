@@ -65,9 +65,9 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     '''
     load all embeddings from file
     '''
-    with open(KB_embeddings_file) as embs_file:
-        entity2vec = {}
+    entity2vec = {}
 
+    with open(KB_embeddings_file) as embs_file:
         # embeddings in a text file one per line for Global vectors and glove word embeddings
         for line in embs_file:
             entityAndVector = line.split(None, 1)
@@ -76,7 +76,9 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
             embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
             entity2vec[entity] = embedding_vector
 
-        print("%d KB embeddings loaded"%len(entity2vec))
+    print("%d KB embeddings loaded"%len(entity2vec))
+
+    return entity2vec
 
 
 class KBQA_Translation:
@@ -131,7 +133,7 @@ class KBQA_Translation:
         word_embedding = self.create_pretrained_embedding_layer()
 
         # E'' - answer entities (KB) embedding
-        load_KB_embeddings()
+        self.entity2vec = load_KB_embeddings()
         # self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         # word_embedding = self.create_pretrained_embedding_layer()
 
@@ -224,6 +226,7 @@ class KBQA_Translation:
 
         questions_data = np.zeros((num_samples, self.max_seq_len))
         # answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
+        answers_data = []
         
         # iterate over samples
         for i in range(num_samples):
@@ -231,6 +234,8 @@ class KBQA_Translation:
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[0]) if word in self.wordToIndex]
             for t, token_index in enumerate(questions_sequence):
                 questions_data[i, t] = token_index
+            print len(self.entity2vec[answers[0]])
+            answers_data.append(self.entity2vec[answers[0]])
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
             # answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
             # for t, token_index in enumerate(answers_sequence):
@@ -238,6 +243,7 @@ class KBQA_Translation:
         
         # normalize length
         # questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
+        answers_data = np.asarray(answers_data)
        
         print questions_data
         print answers_data
@@ -318,10 +324,10 @@ def train_model(dataset_name):
 
 
 if __name__ == '__main__':
-    load_KB_embeddings()
-    
-    # dataset_name = 'dbnqa'
-    # train_model(dataset_name)
+    # load_KB_embeddings()
+
+    dataset_name = 'toy'
+    train_model(dataset_name)
 
     # set mode
     # mode = 'train'
