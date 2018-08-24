@@ -114,6 +114,10 @@ class KBQA_RGCN:
         self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         word_embedding = self.create_pretrained_embedding_layer()
 
+        # E'' - answer entities (KB) embedding
+        # self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
+        # word_embedding = self.create_pretrained_embedding_layer()
+
         # load data
         self.load_data(dataset)
 
@@ -150,16 +154,16 @@ class KBQA_RGCN:
 
         
         # A' - answer decoder
-        answer_decoder = []
-        for i in range(self.decoder_depth):
-            answer_decoder.append(GRU(
-                self.rnn_units, 
-                # return_state=True,
-                return_sequences=True, 
-                name='answer_decoder_%i'%i,
-                ))
+        # answer_decoder = []
+        # for i in range(self.decoder_depth):
+        #     answer_decoder.append(GRU(
+        #         self.rnn_units, 
+        #         # return_state=True,
+        #         return_sequences=True, 
+        #         name='answer_decoder_%i'%i,
+        #         ))
 
-        decoder_softmax = Dense(self.entity_vocab_len, activation='softmax', name='decoder_softmax')
+        # decoder_softmax = Dense(self.entity_vocab_len, activation='softmax', name='decoder_softmax')
 
         # network architecture
         question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_encoder_input))
@@ -174,35 +178,35 @@ class KBQA_RGCN:
         # decoder_outputs = decoder_softmax(decoder_outputs)
 
         # fix: add output of the KB encoder
-        answer_decoder_output = decoder_softmax(question_encoder_output)
+        # answer_decoder_output = decoder_softmax(question_encoder_output)
 
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_encoder_input,   # [input question, input KB],
-                                 answer_decoder_output)                        # ground-truth target answer
+                                 question_encoder_output)                        # ground-truth target answer
         print self.model_train.summary()
 
     def load_data(self, dataset):
-        questions, A, answers = dataset
+        questions, answers = dataset
+        assert len(questions) == len(answers)
 
         # encode entities with one-hot-vector encoding
-        X = sp.csr_matrix(A[0].shape)
+            # X = sp.csr_matrix(A[0].shape)
         # self.entityToIndex = {}
 
-        # todo generate entity index
-        self.entityToIndex = {}
-        self.entity_vocab_len = self.word_vocab_len ## X.shape[1]
+        # # todo generate entity index
+        # self.entityToIndex = {}
+        # self.entity_vocab_len = self.word_vocab_len ## X.shape[1]
 
         # define KB parameters for input to R-GCN 
-        self.support = len(A)
+        # self.support = len(A)
         # self.num_entities = X.shape[1]
 
         # encode questions and answers using embeddings vocabulary
-        assert len(questions) == len(answers)
         # num_samples = len(questions)
-        num_samples = 1
+        # num_samples = 1
 
         questions_data = np.zeros((num_samples, self.max_seq_len))
-        answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
+        # answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
         
         # iterate over samples
         for i in range(num_samples):
@@ -211,9 +215,9 @@ class KBQA_RGCN:
             for t, token_index in enumerate(questions_sequence):
                 questions_data[i, t] = token_index
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
-            answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
-            for t, token_index in enumerate(answers_sequence):
-                answers_data[i, t, token_index] = 1.
+            # answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
+            # for t, token_index in enumerate(answers_sequence):
+            #     answers_data[i, t, token_index] = 1.
         
         # normalize length
         # questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
@@ -221,7 +225,7 @@ class KBQA_RGCN:
         print questions_data
         print answers_data
 
-        self.dataset = (questions_data, (X, A), answers_data)
+        self.dataset = (questions_data, answers_data)
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
@@ -249,7 +253,19 @@ def download_glove_embeddings():
             zip_ref.extractall(EMBEDDINGS_PATH)
 
 
-def test_train():
+def load_dbnqa():
+    return (QS, AS)
+
+
+def load_toy_data():
+    from toy_data import *
+    return (QS, KB, AS)
+
+
+def train_model(dataset_name):
+    '''
+    dataset_name <String> Choose one of the available datasets to train the model on ('toy', 'dbnqa')
+    '''
     download_glove_embeddings()
 
     # define QA model architecture parameters
@@ -272,9 +288,10 @@ def test_train():
     # initialize the model
     model = KBQA_RGCN(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
-     # load toy data
-    from toy_data import *
-    dataset = (QS, KB, AS)
+    if dataset == 'toy':
+        dataset = load_toy_data()
+    elif dataset == 'dbnqa':
+        dataset = load_dbnqa()
 
     # build model
     model.build_model_train(dataset)
@@ -284,7 +301,8 @@ def test_train():
 
 
 if __name__ == '__main__':
-    test_train()
+    dataset_name = 'dbnqa'
+    train_model(dataset_name)
 
     # set mode
     # mode = 'train'

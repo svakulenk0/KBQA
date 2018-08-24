@@ -1,6 +1,4 @@
-# KBQA-RGCN
-Knowledge Base Question Answering (KBQA) using Relational Graph Convolutional Networks (RGCN)
-
+# KBQA
 
 ## Requirements
 
@@ -13,7 +11,7 @@ Knowledge Base Question Answering (KBQA) using Relational Graph Convolutional Ne
 
 ## References
 
-* [Keras-based implementation of Relational Graph Convolutional Networks](https://github.com/tkipf/relational-gcn)
+* [Relational Graph Convolutional Networks (RGCN)](https://github.com/tkipf/relational-gcn)
 * [Simple seq2seq model as a baseline model for DSTC7 Task 2](https://github.com/DSTC-MSR-NLP/DSTC7-End-to-End-Conversation-Modeling/blob/master/baseline/baseline.py)
 
 
