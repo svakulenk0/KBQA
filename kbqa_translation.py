@@ -202,7 +202,7 @@ class KBQA_Translation:
         # answer_decoder_output = decoder_softmax(question_encoder_output)
 
         # reshape question_encoder_output to the answer embedding vector size
-        answer_output = Reshape((self.kb_embeddings_dimension))(question_encoder_output)
+        answer_output = Reshape((self.kb_embeddings_dimension,))(question_encoder_output)
 
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_input,   # [input question, input KB],
