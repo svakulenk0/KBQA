@@ -203,6 +203,7 @@ class KBQA_Translation:
 
         # reshape question_encoder_output to the answer embedding vector size
         # answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
+        print (self.num_samples, self.max_seq_len, self.rnn_units)
         answer_output = Flatten(input_shape=(self.num_samples, self.max_seq_len, self.rnn_units))(question_encoder_output)
 
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
@@ -283,6 +284,7 @@ def download_glove_embeddings():
 
 
 def load_dbnqa():
+    # https://ndownloader.figshare.com/articles/6118505/versions/2
     return (QS, AS)
 
 
