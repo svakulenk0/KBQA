@@ -24,7 +24,7 @@ import numpy as np
 import scipy.sparse as sp
 
 from keras.models import Model
-from keras.layers import Input, GRU, Dropout, Embedding, Dense
+from keras.layers import Input, GRU, Dropout, Embedding, Dense, Reshape
 from keras.regularizers import l2
 from keras.optimizers import Adam
 
