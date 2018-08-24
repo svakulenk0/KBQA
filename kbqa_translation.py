@@ -24,7 +24,7 @@ import numpy as np
 import scipy.sparse as sp
 
 from keras.models import Model
-from keras.layers import Input, GRU, Dropout, Embedding, Dense, Reshape
+from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten
 from keras.regularizers import l2
 from keras.optimizers import Adam
 
@@ -202,7 +202,8 @@ class KBQA_Translation:
         # answer_decoder_output = decoder_softmax(question_encoder_output)
 
         # reshape question_encoder_output to the answer embedding vector size
-        answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
+        # answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
+        answer_output = Flatten()(question_encoder_output)
 
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_input,   # [input question, input KB],
@@ -239,7 +240,7 @@ class KBQA_Translation:
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
             for t, token_index in enumerate(questions_sequence):
                 questions_data[i, t] = token_index
-            print len(self.entity2vec[answers[i]])
+            # print len(self.entity2vec[answers[i]])
             answers_data.append(self.entity2vec[answers[i]])
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
             # answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
@@ -297,8 +298,8 @@ def train_model(dataset_name):
     download_glove_embeddings()
 
     # define QA model architecture parameters
-    max_seq_len = 32
-    rnn_units = 512  # dimension of the GRU output layer (hidden question representation) 
+    max_seq_len = 10
+    rnn_units = 20  # dimension of the GRU output layer (hidden question representation) 
     encoder_depth = 2
     decoder_depth = 2
     dropout_rate = 0.5
