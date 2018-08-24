@@ -72,8 +72,8 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
         for line in embs_file:
             entityAndVector = line.split(None, 1)
             # match the entity labels in vector embeddings
-            entity = wordAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
-            embedding_vector = np.asarray(wordAndVector[1].split(), dtype='float32')
+            entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
+            embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
             entity2vec[entity] = embedding_vector
 
         print("%d KB embeddings loaded"%len(entity2vec))
