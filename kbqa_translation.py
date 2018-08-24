@@ -221,7 +221,7 @@ class KBQA_Translation:
         # self.num_entities = X.shape[1]
 
         # encode questions and answers using embeddings vocabulary
-        # num_samples = len(questions)
+        num_samples = len(questions)
         # num_samples = 1
 
         questions_data = np.zeros((num_samples, self.max_seq_len))
@@ -231,11 +231,11 @@ class KBQA_Translation:
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
-            questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[0]) if word in self.wordToIndex]
+            questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
             for t, token_index in enumerate(questions_sequence):
                 questions_data[i, t] = token_index
-            print len(self.entity2vec[answers[0]])
-            answers_data.append(self.entity2vec[answers[0]])
+            print len(self.entity2vec[answers[i]])
+            answers_data.append(self.entity2vec[answers[i]])
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
             # answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
             # for t, token_index in enumerate(answers_sequence):
