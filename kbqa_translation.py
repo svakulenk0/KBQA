@@ -296,7 +296,7 @@ def load_lcquad():
 
 def load_toy_data():
     from toy_data import *
-    return (QS, AS), KB_EMBEDDINGS_DIM, ENTITY2VEC
+    return (QS, AS), ENTITY2VEC, KB_EMBEDDINGS_DIM
 
 
 def train_model(dataset_name):
