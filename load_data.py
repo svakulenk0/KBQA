@@ -60,8 +60,9 @@ def load_lcquad_answers():
                 # return [path['X']['value'] for path in paths]
             except Exception, exc:
                 print exc
-
-            qas.append({'question': question_str, 'answers': answers})
+            
+            if answers:
+                qas.append({'question': question_str, 'answers': answers})
 
     with open("./data/lcquad_train.json", "w") as write_file:
         json.dump(qas, write_file, indent=2)
