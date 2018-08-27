@@ -240,21 +240,29 @@ class KBQA_Translation:
         # answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
         questions_data = []
         answers_data = []
+        not_found_entities = 0
         
         # iterate over samples
         for i in range(self.num_samples):
             # encode words (ignore OOV words)
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
-            questions_data.append(questions_sequence)
             # for t, token_index in enumerate(questions_sequence):
                 # questions_data[i, t] = token_index
             # print len(self.entity2vec[answers[i]])
-            answers_data.append(self.entity2vec[answers[i]])
+            answer = answers[i]
+
+            # filter out answers without pre-trained embeddings
+            if answer in self.entity2vec.keys():
+                questions_data.append(questions_sequence)
+                answers_data.append(self.entity2vec[answer])
+            else:
+                not_found_entities +=1
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
             # answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
             # for t, token_index in enumerate(answers_sequence):
             #     answers_data[i, t, token_index] = 1.
         
+        print ("Not found: %d entities"%not_found_entities)
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         print(questions_data.shape[1])
