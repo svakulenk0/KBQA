@@ -135,7 +135,7 @@ class KBQA_Translation:
         word_embedding = self.create_pretrained_embedding_layer()
 
         # E'' - answer entities (KB) embedding
-        self.entity2vec, self.kb_embeddings_dimension = load_KB_embeddings()
+
         # self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         # word_embedding = self.create_pretrained_embedding_layer()
 
@@ -147,7 +147,7 @@ class KBQA_Translation:
             question_encoder.append(GRU(
                 self.rnn_units, 
                 # return_state=True,
-                return_sequences=True, 
+                # return_sequences=True, 
                 name='question_encoder_%i' % i
                 ))
 
@@ -206,7 +206,7 @@ class KBQA_Translation:
         print (self.num_samples, self.max_seq_len, self.rnn_units)
         # answer_output = Flatten(input_shape=(self.num_samples, self.max_seq_len, self.rnn_units))(question_encoder_output)
         answer_output = question_encoder_output
-        
+
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_input,   # [input question, input KB],
                                  answer_output)                        # ground-truth target answer
@@ -285,16 +285,18 @@ def download_glove_embeddings():
 
 
 def load_lcquad():
-    return (QS, AS)
+    # load embeddings
+    entity2vec, kb_embeddings_dimension = load_KB_embeddings()
+    return (QS, AS), entity2vec, kb_embeddings_dimension
 
 
-def load_dbnqa():
-    return (QS, AS)
+# def load_dbnqa():
+#     return (QS, AS)
 
 
 def load_toy_data():
     from toy_data import *
-    return (QS, AS)
+    return (QS, AS), KB_EMBEDDINGS_DIM, ENTITY2VEC
 
 
 def train_model(dataset_name):
@@ -324,11 +326,12 @@ def train_model(dataset_name):
     model = KBQA_Translation(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
     if dataset_name == 'toy':
-        dataset = load_toy_data()
-    elif dataset_name == 'dbnqa':
-        dataset = load_dbnqa()
+        dataset, model.entity2vec, model.kb_embeddings_dimension = load_toy_data()
+    # elif dataset_name == 'dbnqa':
+    #     dataset = load_dbnqa()
     elif dataset_name == 'load_lcquad':
-        dataset = load_lcquad()
+        dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad()
+
 
     # build model
     model.build_model_train(dataset)
