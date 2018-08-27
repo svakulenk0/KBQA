@@ -41,31 +41,30 @@ def load_lcquad_answers():
     with open(training_questions_path) as f:
         questions = json.load(f)
 
+    qas = []
+    for question in questions:
+        question_str = question["corrected_question"]
+        print question_str
+       
+        # request the endpoint
+        sparql_query = question["sparql_query"]
+        # print sparql_query
+        if "SELECT DISTINCT ?uri WHERE" in sparql_query:
+            try:
+                response = requests.get(ENDPOINT, params={'query': sparql_query, 'output': 'json'})
+                results = response.json()['results']['bindings']
+                # print results
+                answers = [result.values()[0]['value'] for result in results]
+                # print answers
+                # print '\n'
+                # return [path['X']['value'] for path in paths]
+            except Exception, exc:
+                print exc
+
+            qas.append({'question': question_str, 'answers': answers})
+
     with open("./data/lcquad_train.json", "w") as write_file:
-
-        for question in questions:
-            question_str = question["corrected_question"]
-            
-            sparql_query = question["sparql_query"]
-            # filter only select queries
-            if "SELECT DISTINCT ?uri WHERE" in sparql_query:
-                print question_str
-                print sparql_query
-                # request the SPARQL endpoint
-                try:
-                    response = requests.get(ENDPOINT, params={'query': sparql_query, 'output': 'json'})
-                    results = response.json()['results']['bindings']
-                    # print results
-                    answers = [result.values()[0]['value'] for result in results]
-                    # return [path['X']['value'] for path in paths]
-                except Exception, exc:
-                    print exc
-
-                if answers:
-                    print answers
-                    print '\n'
-                    qa = {'question': question_str, 'answers': answers}
-                    json.dump(qa, write_file, indent=2)
+        json.dump(qas, write_file, indent=2)
 
 
 if __name__ == '__main__':
