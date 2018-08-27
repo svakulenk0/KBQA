@@ -255,7 +255,7 @@ class KBQA_Translation:
             # filter out answers without pre-trained embeddings
             if answer in self.entity2vec.keys():
                 questions_data.append(questions_sequence)
-                answers_data.append(self.entity2vecentity2vec[answer])
+                answers_data.append(self.entity2vec[answer])
             else:
                 not_found_entities +=1
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
