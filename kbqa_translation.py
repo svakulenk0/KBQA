@@ -308,7 +308,7 @@ def train_model(dataset_name):
 
     # define QA model architecture parameters
     max_seq_len = 10
-    rnn_units = 20  # dimension of the GRU output layer (hidden question representation) 
+    rnn_units = 200  # dimension of the GRU output layer (hidden question representation) 
     encoder_depth = 2
     decoder_depth = 2
     dropout_rate = 0.5
