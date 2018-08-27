@@ -63,6 +63,14 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
 
     return wordToIndex, indexToWord, wordToGlove
 
+def create_KB_input(embeddings):
+    '''
+    Create an input which can be used in the network based on the existing embeddings
+    '''
+    from keras import backend as K
+    k_constants = K.variable(embeddings)
+    fixed_input = Input(tensor=k_constants)
+    return fixed_input
 
 def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     '''
