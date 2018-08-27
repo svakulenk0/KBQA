@@ -69,6 +69,8 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     '''
     entity2vec = {}
 
+    print("Loading embeddings...")
+
     with open(KB_embeddings_file) as embs_file:
         # embeddings in a text file one per line for Global vectors and glove word embeddings
         for line in embs_file:
@@ -234,16 +236,18 @@ class KBQA_Translation:
         self.num_samples = len(questions)
         # num_samples = 1
 
-        questions_data = np.zeros((self.num_samples, self.max_seq_len))
+        # questions_data = np.zeros((self.num_samples, self.max_seq_len))
         # answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
+        questions_data = []
         answers_data = []
         
         # iterate over samples
         for i in range(self.num_samples):
             # encode words (ignore OOV words)
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
-            for t, token_index in enumerate(questions_sequence):
-                questions_data[i, t] = token_index
+            questions_data.append(questions_sequence)
+            # for t, token_index in enumerate(questions_sequence):
+                # questions_data[i, t] = token_index
             # print len(self.entity2vec[answers[i]])
             answers_data.append(self.entity2vec[answers[i]])
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
@@ -252,7 +256,8 @@ class KBQA_Translation:
             #     answers_data[i, t, token_index] = 1.
         
         # normalize length
-        # questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
+        questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
+        print(questions_data.shape[1])
         answers_data = np.asarray(answers_data)
        
         # print questions_data
