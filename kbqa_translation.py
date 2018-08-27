@@ -37,6 +37,7 @@ EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 # rdf2vec embeddings 200 dimensions
 KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
+LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_train_answers.txt"
 
 
 # Prepare Glove File
@@ -254,7 +255,7 @@ class KBQA_Translation:
             # filter out answers without pre-trained embeddings
             if answer in self.entity2vec.keys():
                 questions_data.append(questions_sequence)
-                answers_data.append(self.entity2vec[answer])
+                answers_data.append(self.entity2vecentity2vec[answer])
             else:
                 not_found_entities +=1
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
@@ -301,7 +302,7 @@ def download_glove_embeddings():
 
 def load_lcquad():
     # load embeddings
-    entity2vec, kb_embeddings_dimension = load_KB_embeddings()
+    entity2vec, kb_embeddings_dimension = load_KB_embeddings(LCQUAD_KB_EMBEDDINGS_PATH)
     QS = []
     AS = []
     with open("./data/lcquad_train.json", "r") as train_file:
@@ -364,7 +365,6 @@ def train_model(dataset_name):
 
 if __name__ == '__main__':
     # load_KB_embeddings()
-
     dataset_name = 'lcquad'
     train_model(dataset_name)
 
