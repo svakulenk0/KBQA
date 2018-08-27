@@ -54,7 +54,7 @@ def load_lcquad_answers():
                 response = requests.get(ENDPOINT, params={'query': sparql_query, 'output': 'json'})
                 results = response.json()['results']['bindings']
                 # print results
-                answers = [result.values()[0]['value'] for result in results]
+                answers = [result.values()[0]['value'] for result in results if result.values()[0]['type'] == 'uri']
                 # print answers
                 # print '\n'
                 # return [path['X']['value'] for path in paths]
