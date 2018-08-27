@@ -12,6 +12,7 @@ format based on LC-QuAD https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/
 
 '''
 import pickle as pkl
+import numpy as np
 
 QS = ["What is the river whose mouth is in deadsea?"]
 AS = ["http://dbpedia.org/resource/Jordan_River"]
