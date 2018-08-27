@@ -41,7 +41,7 @@ def load_lcquad_answers():
     with open(training_questions_path) as f:
         questions = json.load(f)
 
-    with open("./data/lcquad_train_answers.txt", "w") as f:
+    with open("./data/lcquad_train_answers_5000.txt", "w") as f:
 
         qas = []
         for question in questions:
@@ -57,7 +57,6 @@ def load_lcquad_answers():
                     results = response.json()['results']['bindings']
                     # print results
                     answers = [result.values()[0]['value'] for result in results if result.values()[0]['type'] == 'uri']
-                    f.writelines([answer + '\n' for answer in answers])
                     # print answers
                     # print '\n'
                     # return [path['X']['value'] for path in paths]
@@ -65,6 +64,7 @@ def load_lcquad_answers():
                     print exc
                 
                 if answers:
+                    f.write('<' + answers[0].encode('utf-8') + '>\n')
                     qas.append({'question': question_str, 'answers': answers})
 
     with open("./data/lcquad_train.json", "w") as f:
