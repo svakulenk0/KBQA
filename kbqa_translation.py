@@ -37,7 +37,8 @@ EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 # rdf2vec embeddings 200 dimensions
 KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
-LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_train_answers.txt"
+# LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_train_answers.txt"
+LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_train_answer_5000_uniq.txt"
 
 
 # Prepare Glove File
