@@ -142,14 +142,15 @@ class KBQA_Translation:
         # load data
         self.load_data(dataset)
 
-        question_encoder = []
-        for i in range(self.encoder_depth):
-            question_encoder.append(GRU(
-                self.rnn_units, 
-                # return_state=True,
-                # return_sequences=True, 
-                name='question_encoder_%i' % i
-                ))
+        question_encoder_output = GRU(self.rnn_units, name='question_encoder')(word_embedding(question_input))
+        # question_encoder = []
+        # for i in range(self.encoder_depth):
+        #     question_encoder.append(GRU(
+        #         self.rnn_units, 
+        #         # return_state=True,
+        #         # return_sequences=True, 
+        #         name='question_encoder_%i' % i
+        #         ))
 
         # K' - KB encoder layer: (entities, relations) adjacency matrix as input via R-GCN architecture
         # https://github.com/tkipf/relational-gcn/blob/master/rgcn/train.py
@@ -187,7 +188,7 @@ class KBQA_Translation:
         # decoder_softmax = Dense(self.entity_vocab_len, activation='softmax', name='decoder_softmax')
 
         # network architecture
-        question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_input))
+        # question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_input))
             # kb_encoder_output = kb_encoder(kb_encoder_input)
         
         # to do join outputs of the encoders and decoder
