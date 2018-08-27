@@ -19,6 +19,7 @@ Answer - entity vector from KB (entity embeddings index)
 import os
 import wget
 import zipfile
+import json
 
 import numpy as np
 import scipy.sparse as sp
@@ -288,6 +289,13 @@ def download_glove_embeddings():
 def load_lcquad():
     # load embeddings
     entity2vec, kb_embeddings_dimension = load_KB_embeddings()
+    QS = []
+    AS = []
+    with open("./data/lcquad_train.json", "r") as train_file:
+        qas = json.load(train_file)
+        for qa in qas:
+            QS.append(qa['question'])
+            AS.append(qa['answers'][0])
     return (QS, AS), entity2vec, kb_embeddings_dimension
 
 
@@ -320,7 +328,7 @@ def train_model(dataset_name):
 
     # define training parameters
     batch_size = 100
-    epochs = 2  # 10
+    epochs = 10  # 10
     learning_rate = 1e-3
 
     # initialize the model
@@ -330,7 +338,7 @@ def train_model(dataset_name):
         dataset, model.entity2vec, model.kb_embeddings_dimension = load_toy_data()
     # elif dataset_name == 'dbnqa':
     #     dataset = load_dbnqa()
-    elif dataset_name == 'load_lcquad':
+    elif dataset_name == 'lcquad':
         dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad()
 
 
@@ -344,7 +352,7 @@ def train_model(dataset_name):
 if __name__ == '__main__':
     # load_KB_embeddings()
 
-    dataset_name = 'toy'
+    dataset_name = 'lcquad'
     train_model(dataset_name)
 
     # set mode
