@@ -204,8 +204,9 @@ class KBQA_Translation:
         # reshape question_encoder_output to the answer embedding vector size
         # answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
         print (self.num_samples, self.max_seq_len, self.rnn_units)
-        answer_output = Flatten(input_shape=(self.num_samples, self.max_seq_len, self.rnn_units))(question_encoder_output)
-
+        # answer_output = Flatten(input_shape=(self.num_samples, self.max_seq_len, self.rnn_units))(question_encoder_output)
+        answer_output = question_encoder_output
+        
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_input,   # [input question, input KB],
                                  answer_output)                        # ground-truth target answer
@@ -283,8 +284,11 @@ def download_glove_embeddings():
             zip_ref.extractall(EMBEDDINGS_PATH)
 
 
+def load_lcquad():
+    return (QS, AS)
+
+
 def load_dbnqa():
-    # https://ndownloader.figshare.com/articles/6118505/versions/2
     return (QS, AS)
 
 
@@ -323,6 +327,8 @@ def train_model(dataset_name):
         dataset = load_toy_data()
     elif dataset_name == 'dbnqa':
         dataset = load_dbnqa()
+    elif dataset_name == 'load_lcquad':
+        dataset = load_lcquad()
 
     # build model
     model.build_model_train(dataset)
