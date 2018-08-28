@@ -219,7 +219,7 @@ class KBQA_Translation:
 
         # reshape question_encoder_output to the answer embedding vector size
         # answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
-        print (self.num_samples, self.max_seq_len, self.rnn_units)
+        print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         # answer_output = Flatten(input_shape=(self.num_samples, self.max_seq_len, self.rnn_units))(question_encoder_output)
         answer_output = question_encoder_output
 
@@ -278,7 +278,7 @@ class KBQA_Translation:
         print ("Not found: %d entities"%not_found_entities)
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
-        print(questions_data.shape[1])
+        print("Maximum question length %d"%questions_data.shape[1])
         answers_data = np.asarray(answers_data)
        
         # print questions_data
@@ -296,7 +296,7 @@ class KBQA_Translation:
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        self.model_train.fit(questions, answers, epochs=epochs, verbose=2)
+        self.model_train.fit(questions, answers, epochs=epochs, verbose=2, validation_split=0.3)
 
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
@@ -353,7 +353,7 @@ def train_model(dataset_name):
 
     # define training parameters
     batch_size = 100
-    epochs = 50  # 10
+    epochs = 10  # 10
     learning_rate = 1e-3
 
     # initialize the model
