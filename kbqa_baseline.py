@@ -23,7 +23,9 @@ import json
 
 import random
 import numpy as np
+
 import scipy.sparse as sp
+from sklearn.metrics.pairwise import cosine_similarity
 
 from keras.models import Model
 from keras.models import load_model
@@ -62,7 +64,6 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
     '''
     https://stackoverflow.com/questions/48677077/how-do-i-create-a-keras-embedding-layer-from-a-pre-trained-word-embedding-datase
     '''
-
     download_glove_embeddings()
 
     with open(gloveFile, 'r') as f:
@@ -99,6 +100,10 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     entity2vec = {}
 
     print("Loading embeddings...")
+    
+    idx = 0
+    entity2index = {}  # map from a token to an index
+    index2entity = {}  # map from an index to a token 
 
     with open(KB_embeddings_file) as embs_file:
         # embeddings in a text file one per line for Global vectors and glove word embeddings
@@ -107,12 +112,16 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
             # match the entity labels in vector embeddings
             entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
             embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-            n_dimensions = len(embedding_vector)
+            
+            idx += 1  # 0 is reserved for masking in Keras
+            entity2index[entity] = idx
+            index2entity[idx] = entity
             entity2vec[entity] = embedding_vector
+            n_dimensions = len(embedding_vector)
 
     print("Loaded %d embeddings with %d dimensions" % (len(entity2vec), n_dimensions))
 
-    return (entity2vec, n_dimensions)
+    return (entity2index, index2entity, entity2vec, n_dimensions)
 
 
 class KBQA:
@@ -145,106 +154,44 @@ class KBQA:
             # states.append(state)
         return outputs
 
+    def load_embeddings_from_index(self, embeddings_index, items_index):
+        # load embeddings into matrix
+        vocab_len = len(items_index) + 1  # adding 1 to account for masking
+        embDim = next(iter(embeddings_index.values())).shape[0]
+        embeddings_matrix = np.zeros((vocab_len, embDim))  # initialize with zeros
+        for item, index in items_index.items():
+            embeddings_matrix[index, :] = embeddings_index[item] # create embedding: item index to item embedding
+        return embeddings_matrix
+
     def create_pretrained_embedding_layer(self, isTrainable=False):
         '''
         Create pre-trained Keras embedding layer
         '''
         self.word_vocab_len = len(self.wordToIndex) + 1  # adding 1 to account for masking
-        embDim = next(iter(self.wordToGlove.values())).shape[0]  # works with any glove dimensions (e.g. 50)
+        embeddings_matrix = self.load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
 
-        embeddingMatrix = np.zeros((self.word_vocab_len, embDim))  # initialize with zeros
-        for word, index in self.wordToIndex.items():
-            embeddingMatrix[index, :] = self.wordToGlove[word] # create embedding: word index to Glove word embedding
-
-        embeddingLayer = Embedding(self.word_vocab_len, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
+        embeddingLayer = Embedding(self.word_vocab_len, embDim, weights=[embeddings_matrix], trainable=isTrainable, name='word_embedding')
         return embeddingLayer
 
     def build_model_train(self):
         '''
         build layers required for training the NN
         '''
-        # Q' - question encoder
+        # Q - question input
         question_input = Input(shape=(None,), name='question_input')
 
         # E' - question words embedding
         word_embedding = self.create_pretrained_embedding_layer()
-
-        # E'' - answer entities (KB) embedding
-
-        # self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
-        # word_embedding = self.create_pretrained_embedding_layer()
-
+        
+        # Q' - question encoder
         question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(word_embedding(question_input))
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
         question_encoder_output = GRU(self.rnn_units, name='question_encoder_3')(question_encoder_output_2)
-        # question_encoder = []
-        # for i in range(self.encoder_depth):
-        #     question_encoder.append(GRU(
-        #         self.rnn_units, 
-        #         # return_state=True,
-        #         # return_sequences=True, 
-        #         name='question_encoder_%i' % i
-        #         ))
 
-        # K' - KB encoder layer: (entities, relations) adjacency matrix as input via R-GCN architecture
-        # https://github.com/tkipf/relational-gcn/blob/master/rgcn/train.py
-
-            # A_in = [InputAdj(sparse=True) for _ in range(self.support)]
-            # X_in = Input(shape=(self.entity_vocab_len,), sparse=True)
-
-            # kb_encoder_input = [X_in] + A_in
-            # input=[X_in] + A_in
-
-            # # E'' - KB entities initial embedding
-            # # entity_embedding = 
-
-            # kb_encoder = GraphConvolution(self.num_hidden_units, self.support, num_bases=self.bases, featureless=True,
-            #                               activation='relu',
-            #                               W_regularizer=l2(self.l2norm))
-        # kb_encoder_output = GraphConvolution(self.num_hidden_units, support, num_bases=self.bases, featureless=True,
-                             # activation='relu',
-                             # W_regularizer=l2(self.l2norm))(kb_encoder_input)
-        # kb_encoder = Dropout(self.dropout_rate)(kb_encoder)
-        # kb_encoder = GraphConvolution(, support, num_bases=self.bases,
-                             # activation='softmax')([kb_encoder] + A_in)
-
-        
-        # A' - answer decoder
-        # answer_decoder = []
-        # for i in range(self.decoder_depth):
-        #     answer_decoder.append(GRU(
-        #         self.rnn_units, 
-        #         # return_state=True,
-        #         return_sequences=True, 
-        #         name='answer_decoder_%i'%i,
-        #         ))
-
-        # decoder_softmax = Dense(self.entity_vocab_len, activation='softmax', name='decoder_softmax')
-
-        # network architecture
-        # question_encoder_output = self._stacked_rnn(question_encoder, word_embedding(question_input))
-            # kb_encoder_output = kb_encoder(kb_encoder_input)
-        
-        # to do join outputs of the encoders and decoder
-
-        # decoder_outputs, decoder_states = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output, [question_encoder_states[-1]] * self.decoder_depth)
-        # decoder_outputs = self._stacked_rnn(answer_decoder, question_encoder_output + kb_encoder_output)
-        # question_encoder_output = Dropout(self.dropout_rate)(question_encoder_output)
-        # kb_encoder_output = Dropout(self.dropout_rate)(kb_encoder_output)
-        # decoder_outputs = decoder_softmax(decoder_outputs)
-
-        # fix: add output of the KB encoder
-        # answer_decoder_output = decoder_softmax(question_encoder_output)
-
-        # reshape question_encoder_output to the answer embedding vector size
-        # answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
-        # answer_output = Flatten(input_shape=(self.num_samples, self.max_seq_len, self.rnn_units))(question_encoder_output)
         
         answer_output = Dropout(self.dropout_rate)(question_encoder_output)
-        # answer_output = question_encoder_output
 
-        # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_input,   # [input question, input KB],
                                  answer_output)                        # ground-truth target answer
         print self.model_train.summary()
@@ -253,28 +200,13 @@ class KBQA:
         questions, answers = dataset
         assert len(questions) == len(answers)
 
-        # encode entities with one-hot-vector encoding
-            # X = sp.csr_matrix(A[0].shape)
-        # self.entityToIndex = {}
-
-        # # todo generate entity index
-        # self.entityToIndex = {}
-        # self.entity_vocab_len = self.word_vocab_len ## X.shape[1]
-
-        # define KB parameters for input to R-GCN 
-        # self.support = len(A)
-        # self.num_entities = X.shape[1]
-
         # encode questions and answers using embeddings vocabulary
         self.num_samples = len(questions)
-        # num_samples = 1
 
-        # questions_data = np.zeros((self.num_samples, self.max_seq_len))
-        # answers_data = np.zeros((num_samples, self.max_seq_len, self.entity_vocab_len))
         questions_data = []
         answers_data = []
         not_found_entities = 0
-        
+
         # iterate over samples
         for i in range(self.num_samples):
             # encode words (ignore OOV words)
@@ -291,10 +223,6 @@ class KBQA:
                 answers_data.append(self.entity2vec[answer])
             else:
                 not_found_entities +=1
-            # encode answer into a one-hot-encoding with a 3 dimensional tensor
-            # answers_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(answers[0]) if word in self.wordToIndex]
-            # for t, token_index in enumerate(answers_sequence):
-            #     answers_data[i, t, token_index] = 1.
         
         print ("Not found: %d entities"%not_found_entities)
         # normalize length
@@ -331,12 +259,6 @@ class KBQA:
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
 
-    def build_model_test(self, dataset):
-        '''
-        build layers required for inference in NN
-        '''
-        pass
-
     def test(self):
         questions, answers = self.dataset
         print("Testing...")
@@ -347,6 +269,11 @@ class KBQA:
 
         predicted_answers_vectors = self.model_train.predict(questions)
         print("Predicted answers shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
+
+        # load embeddings into matrix
+        embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
+        # calculate pairwise distances (via cosine similarity)
+        print cosine_similarity(predicted_answers_vectors, embeddings_matrix)
 
 
 def download_glove_embeddings():
@@ -360,7 +287,7 @@ def download_glove_embeddings():
 
 def load_lcquad(dataset_split):
     # load embeddings
-    entity2vec, kb_embeddings_dimension = load_KB_embeddings(LCQUAD_KB_EMBEDDINGS_PATH)
+    entity2index, index2entity, entity2vec, kb_embeddings_dimension = load_KB_embeddings(LCQUAD_KB_EMBEDDINGS_PATH)
     QS = []
     AS = []
     with open("./data/lcquad_%s.json"%dataset_split, "r") as train_file:
@@ -368,7 +295,7 @@ def load_lcquad(dataset_split):
         for qa in qas:
             QS.append(qa['question'])
             AS.append(qa['answers'][0])
-    return (QS, AS), entity2vec, kb_embeddings_dimension
+    return (QS, AS), entity2index, index2entity, entity2vec, kb_embeddings_dimension
 
 
 # def load_dbnqa():
@@ -406,7 +333,7 @@ def load_data(model, dataset_name, mode):
     # elif dataset_name == 'dbnqa':
     #     dataset = load_dbnqa()
     elif dataset_name == 'lcquad':
-        dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad(mode)
+        dataset, model.entity2index, model.index2entity, model.entity2vec, model.kb_embeddings_dimension = load_lcquad(mode)
 
     model.load_data(dataset)
 
