@@ -283,7 +283,14 @@ class KBQA:
 
         n = 5
         # indices of the top n predicted answers for every question in the test set
-        print similarity_matrix.argsort(axis=1)[:, -n:][::-1]
+        top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
+
+        hits = 0
+        for i, answer in enumerate(answers_indices):
+            if answer in top_ns[i]:
+                hits += 1
+
+        print("Number of hits in top %d: %d/%d"%(n, hits, len(answers_indices)))
 
 
 def download_glove_embeddings():
