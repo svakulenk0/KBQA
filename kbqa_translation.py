@@ -123,7 +123,8 @@ class KBQA_Translation:
         self.dropout_rate = dropout_rate
         makedirs(model_dir)
         self.model_dir = model_dir
-
+        # load word vocabulary
+        self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
 
     def _stacked_rnn(self, rnns, inputs, initial_states=None):
         # if initial_states is None:
@@ -159,7 +160,6 @@ class KBQA_Translation:
         question_input = Input(shape=(None,), name='question_input')
 
         # E' - question words embedding
-        self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         word_embedding = self.create_pretrained_embedding_layer()
 
         # E'' - answer entities (KB) embedding
