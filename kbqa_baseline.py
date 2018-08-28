@@ -278,8 +278,9 @@ class KBQA:
         embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
         # calculate pairwise distances (via cosine similarity)
         similarity_matrix = cosine_similarity(predicted_answers_vectors, embeddings_matrix).shape
-        print np.argmax(similarity_matrix, axis=1).shape
-        print np.argmax(similarity_matrix, axis=1)
+        print similarity_matrix.shape
+        print np.argmax(similarity_matrix, axis=0).shape
+        print np.argmax(similarity_matrix, axis=0)
 
 
 def download_glove_embeddings():
