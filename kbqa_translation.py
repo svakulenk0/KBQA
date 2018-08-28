@@ -313,7 +313,6 @@ class KBQA_Translation:
         self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
         
         questions, answers = self.dataset
-
         # for epoch in range(epochs):
         #     print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
             # load training dataset
@@ -330,8 +329,8 @@ class KBQA_Translation:
     #     '''
     #     pass
 
-    def test(self, dataset):
-        questions, answers = dataset
+    def test(self):
+        questions, answers = self.dataset
         self.model_train.evaluate(questions, answers, verbose=2)
 
 
@@ -365,22 +364,22 @@ def load_toy_data():
     return (QS, AS), ENTITY2VEC, KB_EMBEDDINGS_DIM
 
 
-def train_model(model, dataset_name):
+def train_model(model):
     '''
     dataset_name <String> Choose one of the available datasets to train the model on ('toy', 'lcquad')
     '''
     # build model
-    model.build_model_train(dataset)
+    model.build_model_train()
     # train model
     model.train(batch_size, epochs, lr=learning_rate)
 
 
-def test_model(model, dataset_name):
+def test_model(model):
     '''
     dataset_name <String> Choose one of the available datasets to test the model on ('lcquad')
     '''
     model.load_pretrained_model()
-    model.test(dataset)
+    model.test()
 
 
 def load_data(model, dataset_name):
