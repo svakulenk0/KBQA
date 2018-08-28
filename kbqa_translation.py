@@ -291,7 +291,7 @@ class KBQA_Translation:
         self.dataset = (questions_data, answers_data)
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
-        self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
+        self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
         
         questions, answers = self.dataset
 
