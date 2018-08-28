@@ -264,6 +264,7 @@ class KBQA_Translation:
             # filter out answers without pre-trained embeddings
             if answer in self.entity2vec.keys():
                 questions_data.append(questions_sequence)
+                # TODO match unicode lookup
                 answers_data.append(self.entity2vec[answer])
             else:
                 not_found_entities +=1
@@ -351,7 +352,7 @@ def train_model(dataset_name):
 
     # define training parameters
     batch_size = 100
-    epochs = 10  # 10
+    epochs = 50  # 10
     learning_rate = 1e-3
 
     # initialize the model
