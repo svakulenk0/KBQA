@@ -268,7 +268,7 @@ class KBQA:
         # print score
         print("Questions vectors shape: " + " ".join([str(dim) for dim in questions_vectors.shape]))
         print("Answers vectors shape: " + " ".join([str(dim) for dim in answers_vectors.shape]))
-        print("Answers indices: " + ", ".join(answers_indices))
+        print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
         predicted_answers_vectors = self.model_train.predict(questions_vectors)
         print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
