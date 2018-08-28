@@ -357,7 +357,7 @@ def train_model(dataset_name):
 
     # define training parameters
     batch_size = 100
-    epochs = 10  # 10
+    epochs = 50  # 10
     learning_rate = 1e-3
 
     # initialize the model
