@@ -25,6 +25,8 @@ import numpy as np
 import scipy.sparse as sp
 
 from keras.models import Model
+from keras.models import load_model
+
 from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten
 from keras.regularizers import l2
 from keras.optimizers import Adam
@@ -53,6 +55,9 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
     '''
     https://stackoverflow.com/questions/48677077/how-do-i-create-a-keras-embedding-layer-from-a-pre-trained-word-embedding-datase
     '''
+
+    download_glove_embeddings()
+
     with open(gloveFile, 'r') as f:
         wordToGlove = {}  # map from a token (word) to a Glove embedding vector
         wordToIndex = {}  # map from a token to an index
@@ -118,6 +123,7 @@ class KBQA_Translation:
         self.dropout_rate = dropout_rate
         makedirs(model_dir)
         self.model_dir = model_dir
+
 
     def _stacked_rnn(self, rnns, inputs, initial_states=None):
         # if initial_states is None:
@@ -302,6 +308,10 @@ class KBQA_Translation:
         self.model_train.save(path)
         print('Saved to: '+path)
 
+    def load_pretrained_model(self):
+        self.model_train = load_model(os.path.join(self.model_dir, 'model.h5'))
+        # self.build_model_test()
+
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
         
@@ -316,6 +326,16 @@ class KBQA_Translation:
         self.save_model('model.h5')
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
+
+    # def build_model_test(self, dataset):
+    #     '''
+    #     build layers
+    #     '''
+    #     pass
+
+    def test(self, dataset):
+        questions, answers = dataset
+        self.model_train.evaluate(questions, answers, verbose=2)
 
 
 def download_glove_embeddings():
@@ -348,11 +368,40 @@ def load_toy_data():
     return (QS, AS), ENTITY2VEC, KB_EMBEDDINGS_DIM
 
 
-def train_model(dataset_name):
+def train_model(model, dataset_name):
     '''
-    dataset_name <String> Choose one of the available datasets to train the model on ('toy', 'dbnqa')
+    dataset_name <String> Choose one of the available datasets to train the model on ('toy', 'lcquad')
     '''
-    download_glove_embeddings()
+    if dataset_name == 'toy':
+        dataset, model.entity2vec, model.kb_embeddings_dimension = load_toy_data()
+    # elif dataset_name == 'dbnqa':
+    #     dataset = load_dbnqa()
+    elif dataset_name == 'lcquad':
+        dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad()
+
+
+    # build model
+    model.build_model_train(dataset)
+   
+    # train model
+    model.train(batch_size, epochs, lr=learning_rate)
+
+
+def test_model(model, dataset_name):
+    '''
+    dataset_name <String> Choose one of the available datasets to test the model on ('lcquad')
+    '''
+    if dataset_name == 'lcquad':
+        dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad()
+
+    model.load_pretrained_model()
+    model.test(dataset)
+
+
+if __name__ == '__main__':
+    # set mode and dataset
+    mode = 'test'
+    dataset_name = 'lcquad'
 
     # define QA model architecture parameters
     max_seq_len = 10
@@ -374,28 +423,8 @@ def train_model(dataset_name):
     # initialize the model
     model = KBQA_Translation(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
-    if dataset_name == 'toy':
-        dataset, model.entity2vec, model.kb_embeddings_dimension = load_toy_data()
-    # elif dataset_name == 'dbnqa':
-    #     dataset = load_dbnqa()
-    elif dataset_name == 'lcquad':
-        dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad()
-
-
-    # build model
-    model.build_model_train(dataset)
-   
-    # train model
-    model.train(batch_size, epochs, lr=learning_rate)
-
-
-if __name__ == '__main__':
-    # load_KB_embeddings()
-    dataset_name = 'lcquad'
-    train_model(dataset_name)
-
-    # set mode
-    # mode = 'train'
-    
-    # # modes
-    # if mode == 'train':
+    # modes
+    if mode == 'train':
+        train_model(model, dataset_name)
+    elif mode == 'test':
+        test_model(model, dataset_name)
