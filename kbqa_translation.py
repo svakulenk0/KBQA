@@ -154,7 +154,7 @@ class KBQA_Translation:
 
     def build_model_train(self):
         '''
-        build layers
+        build layers required for training the NN
         '''
         # Q' - question encoder
         question_input = Input(shape=(None,), name='question_input')
@@ -324,17 +324,20 @@ class KBQA_Translation:
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
 
-    # def build_model_test(self, dataset):
-    #     '''
-    #     build layers
-    #     '''
-    #     pass
+    def build_model_test(self, dataset):
+        '''
+        build layers required for inference in NN
+        '''
+        pass
 
     def test(self):
         questions, answers = self.dataset
         print("Testing...")
-        score = self.model_train.evaluate(questions, answers, verbose=0)
-        print score
+        # score = self.model_train.evaluate(questions, answers, verbose=0)
+        # print score
+        for question in questions:
+            predicted_answer_vector = self.model_train.predict(question)
+            print(predicted_answer_vector.shape)
 
 
 def download_glove_embeddings():
