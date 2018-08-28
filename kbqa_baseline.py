@@ -272,7 +272,7 @@ class KBQA:
         predicted_answers_vectors = self.model_train.predict(questions_vectors)
         print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
 
-        print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
+        # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
         # load embeddings into matrix
         embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
@@ -290,7 +290,7 @@ class KBQA:
             if answer in top_ns[i]:
                 hits += 1
 
-        print("Number of hits in top %d: %d/%d"%(n, hits, len(answers_indices)))
+        print("Hits in top %d: %d/%d"%(n, hits, len(answers_indices)))
 
 
 def download_glove_embeddings():
