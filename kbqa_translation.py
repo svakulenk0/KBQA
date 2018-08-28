@@ -299,6 +299,7 @@ class KBQA_Translation:
         # print answers_data
 
         self.dataset = (questions_data, answers_data)
+        print("Loaded the dataset")
 
     def save_model(self, name):
         path = os.path.join(self.model_dir, name)
@@ -331,6 +332,7 @@ class KBQA_Translation:
 
     def test(self):
         questions, answers = self.dataset
+        print("Testing...")
         self.model_train.evaluate(questions, answers, verbose=2)
 
 
@@ -379,6 +381,7 @@ def test_model(model):
     dataset_name <String> Choose one of the available datasets to test the model on ('lcquad')
     '''
     model.load_pretrained_model()
+    print("Loaded the pre-trained model")
     model.test()
 
 
