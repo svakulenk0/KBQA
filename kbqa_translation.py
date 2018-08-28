@@ -289,12 +289,12 @@ class KBQA_Translation:
         
         questions, answers = self.dataset
 
-        for epoch in range(epochs):
-            print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
+        # for epoch in range(epochs):
+        #     print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-            self.model_train.fit(questions, answers, batch_size=batch_size,)
+        self.model_train.fit(questions, answers)
 
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
