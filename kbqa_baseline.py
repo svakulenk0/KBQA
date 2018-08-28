@@ -268,15 +268,18 @@ class KBQA:
         # print score
         print("Questions vectors shape: " + " ".join([str(dim) for dim in questions_vectors.shape]))
         print("Answers vectors shape: " + " ".join([str(dim) for dim in answers_vectors.shape]))
-        print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
         predicted_answers_vectors = self.model_train.predict(questions_vectors)
         print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
 
+        print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
+
         # load embeddings into matrix
         embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
         # calculate pairwise distances (via cosine similarity)
-        print cosine_similarity(predicted_answers_vectors, embeddings_matrix).shape
+        similarity_matrix = cosine_similarity(predicted_answers_vectors, embeddings_matrix).shape
+        print np.argmax(similarity_matrix, axis=1).shape
+        print np.argmax(similarity_matrix, axis=1)
 
 
 def download_glove_embeddings():
