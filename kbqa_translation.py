@@ -32,6 +32,8 @@ from keras.optimizers import Adam
 from keras.preprocessing.text import text_to_word_sequence
 from keras.preprocessing.sequence import pad_sequences
 
+from toy_data import *
+
 
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
@@ -294,7 +296,7 @@ class KBQA_Translation:
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        self.model_train.fit(questions, answers)
+        self.model_train.fit(questions, answers, epochs=epochs, verbose=2)
 
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
@@ -328,7 +330,6 @@ def load_lcquad():
 
 
 def load_toy_data():
-    from toy_data import *
     return (QS, AS), ENTITY2VEC, KB_EMBEDDINGS_DIM
 
 
