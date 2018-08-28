@@ -271,7 +271,7 @@ class KBQA_Translation:
             if answer.encode('utf-8') in self.entity2vec.keys():
                 questions_data.append(questions_sequence)
                 # TODO match unicode lookup
-                answers_data.append(self.entity2vec[answer])
+                answers_data.append(self.entity2vec[answer.decode('utf-8')])
             else:
                 not_found_entities +=1
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
