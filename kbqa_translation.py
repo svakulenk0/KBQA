@@ -223,7 +223,9 @@ class KBQA_Translation:
         # answer_output = Reshape((self.kb_embeddings_dimension,), input_shape=(self.max_seq_len, self.rnn_units))(question_encoder_output)
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         # answer_output = Flatten(input_shape=(self.num_samples, self.max_seq_len, self.rnn_units))(question_encoder_output)
-        answer_output = question_encoder_output
+        
+        answer_output = Dropout(self.dropout_rate)(question_encoder_output)
+        # answer_output = question_encoder_output
 
         # self.model_train = Model([question_encoder_input] +[X_in] + A_in,   # [input question, input KB],
         self.model_train = Model(question_input,   # [input question, input KB],
@@ -266,7 +268,7 @@ class KBQA_Translation:
             answer = answers[i]
 
             # filter out answers without pre-trained embeddings
-            if answer in self.entity2vec.keys():
+            if answer.encode('utf-8') in self.entity2vec.keys():
                 questions_data.append(questions_sequence)
                 # TODO match unicode lookup
                 answers_data.append(self.entity2vec[answer])
