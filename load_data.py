@@ -45,7 +45,7 @@ def load_lcquad_answers(split):
     with open(questions_path) as f:
         questions = json.load(f)
 
-    with open("./data/lcquad_%s_answers.txt"%split, "w") as f:
+    with open("./data/lcquad_%s_all_answers.txt"%split, "w") as f:
 
         qas = []
         for question in questions:
@@ -68,7 +68,11 @@ def load_lcquad_answers(split):
                     print exc
                 
                 if answers:
-                    f.write('<' + answers[0].encode('utf-8') + '>\n')
+                    # if split == 'train':
+                    #     f.write('<' + answers[0].encode('utf-8') + '>\n')
+                    # elif split == 'test':
+                    for answer in answers:
+                        f.write('<' + answer.encode('utf-8') + '>\n')
                     qas.append({'question': question_str, 'answers': answers})
 
     with open("./data/lcquad_%s.json"%split, "w") as f:
