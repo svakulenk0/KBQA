@@ -215,14 +215,20 @@ class KBQA:
             # for t, token_index in enumerate(questions_sequence):
                 # questions_data[i, t] = token_index
             # print len(self.entity2vec[answers[i]])
-            answer = answers[i].encode('utf-8')
+
+            answers_to_question = answers[i]
+
+            # train only on the first answer from the answer set
+            answer = answers_to_question[0].encode('utf-8')
 
             # filter out answers without pre-trained embeddings
             if answer in self.entity2vec.keys():
                 questions_data.append(questions_sequence)
                 # TODO match unicode lookup
                 answers_data.append(self.entity2vec[answer])
-                answers_indices.append(self.entity2index[answer])
+
+                # add all answer indices for testing
+                answers_indices.append([self.entity2index[answer] for answer in answers_to_question])
             else:
                 not_found_entities +=1
         
@@ -286,8 +292,9 @@ class KBQA:
         top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
 
         hits = 0
-        for i, answer in enumerate(answers_indices):
-            if answer in top_ns[i]:
+        for i, answers in enumerate(answers_indices):
+            # check if the correct and predicted answer sets intersect
+            if set.intersection(set(answers), set(top_ns[i])):
                 hits += 1
 
         print("Hits in top %d: %d/%d"%(n, hits, len(answers_indices)))
@@ -311,7 +318,7 @@ def load_lcquad(dataset_split):
         qas = json.load(train_file)
         for qa in qas:
             QS.append(qa['question'])
-            AS.append(qa['answers'][0])
+            AS.append(qa['answers'])
     return (QS, AS), entity2index, index2entity, entity2vec, kb_embeddings_dimension
 
 
