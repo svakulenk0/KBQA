@@ -265,13 +265,13 @@ class KBQA_Translation:
             # for t, token_index in enumerate(questions_sequence):
                 # questions_data[i, t] = token_index
             # print len(self.entity2vec[answers[i]])
-            answer = answers[i]
+            answer = answers[i].encode('utf-8')
 
             # filter out answers without pre-trained embeddings
-            if answer.encode('utf-8') in self.entity2vec.keys():
+            if answer in self.entity2vec.keys():
                 questions_data.append(questions_sequence)
                 # TODO match unicode lookup
-                answers_data.append(self.entity2vec[answer.decode('utf-8')])
+                answers_data.append(self.entity2vec[answer])
             else:
                 not_found_entities +=1
             # encode answer into a one-hot-encoding with a 3 dimensional tensor
