@@ -283,7 +283,7 @@ class KBQA:
 
         n = 5
         # indices of the top n predicted answers for every question in the test set
-        print similarity_matrix.argsort(axis=1)[:][-n:].shape
+        print similarity_matrix.argsort(axis=1)[:, -n:].shape
 
 
 def download_glove_embeddings():
