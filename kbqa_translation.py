@@ -157,8 +157,8 @@ class KBQA_Translation:
         # load data
         self.load_data(dataset)
 
-        question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder')(word_embedding(question_input))
-        question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder')(question_encoder_output_1)
+        question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder', return_sequences=True)(word_embedding(question_input))
+        question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder', return_sequences=True)(question_encoder_output_1)
         question_encoder_output = GRU(self.rnn_units, name='question_encoder')(question_encoder_output_2)
         # question_encoder = []
         # for i in range(self.encoder_depth):
