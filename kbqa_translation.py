@@ -339,7 +339,7 @@ class KBQA_Translation:
         print("Answers shape: " + " ".join([str(dim) for dim in answers.shape]))
 
         predicted_answers_vectors = self.model_train.predict(questions)
-        print("Predicted answers shape: " + " ".join([str(dim) for dim in predicted_answer_vector.shape]))
+        print("Predicted answers shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
 
 
 def download_glove_embeddings():
