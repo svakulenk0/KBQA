@@ -335,9 +335,11 @@ class KBQA_Translation:
         print("Testing...")
         # score = self.model_train.evaluate(questions, answers, verbose=0)
         # print score
-        for question in questions:
-            predicted_answer_vector = self.model_train.predict(question)
-            # print(predicted_answer_vector.shape)
+        print("Questions shape: %d"%questions.shape)
+        print("Answers shape: %d"%answers.shape)
+
+        predicted_answers_vectors = self.model_train.predict(questions)
+        print("Predicted answers shape: %d"%predicted_answer_vector.shape)
 
 
 def download_glove_embeddings():
@@ -402,7 +404,7 @@ def load_data(model, dataset_name):
 
 if __name__ == '__main__':
     # set mode and dataset
-    mode = 'train'
+    mode = 'test'
     dataset_name = 'lcquad'
 
     # define QA model architecture parameters
