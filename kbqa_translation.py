@@ -333,7 +333,8 @@ class KBQA_Translation:
     def test(self):
         questions, answers = self.dataset
         print("Testing...")
-        self.model_train.evaluate(questions, answers, verbose=2)
+        score = self.model_train.evaluate(questions, answers, verbose=0)
+        print score
 
 
 def download_glove_embeddings():
