@@ -205,6 +205,7 @@ class KBQA:
 
         questions_data = []
         answers_data = []
+        answers_indices = []
         not_found_entities = 0
 
         # iterate over samples
@@ -221,6 +222,7 @@ class KBQA:
                 questions_data.append(questions_sequence)
                 # TODO match unicode lookup
                 answers_data.append(self.entity2vec[answer])
+                answers_indices.append(self.entity2index[answer])
             else:
                 not_found_entities +=1
         
@@ -233,7 +235,7 @@ class KBQA:
         # print questions_data
         # print answers_data
 
-        self.dataset = (questions_data, answers_data)
+        self.dataset = (questions_data, answers_data, answers_indices)
         print("Loaded the dataset")
 
     def save_model(self, name):
@@ -248,27 +250,28 @@ class KBQA:
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
         
-        questions, answers = self.dataset
+        questions_vectors, answers_vectors, answers_indices = self.dataset
         # for epoch in range(epochs):
         #     print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        self.model_train.fit(questions, answers, epochs=epochs, verbose=2, validation_split=0.3)
+        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3)
         self.save_model('model.h5')
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
 
     def test(self):
-        questions, answers = self.dataset
+        questions_vectors, answers_vectors, answers_indices = self.dataset
         print("Testing...")
         # score = self.model_train.evaluate(questions, answers, verbose=0)
         # print score
-        print("Questions shape: " + " ".join([str(dim) for dim in questions.shape]))
-        print("Answers shape: " + " ".join([str(dim) for dim in answers.shape]))
+        print("Questions vectors shape: " + " ".join([str(dim) for dim in questions.shape]))
+        print("Answers vectors shape: " + " ".join([str(dim) for dim in answers.shape]))
+        print("Answers indices: " + ", ".join(answers_indices))
 
         predicted_answers_vectors = self.model_train.predict(questions)
-        print("Predicted answers shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
+        print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
 
         # load embeddings into matrix
         embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
