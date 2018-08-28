@@ -383,7 +383,7 @@ def test_model(model, dataset_name):
     model.test(dataset)
 
 
-def load_data(model, dataset_name)
+def load_data(model, dataset_name):
     if dataset_name == 'toy':
         dataset, model.entity2vec, model.kb_embeddings_dimension = load_toy_data()
     # elif dataset_name == 'dbnqa':
