@@ -42,6 +42,11 @@ KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/
 # LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_train_answers.txt"
 LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_train_answer_5000_uniq.txt"
 
+# util creates missing folders
+def makedirs(fld):
+    if not os.path.exists(fld):
+        os.makedirs(fld)
+
 
 # Prepare Glove File
 def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
@@ -102,7 +107,7 @@ class KBQA_Translation:
     '''
     Translation-based NN model for KBQA
     '''
-    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate=0.2):
+    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate=0.2, model_dir='./models/'):
         self.max_seq_len = max_seq_len
         self.rnn_units = rnn_units
         self.encoder_depth = encoder_depth
@@ -111,6 +116,8 @@ class KBQA_Translation:
         self.bases = bases
         self.l2norm = l2norm
         self.dropout_rate = dropout_rate
+        makedirs(model_dir)
+        self.model_dir = model_dir
 
     def _stacked_rnn(self, rnns, inputs, initial_states=None):
         # if initial_states is None:
@@ -290,6 +297,11 @@ class KBQA_Translation:
 
         self.dataset = (questions_data, answers_data)
 
+    def save_model(self, name):
+        path = os.path.join(self.model_dir, name)
+        self.model_train.save(path)
+        print('Saved to: '+path)
+
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
         
@@ -301,14 +313,13 @@ class KBQA_Translation:
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
         self.model_train.fit(questions, answers, epochs=epochs, verbose=2, validation_split=0.3)
-
+        self.save_model('model.h5')
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
 
 
 def download_glove_embeddings():
-    if not os.path.exists(EMBEDDINGS_PATH):
-        os.makedirs(EMBEDDINGS_PATH)
+    makedirs(EMBEDDINGS_PATH)
 
     if not os.path.exists(GLOVE_EMBEDDINGS_PATH):
         wget.download('http://nlp.stanford.edu/data/glove.6B.zip', EMBEDDINGS_PATH+"glove.6B.zip")
@@ -357,7 +368,7 @@ def train_model(dataset_name):
 
     # define training parameters
     batch_size = 100
-    epochs = 50  # 10
+    epochs = 20  # 10
     learning_rate = 1e-3
 
     # initialize the model
