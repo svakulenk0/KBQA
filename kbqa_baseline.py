@@ -44,6 +44,12 @@ KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/
 # subset of the KB embeddings (rdf2vec embeddings 200 dimensions from KB_EMBEDDINGS_PATH) for the entities of the LC-Quad dataset (both train and test split)
 LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_answers.txt"
 
+
+def set_random_seed(seed=912):
+    random.seed(seed)
+    np.random.seed(seed)
+
+
 # util creates missing folders
 def makedirs(fld):
     if not os.path.exists(fld):
@@ -405,6 +411,7 @@ def load_data(model, dataset_name, mode):
 
 
 if __name__ == '__main__':
+    set_random_seed()
     # set mode and dataset
     mode = 'train'
     dataset_name = 'lcquad'
