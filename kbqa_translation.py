@@ -151,7 +151,7 @@ class KBQA_Translation:
         embeddingLayer = Embedding(self.word_vocab_len, embDim, weights=[embeddingMatrix], trainable=isTrainable, name='word_embedding')
         return embeddingLayer
 
-    def build_model_train(self, dataset):
+    def build_model_train(self):
         '''
         build layers
         '''
@@ -166,9 +166,6 @@ class KBQA_Translation:
 
         # self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         # word_embedding = self.create_pretrained_embedding_layer()
-
-        # load data
-        self.load_data(dataset)
 
         question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(word_embedding(question_input))
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
@@ -372,17 +369,8 @@ def train_model(model, dataset_name):
     '''
     dataset_name <String> Choose one of the available datasets to train the model on ('toy', 'lcquad')
     '''
-    if dataset_name == 'toy':
-        dataset, model.entity2vec, model.kb_embeddings_dimension = load_toy_data()
-    # elif dataset_name == 'dbnqa':
-    #     dataset = load_dbnqa()
-    elif dataset_name == 'lcquad':
-        dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad()
-
-
     # build model
     model.build_model_train(dataset)
-   
     # train model
     model.train(batch_size, epochs, lr=learning_rate)
 
@@ -391,11 +379,19 @@ def test_model(model, dataset_name):
     '''
     dataset_name <String> Choose one of the available datasets to test the model on ('lcquad')
     '''
-    if dataset_name == 'lcquad':
-        dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad()
-
     model.load_pretrained_model()
     model.test(dataset)
+
+
+def load_data(model, dataset_name)
+    if dataset_name == 'toy':
+        dataset, model.entity2vec, model.kb_embeddings_dimension = load_toy_data()
+    # elif dataset_name == 'dbnqa':
+    #     dataset = load_dbnqa()
+    elif dataset_name == 'lcquad':
+        dataset, model.entity2vec, model.kb_embeddings_dimension = load_lcquad()
+
+    model.load_data(dataset)
 
 
 if __name__ == '__main__':
@@ -423,8 +419,11 @@ if __name__ == '__main__':
     # initialize the model
     model = KBQA_Translation(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
 
+    # load data
+    load_data(model, dataset_name)
+    
     # modes
     if mode == 'train':
-        train_model(model, dataset_name)
+        train_model(model)
     elif mode == 'test':
-        test_model(model, dataset_name)
+        test_model(model)
