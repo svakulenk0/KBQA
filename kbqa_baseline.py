@@ -273,7 +273,7 @@ class KBQA:
         # load embeddings into matrix
         embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
         # calculate pairwise distances (via cosine similarity)
-        print cosine_similarity(predicted_answers_vectors, embeddings_matrix)
+        print cosine_similarity(predicted_answers_vectors, embeddings_matrix).shape
 
 
 def download_glove_embeddings():
