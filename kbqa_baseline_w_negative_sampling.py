@@ -241,7 +241,7 @@ class KBQA:
                     random_entity = random.choice(self.entities)
                     answers_data.append(self.entity2vec[random_entity])
 
-                    samples_indicators = np.array([1, -1] * (len(answers_vectors) / 2))
+                    samples_indicators.extend([1, -1])
 
             if split == 'test':
                 # add all answer indices for testing
@@ -254,7 +254,8 @@ class KBQA:
                 answers_indices.append(answer_indices)
                 # if answer_indices:
                 questions_data.append(questions_sequence)
-                samples_indicators = np.array([1] * (len(answers_vectors)))
+                samples_indicators.append(1)
+
 
             # else:
             #     not_found_entities +=1
