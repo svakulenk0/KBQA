@@ -222,16 +222,20 @@ class KBQA:
             answers_to_question = answers[i]
 
             # train only on the first answer from the answer set
-            answer = answers_to_question[0].encode('utf-8')
+            first_answer = answers_to_question[0].encode('utf-8')
 
             # filter out answers without pre-trained embeddings
-            if answer in self.entity2vec.keys():
+            if first_answer in self.entity2vec.keys():
                 questions_data.append(questions_sequence)
                 # TODO match unicode lookup
-                answers_data.append(self.entity2vec[answer])
+                answers_data.append(self.entity2vec[first_answer])
 
-                # add all answer indices for testing
-                answers_indices.append([self.entity2index[answer.encode('utf-8')] for answer in answers_to_question])
+            # add all answer indices for testing
+            for answer in answers_to_question:
+                answer = answer.encode('utf-8')
+                if answer in self.entity2vec.keys():
+                    answers_indices.append([self.entity2index[answer]])
+            
             else:
                 not_found_entities +=1
         
