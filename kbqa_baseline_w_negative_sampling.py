@@ -134,7 +134,7 @@ class KBQA:
     '''
     Baseline neural network architecture for KBQA
     '''
-    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate=0.2, model_dir='./models/'):
+    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, n_negative_samples, dropout_rate=0.2, model_dir='./models/'):
         self.max_seq_len = max_seq_len
         self.rnn_units = rnn_units
         self.encoder_depth = encoder_depth
@@ -147,6 +147,7 @@ class KBQA:
         self.model_dir = model_dir
         # load word vocabulary
         self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
+        self.n_negative_samples = n_negative_samples
 
     def _stacked_rnn(self, rnns, inputs, initial_states=None):
         # if initial_states is None:
@@ -195,7 +196,9 @@ class KBQA:
         # Q' - question encoder
         question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(word_embedding(question_input))
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
-        question_encoder_output = GRU(self.rnn_units, name='question_encoder_3')(question_encoder_output_2)
+        question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_2)
+        question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_3)
+        question_encoder_output = GRU(self.rnn_units, name='question_encoder')(question_encoder_output_4)
 
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         
@@ -223,8 +226,6 @@ class KBQA:
         samples_indicators = []
         not_found_entities = 0
 
-        n_negative_samples = 5
-
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
@@ -242,13 +243,13 @@ class KBQA:
 
                     # generate a random negative sample for each positive sample
                     # pick n random entities
-                    for i in range(n_negative_samples):
+                    for i in range(self.n_negative_samples):
                         questions_data.append(questions_sequence)
                         random_entity = random.choice(self.entities)
                         answers_data.append(self.entity2vec[random_entity])
 
                     samples_indicators.append(1)
-                    samples_indicators.extend([-1] * n_negative_samples)
+                    samples_indicators.extend([-1] * self.n_negative_samples)
 
             if split == 'test':
                 # add all answer indices for testing
@@ -448,9 +449,10 @@ def main(mode):
     batch_size = 100
     epochs = 20  # 10
     learning_rate = 1e-3
+    n_negative_samples = 1
 
     # initialize the model
-    model = KBQA(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate)
+    model = KBQA(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, n_negative_samples, dropout_rate)
 
     # load data
     load_data(model, dataset_name, mode)
