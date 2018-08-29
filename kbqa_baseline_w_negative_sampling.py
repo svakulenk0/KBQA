@@ -202,7 +202,7 @@ class KBQA:
 
         answer_indicator_output = Concatenate(axis=0)([answer_output, sample_indicator])
 
-        self.model_train = Model([question_input, sample_indicator]   # [input question, input KB],
+        self.model_train = Model([question_input, sample_indicator],   # [input question, input KB],
                                  answer_indicator_output)                        # ground-truth target answer
         print self.model_train.summary()
 
