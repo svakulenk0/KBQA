@@ -224,8 +224,7 @@ class KBQA:
                 if first_answer in self.entity2vec.keys():
                     # TODO match unicode lookup
                     questions_data.append(questions_sequence)
-
-                    answers_data.append(self.entity2vec[0])
+                    answers_data.append(self.entity2vec[first_answer])
 
             if split == 'test':
                 # add all answer indices for testing
