@@ -221,7 +221,7 @@ class KBQA:
         samples_indicators = []
         not_found_entities = 0
 
-        n_negative_samples = 5
+        n_negative_samples = 1
 
         # iterate over samples
         for i in range(num_samples):
@@ -426,7 +426,7 @@ def load_data(model, dataset_name, mode):
 if __name__ == '__main__':
     set_random_seed()
     # set mode and dataset
-    mode = 'test'
+    mode = 'train'
     dataset_name = 'lcquad'
     # dataset_name = 'lcquad_test'
 
