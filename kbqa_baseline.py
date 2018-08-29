@@ -199,7 +199,7 @@ class KBQA:
                                  answer_output)                        # ground-truth target answer
         print self.model_train.summary()
 
-    def load_data(self, dataset):
+    def load_data(self, dataset, split):
         questions, answers = dataset
         assert len(questions) == len(answers)
 
@@ -215,32 +215,33 @@ class KBQA:
         for i in range(self.num_samples):
             # encode words (ignore OOV words)
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
-            # for t, token_index in enumerate(questions_sequence):
-                # questions_data[i, t] = token_index
-            # print len(self.entity2vec[answers[i]])
-
             answers_to_question = answers[i]
-
-            # train only on the first answer from the answer set
-            first_answer = answers_to_question[0].encode('utf-8')
-
-            # filter out answers without pre-trained embeddings
-            if first_answer in self.entity2vec.keys():
-                questions_data.append(questions_sequence)
-                # TODO match unicode lookup
-                answers_data.append(self.entity2vec[first_answer])
-
-            # add all answer indices for testing
-            answer_indices = []
-            for answer in answers_to_question:
-                answer = answer.encode('utf-8')
-                if answer in self.entity2vec.keys():
-                    answer_indices.append(self.entity2index[answer])
-
-            answers_indices.append(answer_indices)
             
-            else:
-                not_found_entities +=1
+            if split == 'train':
+                # train only on the first answer from the answer set
+                first_answer = answers_to_question[0].encode('utf-8')
+                # filter out answers without pre-trained embeddings
+                if first_answer in self.entity2vec.keys():
+                    # TODO match unicode lookup
+                    questions_data.append(questions_sequence)
+
+                    answers_data.append(self.entity2vec[0])
+
+            if split == 'test':
+                # add all answer indices for testing
+                answer_indices = []
+                for answer in answers_to_question:
+                    answer = answer.encode('utf-8')
+                    if answer in self.entity2vec.keys():
+                        answer_indices.append(self.entity2index[answer])
+
+                answers_indices.append(answer_indices)
+                if answer_indices:
+                    questions_data.append(questions_sequence)
+
+            
+            # else:
+            #     not_found_entities +=1
         
         print ("Not found: %d entities"%not_found_entities)
         # normalize length
@@ -370,7 +371,7 @@ def load_data(model, dataset_name, mode):
     elif dataset_name == 'lcquad':
         dataset, model.entity2index, model.index2entity, model.entity2vec, model.kb_embeddings_dimension = load_lcquad(mode)
 
-    model.load_data(dataset)
+    model.load_data(dataset, mode)
 
 
 if __name__ == '__main__':
