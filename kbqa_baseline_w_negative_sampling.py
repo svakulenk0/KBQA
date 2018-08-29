@@ -30,7 +30,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from keras.models import Model
 from keras.models import load_model
 
-from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten
+from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten, Concatenate
 from keras.regularizers import l2
 from keras.optimizers import Adam
 
