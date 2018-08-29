@@ -281,7 +281,7 @@ class KBQA:
         def loss(y_true, y_pred):
             y_true = K.l2_normalize(y_true, axis=-1)
             y_pred = K.l2_normalize(y_pred, axis=-1)
-            samples_indicator = np.array([1, -1] * batch_size)
+            samples_indicator = np.array([1, -1] * (batch_size / 2))
             loss_vector = -K.sum(y_true * y_pred, axis=-1) * K.variable(value=samples_indicator)
             print("Loss: %s" % str(loss_vector.shape))
             return loss_vector
