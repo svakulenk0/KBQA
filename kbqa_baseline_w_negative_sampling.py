@@ -266,6 +266,7 @@ class KBQA:
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         print("Maximum question length %d"%questions_data.shape[1])
         answers_data = np.asarray(answers_data)
+        samples_indicators = np.asarray(samples_indicators)
 
         self.num_samples = questions_data.shape[0]
 
