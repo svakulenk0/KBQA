@@ -297,7 +297,8 @@ class KBQA:
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3, shuffle='batch')
+        # self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3, shuffle='batch')
+        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3)
         self.save_model('model.h5')
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
