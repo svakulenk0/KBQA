@@ -448,8 +448,8 @@ def main(mode):
 
     # define training parameters
     batch_size = 100
-    epochs = 20  # 10
-    learning_rate = 1e-2
+    epochs = 10  # 10
+    learning_rate = 1e-3
     n_negative_samples = 1
 
     # initialize the model
