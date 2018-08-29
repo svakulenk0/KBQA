@@ -186,7 +186,7 @@ class KBQA:
         question_input = Input(shape=(None,), name='question_input')
 
         # I - positive/negtive sample indicator (1/-1)
-        sample_indicator = Input(shape=(None), name='sample_indicator')
+        sample_indicator = Input(shape=(None,), name='sample_indicator')
 
         # E' - question words embedding
         word_embedding = self.create_pretrained_embedding_layer()
