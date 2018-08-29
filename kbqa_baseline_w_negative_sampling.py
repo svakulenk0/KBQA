@@ -196,8 +196,8 @@ class KBQA:
         # Q' - question encoder
         question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(word_embedding(question_input))
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
-        question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_2)
-        question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_3)
+        question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_output_2)
+        question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
         question_encoder_output = GRU(self.rnn_units, name='question_encoder')(question_encoder_output_4)
 
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
