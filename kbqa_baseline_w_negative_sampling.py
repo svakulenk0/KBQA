@@ -394,7 +394,7 @@ def load_toy_data():
     return (QS, AS), ENTITY2VEC, KB_EMBEDDINGS_DIM
 
 
-def train_model(model, batch_size):
+def train_model(model, epochs, batch_size):
     '''
     dataset_name <String> Choose one of the available datasets to train the model on ('toy', 'lcquad')
     '''
@@ -457,7 +457,7 @@ def main(mode):
     
     # modes
     if mode == 'train':
-        train_model(model, batch_size)
+        train_model(model, epochs, batch_size)
     elif mode == 'test':
         test_model(model)
 
