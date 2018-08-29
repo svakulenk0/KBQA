@@ -282,6 +282,7 @@ class KBQA:
             y_true = K.l2_normalize(y_true, axis=-1)
             y_pred = K.l2_normalize(y_pred, axis=-1)
             loss_vector = -K.sum(y_true * y_pred, axis=-1)
+            return loss_vector
         return loss
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
