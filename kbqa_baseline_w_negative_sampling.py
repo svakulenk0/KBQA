@@ -277,14 +277,14 @@ class KBQA:
         self.model_train = load_model(os.path.join(self.model_dir, 'model.h5'))
         # self.build_model_test()
 
-    def samples_loss(self, batch_size=32):
+    def samples_loss(self):
         def loss(y_true, y_pred):
-            y_true = K.tile(K.l2_normalize(y_true, axis=-1), [1, batch_size])
-            y_pred = K.tile(K.l2_normalize(y_pred, axis=-1), [1,batch_size])
-
+            y_true = K.l2_normalize(y_true, axis=-1)
+            y_pred = K.l2_normalize(y_pred, axis=-1)
             # print("Batch size: %s" % str(y_pred.shape))
-            samples_indicator = np.array([1, -1] * batch_size / 2)
-            loss_vector = -K.sum(y_true * y_pred, axis=-1) * samples_indicator
+            batch_size = K.shape(y_pred)[0]
+            indicator = K.variable(value=[1, -1])
+            loss_vector = -K.sum(y_true * y_pred, axis=-1) * K.tile(indicator, batch_size/2, 0)
             print("Loss: %s" % str(loss_vector.shape))
             return loss_vector
         return loss
