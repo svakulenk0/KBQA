@@ -290,10 +290,15 @@ class KBQA:
 
     def samples_loss(self):
         def loss(y_true, y_pred):
+            print ("Predicted vectors: %s" % str(y_pred.shape))
             y_true = K.l2_normalize(y_true, axis=-1)
 
             y_indicator = y_pred[:][-1]
+            print ("Indicators vector: %s" % str(y_indicator.shape))
+
             y_pred = y_pred[:][:-1]
+            print ("Predicted vectors: %s" % str(y_pred.shape))
+
 
             y_pred = K.l2_normalize(y_pred, axis=-1)
             
