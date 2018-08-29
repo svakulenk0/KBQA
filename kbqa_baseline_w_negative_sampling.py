@@ -186,7 +186,7 @@ class KBQA:
         question_input = Input(shape=(None,), name='question_input')
 
         # I - positive/negtive sample indicator (1/-1)
-        # sample_input = Input(shape=(None,), name='sample_indicator')
+        sample_indicator = Input(shape=(None), name='sample_indicator')
 
         # E' - question words embedding
         word_embedding = self.create_pretrained_embedding_layer()
@@ -200,8 +200,10 @@ class KBQA:
         
         answer_output = Dropout(self.dropout_rate)(question_encoder_output)
 
-        self.model_train = Model(question_input,   # [input question, input KB],
-                                 answer_output)                        # ground-truth target answer
+        answer_indicator_output = Concatenate(axis=0)([answer_output, sample_indicator])
+
+        self.model_train = Model([question_input, sample_indicator]   # [input question, input KB],
+                                 answer_indicator_output)                        # ground-truth target answer
         print self.model_train.summary()
 
     def load_data(self, dataset, split):
@@ -215,6 +217,7 @@ class KBQA:
         questions_data = []
         answers_data = []
         answers_indices = []
+        samples_indicators = []
         not_found_entities = 0
 
         # iterate over samples
@@ -238,6 +241,8 @@ class KBQA:
                     random_entity = random.choice(self.entities)
                     answers_data.append(self.entity2vec[random_entity])
 
+                    samples_indicators = np.array([1, -1] * (len(answers_vectors) / 2))
+
             if split == 'test':
                 # add all answer indices for testing
                 answer_indices = []
@@ -249,10 +254,11 @@ class KBQA:
                 answers_indices.append(answer_indices)
                 # if answer_indices:
                 questions_data.append(questions_sequence)
+                samples_indicators = np.array([1] * (len(answers_vectors)))
 
-            
             # else:
             #     not_found_entities +=1
+        print("Samples indicators: %d" % len(samples_indicators))
         
         print ("Not found: %d entities"%not_found_entities)
         # normalize length
@@ -261,11 +267,13 @@ class KBQA:
         answers_data = np.asarray(answers_data)
 
         self.num_samples = questions_data.shape[0]
+
+        
        
         # print questions_data
         # print answers_data
 
-        self.dataset = (questions_data, answers_data, answers_indices)
+        self.dataset = (questions_data, answers_data, answers_indices, samples_indicators)
         print("Loaded the dataset")
 
     def save_model(self, name):
@@ -280,22 +288,27 @@ class KBQA:
     def samples_loss(self):
         def loss(y_true, y_pred):
             y_true = K.l2_normalize(y_true, axis=-1)
+            
+            y_indicator = y_pred[-1]
+            y_pred = y_pred[:-1]
+
             y_pred = K.l2_normalize(y_pred, axis=-1)
-            loss_vector = -K.sum(y_true * y_pred, axis=-1)
+            
+            loss_vector = -K.sum(y_true * y_pred, axis=-1) * y_indicator
             return loss_vector
         return loss
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
-        questions_vectors, answers_vectors, answers_indices = self.dataset
-        samples_indicator = np.array([1, -1] * (len(answers_vectors) / 2))
-        print("Samples indicators: %d" % len(samples_indicator))
         self.model_train.compile(optimizer=Adam(lr=lr), loss=self.samples_loss())
         # for epoch in range(epochs):
         #     print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3)
+        
+        questions_vectors, answers_vectors, answers_indices, sample_indicators = self.dataset
+
+        self.model_train.fit([questions_vectors, sample_indicators], answers_vectors, epochs=epochs, verbose=2, validation_split=0.3)
         self.save_model('model.h5')
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
