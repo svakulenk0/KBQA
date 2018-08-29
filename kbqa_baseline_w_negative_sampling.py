@@ -30,7 +30,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from keras.models import Model
 from keras.models import load_model
 
-from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten, Concatenate
+from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten, Concatenate, concatenate
 from keras.regularizers import l2
 from keras.optimizers import Adam
 
@@ -200,7 +200,8 @@ class KBQA:
         
         answer_output = Dropout(self.dropout_rate)(question_encoder_output)
 
-        answer_indicator_output = Concatenate(axis=0)([answer_output, sample_indicator])
+        # answer_indicator_output = Concatenate(axis=0)([answer_output, sample_indicator])
+        answer_indicator_output = concatenate([answer_output, sample_indicator], axis=0)
 
         self.model_train = Model(inputs=[question_input, sample_indicator],   # [input question, input KB],
                                  outputs=[answer_indicator_output])                        # ground-truth target answer
