@@ -291,9 +291,9 @@ class KBQA:
     def samples_loss(self):
         def loss(y_true, y_pred):
             y_true = K.l2_normalize(y_true, axis=-1)
-            
-            y_indicator = y_pred[-1]
-            y_pred = y_pred[:-1]
+
+            y_indicator = y_pred[:][-1]
+            y_pred = y_pred[:][:-1]
 
             y_pred = K.l2_normalize(y_pred, axis=-1)
             
