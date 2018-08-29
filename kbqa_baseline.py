@@ -298,7 +298,7 @@ class KBQA:
 
         # print np.argmax(similarity_matrix, axis=1)
 
-        n = 5
+        n = 1
         # indices of the top n predicted answers for every question in the test set
         top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
         print top_ns[:2]
@@ -307,6 +307,7 @@ class KBQA:
         for i, answers in enumerate(answers_indices):
             # check if the correct and predicted answer sets intersect
             if set.intersection(set(answers), set(top_ns[i])):
+            # if set.intersection(set([answers[0]]), set(top_ns[i])):
                 hits += 1
 
         print("Hits in top %d: %d/%d"%(n, hits, len(answers_indices)))
