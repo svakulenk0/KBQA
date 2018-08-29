@@ -298,10 +298,10 @@ class KBQA:
 
         # print np.argmax(similarity_matrix, axis=1)
 
-        n = 27293
+        n = 5
         # indices of the top n predicted answers for every question in the test set
         top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
-        print top_ns[:2]
+        # print top_ns[:2]
 
         hits = 0
         for i, answers in enumerate(answers_indices):
@@ -378,7 +378,7 @@ def load_data(model, dataset_name, mode):
 if __name__ == '__main__':
     set_random_seed()
     # set mode and dataset
-    mode = 'test'
+    mode = 'train'
     dataset_name = 'lcquad'
     # dataset_name = 'lcquad_test'
 
