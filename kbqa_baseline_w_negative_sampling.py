@@ -256,7 +256,7 @@ class KBQA:
         
         print ("Not found: %d entities"%not_found_entities)
         # normalize length
-        questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
+        questions_data = np.asarray(pad_sequences(questions_data, padding='post'), dtype='float64')
         print("Maximum question length %d"%questions_data.shape[1])
         answers_data = np.asarray(answers_data)
 
