@@ -200,8 +200,8 @@ class KBQA:
         
         answer_output = Dropout(self.dropout_rate)(question_encoder_output)
 
-        # answer_indicator_output = Concatenate(axis=0)([answer_output, sample_indicator])
-        answer_indicator_output = concatenate([answer_output, sample_indicator], axis=0)
+        answer_indicator_output = Concatenate(axis=1)([answer_output, sample_indicator])
+        # answer_indicator_output = concatenate([answer_output, sample_indicator], axis=0)
 
         self.model_train = Model(inputs=[question_input, sample_indicator],   # [input question, input KB],
                                  outputs=[answer_indicator_output])                        # ground-truth target answer
