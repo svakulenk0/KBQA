@@ -173,7 +173,7 @@ class KBQA:
         self.word_vocab_len = len(self.wordToIndex) + 1  # adding 1 to account for masking
         embeddings_matrix = self.load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
 
-        embeddingLayer = Embedding(self.word_vocab_len, embDim, weights=[embeddings_matrix], trainable=isTrainable, name='word_embedding')
+        embeddingLayer = Embedding(self.word_vocab_len, embeddings_matrix.shape[1], weights=[embeddings_matrix], trainable=isTrainable, name='word_embedding')
         return embeddingLayer
 
     def build_model_train(self):
