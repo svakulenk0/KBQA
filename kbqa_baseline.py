@@ -111,8 +111,11 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
             entityAndVector = line.split(None, 1)
             # match the entity labels in vector embeddings
             entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
-            embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-            
+            try:
+                embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+            except:
+                print entityAndVector
+
             idx += 1  # 0 is reserved for masking in Keras
             entity2index[entity] = idx
             index2entity[idx] = entity
