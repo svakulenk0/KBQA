@@ -298,7 +298,7 @@ class KBQA:
 
         # print np.argmax(similarity_matrix, axis=1)
 
-        n = 1
+        n = 27293
         # indices of the top n predicted answers for every question in the test set
         top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
         print top_ns[:2]
