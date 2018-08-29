@@ -239,9 +239,9 @@ class KBQA:
                     answers_data.append(self.entity2vec[first_answer])
 
                     # generate a random negative sample for each positive sample
-                    questions_data.append(questions_sequence)
                     # pick n random entities
                     for i in range(n_negative_samples):
+                        questions_data.append(questions_sequence)
                         random_entity = random.choice(self.entities)
                         answers_data.append(self.entity2vec[random_entity])
 
