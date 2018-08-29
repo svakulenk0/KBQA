@@ -16,6 +16,7 @@ Answer - entity vector from KB (entity embeddings index)
 
 
 '''
+import sys
 import os
 import wget
 import zipfile
@@ -425,10 +426,9 @@ def load_data(model, dataset_name, mode):
     model.load_data(dataset, mode)
 
 
-if __name__ == '__main__':
-    set_random_seed()
+def main(mode):
     # set mode and dataset
-    mode = 'train'
+    # mode = 'test'
     dataset_name = 'lcquad'
     # dataset_name = 'lcquad_test'
 
@@ -460,3 +460,8 @@ if __name__ == '__main__':
         train_model(model)
     elif mode == 'test':
         test_model(model)
+
+
+if __name__ == '__main__':
+    set_random_seed()
+    main(sys.argv[1])
