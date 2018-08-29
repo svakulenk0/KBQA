@@ -285,7 +285,7 @@ class KBQA:
         print('Saved to: '+path)
 
     def load_pretrained_model(self):
-        self.model_train = load_model(os.path.join(self.model_dir, 'model.h5'))
+        self.model_train = load_model(os.path.join(self.model_dir, 'model.h5'), custom_objects={'samples_loss': self.samples_loss})
         # self.build_model_test()
 
     def samples_loss(self):
