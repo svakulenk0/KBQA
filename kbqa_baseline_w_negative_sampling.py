@@ -277,11 +277,12 @@ class KBQA:
         self.model_train = load_model(os.path.join(self.model_dir, 'model.h5'))
         # self.build_model_test()
 
-    def samples_loss(self, batch_size=32):
+    def samples_loss(self):
         def loss(y_true, y_pred):
             y_true = K.l2_normalize(y_true, axis=-1)
             y_pred = K.l2_normalize(y_pred, axis=-1)
-            samples_indicator = np.array([1, -1] * (batch_size / 2))
+            print("Batch size: %s" % str(y_pred.shape))
+            samples_indicator = np.array([1, -1] * (y_pred.shape[0] / 2))
             loss_vector = -K.sum(y_true * y_pred, axis=-1) * K.variable(value=samples_indicator)
             print("Loss: %s" % str(loss_vector.shape))
             return loss_vector
@@ -295,7 +296,7 @@ class KBQA:
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3)
+        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3, shuffle='batch')
         self.save_model('model.h5')
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
