@@ -279,8 +279,8 @@ class KBQA:
 
     def samples_loss(self, batch_size=32):
         def loss(y_true, y_pred):
-            y_true = K.tile(K.l2_normalize(y_true, axis=-1), batch_size)
-            y_pred = K.tile(K.l2_normalize(y_pred, axis=-1), batch_size)
+            y_true = K.tile(K.l2_normalize(y_true, axis=-1), [1, batch_size])
+            y_pred = K.tile(K.l2_normalize(y_pred, axis=-1), [1,batch_size])
 
             # print("Batch size: %s" % str(y_pred.shape))
             samples_indicator = np.array([1, -1] * batch_size / 2)
