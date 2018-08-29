@@ -231,10 +231,13 @@ class KBQA:
                 answers_data.append(self.entity2vec[first_answer])
 
             # add all answer indices for testing
+            answer_indices = []
             for answer in answers_to_question:
                 answer = answer.encode('utf-8')
                 if answer in self.entity2vec.keys():
-                    answers_indices.append(self.entity2index[answer])
+                    answer_indices.append(self.entity2index[answer])
+
+            answers_indices.append(answer_indices)
             
             else:
                 not_found_entities +=1
