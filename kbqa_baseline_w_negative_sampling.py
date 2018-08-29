@@ -421,7 +421,7 @@ def load_data(model, dataset_name, mode):
 if __name__ == '__main__':
     set_random_seed()
     # set mode and dataset
-    mode = 'train'
+    mode = 'test'
     dataset_name = 'lcquad'
     # dataset_name = 'lcquad_test'
 
