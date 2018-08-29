@@ -199,7 +199,7 @@ class KBQA:
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
         question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_output_2)
         question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
-        question_encoder_output = GRU(self.rnn_units, name='question_encoder')(question_encoder_output_4)
+        question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder')(question_encoder_output_4)
 
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         
@@ -436,7 +436,7 @@ def main(mode):
 
     # define QA model architecture parameters
     max_seq_len = 10
-    rnn_units = 200  # dimension of the GRU output layer (hidden question representation) 
+    rnn_units = 500  # dimension of the GRU output layer (hidden question representation) 
     encoder_depth = 2
     decoder_depth = 2
     dropout_rate = 0.5
