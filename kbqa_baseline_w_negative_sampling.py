@@ -170,7 +170,7 @@ class KBQA:
             embeddings_matrix[index, :] = embeddings_index[item] # create embedding: item index to item embedding
         return embeddings_matrix
 
-    def create_pretrained_embedding_layer(self, isTrainable=False):
+    def create_pretrained_embedding_layer(self, isTrainable=True):
         '''
         Create pre-trained Keras embedding layer
         '''
