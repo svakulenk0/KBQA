@@ -322,7 +322,7 @@ class KBQA:
         # self.save_model('model.h5')
 
     def test(self):
-        questions_vectors, answers_vectors, answers_indices = self.dataset
+        questions_vectors, answers_vectors, answers_indices, sample_indicators = self.dataset
         print("Testing...")
         # score = self.model_train.evaluate(questions, answers, verbose=0)
         # print score
@@ -330,7 +330,7 @@ class KBQA:
         # print("Answers vectors shape: " + " ".join([str(dim) for dim in answers_vectors.shape]))
         print("Answers indices shape: %d" % len(answers_indices))
 
-        predicted_answers_vectors = self.model_train.predict(questions_vectors)
+        predicted_answers_vectors = self.model_train.predict([questions_vectors, sample_indicators])[:,:-1]
         print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
         # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
