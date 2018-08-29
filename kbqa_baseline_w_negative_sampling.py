@@ -209,7 +209,7 @@ class KBQA:
         assert len(questions) == len(answers)
 
         # encode questions and answers using embeddings vocabulary
-        self.num_samples = len(questions)
+        num_samples = len(questions)
         self.entities = self.entity2vec.keys()
 
         questions_data = []
@@ -218,7 +218,7 @@ class KBQA:
         not_found_entities = 0
 
         # iterate over samples
-        for i in range(self.num_samples):
+        for i in range(num_samples):
             # encode words (ignore OOV words)
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
             answers_to_question = answers[i]
@@ -259,6 +259,8 @@ class KBQA:
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         print("Maximum question length %d"%questions_data.shape[1])
         answers_data = np.asarray(answers_data)
+
+        self.num_samples = questions_data.shape[0]
        
         # print questions_data
         # print answers_data
@@ -280,7 +282,7 @@ class KBQA:
             y_true = K.l2_normalize(y_true, axis=-1)
             y_pred = K.l2_normalize(y_pred, axis=-1)
             loss_vector = -K.sum(y_true * y_pred, axis=-1) * samples_indicator
-            print("Loss: %d" % len(loss_vector))
+            print("Loss: %s" % str(loss_vector.shape))
             return loss_vector
         return loss
 
