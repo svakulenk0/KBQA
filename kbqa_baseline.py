@@ -236,8 +236,8 @@ class KBQA:
                         answer_indices.append(self.entity2index[answer])
 
                 answers_indices.append(answer_indices)
-                if answer_indices:
-                    questions_data.append(questions_sequence)
+                # if answer_indices:
+                questions_data.append(questions_sequence)
 
             
             # else:
