@@ -322,7 +322,7 @@ class KBQA:
         
         questions_vectors, answers_vectors, answers_indices, sample_indicators = self.dataset
 
-        self.model_train.fit([questions_vectors, sample_indicators], [answers_vectors], epochs=epochs, verbose=2, validation_split=0.3)
+        self.model_train.fit([questions_vectors, sample_indicators], [answers_vectors], epochs=epochs, verbose=2, validation_split=0.3, shuffle='batch')
         self.save_model('model.h5')
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
