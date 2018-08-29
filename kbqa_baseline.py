@@ -284,7 +284,7 @@ class KBQA:
 
         predicted_answers_vectors = self.model_train.predict(questions_vectors)
         print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
-        # print answers_indices
+        print answers_indices[:2]
         # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
         # load embeddings into matrix
@@ -297,6 +297,7 @@ class KBQA:
         n = 5
         # indices of the top n predicted answers for every question in the test set
         top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
+        print top_ns[:2]
 
         hits = 0
         for i, answers in enumerate(answers_indices):
