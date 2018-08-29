@@ -199,12 +199,13 @@ class KBQA:
                                  answer_output)                        # ground-truth target answer
         print self.model_train.summary()
 
-    def load_data(self, dataset, split):
+    def load_data(self, dataset, split, negative_sampling=True):
         questions, answers = dataset
         assert len(questions) == len(answers)
 
         # encode questions and answers using embeddings vocabulary
         self.num_samples = len(questions)
+        self.entities = self.entity2vec.keys()
 
         questions_data = []
         answers_data = []
@@ -221,10 +222,17 @@ class KBQA:
                 # train only on the first answer from the answer set
                 first_answer = answers_to_question[0].encode('utf-8')
                 # filter out answers without pre-trained embeddings
-                if first_answer in self.entity2vec.keys():
+                if first_answer in self.entities:
                     # TODO match unicode lookup
                     questions_data.append(questions_sequence)
                     answers_data.append(self.entity2vec[first_answer])
+
+                    if negative_sampling == True:
+                        # generate a random negative sample for each positive sample
+                        questions_data.append(questions_sequence)
+                        # pick a random entity
+                        random_entity = random.choice(self.entities)
+                        answers_data.append(self.entity2vec[random_entity])
 
             if split == 'test':
                 # add all answer indices for testing
