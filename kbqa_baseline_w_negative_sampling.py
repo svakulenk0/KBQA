@@ -256,7 +256,7 @@ class KBQA:
         
         print ("Not found: %d entities"%not_found_entities)
         # normalize length
-        questions_data = np.asarray(pad_sequences(questions_data, padding='post'), dtype='float64')
+        questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         print("Maximum question length %d"%questions_data.shape[1])
         answers_data = np.asarray(answers_data)
 
@@ -281,24 +281,20 @@ class KBQA:
         def loss(y_true, y_pred):
             y_true = K.l2_normalize(y_true, axis=-1)
             y_pred = K.l2_normalize(y_pred, axis=-1)
-            # print("Batch size: %s" % str(y_pred.shape))
-            size = K.variable([K.shape(y_pred)[0]//2], dtype='int32')
-            indicator = K.variable(value=[1, -1])
-            loss_vector = -K.sum(y_true * y_pred, axis=-1) * K.tile(indicator, size)
-            print("Loss: %s" % str(loss_vector.shape))
-            return loss_vector
+            loss_vector = -K.sum(y_true * y_pred, axis=-1)
         return loss
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         questions_vectors, answers_vectors, answers_indices = self.dataset
+        samples_indicator = np.array([1, -1] * (len(answers_vectors) / 2))
+        print("Samples indicators: %d" % len(samples_indicator))
         self.model_train.compile(optimizer=Adam(lr=lr), loss=self.samples_loss())
         # for epoch in range(epochs):
         #     print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
             # load training dataset
             # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
             # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        print(questions_vectors.shape, questions_vectors.dtype)
-        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3, shuffle='batch')
+        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3)
         self.save_model('model.h5')
             # self.save_model('model_epoch%i.h5'%(epoch + 1))
         # self.save_model('model.h5')
