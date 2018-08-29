@@ -305,6 +305,7 @@ class KBQA:
 
 
             y_pred = K.l2_normalize(y_pred, axis=-1)
+            y_indicator = K.print_tensor(y_indicator, message="y_indicator vector")
             
             loss_vector = -K.sum(y_true * y_pred, axis=-1) * y_indicator
             loss_vector = K.print_tensor(loss_vector, message="loss vector")
