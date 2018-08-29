@@ -186,7 +186,7 @@ class KBQA:
         question_input = Input(shape=(None,), name='question_input')
 
         # I - positive/negtive sample indicator (1/-1)
-        sample_indicator = Input(shape=(None,), name='sample_indicator')
+        sample_indicator = Input(shape=(), name='sample_indicator')
 
         # E' - question words embedding
         word_embedding = self.create_pretrained_embedding_layer()
@@ -200,7 +200,7 @@ class KBQA:
         
         answer_output = Dropout(self.dropout_rate)(question_encoder_output)
 
-        answer_indicator_output = Concatenate(axis=0)([answer_output, sample_indicator])
+        answer_indicator_output = Concatenate(axis=1)([answer_output, sample_indicator])
 
         self.model_train = Model([question_input, sample_indicator],   # [input question, input KB],
                                  answer_indicator_output)                        # ground-truth target answer
