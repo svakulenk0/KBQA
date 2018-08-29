@@ -284,7 +284,7 @@ class KBQA:
             # print("Batch size: %s" % str(y_pred.shape))
             batch_size = K.int_shape(y_pred)[0]
             indicator = K.variable(value=[1, -1])
-            loss_vector = -K.sum(y_true * y_pred, axis=-1) * K.repeat_elements(indicator, batch_size/2, 0)
+            loss_vector = -K.sum(y_true * y_pred, axis=-1) * K.repeat_elements(indicator, batch_size, 0)
             print("Loss: %s" % str(loss_vector.shape))
             return loss_vector
         return loss
