@@ -223,7 +223,7 @@ class KBQA:
         samples_indicators = []
         not_found_entities = 0
 
-        n_negative_samples = 1
+        n_negative_samples = 5
 
         # iterate over samples
         for i in range(num_samples):
