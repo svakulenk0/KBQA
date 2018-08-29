@@ -414,7 +414,7 @@ def test_model(model):
     model.test()
 
 
-def load_dataset(model, dataset_name, mode, split):
+def load_dataset(model, dataset_name, mode):
     print("Loading %s..."%dataset_name)
     
     if dataset_name == 'toy':
@@ -431,7 +431,6 @@ def main(mode):
     # set mode and dataset
     # mode = 'test'
     dataset_name = 'lcquad'
-    split = 'train'
     # dataset_name = 'lcquad_test'
 
     # define QA model architecture parameters
@@ -456,7 +455,7 @@ def main(mode):
     model = KBQA(max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, n_negative_samples, dropout_rate)
 
     # load data
-    load_dataset(model, dataset_name, mode, split)
+    load_dataset(model, dataset_name, mode)
     
     # modes
     if mode == 'train':
