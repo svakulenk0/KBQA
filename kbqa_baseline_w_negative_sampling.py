@@ -283,9 +283,8 @@ class KBQA:
             y_pred = K.l2_normalize(y_pred, axis=-1)
             # print("Batch size: %s" % str(y_pred.shape))
             batch_size = K.shape(y_pred)[0]
-            print("batch_size: %s" % str(batch_size.shape))
             indicator = K.variable(value=[1, -1])
-            loss_vector = -K.sum(y_true * y_pred, axis=-1) * K.repeat(indicator, batch_size/2)
+            loss_vector = -K.sum(y_true * y_pred, axis=-1) * K.repeat_elements(indicator, batch_size/2, 0)
             print("Loss: %s" % str(loss_vector.shape))
             return loss_vector
         return loss
