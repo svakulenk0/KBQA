@@ -199,6 +199,7 @@ class KBQA:
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         
         # answer_output = Dropout(self.dropout_rate)(question_encoder_output)
+        answer_output = question_encoder_output
 
         answer_indicator_output = Concatenate(axis=1)([answer_output, sample_indicator])
         # answer_indicator_output = concatenate([answer_output, sample_indicator], axis=0)
@@ -427,7 +428,7 @@ def load_data(model, dataset_name, mode):
 if __name__ == '__main__':
     set_random_seed()
     # set mode and dataset
-    mode = 'train'
+    mode = 'test'
     dataset_name = 'lcquad'
     # dataset_name = 'lcquad_test'
 
