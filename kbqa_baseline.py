@@ -199,7 +199,7 @@ class KBQA:
                                  answer_output)                        # ground-truth target answer
         print self.model_train.summary()
 
-    def load_data(self, dataset, split, negative_sampling=True):
+    def load_data(self, dataset, split):
         questions, answers = dataset
         assert len(questions) == len(answers)
 
@@ -226,13 +226,6 @@ class KBQA:
                     # TODO match unicode lookup
                     questions_data.append(questions_sequence)
                     answers_data.append(self.entity2vec[first_answer])
-
-                    if negative_sampling == True:
-                        # generate a random negative sample for each positive sample
-                        questions_data.append(questions_sequence)
-                        # pick a random entity
-                        random_entity = random.choice(self.entities)
-                        answers_data.append(self.entity2vec[random_entity])
 
             if split == 'test':
                 # add all answer indices for testing
