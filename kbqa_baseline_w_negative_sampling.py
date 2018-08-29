@@ -221,6 +221,8 @@ class KBQA:
         samples_indicators = []
         not_found_entities = 0
 
+        n_negative_samples = 5
+
         # iterate over samples
         for i in range(num_samples):
             # encode words (ignore OOV words)
@@ -238,11 +240,13 @@ class KBQA:
 
                     # generate a random negative sample for each positive sample
                     questions_data.append(questions_sequence)
-                    # pick a random entity
-                    random_entity = random.choice(self.entities)
-                    answers_data.append(self.entity2vec[random_entity])
+                    # pick n random entities
+                    for i in range(n_negative_samples):
+                        random_entity = random.choice(self.entities)
+                        answers_data.append(self.entity2vec[random_entity])
 
-                    samples_indicators.extend([1, -1])
+                    samples_indicators.append(1)
+                    samples_indicators.extend([-1] * n_negative_samples)
 
             if split == 'test':
                 # add all answer indices for testing
