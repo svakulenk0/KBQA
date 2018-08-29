@@ -284,7 +284,7 @@ class KBQA:
 
         predicted_answers_vectors = self.model_train.predict(questions_vectors)
         print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
-        print answers_indices
+        # print answers_indices
         # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
         # load embeddings into matrix
