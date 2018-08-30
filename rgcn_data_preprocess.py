@@ -239,7 +239,7 @@ def load_data(graph_file, working_dir, dataset_str, limit=-1):
                 print('%d adjacency matrices loaded ' % i)
 
         pkl.dump(nodes, open(nodes_file, 'wb'))
-        stringNodes = [str(node) for node in nodes]
+        stringNodes = [unicode(node) for node in nodes]
         pkl.dump(stringNodes, open(nodes_strings_file, 'wb'))
         
         pkl.dump(relations_dict, open(rel_dict_file, 'wb'))
