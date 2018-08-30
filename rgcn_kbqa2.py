@@ -143,6 +143,7 @@ class KBQA_RGCN:
         with open('aifb.pickle', 'rb') as f:
             data = pkl.load(f)
             kb_adjacency = data['A']
+            self.support = len(A)  # number of relations in KB?
             kb_entities = sp.csr_matrix(A[0].shape)
         
         self.model_train.fit([questions_vectors, kb_adjacency, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
