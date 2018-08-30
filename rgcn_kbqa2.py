@@ -144,8 +144,8 @@ class KBQA_RGCN:
 
         # kb_adjacency_input = [InputAdj(sparse=True) for kb_relation_adjacency in self.kb_adjacency]
         # kb_adjacency_input = [InputAdj(tensor=K.variable(kb_relation_adjacency)) for kb_relation_adjacency in self.kb_adjacency]
-        # kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
-        kb_adjacency_input = [kb_relation_adjacency for kb_relation_adjacency in self.kb_adjacency]
+        kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
+        # kb_adjacency_input = [kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
         kb_entities_input = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
@@ -164,7 +164,7 @@ class KBQA_RGCN:
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
-        kb_encoder_output = GraphConvolution(self.gc_units, kb_adjacency_input, self.support, num_bases=self.gc_bases, featureless=False,
+        kb_encoder_output = GraphConvolution(self.gc_units, kb_adjacency_input, self.support, num_bases=self.gc_bases, featureless=True,
                                              activation='relu', W_regularizer=l2(self.l2norm))(kb_entities_embedding_output)
 
         # S' - KB subgraph projection layer
