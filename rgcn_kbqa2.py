@@ -59,7 +59,7 @@ class KBQA_RGCN:
         self.num_entities = len(self.entityToIndex.keys())
         self.support = len(self.kb_adjacency)  # number of relations in KB?
 
-    def load_data(self, dataset):
+    def load_data(self, dataset, max_answers_per_question=100):
         questions, answers = dataset
         num_samples = len(questions)
         assert num_samples == len(answers)
@@ -74,14 +74,17 @@ class KBQA_RGCN:
         for i in range(num_samples):
             # encode words in the question (ignore OOV words i.e. words without pre-trained embeddings) TODO: deal with OOV e.g. char-based encoding or FastText
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
-            questions_data.append(questions_sequence)
 
             # encode all entities in the answer as a list of indices (ignore OOV entity labels i.e. entities in the answers but not in the KB)
             answer_set = [self.entityToIndex[entity] for entity in answers[i] if entity in self.entityToIndex]
             # encode all entities in the answer as a one-hot-vector for the corresponding entities indices TODO
-            answers_data.append(answer_set)
+            n_answers = len(answer_set)
 
-            n_answers_per_question[len(answer_set)] += 1
+            # add sample
+            if n_answers <= max_answers_per_question:
+                questions_data.append(questions_sequence)
+                answers_data.append(answer_set)
+                n_answers_per_question[n_answers] += 1
 
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
@@ -91,7 +94,7 @@ class KBQA_RGCN:
         # show dataset stats
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
         print("Maximum number of entities in an answer set: %d"%answers_data.shape[1])
-        # print("Number of answers per question distribution: %s"%str(n_answers_per_question))
+        print("Number of answers per question distribution: %s"%str(n_answers_per_question))
 
     def build_model(self):
         '''
@@ -145,8 +148,8 @@ class KBQA_RGCN:
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
 
-        self.model_train = Model(input=[question_input] + kb_input,   # input question TODO input KB
-                                 output=answers_output)  # ground-truth target answer set
+        self.model_train = Model(inputs=[question_input] + kb_input,   # input question TODO input KB
+                                 outputs=[answers_output])  # ground-truth target answer set
         print self.model_train.summary()
 
     def train(self, batch_size, epochs, lr=0.001):
