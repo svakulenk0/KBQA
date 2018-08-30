@@ -152,7 +152,7 @@ def main(mode):
     '''
     Train model by running: python rgcn_kbqa2.py train
     '''
-    from rgcn_settings import *
+    from rgcn_settings import dataset_name, rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings, batch_size, epochs, learning_rate
 
     model = KBQA_RGCN(rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings)
     # train on train split / test on test split
