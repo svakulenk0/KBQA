@@ -176,7 +176,7 @@ class KBQA_RGCN:
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
         kb_entities = K.random_uniform_variable(shape=(self.kb_adjacency[0].shape[0], 4), low=0, high=1)
 
-        self.model_train.fit([questions_vectors, self.kb_adjacency, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
+        self.model_train.fit([questions_vectors] + [kb_entities] + self.kb_adjacency, [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
 
 def main(mode):
