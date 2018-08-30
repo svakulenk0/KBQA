@@ -44,10 +44,15 @@ class KBQA_RGCN:
 
 
 def main(mode):
+    '''
+    Train model by running: python rgcn_kbqa2.py train
+    '''
     model = KBQA_RGCN()
+    # train on train split / test on test split
+    dataset_split = mode
 
     # load data
-    dataset = load_dataset(dataset_name)
+    dataset = load_dataset(dataset_name, dataset_split)
     model.load_data(dataset)
 
 

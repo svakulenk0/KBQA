@@ -39,12 +39,12 @@ def load_lcquad(dataset_split):
     return (QS, AS)
 
 
-def load_dataset(dataset_name):
+def load_dataset(dataset_name, dataset_split):
     print("Loading %s..."%dataset_name)
     
     
     if dataset_name == 'lcquad':
-        dataset = load_lcquad(split)
+        dataset = load_lcquad(dataset_split)
     elif dataset_name == 'dbnqa':
         dataset = load_dbnqa()
 
