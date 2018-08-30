@@ -59,7 +59,7 @@ class KBQA_RGCN:
         self.num_entities = len(self.entityToIndex.keys())
         self.support = len(self.kb_adjacency)  # number of relations in KB?
 
-    def load_data(self, dataset, max_answers_per_question=100):
+    def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
         questions, answers = dataset
         num_samples = len(questions)
         assert num_samples == len(answers)
@@ -94,7 +94,8 @@ class KBQA_RGCN:
         # show dataset stats
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
         print("Maximum number of entities in an answer set: %d"%answers_data.shape[1])
-        print("Number of answers per question distribution: %s"%str(n_answers_per_question))
+        if show_n_answers_distribution:
+            print("Number of answers per question distribution: %s"%str(n_answers_per_question))
 
     def build_model(self):
         '''
