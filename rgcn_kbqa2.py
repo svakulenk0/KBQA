@@ -82,14 +82,17 @@ class KBQA_RGCN:
 
             # encode all entities in the answer as a list of indices (ignore OOV entity labels i.e. entities in the answers but not in the KB)
             answer_set = [self.entityToIndex[entity] for entity in answers[i] if entity in self.entityToIndex]
-            # encode all entities in the answer as a one-hot-vector for the corresponding entities indices TODO
             n_answers = len(answer_set)
 
             # add sample
             if n_answers <= max_answers_per_question:
-                questions_data.append(questions_sequence)
-                answers_data.append(answer_set)
                 n_answers_per_question[n_answers] += 1
+                questions_data.append(questions_sequence)
+
+                # encode all entities in the answer as a one-hot-vector for the corresponding entities indices TODO
+                answer_vector = np.zeros(self.num_entities)
+                answer_vector[s] = 1
+                answers_data.append(answer_vector)
 
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
