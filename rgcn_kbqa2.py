@@ -137,8 +137,9 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
 
         # test
+        A = K.variable(self.kb_adjacency[0])
         X = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
-        sparse_matrix = K.dot(self.kb_adjacency[0], X)
+        sparse_matrix = K.dot(A, X)
 
 
         kb_adjacency_input = [InputAdj(sparse=True) for kb_relation_adjacency in self.kb_adjacency]
