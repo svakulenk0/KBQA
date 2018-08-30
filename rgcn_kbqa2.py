@@ -137,7 +137,8 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
         kb_adjacency_input = []
         for kb_relation_adjacency in self.kb_adjacency:
-            kb_relation_adjacency_var = K.variable(kb_relation_adjacency)
+            kb_relation_adjacency_var = K.variable([1,2,3])
+            # kb_relation_adjacency_var = K.variable(kb_relation_adjacency)
             kb_adjacency_input.append(InputAdj(tensor=kb_relation_adjacency_var))
 
         # represent KB entities with 1-hot encoding vectors
