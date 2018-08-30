@@ -63,7 +63,7 @@ print("Relations used and their frequencies" + str([a.sum() for a in A]))
 
 data = {'A': A, }
 
-dirname = os.path.dirname(os.path.realpath(working_dir))
+dirname = working_dir
 filename = dirname + '/' + dataset_str + '.pickle'
 print ("Saving adjecency matrix to " + filename)
 with open(filename, 'wb') as f:
