@@ -43,8 +43,9 @@ class KBQA_RGCN:
         self.num_words = (len(self.wordToIndex.keys()))
 
         # load entity vocabulary into a map
-        self.entityToIndex = loadKB()
-        self.num_entities = (len(self.entityToIndex.keys()))
+        self.entityToIndex, self.kb_adjacency = loadKB()
+        self.num_entities = len(self.entityToIndex.keys())
+        self.support = len(self.kb_adjacency)  # number of relations in KB?
 
     def load_data(self, dataset):
         questions, answers = dataset
@@ -137,16 +138,12 @@ class KBQA_RGCN:
         early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
         callbacks_list = [checkpoint, early_stop]
         
-        # load data
+        # prepare QA dataset and KB
         questions_vectors, answers_vectors = self.dataset
+        # represent KB entities with 1-hot encoding vectors
+        kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
 
-        with open('aifb.pickle', 'rb') as f:
-            data = pkl.load(f)
-            kb_adjacency = data['A']
-            self.support = len(A)  # number of relations in KB?
-            kb_entities = sp.csr_matrix(A[0].shape)
-        
-        self.model_train.fit([questions_vectors, kb_adjacency, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
+        self.model_train.fit([questions_vectors, self.kb_adjacency, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
 
 def main(mode):
