@@ -63,6 +63,7 @@ class KBQA_RGCN:
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities in KB vocabulary: %d"%self.num_entities)
         self.support = len(self.kb_adjacency)  # number of relations in KB?
+        print("Number of relations in KB adjacency matrix: %d"%self.support)
 
     def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
         questions, answers = dataset
