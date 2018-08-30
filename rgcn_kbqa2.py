@@ -91,7 +91,7 @@ class KBQA_RGCN:
         # show dataset stats
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
         print("Maximum number of entities in an answer set: %d"%answers_data.shape[1])
-        print("Number of answers per question distribution: %s"%str(n_answers_per_question))
+        # print("Number of answers per question distribution: %s"%str(n_answers_per_question))
 
     def build_model(self):
         '''
@@ -145,8 +145,8 @@ class KBQA_RGCN:
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
 
-        self.model_train = Model(inputs=[question_input, kb_input],   # input question TODO input KB
-                                 outputs=[answers_output])  # ground-truth target answer set
+        self.model_train = Model(input=[question_input] + kb_input,   # input question TODO input KB
+                                 output=answers_output)  # ground-truth target answer set
         print self.model_train.summary()
 
     def train(self, batch_size, epochs, lr=0.001):
