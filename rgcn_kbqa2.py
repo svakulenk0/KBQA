@@ -41,7 +41,10 @@ class KBQA_RGCN:
     '''
     NN model for KBQA with R-GCN for KB embedding training
     '''
-    def __init__(self, rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings, load_word_embeddings=readGloveFile):
+    def __init__(self, rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings, model_path='./models/model.best.hdf5', load_word_embeddings=readGloveFile):
+        # define path to store pre-trained model
+        makedirs('./models')
+        self.model_path = model_path
 
         # set architecture parameters
         self.rnn_units = rnn_units
@@ -91,9 +94,12 @@ class KBQA_RGCN:
         answers_data = np.asarray(pad_sequences(answers_data, padding='post'))
 
         print("Loaded the dataset")
+        self.dataset = questions_data, answers_data
+
         # show dataset stats
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
         print("Maximum number of entities in an answer set: %d"%answers_data.shape[1])
+
         if show_n_answers_distribution:
             print("Number of answers per question distribution: %s"%str(n_answers_per_question))
 
