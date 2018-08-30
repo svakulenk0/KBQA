@@ -22,7 +22,6 @@ from keras.preprocessing.sequence import pad_sequences
 
 from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten
 
-from rgcn_settings import *
 from utils import *
 
 
@@ -30,9 +29,13 @@ class KBQA_RGCN:
     '''
     NN model for KBQA with R-GCN for KB embedding training
     '''
-    def __init__(self, load_word_embeddings=readGloveFile, rnn_units=rnn_units, train_word_embeddings=train_word_embeddings):
+    def __init__(self, rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings, load_word_embeddings=readGloveFile):
+
         # set architecture parameters
         self.rnn_units = rnn_units
+        self.gc_units = gc_units
+        self.gc_bases = gc_bases
+        self.l2norm = l2norm
         self.train_word_embeddings = train_word_embeddings
 
         # load word embeddings with its vocabulary into maps
@@ -75,9 +78,11 @@ class KBQA_RGCN:
         '''
         build layers required for training the NN
         '''
-        # trainable word embeddings layer
+        # set up a trainable word embeddings layer initialized with pre-trained word embeddings
         embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
-        words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1], weights=[embeddings_matrix], trainable=self.train_word_embeddings, name='words_embedding')
+        words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
+                                     weights=[embeddings_matrix], trainable=self.train_word_embeddings,
+                                     name='words_embeddings', mask_zero=True)
 
         # Q - question input
         question_input = Input(shape=(None,), name='question_input')
@@ -147,7 +152,9 @@ def main(mode):
     '''
     Train model by running: python rgcn_kbqa2.py train
     '''
-    model = KBQA_RGCN()
+    from rgcn_settings import *
+
+    model = KBQA_RGCN(rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings)
     # train on train split / test on test split
     dataset_split = mode
 
