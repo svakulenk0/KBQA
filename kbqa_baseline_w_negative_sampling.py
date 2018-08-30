@@ -127,23 +127,14 @@ class KBQA:
             # states.append(state)
         return outputs
 
-    def load_embeddings_from_index(self, embeddings_index, items_index):
-        # load embeddings into matrix
-        vocab_len = len(items_index) + 1  # adding 1 to account for masking
-        embDim = next(iter(embeddings_index.values())).shape[0]
-        embeddings_matrix = np.zeros((vocab_len, embDim))  # initialize with zeros
-        for item, index in items_index.items():
-            embeddings_matrix[index, :] = embeddings_index[item] # create embedding: item index to item embedding
-        return embeddings_matrix
-
     def create_pretrained_embedding_layer(self, isTrainable=True):
         '''
         Create pre-trained Keras embedding layer
         '''
         self.word_vocab_len = len(self.wordToIndex) + 1  # adding 1 to account for masking
-        embeddings_matrix = self.load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
+        embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
 
-        embeddingLayer = Embedding(self.word_vocab_len, embeddings_matrix.shape[1], weights=[embeddings_matrix], trainable=isTrainable, name='word_embedding')
+        embeddingLayer = Embedding(self.word_vocab_len, embeddings_matrix.shape[1], weights=[embeddings_matrix], trainable=isTrainable, name='word_embedding', mask_zero=True)
         return embeddingLayer
 
     def build_model_train(self):
@@ -168,8 +159,8 @@ class KBQA:
 
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         
-        answer_output = Dropout(self.dropout_rate)(question_encoder_output)
-        # answer_output = question_encoder_output
+        # answer_output = Dropout(self.dropout_rate)(question_encoder_output)
+        answer_output = question_encoder_output
 
         answer_indicator_output = Concatenate(axis=1)([answer_output, sample_indicator])
         # answer_indicator_output = concatenate([answer_output, sample_indicator], axis=0)
@@ -299,7 +290,7 @@ class KBQA:
         # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
         # load embeddings into matrix
-        embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
+        embeddings_matrix = load_embeddings_from_index(self.entity2vec, self.entity2index)
         # calculate pairwise distances (via cosine similarity)
         similarity_matrix = cosine_similarity(predicted_answers_vectors, embeddings_matrix)
 
@@ -384,7 +375,7 @@ def main(mode):
     rnn_units = 500  # dimension of the GRU output layer (hidden question representation) 
     encoder_depth = 2
     decoder_depth = 2
-    dropout_rate = 0.3
+    dropout_rate = 0.5
 
     # define R-GCN architecture parameters
     num_hidden_units = 16
@@ -393,7 +384,7 @@ def main(mode):
 
     # define training parameters
     batch_size = 100
-    epochs = 10  # 10
+    epochs = 20  # 10
     learning_rate = 1e-3
     n_negative_samples = 1
 

@@ -95,5 +95,19 @@ def loadKB():
     '''
     Returns an index of entities <dict>
     <str> "entity_label": <int> index
+    where 0 is a mask symbol in Keras
+    e.g. {'http://dbpedia.org/resource/Pittsburgh': 1}
     '''
-    return {}
+    idx = 0
+    keras_idx = idx + 1
+    return {'http://dbpedia.org/resource/Pittsburgh': 1}
+
+
+def load_embeddings_from_index(embeddings_index, items_index):
+    # load embeddings into matrix
+    vocab_len = len(items_index) + 1  # adding 1 to account for masking
+    embDim = next(iter(embeddings_index.values())).shape[0]
+    embeddings_matrix = np.zeros((vocab_len, embDim))  # initialize with zeros
+    for item, index in items_index.items():
+        embeddings_matrix[index, :] = embeddings_index[item] # create embedding: item index to item embedding
+    return embeddings_matrix
