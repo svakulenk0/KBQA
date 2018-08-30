@@ -27,6 +27,7 @@ from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten
 from keras.callbacks import  ModelCheckpoint, EarlyStopping
 from keras.regularizers import l2
 from keras.optimizers import Adam
+from keras import backend as K
 
 from rgcn.layers.graph import GraphConvolution
 from rgcn.layers.input_adj import InputAdj
@@ -150,7 +151,8 @@ class KBQA_RGCN:
         # prepare QA dataset and KB
         questions_vectors, answers_vectors = self.dataset
         # represent KB entities with 1-hot encoding vectors
-        kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
+            # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
+        kb_entities = K.eye(self.kb_adjacency[0].shape[0])
 
         self.model_train.fit([questions_vectors, self.kb_adjacency, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
