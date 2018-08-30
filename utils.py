@@ -89,3 +89,11 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
             indexToWord[kerasIdx] = tok # associate a word to a token (word). Note: inverse of dictionary above
 
     return wordToIndex, indexToWord, wordToGlove
+
+
+def loadKB():
+    '''
+    Returns an index of entities <dict>
+    <str> "entity_label": <int> index
+    '''
+    return {}
