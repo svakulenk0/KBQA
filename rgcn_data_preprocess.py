@@ -134,11 +134,15 @@ def load_data(graph_file, working_dir, dataset_str, limit=-1):
     adj_fprepend = 'data/' + dataset_str + '/adjacencies_'
     rel_dict_file = 'data/' + dataset_str + '/rel_dict.pkl'
     nodes_file = 'data/' + dataset_str + '/nodes.pkl'
+    #The nodes_file contains the node labels as instances of rdflib.term.URIRef, this stores it as just strings.
+    #MC: I am not sure whether both are really needed. 
+    nodes_strings_file = 'data/' + dataset_str + '/nodes_strings.pkl'
 
     dirname = os.path.dirname(working_dir)
     adj_fprepend = dirname + '/' + adj_fprepend
     rel_dict_file = dirname + '/' + rel_dict_file
     nodes_file = dirname + '/' + nodes_file
+    nodes_strings_file = dirname + '/' + nodes_strings_file
 
     adj_files = glob.glob(adj_fprepend + '*.npz')
 
@@ -235,6 +239,9 @@ def load_data(graph_file, working_dir, dataset_str, limit=-1):
                 print('%d adjacency matrices loaded ' % i)
 
         pkl.dump(nodes, open(nodes_file, 'wb'))
+        stringNodes = [unicode(node) for node in nodes]
+        pkl.dump(stringNodes, open(nodes_strings_file, 'wb'))
+        
         pkl.dump(relations_dict, open(rel_dict_file, 'wb'))
 
 
