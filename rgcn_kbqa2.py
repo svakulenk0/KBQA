@@ -112,7 +112,7 @@ class KBQA_RGCN:
         # K - KB input: entities as sequences of words and relations as adjacency matrix
         # https://github.com/tkipf/relational-gcn
         kb_adjacency_input = [InputAdj(sparse=True) for _ in range(self.support)]
-        kb_entities_input = Input(shape=(self.num_entities,), sparse=True)
+        kb_entities_input = Input(shape=(self.num_entities,))
 
         # kb_entities_input = Input(shape=(None,), name='kb_entities_input')
         
