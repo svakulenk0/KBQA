@@ -20,9 +20,19 @@ import sys
 from keras.preprocessing.text import text_to_word_sequence
 from keras.preprocessing.sequence import pad_sequences
 
+from keras.models import Model
+from keras.models import load_model
+
 from keras.layers import Input, GRU, Dropout, Embedding, Dense, Flatten
+from keras.callbacks import  ModelCheckpoint, EarlyStopping
+from keras.regularizers import l2
+from keras.optimizers import Adam
+
+from rgcn.layers.graph import GraphConvolution
+from rgcn.layers.input_adj import InputAdj
 
 from utils import *
+from rgcn_settings import *
 
 
 class KBQA_RGCN:
@@ -151,7 +161,6 @@ def main(mode):
     Train model by running: python rgcn_kbqa2.py train
     '''
     # from rgcn_settings import dataset_name, rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings, batch_size, epochs, learning_rate
-    from rgcn_settings import *
 
     model = KBQA_RGCN(rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings)
     # train on train split / test on test split
