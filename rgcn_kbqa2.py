@@ -188,7 +188,7 @@ class KBQA_RGCN:
         
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
-        kb_entities = np.random.randint(low=0, high=1, size=(self.num_entities, 4))
+        kb_entities = np.random.randint(low=0, high=1, size=(4, self.num_entities))
 
         self.model_train.fit([questions_vectors, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
