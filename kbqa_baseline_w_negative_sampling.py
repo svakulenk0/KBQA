@@ -135,7 +135,7 @@ class KBQA:
     '''
     Baseline neural network architecture for KBQA
     '''
-    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, n_negative_samples, dropout_rate=0.2, model_dir='./models/'):
+    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, n_negative_samples, dropout_rate=0.2, model_path='./models/model.best.hdf5'):
         self.max_seq_len = max_seq_len
         self.rnn_units = rnn_units
         self.encoder_depth = encoder_depth
@@ -145,7 +145,7 @@ class KBQA:
         self.l2norm = l2norm
         self.dropout_rate = dropout_rate
         makedirs(model_dir)
-        self.model_dir = model_dir
+        self.model_path = model_path
         # load word vocabulary
         self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
         self.n_negative_samples = n_negative_samples
@@ -287,14 +287,8 @@ class KBQA:
         self.dataset = (questions_data, answers_data, answers_indices, samples_indicators)
         print("Loaded the dataset")
 
-    def save_model(self, name):
-        path = os.path.join(self.model_dir, name)
-        self.model_train.save(path)
-        print('Saved to: '+path)
-
     def load_pretrained_model(self):
-        self.model_train = load_model(os.path.join(self.model_dir, 'model.h5'), custom_objects={'loss': self.samples_loss()})
-        # self.build_model_test()
+        self.model_train = load_model(self.model_path, custom_objects={'loss': self.samples_loss()})
 
     def samples_loss(self):
         def loss(y_true, y_pred):
@@ -318,18 +312,13 @@ class KBQA:
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss=self.samples_loss())
-        # for epoch in range(epochs):
-        #     print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
-            # load training dataset
-            # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
-            # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        
         questions_vectors, answers_vectors, answers_indices, sample_indicators = self.dataset
-
-        self.model_train.fit([questions_vectors, sample_indicators], [answers_vectors], epochs=epochs, verbose=2, validation_split=0.3, shuffle='batch')
-        self.save_model('model.h5')
-            # self.save_model('model_epoch%i.h5'%(epoch + 1))
-        # self.save_model('model.h5')
+        
+        # early stopping
+        checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+        early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
+        callbacks_list = [checkpoint, early_stop]
+        self.model_train.fit([questions_vectors, sample_indicators], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
     def test(self):
         questions_vectors, answers_vectors, answers_indices, sample_indicators = self.dataset
