@@ -86,7 +86,7 @@ class KBQA_RGCN:
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
         print("Maximum number of entities in an answer set: %d"%answers_data.shape[1])
 
-    def build_model_train(self):
+    def build_model(self):
         '''
         build layers required for training the NN
         '''
@@ -130,7 +130,10 @@ class KBQA_RGCN:
                                              W_regularizer=l2(self.l2norm))(kb_input)
 
         # S' - KB subgraph projection layer
-        kb_projection_output = Dot()([kb_encoder_output, question_encoder_output])
+        # check tensor shapes before multiplication
+        print("Question encoder output shape: %s"%str(question_encoder_output.shape))
+        print("KB encoder output shape: %s"%str(kb_encoder_output.shape))
+        kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
 
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
@@ -174,7 +177,7 @@ def main(mode):
     # mode switch
     if mode == 'train':
         # build model
-        model.build_model_train()
+        model.build_model()
         # train model
         model.train(batch_size, epochs, lr=learning_rate)
     # elif mode == 'test':
