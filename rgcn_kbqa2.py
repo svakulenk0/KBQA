@@ -145,7 +145,6 @@ class KBQA_RGCN:
         # kb_adjacency_input = [kb_relation_adjacency for kb_relation_adjacency in self.kb_adjacency]
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
-        kb_entities_representation = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
         kb_entities_input = Input(tensor=kb_entities_representation, shape=(self.num_entities,))
         
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
@@ -174,7 +173,7 @@ class KBQA_RGCN:
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
 
-        self.model_train = Model(inputs=[question_input],   # input question TODO input KB
+        self.model_train = Model(inputs=[question_input, kb_entities_input],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
         print self.model_train.summary()
 
@@ -189,7 +188,9 @@ class KBQA_RGCN:
         
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
-        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
+        kb_entities = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
+
+        self.model_train.fit([questions_vectors, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
 
 def main(mode):
