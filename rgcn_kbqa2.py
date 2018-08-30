@@ -56,10 +56,12 @@ class KBQA_RGCN:
         # load word embeddings with its vocabulary into maps
         self.wordToIndex, self.indexToWord, self.wordToGlove = load_word_embeddings()
         self.num_words = (len(self.wordToIndex.keys()))
+        print("Number of words in vocabulary with pre-trained embeddings: %d"%self.num_words)
 
         # load entity vocabulary into a map
         self.entityToIndex, self.kb_adjacency = loadKB()
         self.num_entities = len(self.entityToIndex.keys())
+        print("Number of entities in KB vocabulary: %d"%self.num_entities)
         self.support = len(self.kb_adjacency)  # number of relations in KB?
 
     def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
@@ -172,7 +174,7 @@ class KBQA_RGCN:
         questions_vectors, answers_vectors = self.dataset
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
-        kb_entities = K.eye(self.kb_adjacency[0].shape[0])
+        kb_entities = K.random_uniform_variable(shape=(self.kb_adjacency[0].shape[0], 4), low=0, high=1)
 
         self.model_train.fit([questions_vectors, self.kb_adjacency, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
