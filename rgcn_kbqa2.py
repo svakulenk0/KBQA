@@ -141,12 +141,12 @@ class KBQA_RGCN:
         # X = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
         # sparse_matrix = K.dot(A, X)
 
-        # kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
-        kb_adjacency_input = [kb_relation_adjacency for kb_relation_adjacency in self.kb_adjacency]
+        kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
+        # kb_adjacency_input = [kb_relation_adjacency for kb_relation_adjacency in self.kb_adjacency]
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
-        kb_entities_input = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
-        # kb_entities_input = Input(sparse=True, shape=(self.num_entities,))
+        kb_entities_representation = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
+        kb_entities_input = Input(tensor=kb_entities_representation, shape=(self.num_entities,))
         
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         # kb_entities_words_embedding_output = words_embeddings(kb_entities_input)
