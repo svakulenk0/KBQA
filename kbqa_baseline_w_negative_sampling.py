@@ -144,7 +144,7 @@ class KBQA:
         self.bases = bases
         self.l2norm = l2norm
         self.dropout_rate = dropout_rate
-        makedirs(model_dir)
+        makedirs('./models')
         self.model_path = model_path
         # load word vocabulary
         self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
