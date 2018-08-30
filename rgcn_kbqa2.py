@@ -135,9 +135,10 @@ class KBQA_RGCN:
 
         # K - KB input: entities as sequences of words and relations as adjacency matrix
         # https://github.com/tkipf/relational-gcn
+        kb_adjacency_input = []
         for kb_relation_adjacency in self.kb_adjacency:
             kb_relation_adjacency_var = K.variable(kb_relation_adjacency)
-            kb_adjacency_input = InputAdj(tensor=kb_relation_adjacency_var)
+            kb_adjacency_input.append(InputAdj(tensor=kb_relation_adjacency_var))
 
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
