@@ -118,10 +118,9 @@ class KBQA_RGCN:
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         # kb_entities_words_embedding_output = words_embeddings(kb_entities_input)
         # # aggregate word embeddings vectors into a single entity vector
-        
         kb_entities_embedding_output = kb_entities_input
 
-        kb_input = [kb_entities_embedding_output] + A_in
+        kb_input = [kb_entities_embedding_output] + kb_adjacency_input
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
