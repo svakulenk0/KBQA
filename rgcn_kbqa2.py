@@ -137,25 +137,25 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
 
         # test
-        A = K.variable(self.kb_adjacency[0])
-        X = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
-        sparse_matrix = K.dot(A, X)
+        # A = K.variable(self.kb_adjacency[0])
+        # X = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
+        # sparse_matrix = K.dot(A, X)
 
 
-        kb_adjacency_input = [InputAdj(sparse=True) for kb_relation_adjacency in self.kb_adjacency]
+        # kb_adjacency_input = [InputAdj(sparse=True) for kb_relation_adjacency in self.kb_adjacency]
         # kb_adjacency_input = [InputAdj(tensor=K.variable(kb_relation_adjacency)) for kb_relation_adjacency in self.kb_adjacency]
-        # kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
+        kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
-        # kb_entities_input = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
-        kb_entities_input = Input(sparse=True, shape=(self.num_entities,))
+        kb_entities_input = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
+        # kb_entities_input = Input(sparse=True, shape=(self.num_entities,))
         
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         # kb_entities_words_embedding_output = words_embeddings(kb_entities_input)
         # # aggregate word embeddings vectors into a single entity vector
         kb_entities_embedding_output = kb_entities_input
 
-        kb_input = [kb_entities_embedding_output] + kb_adjacency_input
+        # kb_input = [kb_entities_embedding_output] + kb_adjacency_input
 
         # input_tensor = K.placeholder(shape=self.num_entities,
         #                              dtype=K.floatx(),
@@ -163,8 +163,8 @@ class KBQA_RGCN:
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
-        kb_encoder_output = GraphConvolution(self.gc_units, self.support, num_bases=self.gc_bases, featureless=False,
-                                             activation='relu', W_regularizer=l2(self.l2norm))(kb_input)
+        kb_encoder_output = GraphConvolution(self.gc_units, kb_adjacency_input, self.support, num_bases=self.gc_bases, featureless=False,
+                                             activation='relu', W_regularizer=l2(self.l2norm))(kb_entities_embedding_output)
 
         # S' - KB subgraph projection layer
         # check tensor shapes before multiplication
