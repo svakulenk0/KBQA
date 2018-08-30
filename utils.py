@@ -113,7 +113,7 @@ def loadKB(kb_entity_labels_list=DBPEDIA_1M_TRIPLES_ENTITIES_LIST, kb_adjacency_
             entityToIndex[entity_label] = keras_idx
     
     # load adjacency matrix
-    with open(kb_adjacency_matrix_path, 'rb') as f:
+    with open(kb_adjacency_path, 'rb') as f:
         data = pkl.load(f)
     kb_adjacency = data['A']
 
