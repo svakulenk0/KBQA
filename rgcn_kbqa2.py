@@ -126,13 +126,12 @@ class KBQA_RGCN:
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
         kb_encoder_output = GraphConvolution(self.gc_units, self.support, num_bases=self.gc_bases, featureless=False,
-                                             activation='relu',
-                                             W_regularizer=l2(self.l2norm))(kb_input)
+                                             activation='relu', W_regularizer=l2(self.l2norm))(kb_input)
 
         # S' - KB subgraph projection layer
         # check tensor shapes before multiplication
-        print("Question encoder output shape: %s"%str(question_encoder_output.shape))
-        print("KB encoder output shape: %s"%str(kb_encoder_output.shape))
+        print("Question encoder output shape: %s"%str(K.shape(question_encoder_output)))
+        print("KB encoder output shape: %s"%str(K.shape(kb_encoder_output))
         kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
 
         # A - answer output
