@@ -40,6 +40,8 @@ from keras import backend as K
 from keras.preprocessing.text import text_to_word_sequence
 from keras.preprocessing.sequence import pad_sequences
 
+from keras.callbacks import  ModelCheckpoint, EarlyStopping
+
 from toy_data import *
 
 
