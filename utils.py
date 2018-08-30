@@ -12,6 +12,7 @@ Utils functions for different KBQA models
 import os
 import json
 
+EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 
 
