@@ -119,10 +119,12 @@ def load_data(graph_file, working_dir, dataset_str, limit=-1):
 
     adj_fprepend = 'data/' + dataset_str + '/adjacencies_'
     rel_dict_file = 'data/' + dataset_str + '/rel_dict.pkl'
+    nodes_file = 'data/' + dataset_str + '/nodes.pkl'
 
     dirname = os.path.dirname(working_dir)
     adj_fprepend = dirname + '/' + adj_fprepend
     rel_dict_file = dirname + '/' + rel_dict_file
+    nodes_file = dirname + '/' + nodes_file
 
     adj_files = glob.glob(adj_fprepend + '*.npz')
 
@@ -214,6 +216,7 @@ def load_data(graph_file, working_dir, dataset_str, limit=-1):
                 adjacencies.append(load_sparse_csr(file))
                 print('%d adjacency matrices loaded ' % i)
 
+        pkl.dump(nodes, open(nodes_file, 'wb'))
         pkl.dump(relations_dict, open(rel_dict_file, 'wb'))
 
 
