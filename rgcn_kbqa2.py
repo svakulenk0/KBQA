@@ -141,7 +141,8 @@ class KBQA_RGCN:
         # X = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
         # sparse_matrix = K.dot(A, X)
 
-        kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
+        # kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
+        kb_adjacency_input = [kb_relation_adjacency for kb_relation_adjacency in self.kb_adjacency]
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
         kb_entities_input = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
@@ -167,8 +168,8 @@ class KBQA_RGCN:
         # check tensor shapes before multiplication
         # print("Question encoder output shape: %s"%str(K.shape(question_encoder_output)))
         # print("KB encoder output shape: %s"%str(K.shape(kb_encoder_output)))
-        # kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
-        kb_projection_output = K.dot(question_encoder_output, kb_encoder_output)
+        kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
+        # kb_projection_output = K.dot(question_encoder_output, kb_encoder_output)
 
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
