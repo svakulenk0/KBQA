@@ -110,6 +110,7 @@ def loadKB(kb_entity_labels_list=DBPEDIA_1M_TRIPLES_ENTITIES_LIST, kb_adjacency_
 
     with open(kb_entity_labels_list, 'rb') as f:
         for entity_label in f:
+            print(entity_label)
             keras_idx = idx + 1  # mask 0 for padding
             entityToIndex[entity_label] = keras_idx
     
