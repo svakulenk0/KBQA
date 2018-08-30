@@ -76,8 +76,9 @@ class KBQA_RGCN:
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
             questions_data.append(questions_sequence)
 
-            # encode all entities in the answer (ignore OOV entity labels i.e. entities in the answers but not in the KB)
+            # encode all entities in the answer as a list of indices (ignore OOV entity labels i.e. entities in the answers but not in the KB)
             answer_set = [self.entityToIndex[entity] for entity in answers[i] if entity in self.entityToIndex]
+            # encode all entities in the answer as a one-hot-vector for the corresponding entities indices TODO
             answers_data.append(answer_set)
 
             n_answers_per_question[len(answer_set)] += 1
@@ -144,7 +145,7 @@ class KBQA_RGCN:
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
 
-        self.model_train = Model(inputs=[question_input, kb_adjacency_input, kb_entities_input],   # input question TODO input KB
+        self.model_train = Model(inputs=[question_input, kb_input],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
         print self.model_train.summary()
 
