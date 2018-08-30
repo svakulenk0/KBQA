@@ -15,8 +15,13 @@ import json
 import numpy as np
 import random
 
+# word embeddings
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
+
+# KB
+DBPEDIA_1M_TRIPLES_ADJACENCY = ".data/graph/data/sample/adjacency.pickle"
+DBPEDIA_1M_TRIPLES_ENTITIES_LIST = ".data/graph/data/sample/nodes_strings.pkl"
 
 
 def set_random_seed(seed=912):
@@ -91,16 +96,26 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
     return wordToIndex, indexToWord, wordToGlove
 
 
-def loadKB():
+def loadKB(kb_entity_labels_list=DBPEDIA_1M_TRIPLES_ENTITIES_LIST, kb_adjacency_path=DBPEDIA_1M_TRIPLES_ADJACENCY):
     '''
-    Returns an index of entities <dict>
+    Returns an index of entities <dict> and adjacency matrix
     <str> "entity_label": <int> index
     where 0 is a mask symbol in Keras
     e.g. {'http://dbpedia.org/resource/Pittsburgh': 1}
     '''
-    idx = 0
-    keras_idx = idx + 1
-    return {'http://dbpedia.org/resource/Pittsburgh': 1}
+    # index entity labels into a map
+    entityToIndex = {}
+    with open(kb_entity_labels_list, 'rb') as f:
+        for idx, entity_label in f:
+            keras_idx = idx + 1  # mask 0 for padding
+            entityToIndex[entity_label] = keras_idx
+    
+    # load adjacency matrix
+    with open(kb_adjacency_matrix_path, 'rb') as f:
+        data = pkl.load(f)
+    kb_adjacency = data['A']
+
+    return entityToIndex, kb_adjacency
 
 
 def load_embeddings_from_index(embeddings_index, items_index):
