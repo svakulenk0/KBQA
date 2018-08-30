@@ -97,7 +97,7 @@ class KBQA_RGCN:
 
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
-        answers_data = np.asarray(pad_sequences(answers_data, padding='post'))
+        answers_data = np.asarray(answers_data)
 
         print("Loaded the dataset")
         self.dataset = questions_data, answers_data
