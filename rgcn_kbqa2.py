@@ -135,6 +135,12 @@ class KBQA_RGCN:
 
         # K - KB input: entities as sequences of words and relations as adjacency matrix
         # https://github.com/tkipf/relational-gcn
+
+        # test
+        X = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
+        sparse_matrix = K.dot(self.kb_adjacency[0], X)
+
+
         kb_adjacency_input = [InputAdj(sparse=True) for kb_relation_adjacency in self.kb_adjacency]
         # kb_adjacency_input = [InputAdj(tensor=K.variable(kb_relation_adjacency)) for kb_relation_adjacency in self.kb_adjacency]
         # kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
