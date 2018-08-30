@@ -57,12 +57,12 @@ class KBQA_RGCN:
 
         # iterate over samples
         for i in range(num_samples):
-            # encode words in the question (ignore OOV words i.e. words without pre-trained embeddings) TODO deal with OOV e.g. char-based encoding or FastText
+            # encode words in the question (ignore OOV words i.e. words without pre-trained embeddings) TODO: deal with OOV e.g. char-based encoding or FastText
             questions_sequence = [self.wordToIndex[word] for word in text_to_word_sequence(questions[i]) if word in self.wordToIndex]
             questions_data.append(questions_sequence)
 
-            # encode all entities in the answer (make sure that all possible answer entities are indexed)
-            answer_set = [self.entityToIndex[entity] for entity in answers[i]]
+            # encode all entities in the answer (ignore OOV entity labels i.e. entities in the answers but not in the KB)
+            answer_set = [self.entityToIndex[entity] for entity in answers[i] if entity in self.entityToIndex]
             answers_data.append(answer_set)
 
         # normalize length
@@ -152,7 +152,8 @@ def main(mode):
     '''
     Train model by running: python rgcn_kbqa2.py train
     '''
-    from rgcn_settings import dataset_name, rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings, batch_size, epochs, learning_rate
+    # from rgcn_settings import dataset_name, rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings, batch_size, epochs, learning_rate
+    from rgcn_settings import *
 
     model = KBQA_RGCN(rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings)
     # train on train split / test on test split
