@@ -11,6 +11,7 @@ Utils functions for different KBQA models
 '''
 import os
 import json
+import pickle as pkl
 
 import numpy as np
 import random
