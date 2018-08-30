@@ -148,7 +148,8 @@ class KBQA_RGCN:
 
         kb_entities = np.random.randint(low=0, high=1, size=(4, self.num_entities))
         # kb_entities_input = Input(tensor=K.variable(kb_entities))
-        kb_entities_input = Input(tensor=K.variable(np.ones((10, 5))))
+        # TODO
+        kb_entities_input = Input(tensor=K.constant(np.ones((10, 5))))
         
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         # kb_entities_words_embedding_output = words_embeddings(kb_entities_input)
