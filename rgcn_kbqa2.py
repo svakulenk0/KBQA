@@ -30,8 +30,7 @@ class KBQA_RGCN:
     '''
     NN model for KBQA with R-GCN for KB embedding training
     '''
-    def __init__(self, rnn_units=rnn_units, gc_units=gc_units, gc_bases=gc_bases, l2norm=l2norm,
-                 train_word_embeddings=train_word_embeddings, load_word_embeddings=readGloveFile):
+    def __init__(self, rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings, load_word_embeddings=readGloveFile):
 
         # set architecture parameters
         self.rnn_units = rnn_units
