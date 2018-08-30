@@ -44,9 +44,10 @@ from keras.callbacks import  ModelCheckpoint, EarlyStopping
 
 from toy_data import *
 
+from utils import *
+
 
 EMBEDDINGS_PATH = "./embeddings/"
-GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 # rdf2vec embeddings 200 dimensions
 KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 # subset of the KB embeddings (rdf2vec embeddings 200 dimensions from KB_EMBEDDINGS_PATH) for the entities of the LC-Quad dataset (both train and test split)
@@ -58,37 +59,6 @@ def set_random_seed(seed=912):
     random.seed(seed)
     np.random.seed(seed)
 
-
-# util creates missing folders
-def makedirs(fld):
-    if not os.path.exists(fld):
-        os.makedirs(fld)
-
-
-# Prepare Glove File
-def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
-    '''
-    https://stackoverflow.com/questions/48677077/how-do-i-create-a-keras-embedding-layer-from-a-pre-trained-word-embedding-datase
-    '''
-    download_glove_embeddings()
-
-    with open(gloveFile, 'r') as f:
-        wordToGlove = {}  # map from a token (word) to a Glove embedding vector
-        wordToIndex = {}  # map from a token to an index
-        indexToWord = {}  # map from an index to a token 
-
-        for line in f:
-            record = line.strip().split()
-            token = record[0] # take the token (word) from the text line
-            wordToGlove[token] = np.array(record[1:], dtype=np.float64) # associate the Glove embedding vector to a that token (word)
-
-        tokens = sorted(wordToGlove.keys())
-        for idx, tok in enumerate(tokens):
-            kerasIdx = idx + 1  # 0 is reserved for masking in Keras
-            wordToIndex[tok] = kerasIdx # associate an index to a token (word)
-            indexToWord[kerasIdx] = tok # associate a word to a token (word). Note: inverse of dictionary above
-
-    return wordToIndex, indexToWord, wordToGlove
 
 def create_KB_input(embeddings):
     '''
@@ -355,15 +325,6 @@ class KBQA:
                 hits += 1
 
         print("Hits in top %d: %d/%d"%(n, hits, len(answers_indices)))
-
-
-def download_glove_embeddings():
-    makedirs(EMBEDDINGS_PATH)
-
-    if not os.path.exists(GLOVE_EMBEDDINGS_PATH):
-        wget.download('http://nlp.stanford.edu/data/glove.6B.zip', EMBEDDINGS_PATH+"glove.6B.zip")
-        with zipfile.ZipFile(EMBEDDINGS_PATH+"glove.6B.zip","r") as zip_ref:
-            zip_ref.extractall(EMBEDDINGS_PATH)
 
 
 def load_lcquad(dataset_split):
