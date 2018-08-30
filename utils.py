@@ -11,10 +11,17 @@ Utils functions for different KBQA models
 '''
 import os
 import json
+
 import numpy as np
+import random
 
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
+
+
+def set_random_seed(seed=912):
+    random.seed(seed)
+    np.random.seed(seed)
 
 
 def load_dbnqa():
