@@ -66,6 +66,8 @@ class KBQA_RGCN:
         # encode questions with word vocabulary and answers with entity vocabulary
         questions_data = []
         answers_data = []
+        # track number of answers per question distribution
+        n_answers_per_question = Counter()
 
         # iterate over samples
         for i in range(num_samples):
@@ -77,6 +79,8 @@ class KBQA_RGCN:
             answer_set = [self.entityToIndex[entity] for entity in answers[i] if entity in self.entityToIndex]
             answers_data.append(answer_set)
 
+            n_answers_per_question[len(answer_set)] += 1
+
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         answers_data = np.asarray(pad_sequences(answers_data, padding='post'))
@@ -85,6 +89,7 @@ class KBQA_RGCN:
         # show dataset stats
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
         print("Maximum number of entities in an answer set: %d"%answers_data.shape[1])
+        print("Number of answers per question distribution: %s"%str(n_answers_per_question))
 
     def build_model(self):
         '''
@@ -132,7 +137,7 @@ class KBQA_RGCN:
         # check tensor shapes before multiplication
         # print("Question encoder output shape: %s"%str(K.shape(question_encoder_output)))
         # print("KB encoder output shape: %s"%str(K.shape(kb_encoder_output)))
-        kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, K.transpose(kb_encoder_output)])
+        kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
         # kb_projection_output = K.dot(question_encoder_output, K.transpose(kb_encoder_output))
 
         # A - answer output
