@@ -30,9 +30,14 @@ class KBQA_RGCN:
     '''
     NN model for KBQA with R-GCN for KB embedding training
     '''
-    def __init__(self, load_word_embeddings=readGloveFile, rnn_units=rnn_units, train_word_embeddings=train_word_embeddings):
+    def __init__(self, rnn_units=rnn_units, gc_units=gc_units, gc_bases=gc_bases, l2norm=l2norm,
+                 train_word_embeddings=train_word_embeddings, load_word_embeddings=readGloveFile):
+
         # set architecture parameters
         self.rnn_units = rnn_units
+        self.gc_units = gc_units
+        self.gc_bases = gc_bases
+        self.l2norm = l2norm
         self.train_word_embeddings = train_word_embeddings
 
         # load word embeddings with its vocabulary into maps
@@ -147,7 +152,7 @@ def main(mode):
     '''
     Train model by running: python rgcn_kbqa2.py train
     '''
-    model = KBQA_RGCN()
+    model = KBQA_RGCN(rnn_units, gc_units, gc_bases, l2norm, train_word_embeddings)
     # train on train split / test on test split
     dataset_split = mode
 
