@@ -9,6 +9,9 @@ Created on Aug 30, 2018
 
 Utils functions for different KBQA models
 '''
+import os
+import json
+
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 
 
