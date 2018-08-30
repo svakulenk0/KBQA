@@ -141,11 +141,7 @@ class KBQA_RGCN:
         # X = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
         # sparse_matrix = K.dot(A, X)
 
-
-        # kb_adjacency_input = [InputAdj(sparse=True) for kb_relation_adjacency in self.kb_adjacency]
-        # kb_adjacency_input = [InputAdj(tensor=K.variable(kb_relation_adjacency)) for kb_relation_adjacency in self.kb_adjacency]
         kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
-        # kb_adjacency_input = [kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
         kb_entities_input = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
@@ -177,8 +173,8 @@ class KBQA_RGCN:
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
 
-        self.model_train = Model(input=question_input,   # input question TODO input KB
-                                 output=answers_output)  # ground-truth target answer set
+        self.model_train = Model(inputs=[question_input],   # input question TODO input KB
+                                 outputs=[answers_output])  # ground-truth target answer set
         print self.model_train.summary()
 
     def train(self, batch_size, epochs, lr=0.001):
@@ -192,7 +188,7 @@ class KBQA_RGCN:
         
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
-        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
+        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
 
 def main(mode):
