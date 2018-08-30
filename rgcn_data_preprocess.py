@@ -112,7 +112,21 @@ def load_data(graph_file, working_dir, dataset_str, limit=-1):
         but only a limited a then restored to memory.
     :return:
     """
+    import errno    
+    import os
 
+    def mkdir_p(path):
+        try:
+            os.makedirs(path)
+        except OSError as exc:  # Python >2.5
+            if exc.errno == errno.EEXIST and os.path.isdir(path):
+                pass
+            else:
+                raise
+
+    def mkdir_p_for_file(thefile):
+        mkdir_p(os.path.dirname(thefile))
+    
     assert limit == -1 or limit > 0
 
     print('Loading dataset', graph_file)
@@ -127,6 +141,10 @@ def load_data(graph_file, working_dir, dataset_str, limit=-1):
     nodes_file = dirname + '/' + nodes_file
 
     adj_files = glob.glob(adj_fprepend + '*.npz')
+
+    mkdir_p(dirname)
+    mkdir_p_for_file(adj_fprepend)
+    mkdir_p_for_file(rel_dict_file)
 
     if adj_files != []:
 
@@ -238,6 +256,7 @@ def to_unicode(input):
     elif isinstance(input, str):
         return input.decode('utf-8', errors='replace')
     return str(input).decode('utf-8', errors='replace')
+
 
 
 if __name__ == "__main__":
