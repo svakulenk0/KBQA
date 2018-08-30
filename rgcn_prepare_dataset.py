@@ -64,7 +64,7 @@ print("Relations used and their frequencies" + str([a.sum() for a in A]))
 data = {'A': A, }
 
 dirname = working_dir
-filename = dirname + '/' + dataset_str / + 'adjecancy.pickle'
+filename = dirname + '/' + dataset_str + '/adjacency.pickle'
 print ("Saving adjecency matrix to " + filename)
 with open(filename, 'wb') as f:
     pkl.dump(data, f, pkl.HIGHEST_PROTOCOL)
