@@ -46,18 +46,11 @@ from toy_data import *
 
 from utils import *
 
-
-EMBEDDINGS_PATH = "./embeddings/"
 # rdf2vec embeddings 200 dimensions
 KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 # subset of the KB embeddings (rdf2vec embeddings 200 dimensions from KB_EMBEDDINGS_PATH) for the entities of the LC-Quad dataset (both train and test split)
 # selectedEmbeddings_KGlove_PR_Split_lcquad_answers_train_1_test_all.txt
 LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_rdf2vec_uniform_lcquad_answers_train_1_test_all.txt"
-
-
-def set_random_seed(seed=912):
-    random.seed(seed)
-    np.random.seed(seed)
 
 
 def create_KB_input(embeddings):
@@ -175,8 +168,8 @@ class KBQA:
 
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         
-        # answer_output = Dropout(self.dropout_rate)(question_encoder_output)
-        answer_output = question_encoder_output
+        answer_output = Dropout(self.dropout_rate)(question_encoder_output)
+        # answer_output = question_encoder_output
 
         answer_indicator_output = Concatenate(axis=1)([answer_output, sample_indicator])
         # answer_indicator_output = concatenate([answer_output, sample_indicator], axis=0)
@@ -391,7 +384,7 @@ def main(mode):
     rnn_units = 500  # dimension of the GRU output layer (hidden question representation) 
     encoder_depth = 2
     decoder_depth = 2
-    dropout_rate = 0.5
+    dropout_rate = 0.3
 
     # define R-GCN architecture parameters
     num_hidden_units = 16
