@@ -150,9 +150,9 @@ class KBQA_RGCN:
 
         kb_input = [kb_entities_embedding_output] + kb_adjacency_input
 
-        input_tensor = K.placeholder(shape=self.num_entities,
-                                     dtype=K.floatx(),
-                                     sparse=True)
+        # input_tensor = K.placeholder(shape=self.num_entities,
+        #                              dtype=K.floatx(),
+        #                              sparse=True)
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
