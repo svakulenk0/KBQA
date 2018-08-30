@@ -91,7 +91,7 @@ class KBQA_RGCN:
 
                 # encode all entities in the answer as a one-hot-vector for the corresponding entities indices TODO
                 answer_vector = np.zeros(self.num_entities)
-                answer_vector[s] = 1
+                answer_vector[answer_set] = 1
                 answers_data.append(answer_vector)
 
         # normalize length
