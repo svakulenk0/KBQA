@@ -235,3 +235,16 @@ def to_unicode(input):
     elif isinstance(input, str):
         return input.decode('utf-8', errors='replace')
     return str(input).decode('utf-8', errors='replace')
+
+
+if __name__ == "__main__":
+    import sys
+    rdfFileName = sys.argv[1]
+    working_dir = sys.argv[2]
+    dataset_str = sys.argv[3]
+    load_data(rdfFileName, working_dir, dataset_str)
+
+
+
+
+
