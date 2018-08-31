@@ -181,7 +181,7 @@ class KBQA_RGCN:
         # # TODO what happens with 0 representation entities ?
         # kb_entities_labels_word_indices = [self.wordToIndex[entity_label] if entity_label in self.wordToIndex.keys() else 0 for entity_label in kb_entities_labels]
         # print kb_entities_labels_word_indices[:5]
-        kb_entities_labels_word_indices = [1] * self.num_entities
+        kb_entities_labels_word_indices = np.random.randint(low=1, high=self.num_entities+1, size=(self.num_entities,))
         kb_entities = np.array(kb_entities_labels_word_indices * self.num_samples)
         print("Dimensions of the KB entities batches: %s"%str(kb_entities.shape))
 
