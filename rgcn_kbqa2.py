@@ -128,7 +128,8 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
         # TODO make tensor out of constant
         kb_entities_input = Input(shape=(self.num_entities,), name='entities_input')
-        kb_adjacency_input = [K.variable(kb_relation_adjacency, dtype='float32') for kb_relation_adjacency in self.kb_adjacency]
+        print(self.kb_adjacency[0].dtype)
+        kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
 
         # E' - question words embedding
         question_embedding_output = words_embeddings(question_input)
