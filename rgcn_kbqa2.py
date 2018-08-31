@@ -99,8 +99,8 @@ class KBQA_RGCN:
                 answers_data.append(answer_vector)
 
         # normalize length
-        questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
-        answers_data = np.asarray(answers_data)
+        questions_data = np.asarray(pad_sequences(questions_data, padding='post'), dtype=K.floatx())
+        answers_data = np.asarray(answers_data, dtype=K.floatx())
         self.num_samples = answers_data.shape[0]
 
         print("Loaded the dataset")
@@ -186,7 +186,7 @@ class KBQA_RGCN:
         # # TODO what happens with 0 representation entities ?
         # kb_entities_labels_word_indices = [self.wordToIndex[entity_label] if entity_label in self.wordToIndex.keys() else 0 for entity_label in kb_entities_labels]
         # print kb_entities_labels_word_indices[:5]
-        kb_entities = np.random.randint(low=1, high=self.num_entities+1, size=(self.num_samples, self.num_entities))
+        kb_entities = np.random.randint(low=1, high=self.num_entities+1, size=(self.num_samples, self.num_entities), dtype=K.floatx())
         # print("Dimensions of the KB entities labels word indices: %s"%str(kb_entities_labels_word_indices.shape))
         # kb_entities = np.array(kb_entities_labels_word_indices * self.num_samples)
         print("Dimensions of the KB entities batches: %s"%str(kb_entities.shape))
