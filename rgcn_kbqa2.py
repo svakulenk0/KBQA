@@ -38,7 +38,7 @@ import theano
 from utils import *
 from rgcn_settings import *
 
-theano.config.warn_float64('raise')
+theano.config.warn_float64 ='raise'
 
 class KBQA_RGCN:
     '''
