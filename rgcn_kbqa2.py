@@ -162,7 +162,7 @@ class KBQA_RGCN:
         # print("Question encoder output shape: %s"%str(K.shape(question_encoder_output)))
         # print("KB encoder output shape: %s"%str(K.shape(kb_encoder_output)))
         # kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
-        kb_projection_output = K.dot(question_encoder_output, kb_encoder_output)
+        kb_projection_output = K.variable(K.dot(question_encoder_output, kb_encoder_output))
 
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
