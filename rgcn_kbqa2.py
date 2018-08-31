@@ -155,7 +155,7 @@ class KBQA_RGCN:
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
         kb_encoder_output = GraphConvolution(self.num_entities, self.gc_units, kb_entities, kb_adjacency, self.support, num_bases=self.gc_bases, featureless=False,
-                                             activation='relu', W_regularizer=l2(self.l2norm))(question_encoder_output)
+                                             activation='sigmoid', W_regularizer=l2(self.l2norm))(question_encoder_output)
 
         # S' - KB subgraph projection layer
         # check tensor shapes before multiplication
@@ -166,7 +166,7 @@ class KBQA_RGCN:
         # kb_projection_output = (question_encoder_output, kb_encoder_output)
 
         # A - answer output
-        answers_output = Dense(self.num_entities, activation="sigmoid")(kb_encoder_output)
+        # answers_output = Dense(self.num_entities, activation="sigmoid")(kb_encoder_output)
 
         self.model_train = Model(inputs=[question_input],   # input question TODO input KB
                                  outputs=[kb_encoder_output])  # ground-truth target answer set
@@ -174,7 +174,7 @@ class KBQA_RGCN:
 
     def train(self, batch_size, epochs, lr=0.001):
         # define loss
-        self.model_train.compile(optimizer=Adam(lr=lr), loss='binary_crossentropy')
+        self.model_train.compile(optimizer=Adam(lr=lr), loss='binary_crossentropy', metrics=['accuracy'])
 
         # define callbacks for early stopping
         checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
