@@ -120,7 +120,7 @@ class KBQA_RGCN:
         embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
         words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
                                      weights=[embeddings_matrix], trainable=self.train_word_embeddings,
-                                     name='words_embeddings', mask_zero=True)
+                                     name='words_embeddings')  # , mask_zero=True
 
         # Q - question input
         question_input = Input(shape=(None,), name='question_input')
