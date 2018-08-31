@@ -166,7 +166,7 @@ class KBQA_RGCN:
         # kb_projection_output = (question_encoder_output, kb_encoder_output)
 
         # A - answer output
-        # answers_output = Dense(self.num_entities, activation="sigmoid")(kb_encoder_output)
+        answers_output = Dense(self.num_entities, activation="sigmoid")(kb_encoder_output)
 
         self.model_train = Model(inputs=[question_input],   # input question TODO input KB
                                  outputs=[kb_encoder_output])  # ground-truth target answer set
