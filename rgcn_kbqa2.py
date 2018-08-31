@@ -39,6 +39,7 @@ from utils import *
 from rgcn_settings import *
 
 # theano.config.warn_float64 ='raise'
+theano.config.optimizer = 'fast_compile'
 
 class KBQA_RGCN:
     '''
