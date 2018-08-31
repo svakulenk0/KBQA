@@ -145,7 +145,7 @@ class KBQA_RGCN:
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         kb_entities_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
                                          weights=[embeddings_matrix], trainable=self.train_word_embeddings,
-                                         name='kb_entities_words_embeddings', mask_zero=True)
+                                         name='kb_entities_words_embeddings')
 
         kb_entities_words_embedding_output = kb_entities_words_embeddings(kb_entities_input)
         # TODO aggregate several embeddings vectors for the words in the entity labels into a single entity vector
