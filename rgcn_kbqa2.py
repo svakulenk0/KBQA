@@ -178,7 +178,7 @@ class KBQA_RGCN:
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
 
-        self.model_train = Model(inputs=[question_input, kb_entities],   # input question TODO input KB
+        self.model_train = Model(inputs=[question_input, kb_entities_input],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
         print self.model_train.summary()
 
