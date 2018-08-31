@@ -131,9 +131,7 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
         # TODO make tensor out of constant
         kb_entities_input = Input(shape=(self.num_entities,), name='entities_input', dtype=K.floatx())
-        print ("here")
         kb_adjacency_input = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
-        print ("here")
 
         # E' - question words embedding
         question_embedding_output = words_embeddings(question_input)
@@ -191,7 +189,7 @@ class KBQA_RGCN:
         # kb_entities = np.array(kb_entities_labels_word_indices * self.num_samples)
         print("Dimensions of the KB entities batches: %s"%str(kb_entities.shape))
 
-        self.model_train.fit([questions_vectors, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
+        self.model_train.fit([questions_vectors, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
 
 def main(mode):
