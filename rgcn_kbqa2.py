@@ -98,16 +98,15 @@ class KBQA_RGCN:
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
         answers_data = np.asarray(answers_data)
-
         self.num_samples = answers_data.shape[0]
-        print("Number of samples: %d"%self.num_samples)
 
         print("Loaded the dataset")
         self.dataset = questions_data, answers_data
 
         # show dataset stats
+        print("Number of samples: %d"%self.num_samples)
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
-        print("Maximum number of entities in an answer set: %d"%answers_data.shape[1])
+        # print("Maximum number of entities in an answer set: %d"%answers_data.shape[1])
 
         if show_n_answers_distribution:
             print("Number of answers per question distribution: %s"%str(n_answers_per_question))
@@ -125,6 +124,12 @@ class KBQA_RGCN:
         # Q - question input
         question_input = Input(shape=(None,), name='question_input')
 
+        # K - KB input: entities as sequences of words and relations as adjacency matrix
+        # https://github.com/tkipf/relational-gcn
+        # TODO make tensor out of constant
+        kb_entities_input = Input(shape=(self.num_entities,), name='entities_input')
+        kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
+
         # E' - question words embedding
         question_embedding_output = words_embeddings(question_input)
 
@@ -135,33 +140,10 @@ class KBQA_RGCN:
         question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
         question_encoder_output = GRU(self.gc_units, name='question_encoder')(question_encoder_output_4)
 
-        # K - KB input: entities as sequences of words and relations as adjacency matrix
-        # https://github.com/tkipf/relational-gcn
-
-        # test
-        # A = K.variable(self.kb_adjacency[0])
-        # X = K.random_uniform_variable(shape=(self.num_entities, 4), low=0, high=1)
-        # sparse_matrix = K.dot(A, X)
-
-        kb_adjacency_input = [K.variable(kb_relation_adjacency) for kb_relation_adjacency in self.kb_adjacency]
-        # kb_adjacency_input = [kb_relation_adjacency for kb_relation_adjacency in self.kb_adjacency]
-        # represent KB entities with 1-hot encoding vectors
-            # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
-
-        # kb_entities_input = Input(tensor=K.variable(kb_entities))
-        # TODO make tensor out of constant
-        kb_entities_input = Input(shape=(self.num_entities,))
-        
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         kb_entities_words_embedding_output = words_embeddings(kb_entities_input)
         # TODO aggregate several embeddings vectors for the words in the entity labels into a single entity vector
         kb_entities_embedding_output = kb_entities_words_embedding_output
-
-        # kb_input = [kb_entities_embedding_output] + kb_adjacency_input
-
-        # input_tensor = K.placeholder(shape=self.num_entities,
-        #                              dtype=K.floatx(),
-        #                              sparse=True)
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
@@ -193,8 +175,12 @@ class KBQA_RGCN:
         
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
-        # TODO load with actual word indices
-        kb_entities = np.random.randint(low=1, high=self.num_words, size=(self.num_entities,)) * self.num_samples
+        # TODO input all words of the entity label not only the first one
+        kb_entities_labels = [entity_label.split()[0] for entity_label in self.entityToIndex.keys()]
+        print kb_entities_labels[:5]
+        kb_entities_labels_word_indices = [self.wordToIndex[entity_label] for entity_label in kb_entities_labels]
+        print kb_entities_labels_word_indices[:5]
+        kb_entities = array(kb_entities_labels_word_indices * self.num_samples)
         print("Dimensions of the KB entities batches: %s"%str(kb_entities.shape))
 
         self.model_train.fit([questions_vectors, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
