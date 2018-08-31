@@ -118,23 +118,16 @@ class KBQA_RGCN:
         '''
         build layers required for training the NN
         '''
-        # set up a trainable word embeddings layer initialized with pre-trained word embeddings
-        embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
-        words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
-                                     weights=[embeddings_matrix], trainable=self.train_word_embeddings,
-                                     name='words_embeddings')  # , mask_zero=True
-
         # Q - question input
         question_input = Input(shape=(None,), name='question_input', dtype=K.floatx())
 
-        # K - KB input: entities as sequences of words and relations as adjacency matrix
-        # https://github.com/tkipf/relational-gcn
-        # TODO make tensor out of constant
-        kb_entities_input = Input(shape=(self.num_entities,), name='entities_input', dtype=K.floatx())
-        kb_adjacency_input = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
-
         # E' - question words embedding
-        question_embedding_output = words_embeddings(question_input)
+        question_embedding_output = question_words_embeddings(question_input)
+        # set up a trainable word embeddings layer initialized with pre-trained word embeddings
+        embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
+        question_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
+                                     weights=[embeddings_matrix], trainable=self.train_word_embeddings,
+                                     name='question_words_embeddings', mask_zero=True)
 
         # Q' - question encoder
         question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(question_embedding_output)
@@ -143,8 +136,19 @@ class KBQA_RGCN:
         question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
         question_encoder_output = GRU(self.gc_units, name='question_encoder')(question_encoder_output_4)
 
+
+        # K - KB input: entities as sequences of words and relations as adjacency matrix
+        # https://github.com/tkipf/relational-gcn
+        # TODO make tensor out of constant
+        kb_entities_input = Input(shape=(self.num_entities,), name='entities_input', dtype=K.floatx())
+        kb_adjacency_input = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
+
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
-        kb_entities_words_embedding_output = words_embeddings(kb_entities_input)
+        kb_entities_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
+                                         weights=[embeddings_matrix], trainable=self.train_word_embeddings,
+                                         name='kb_entities_words_embeddings', mask_zero=True)
+
+        kb_entities_words_embedding_output = kb_entities_words_embeddings(kb_entities_input)
         # TODO aggregate several embeddings vectors for the words in the entity labels into a single entity vector
         kb_entities_embedding_output = kb_entities_words_embedding_output
 
