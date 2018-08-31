@@ -97,8 +97,10 @@ class KBQA_RGCN:
 
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'))
-        print("Number of samples: %d"%len(answers_data))
         answers_data = np.asarray(answers_data)
+
+        self.num_samples = answers_data.shape[0]
+        print("Number of samples: %d"%self.num_samples)
 
         print("Loaded the dataset")
         self.dataset = questions_data, answers_data
@@ -146,15 +148,14 @@ class KBQA_RGCN:
         # represent KB entities with 1-hot encoding vectors
             # kb_entities = sp.csr_matrix(self.kb_adjacency[0].shape)
 
-        kb_entities = K.constant(np.random.randint(low=0, high=1, size=(4, self.num_entities)))
         # kb_entities_input = Input(tensor=K.variable(kb_entities))
-        # TODO
-        kb_entities_input = Input(tensor=kb_entities, shape=(self.num_entities,))
+        # TODO make tensor out of constant
+        kb_entities_input = Input(shape=(self.num_entities,))
         
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
-        # kb_entities_words_embedding_output = words_embeddings(kb_entities_input)
-        # # aggregate word embeddings vectors into a single entity vector
-        kb_entities_embedding_output = kb_entities_input
+        kb_entities_words_embedding_output = words_embeddings(kb_entities_input)
+        # TODO aggregate several embeddings vectors for the words in the entity labels into a single entity vector
+        kb_entities_embedding_output = kb_entities_words_embedding_output
 
         # kb_input = [kb_entities_embedding_output] + kb_adjacency_input
 
@@ -177,7 +178,7 @@ class KBQA_RGCN:
         # A - answer output
         answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
 
-        self.model_train = Model(inputs=[question_input],   # input question TODO input KB
+        self.model_train = Model(inputs=[question_input, kb_entities],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
         print self.model_train.summary()
 
@@ -192,7 +193,11 @@ class KBQA_RGCN:
         
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
-        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
+        # TODO load with actual word indices
+        kb_entities = np.random.randint(low=1, high=self.num_wordswords, size=(self.num_entities,)) * self.num_samples
+        print("Dimensions of the KB entities batches"%str(kb_entities.shape))
+
+        self.model_train.fit([questions_vectors, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
 
 def main(mode):
