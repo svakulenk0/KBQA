@@ -178,7 +178,7 @@ class KBQA_RGCN:
         # TODO input all words of the entity label not only the first one
         kb_entities_labels = [entity_label.split('http://dbpedia.org/resource/')[1].split('_')[-1] for entity_label in self.entityToIndex.keys()]
         print kb_entities_labels[:5]
-        kb_entities_labels_word_indices = [self.wordToIndex[entity_label] for entity_label in kb_entities_labels if entity_label in self.wordToIndex.keys() else 0]
+        kb_entities_labels_word_indices = [self.wordToIndex[entity_label] if entity_label in self.wordToIndex.keys() else 0 for entity_label in kb_entities_labels]
         print kb_entities_labels_word_indices[:5]
         kb_entities = array(kb_entities_labels_word_indices * self.num_samples)
         print("Dimensions of the KB entities batches: %s"%str(kb_entities.shape))
