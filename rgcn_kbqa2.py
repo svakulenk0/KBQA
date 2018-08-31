@@ -140,33 +140,33 @@ class KBQA_RGCN:
         # K - KB input: entities as sequences of words and relations as adjacency matrix
         # https://github.com/tkipf/relational-gcn
         # TODO make tensor out of constant
-        kb_entities_input = Input(shape=(self.num_entities,), name='entities_input')
-        kb_adjacency_input = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
+        kb_entities = K.variable(np.random.randint(low=1, high=self.num_words+1, size=(self.num_samples, self.num_entities)))
+        kb_adjacency = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
 
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
-        kb_entities_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
-                                         weights=[embeddings_matrix], trainable=self.train_word_embeddings,
-                                         name='kb_entities_words_embeddings')
+        # kb_entities_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
+        #                                  weights=[embeddings_matrix], trainable=self.train_word_embeddings,
+        #                                  name='kb_entities_words_embeddings')
 
-        kb_entities_words_embedding_output = kb_entities_words_embeddings(kb_entities_input)
-        # TODO aggregate several embeddings vectors for the words in the entity labels into a single entity vector
-        kb_entities_embedding_output = kb_entities_words_embedding_output
+        # kb_entities_words_embedding_output = kb_entities_words_embeddings(kb_entities_input)
+        # # TODO aggregate several embeddings vectors for the words in the entity labels into a single entity vector
+        # kb_entities_embedding_output = kb_entities_words_embedding_output
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
-        kb_encoder_output = GraphConvolution(self.gc_units, kb_adjacency_input, self.support, num_bases=self.gc_bases, featureless=False,
-                                             activation='relu', W_regularizer=l2(self.l2norm))(kb_entities_embedding_output)
+        kb_encoder_output = GraphConvolution(self.gc_units, kb_entities, kb_adjacency, self.support, num_bases=self.gc_bases, featureless=False,
+                                             activation='relu', W_regularizer=l2(self.l2norm))(question_encoder_output)
 
         # S' - KB subgraph projection layer
         # check tensor shapes before multiplication
         # print("Question encoder output shape: %s"%str(K.shape(question_encoder_output)))
         # print("KB encoder output shape: %s"%str(K.shape(kb_encoder_output)))
-        kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
+        # kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
         # kb_projection_output = K.dot(question_encoder_output, kb_encoder_output)
         # kb_projection_output = (question_encoder_output, kb_encoder_output)
 
         # A - answer output
-        answers_output = Dense(self.num_entities, activation="sigmoid")(kb_projection_output)
+        answers_output = Dense(self.num_entities, activation="sigmoid")(kb_encoder_output)
 
         self.model_train = Model(inputs=[question_input, kb_entities_input],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
