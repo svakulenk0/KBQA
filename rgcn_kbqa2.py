@@ -33,7 +33,7 @@ from keras import backend as K
 from rgcn.layers.graph import GraphConvolution
 from rgcn.layers.input_adj import InputAdj
 
-import theano.config
+import theano
 
 from utils import *
 from rgcn_settings import *
