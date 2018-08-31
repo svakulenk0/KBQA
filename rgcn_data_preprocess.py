@@ -151,7 +151,7 @@ def load_data(graph_file, working_dir, dataset_str, limit=-1):
     mkdir_p_for_file(rel_dict_file)
 
     if adj_files != []:
-
+        print ("loading precomputed adjacency matrix")
         # load precomputed adjacency matrix
 
         adj_files.sort(key=lambda f: int(re.search('adjacencies_(.+?).npz', f).group(1)))
