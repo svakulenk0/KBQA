@@ -134,7 +134,7 @@ class KBQA_RGCN:
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
         question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_output_2)
         question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
-        question_encoder_output = GRU(self.gc_units, name='question_encoder')(question_encoder_output_4)
+        question_encoder_output = GRU(self.num_entities, name='question_encoder')(question_encoder_output_4)
 
 
         # K - KB input: entities as sequences of words and relations as adjacency matrix
