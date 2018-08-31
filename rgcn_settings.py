@@ -14,7 +14,7 @@ train_word_embeddings = True
 # Question encoder GRU parameters
 rnn_units = 500  # dimension of the GRUs output layer for the hidden question representation
 # KB encoder R-GCN parameters
-gc_units = 16
+gc_units = 200
 gc_bases = -1
 l2norm = 0.
 
