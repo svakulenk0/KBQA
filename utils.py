@@ -86,7 +86,7 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
         for line in f:
             record = line.strip().split()
             token = record[0] # take the token (word) from the text line
-            wordToGlove[token] = np.array(record[1:], dtype=np.float64) # associate the Glove embedding vector to a that token (word)
+            wordToGlove[token] = np.array(record[1:], dtype=K.floatx()) # associate the Glove embedding vector to a that token (word)
 
         tokens = sorted(wordToGlove.keys())
         for idx, tok in enumerate(tokens):
