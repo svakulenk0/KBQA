@@ -139,7 +139,7 @@ class KBQA_RGCN:
         # K - KB input: entities as sequences of words and relations as adjacency matrix
         # https://github.com/tkipf/relational-gcn
         # TODO make tensor out of constant
-        kb_entities_input = Input(shape=(self.num_entities,), name='entities_input', dtype=K.floatx())
+        kb_entities_input = Input(shape=(self.num_entities,), name='entities_input')
         kb_adjacency_input = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
 
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
