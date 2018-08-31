@@ -144,7 +144,7 @@ class KBQA_RGCN:
         # print("Dimensions of the KB entities batches: %s"%str(kb_entities.shape))
 
         # kb_entities_input = Input(tensor=, shape=(self.num_entities,), name='entities_input')
-        kb_adjacency_input = K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency
+        kb_adjacency_input = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
 
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         # kb_entities_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
