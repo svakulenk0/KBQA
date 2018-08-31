@@ -33,9 +33,12 @@ from keras import backend as K
 from rgcn.layers.graph import GraphConvolution
 from rgcn.layers.input_adj import InputAdj
 
+import theano.config
+
 from utils import *
 from rgcn_settings import *
 
+theano.config.warn_float64('raise')
 
 class KBQA_RGCN:
     '''
