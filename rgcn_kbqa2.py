@@ -194,7 +194,7 @@ class KBQA_RGCN:
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
         # TODO load with actual word indices
-        kb_entities = np.random.randint(low=1, high=self.num_wordswords, size=(self.num_entities,)) * self.num_samples
+        kb_entities = np.random.randint(low=1, high=self.num_words, size=(self.num_entities,)) * self.num_samples
         print("Dimensions of the KB entities batches"%str(kb_entities.shape))
 
         self.model_train.fit([questions_vectors, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
