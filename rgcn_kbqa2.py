@@ -182,7 +182,7 @@ class KBQA_RGCN:
         # kb_entities_labels_word_indices = [self.wordToIndex[entity_label] if entity_label in self.wordToIndex.keys() else 0 for entity_label in kb_entities_labels]
         # print kb_entities_labels_word_indices[:5]
         kb_entities_labels_word_indices = [1] * self.num_entities
-        kb_entities = array(kb_entities_labels_word_indices * self.num_samples)
+        kb_entities = np.array(kb_entities_labels_word_indices * self.num_samples)
         print("Dimensions of the KB entities batches: %s"%str(kb_entities.shape))
 
         self.model_train.fit([questions_vectors, kb_entities], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
