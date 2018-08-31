@@ -121,13 +121,12 @@ class KBQA_RGCN:
         # Q - question input
         question_input = Input(shape=(None,), name='question_input', dtype=K.floatx())
 
-        # E' - question words embedding
-        question_embedding_output = question_words_embeddings(question_input)
-        # set up a trainable word embeddings layer initialized with pre-trained word embeddings
+        # E' - question words embedding: set up a trainable word embeddings layer initialized with pre-trained word embeddings
         embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
         question_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
                                      weights=[embeddings_matrix], trainable=self.train_word_embeddings,
                                      name='question_words_embeddings', mask_zero=True)
+        question_embedding_output = question_words_embeddings(question_input)
 
         # Q' - question encoder
         question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(question_embedding_output)
