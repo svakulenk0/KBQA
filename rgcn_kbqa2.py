@@ -153,7 +153,7 @@ class KBQA_RGCN:
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
-        kb_encoder_output = GraphConvolution(self.gc_units, kb_adjacency_input, self.support, num_bases=self.gc_bases, featureless=True,
+        kb_encoder_output = GraphConvolution(self.gc_units, kb_adjacency_input, self.support, num_bases=self.gc_bases, featureless=False,
                                              activation='relu', W_regularizer=l2(self.l2norm))(kb_entities_embedding_output)
 
         # S' - KB subgraph projection layer
