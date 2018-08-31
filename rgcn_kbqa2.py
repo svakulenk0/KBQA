@@ -167,9 +167,10 @@ class KBQA_RGCN:
 
         # A - answer output
         # answers_output = Dense(self.num_entities, activation="sigmoid")(kb_encoder_output)
+        answers_output = kb_encoder_output
 
         self.model_train = Model(inputs=[question_input],   # input question TODO input KB
-                                 outputs=[kb_encoder_output])  # ground-truth target answer set
+                                 outputs=[answers_output])  # ground-truth target answer set
         print self.model_train.summary()
 
     def train(self, batch_size, epochs, lr=0.001):
@@ -179,7 +180,8 @@ class KBQA_RGCN:
         # define callbacks for early stopping
         checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
         early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
-        callbacks_list = [checkpoint, early_stop]
+        # callbacks_list = [checkpoint, early_stop]
+        callbacks_list = [early_stop]
         
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset

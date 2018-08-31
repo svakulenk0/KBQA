@@ -19,6 +19,6 @@ gc_bases = -1
 l2norm = 0.
 
 # training parameters
-batch_size = 100
+batch_size = 32
 epochs = 10  # 10
 learning_rate = 1e-3
