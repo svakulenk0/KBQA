@@ -16,6 +16,8 @@ import pickle as pkl
 import numpy as np
 import random
 
+from keras import backend as K
+
 # word embeddings
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
