@@ -161,7 +161,8 @@ class KBQA_RGCN:
         # check tensor shapes before multiplication
         # print("Question encoder output shape: %s"%str(K.shape(question_encoder_output)))
         # print("KB encoder output shape: %s"%str(K.shape(kb_encoder_output)))
-        kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
+        #kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
+        kb_projection_output = Dot(axes=0, normalize=True)([kb_encoder_output, question_encoder_output.T])
         # kb_projection_output = K.dot(question_encoder_output, kb_encoder_output)
 
         # A - answer output
