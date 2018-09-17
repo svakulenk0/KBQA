@@ -23,8 +23,11 @@ EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 
 # KB
-DBPEDIA_1M_TRIPLES_ADJACENCY = "./data/graph/data/sample/adjacency.pickle"
-DBPEDIA_1M_TRIPLES_ENTITIES_LIST = "./data/graph/data/sample/nodes_strings.pkl"
+DBPEDIA = '~/KBQA-RGCN/data/graph/data/dbpedia2016_04_run2/'
+
+KB = DBPEDIA
+ADJACENCY_MATRIX = KB + "adjacency.pickle"
+ENTITIES_LIST = KB + "nodes_strings.pkl"
 
 
 def set_random_seed(seed=912):
