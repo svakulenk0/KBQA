@@ -111,12 +111,6 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
     e.g. {'http://dbpedia.org/resource/Pittsburgh': 1}
     '''
 
-    # load adjacency matrix
-    with open(kb_adjacency_path, 'rb') as f:
-        data = pkl.load(f)
-        kb_adjacency = data['A']
-
-
     # index entity labels into a map
     entityToIndex = {}
     idx = 0 
@@ -126,9 +120,16 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
         for entity_label in entity_labels:
             keras_idx = idx + 1  # mask 0 for padding
             entityToIndex[entity_label] = keras_idx
-            if limit and keras_idx > limit:
-                print("Limit on the number of entities reached")
-                return entityToIndex, kb_adjacency
+            print keras_idx, limit
+            if limit:
+                if keras_idx > limit:
+                    print("Limit on the number of entities reached")
+                    break
+
+      # load adjacency matrix
+    with open(kb_adjacency_path, 'rb') as f:
+        data = pkl.load(f)
+        kb_adjacency = data['A']
 
     return entityToIndex, kb_adjacency
 
