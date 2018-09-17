@@ -120,6 +120,7 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
             keras_idx = idx + 1  # mask 0 for padding
             entityToIndex[entity_label] = keras_idx
             if limit and keras_idx > limit:
+                print("Limit on the number of entities reached")
                 break
     
     # load adjacency matrix
