@@ -23,7 +23,7 @@ EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 
 # KB
-DBPEDIA = '~/KBQA-RGCN/data/graph/data/dbpedia2016_04_run2/'
+DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
 
 KB = DBPEDIA
 ADJACENCY_MATRIX = KB + "adjacency.pickle"
