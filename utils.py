@@ -110,6 +110,13 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
     where 0 is a mask symbol in Keras
     e.g. {'http://dbpedia.org/resource/Pittsburgh': 1}
     '''
+
+    # load adjacency matrix
+    with open(kb_adjacency_path, 'rb') as f:
+        data = pkl.load(f)
+        kb_adjacency = data['A']
+
+
     # index entity labels into a map
     entityToIndex = {}
     idx = 0 
@@ -121,12 +128,7 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
             entityToIndex[entity_label] = keras_idx
             if limit and keras_idx > limit:
                 print("Limit on the number of entities reached")
-                break
-    
-    # load adjacency matrix
-    with open(kb_adjacency_path, 'rb') as f:
-        data = pkl.load(f)
-    kb_adjacency = data['A']
+                return entityToIndex, kb_adjacency
 
     return entityToIndex, kb_adjacency
 
