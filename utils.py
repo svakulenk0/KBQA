@@ -102,7 +102,7 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
     return wordToIndex, indexToWord, wordToGlove
 
 
-def loadKB(kb_entity_labels_list=DBPEDIA_1M_TRIPLES_ENTITIES_LIST, kb_adjacency_path=DBPEDIA_1M_TRIPLES_ADJACENCY):
+def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATRIX):
     '''
     Returns an index of entities <dict> and adjacency matrix
     <str> "entity_label": <int> index
