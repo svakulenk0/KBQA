@@ -24,3 +24,4 @@ epochs = 10  # 10
 learning_rate = 1e-3
 
 entity_limit = 100  # set limit to load a subset of entities, or None to load all entities
+relation_limit = 3

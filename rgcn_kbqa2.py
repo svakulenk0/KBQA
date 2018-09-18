@@ -63,7 +63,7 @@ class KBQA_RGCN:
         print("Number of words in vocabulary with pre-trained embeddings: %d"%self.num_words)
 
         # load entity vocabulary into a map
-        self.entityToIndex, self.kb_adjacency = loadKB(limit=entity_limit)
+        self.entityToIndex, self.kb_adjacency = loadKB(entity_limit=entity_limit, relation_limit=relation_limit)
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities in KB vocabulary: %d"%self.num_entities)
         self.support = len(self.kb_adjacency)  # number of relations in KB?

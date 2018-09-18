@@ -102,7 +102,7 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
     return wordToIndex, indexToWord, wordToGlove
 
 
-def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATRIX, limit=None):
+def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATRIX, entity_limit=None, relation_limit=None):
     '''
     Returns an index of entities <dict> and adjacency matrix
     <str> "entity_label": <int> index
@@ -126,6 +126,8 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
     with open(kb_adjacency_path, 'rb') as f:
         data = pkl.load(f)
         kb_adjacency = data['A']
+        if relation_limit:
+            kb_adjacency = kb_adjacency[:relation_limit]
 
     return entityToIndex, kb_adjacency
 
