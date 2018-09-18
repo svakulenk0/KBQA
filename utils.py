@@ -28,7 +28,6 @@ DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
 KB = DBPEDIA
 ADJACENCY_MATRIX = KB + "adjacency.pickle"
 ENTITIES_LIST = KB + "nodes_strings.pkl"
-ENTITY_LIMIT = 100  # set limit to load a subset of entities, or None to load all entities
 
 
 def set_random_seed(seed=912):
@@ -103,7 +102,7 @@ def readGloveFile(gloveFile=GLOVE_EMBEDDINGS_PATH):
     return wordToIndex, indexToWord, wordToGlove
 
 
-def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATRIX, limit=ENTITY_LIMIT):
+def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATRIX, limit=None):
     '''
     Returns an index of entities <dict> and adjacency matrix
     <str> "entity_label": <int> index
@@ -118,14 +117,16 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
         for idx, entity_label in enumerate(entity_labels):
             keras_idx = idx + 1  # mask 0 for padding
             entityToIndex[entity_label] = keras_idx
-            if limit and keras_idx > limit:
-                print("Limit on the number of entities reached")
-                break
+            if limit:
+                if keras_idx >= limit:
+                    print("%d limit on the number of entities reached"%limit)
+                    break
 
       # load adjacency matrix
     with open(kb_adjacency_path, 'rb') as f:
         data = pkl.load(f)
         kb_adjacency = data['A']
+        print("Adjacency matrix shape:")
         print(kb_adjacency.shape)
 
     return entityToIndex, kb_adjacency

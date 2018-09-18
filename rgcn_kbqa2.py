@@ -63,7 +63,7 @@ class KBQA_RGCN:
         print("Number of words in vocabulary with pre-trained embeddings: %d"%self.num_words)
 
         # load entity vocabulary into a map
-        self.entityToIndex, self.kb_adjacency = loadKB()
+        self.entityToIndex, self.kb_adjacency = loadKB(limit=entity_limit)
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities in KB vocabulary: %d"%self.num_entities)
         self.support = len(self.kb_adjacency)  # number of relations in KB?
@@ -141,7 +141,10 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
         # TODO make tensor out of constant
         kb_entities = K.variable(np.random.randint(low=1, high=self.num_words+1, size=(self.num_entities, self.gc_units)))
-        kb_adjacency = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
+        if entity_limit:
+            kb_adjacency = [K.variable(kb_relation_adjacency[entity_limit:], dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
+        else:
+            kb_adjacency = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
 
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         # kb_entities_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
@@ -196,7 +199,7 @@ class KBQA_RGCN:
         # kb_entities = np.array(kb_entities_labels_word_indices * self.num_samples)
         # print("Dimensions of the KB entities batches: %s"%str(kb_entities.shape))
 
-        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
+        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=1, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
 
 def main(mode):
