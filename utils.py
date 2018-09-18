@@ -126,8 +126,6 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
     with open(kb_adjacency_path, 'rb') as f:
         data = pkl.load(f)
         kb_adjacency = data['A']
-        print("Adjacency matrix shape:")
-        print(kb_adjacency.shape)
 
     return entityToIndex, kb_adjacency
 
