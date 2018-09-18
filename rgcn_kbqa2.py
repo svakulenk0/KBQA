@@ -142,7 +142,7 @@ class KBQA_RGCN:
         # TODO make tensor out of constant
         kb_entities = K.variable(np.random.randint(low=1, high=self.num_words+1, size=(self.num_entities, self.gc_units)))
         if entity_limit:
-            kb_adjacency = [K.variable(kb_relation_adjacency[entity_limit:], dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
+            kb_adjacency = [K.variable(kb_relation_adjacency[:entity_limit], dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
         else:
             kb_adjacency = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
 
