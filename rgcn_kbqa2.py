@@ -30,8 +30,9 @@ from keras.regularizers import l2
 from keras.optimizers import Adam
 from keras import backend as K
 
-from rgcn.layers.graph import GraphConvolution
-from rgcn.layers.input_adj import InputAdj
+from graph import GraphConvolution
+# from rgcn.layers.graph import GraphConvolution
+# from rgcn.layers.input_adj import InputAdj
 
 import theano
 
