@@ -26,8 +26,8 @@ GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
 
 KB = DBPEDIA
-# ADJACENCY_MATRIX = KB + "adjacency.pickle"
-ADJACENCY_MATRIX = KB + "adjacency_short.pickle"
+ADJACENCY_MATRIX = KB + "adjacency.pickle"
+# ADJACENCY_MATRIX = KB + "adjacency_short.pickle"
 ENTITIES_LIST = KB + "nodes_strings.pkl"
 
 
