@@ -54,17 +54,19 @@ class GraphConvolution(Layer):
         self.b = None
         self.num_nodes = None
 
-        super(GraphConvolution, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
-    def compute_output_shape(self, input_shapes):
-        features_shape = input_shapes[0]
+    def compute_output_shape(self, features_shape):
+        # features_shape = input_shapes[0]
         output_shape = (features_shape[0], self.output_dim)
         return output_shape  # (batch_size, output_dim)
 
-    def build(self, input_shapes):
-        assert len(input_shapes[0]) == 2
-        self.input_dim = input_shapes[0][1]  # number of features
-        self.num_nodes = int(input_shapes[1][1]/self.support)  # assume A = n x Rn
+    def build(self, features_shape):
+        # assert len(input_shapes[0]) == 2
+        self.input_dim = features_shape[1]  # number of features
+        # self.num_nodes = int(input_shapes[1][1]/self.support)  # assume A = n x Rn
+        if self.featureless:
+            self.num_nodes = features_shape[1]
 
         # generate weights
         if self.num_bases > 0:
@@ -126,7 +128,7 @@ class GraphConvolution(Layer):
 
     def call(self, inputs, mask=None):
         # inputs = [X, A]
-        X, A = inputs[0], inputs[1]
+        # X, A = inputs[0], inputs[1]
 
 
         ## compute graph features #############################################
@@ -148,7 +150,7 @@ class GraphConvolution(Layer):
                                  name="W_I_post")
 
             # convolve
-            AIW_I = tf.sparse_tensor_dense_matmul(A, W_I, name="A-IW_I")
+            AIW_I = tf.sparse_tensor_dense_matmul(self.A, W_I, name="A-IW_I")
 
 
         ## compute entity features ###########################################
@@ -156,7 +158,7 @@ class GraphConvolution(Layer):
 
         AFW_F = tf.Variable(0.0, tf.float32)
         if not self.featureless:
-            F = X
+            F = self.E
             if type(F) is tf.SparseTensor:
                 F = tf.sparse_tensor_to_dense(F)
 
@@ -173,7 +175,7 @@ class GraphConvolution(Layer):
             FW_F = tf.reshape(FW_F,
                               [self.support*self.num_nodes, self.output_dim],
                               name="FW_F")
-            AFW_F = tf.sparse_tensor_dense_matmul(A, FW_F, name="A-FW_F")
+            AFW_F = tf.sparse_tensor_dense_matmul(self.A, FW_F, name="A-FW_F")
 
 
         ## compute output ####################################################
