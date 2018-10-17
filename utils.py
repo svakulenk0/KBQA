@@ -26,8 +26,8 @@ GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
 
 KB = DBPEDIA
-# ADJACENCY_MATRIX = KB + "adjacency.pickle"
-ADJACENCY_MATRIX = KB + "adjacency_short.pickle"
+ADJACENCY_MATRIX = KB + "adjacency.pickle"
+# ADJACENCY_MATRIX = KB + "adjacency_short.pickle"
 ENTITIES_LIST = KB + "nodes_strings.pkl"
 
 
@@ -125,7 +125,7 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
     # generate adjacency matrix for each property
     with open(kb_adjacency_path, 'rb') as f:
         # data = pkl.load(f, encoding='ISO-8859-1')
-        kb_adjacency = pkl.load(f)
+        kb_adjacency = pkl.load(f)['A']
        
         if relation_limit:
             kb_adjacency = kb_adjacency[:relation_limit]
@@ -136,7 +136,7 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
                 relation = relation[:entity_limit]
                 adj_shape = (entity_limit, entity_limit)
             
-            relation = np.array(relation)
+            # relation = np.array(relation)
             print ("Adjacency shape:", relation.shape)
 
             # split subject (row) and object (col) node URIs
