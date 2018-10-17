@@ -26,7 +26,8 @@ GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
 
 KB = DBPEDIA
-ADJACENCY_MATRIX = KB + "adjacency.pickle"
+# ADJACENCY_MATRIX = KB + "adjacency.pickle"
+ADJACENCY_MATRIX = KB + "adjacency_short.pickle"
 ENTITIES_LIST = KB + "nodes_strings.pkl"
 
 
@@ -131,8 +132,8 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
             kb_adjacency = kb_adjacency[:relation_limit]
 
         # save reduced A
-        with open(KB+"adjacency_short.pickle", 'wb') as f:
-            pkl.dump(kb_adjacency, f, pkl.HIGHEST_PROTOCOL)
+        # with open(KB+"adjacency_short.pickle", 'wb') as f:
+        #     pkl.dump(kb_adjacency, f, pkl.HIGHEST_PROTOCOL)
 
     return entityToIndex, kb_adjacency
 
