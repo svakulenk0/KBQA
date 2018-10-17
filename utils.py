@@ -124,7 +124,8 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
 
       # load adjacency matrix
     with open(kb_adjacency_path, 'rb') as f:
-        data = pkl.load(f, encoding='ISO-8859-1')
+        data = pkl.load(f)
+        # data = pkl.load(f, encoding='ISO-8859-1')
         kb_adjacency = data['A']
         if relation_limit:
             kb_adjacency = kb_adjacency[:relation_limit]
