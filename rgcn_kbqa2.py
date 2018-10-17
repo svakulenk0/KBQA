@@ -30,14 +30,14 @@ from keras.regularizers import l2
 from keras.optimizers import Adam
 from keras import backend as K
 
-from graph import GraphConvolution
+import scipy.sparse as sp
 # from rgcn.layers.graph import GraphConvolution
 # from rgcn.layers.input_adj import InputAdj
 
-# import theano
-
 from utils import *
 from rgcn_settings import *
+
+from graph import GraphConvolution
 
 # theano.config.warn_float64 ='raise'
 # theano.config.optimizer = 'fast_compile'
@@ -146,6 +146,9 @@ class KBQA_RGCN:
             kb_adjacency = [K.variable(kb_relation_adjacency[:entity_limit], dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
         else:
             kb_adjacency = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
+
+        # make A sparse
+        kb_adjacency = sp.hstack(kb_adjacency, format="csr")
 
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         # kb_entities_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
