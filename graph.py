@@ -28,6 +28,8 @@ class GraphConvolution(Layer):
         self.init = initializers.get(init)
         self.activation = activations.get(activation)
         self.output_dim = output_dim  # number of features per node
+        self.hidden_dim = hidden_dim  # number of features per node
+
         self.support = support  # filter support / number of weights
         self.featureless = featureless  # use/ignore input features
         self.input_layer = input_layer  # adjust for input
