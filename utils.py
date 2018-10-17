@@ -128,7 +128,7 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
         kb_adjacency = pkl.load(f)
         if relation_limit:
             kb_adjacency = kb_adjacency[:relation_limit]
-
+        print ("Adjacency shape:", kb_adjacency.shape)
         for relation in kb_adjacency:
             if entity_limit:
                 relation = relation[:entity_limit]
