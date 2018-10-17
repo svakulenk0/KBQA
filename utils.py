@@ -26,8 +26,8 @@ GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
 
 KB = DBPEDIA
-ADJACENCY_MATRIX = KB + "adjacency.pickle"
-# ADJACENCY_MATRIX = KB + "adjacency_short.pickle"
+# ADJACENCY_MATRIX = KB + "adjacency.pickle"
+ADJACENCY_MATRIX = KB + "adjacency_short.pickle"
 ENTITIES_LIST = KB + "nodes_strings.pkl"
 
 
@@ -126,13 +126,18 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
     with open(kb_adjacency_path, 'rb') as f:
         # data = pkl.load(f, encoding='ISO-8859-1')
         kb_adjacency = pkl.load(f)
+       
         if relation_limit:
             kb_adjacency = kb_adjacency[:relation_limit]
-        print ("Adjacency shape:", kb_adjacency.shape)
+       
         for relation in kb_adjacency:
+
             if entity_limit:
                 relation = relation[:entity_limit]
                 adj_shape = (entity_limit, entity_limit)
+            
+            print ("Adjacency shape:", kb_adjacency.shape)
+
             # split subject (row) and object (col) node URIs
             row, col = np.transpose(relation)
 
