@@ -142,13 +142,10 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
         # TODO make tensor out of constant
         kb_entities = K.variable(np.random.randint(low=1, high=self.num_words+1, size=(self.num_entities, self.gc_units)))
-        if entity_limit:
-            kb_adjacency = [K.variable(kb_relation_adjacency[:entity_limit], dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
-        else:
-            kb_adjacency = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
-
-        # make A sparse
-        kb_adjacency = sp.hstack(kb_adjacency, format="csr")
+        # if entity_limit:
+        #     kb_adjacency = [K.variable(kb_relation_adjacency[:entity_limit], dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
+        # else:
+        #     kb_adjacency = [K.variable(kb_relation_adjacency, dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
 
         # E'' - KB entity embedding for entity labels using the same pre-trained word embeddings
         # kb_entities_words_embeddings = Embedding(embeddings_matrix.shape[0], embeddings_matrix.shape[1],
@@ -161,7 +158,7 @@ class KBQA_RGCN:
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
-        kb_encoder_output = GraphConvolution(self.num_entities, self.gc_units, kb_entities, kb_adjacency, self.support, num_bases=self.gc_bases, featureless=False,
+        kb_encoder_output = GraphConvolution(self.num_entities, self.gc_units, kb_entities, self.kb_adjacency, self.support, num_bases=self.gc_bases, featureless=False,
                                              activation='sigmoid', W_regularizer=l2(self.l2norm))(question_encoder_output)
 
         # S' - KB subgraph projection layer
