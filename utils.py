@@ -136,7 +136,8 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
                 relation = relation[:entity_limit]
                 adj_shape = (entity_limit, entity_limit)
             
-            print ("Adjacency shape:", kb_adjacency.shape)
+            relation = np.array(relation)
+            print ("Adjacency shape:", relation.shape)
 
             # split subject (row) and object (col) node URIs
             row, col = np.transpose(relation)
