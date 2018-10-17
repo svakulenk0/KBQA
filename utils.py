@@ -122,20 +122,39 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
                 if keras_idx >= entity_limit:
                     print("%d limit on the number of entities"%entity_limit)
                     break
-
-      # load adjacency matrix
+    # generate adjacency matrix for each property
     with open(kb_adjacency_path, 'rb') as f:
-        data = pkl.load(f)
         # data = pkl.load(f, encoding='ISO-8859-1')
-        kb_adjacency = data['A']
+        kb_adjacency = pkl.load(f)['A']
         if relation_limit:
             kb_adjacency = kb_adjacency[:relation_limit]
+
+        for relation in kb_adjacency:
+            if entity_limit:
+                relation = relation[:entity_limit]
+                adj_shape = (entity_limit, entity_limit)
+            # split subject (row) and object (col) node URIs
+            row, col = np.transpose(relation)
+
+            # create adjacency matrix for this property
+            data = np.ones(len(row), dtype=np.int8)
+            adj = sp.csr_matrix((data, (row, col)), shape=adj_shape, dtype=np.int8)
+            # if normalize:
+            #     adj = normalize_adjacency_matrix(adj)
+            adjacencies.append(adj)
+
+            # create adjacency matrix for inverse property
+            if include_inverse:
+                adj = sp.csr_matrix((data, (col, row)), shape=adj_shape, dtype=np.int8)
+                # if normalize:
+                #     adj = normalize_adjacency_matrix(adj)
+                adjacencies.append(adj)
 
         # save reduced A
         # with open(KB+"adjacency_short.pickle", 'wb') as f:
         #     pkl.dump(kb_adjacency, f, pkl.HIGHEST_PROTOCOL)
 
-    return entityToIndex, kb_adjacency
+    return entityToIndex, adjacencies
 
 
 def load_embeddings_from_index(embeddings_index, items_index):
