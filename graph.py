@@ -54,7 +54,7 @@ class GraphConvolution(Layer):
         self.b = None
         self.num_nodes = None
 
-        super().__init__(**kwargs)
+        super(GraphConvolution, self).__init__(**kwargs)
 
     def compute_output_shape(self, input_shapes):
         features_shape = input_shapes[0]
