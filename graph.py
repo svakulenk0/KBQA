@@ -65,8 +65,9 @@ class GraphConvolution(Layer):
         # assert len(input_shapes[0]) == 2
         self.input_dim = features_shape[1]  # number of features
         # self.num_nodes = int(input_shapes[1][1]/self.support)  # assume A = n x Rn
-        if self.featureless:
-            self.num_nodes = features_shape[1]
+        # if self.featureless:
+        #     self.num_nodes = features_shape[1]
+        self.num_nodes = self.input_dim
 
         # generate weights
         if self.num_bases > 0:
