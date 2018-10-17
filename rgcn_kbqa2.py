@@ -34,13 +34,13 @@ from graph import GraphConvolution
 # from rgcn.layers.graph import GraphConvolution
 # from rgcn.layers.input_adj import InputAdj
 
-import theano
+# import theano
 
 from utils import *
 from rgcn_settings import *
 
 # theano.config.warn_float64 ='raise'
-theano.config.optimizer = 'fast_compile'
+# theano.config.optimizer = 'fast_compile'
 
 class KBQA_RGCN:
     '''
@@ -175,7 +175,7 @@ class KBQA_RGCN:
 
         self.model_train = Model(inputs=[question_input],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
-        print self.model_train.summary()
+        print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr=0.001):
         # define loss
