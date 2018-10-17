@@ -108,7 +108,7 @@ class GraphConvolution(Layer):
 
             if not self.featureless:
                 # R x f x h  // R := number of relations
-                self.W_F = tf.concat([[self.add_weight((self.input_dim, self.output_dim),
+                self.W_F = tf.concat([[self.add_weight((self.input_dim, self.hidden_dim),
                                                         initializer=self.init,
                                                         name='{}_W_F'.format(self.name),
                                                         regularizer=self.W_regularizer)] for _ in range(self.support)],
@@ -174,7 +174,7 @@ class GraphConvolution(Layer):
             # convolve
             FW_F = tf.einsum('ij,bjk->bik', F, W_F)
             FW_F = tf.reshape(FW_F,
-                              [self.support*self.num_nodes, self.output_dim],
+                              [self.support*self.input_dim, self.output_dim],
                               name="FW_F")
             AFW_F = tf.sparse_tensor_dense_matmul(self.A, FW_F, name="A-FW_F")
 
