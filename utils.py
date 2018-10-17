@@ -119,7 +119,7 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
             entityToIndex[entity_label] = keras_idx
             if entity_limit:
                 if keras_idx >= entity_limit:
-                    print("%d limit on the number of entities reached"%entity_limit)
+                    print("%d limit on the number of entities"%entity_limit)
                     break
 
       # load adjacency matrix
@@ -129,6 +129,10 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
         kb_adjacency = data['A']
         if relation_limit:
             kb_adjacency = kb_adjacency[:relation_limit]
+
+        # save reduced A
+        with open(KB+"adjacency_short.pickle", 'wb') as f:
+            pkl.dump(kb_adjacency, f, pkl.HIGHEST_PROTOCOL)
 
     return entityToIndex, kb_adjacency
 
