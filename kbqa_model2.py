@@ -133,7 +133,7 @@ class KBQA2:
 
 
         # A - answer output TODO dot product
-        answers_output = K.dot(question_encoder_output, kg_embeddings)
+        answers_output = K.dot(question_encoder_output, kg_embeddings.T)
 
         self.model_train = Model(inputs=[question_input],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
