@@ -125,20 +125,15 @@ class KBQA2:
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
         question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_output_2)
         question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
-        question_encoder_output = GRU(kg_embeddings_matrix.shape[0], name='question_encoder')(question_encoder_output_4)
+        question_encoder_output = GRU(kg_embeddings_matrix.shape[1], name='question_encoder')(question_encoder_output_4)
 
 
-
-        # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec TODO
-        kg_embeddings = Embedding(kg_embeddings_matrix.shape[0], kg_embeddings_matrix.shape[1],
-                                  weights=[kg_embeddings_matrix], trainable=self.train_kg_embeddings,
-                                  name='kg_embeddings')
-
-        kg_embedding_output = kg_embeddings(question_encoder_output)
+        # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec TODO as constant/variable ?
+        kg_embeddings = K.variable(kg_embeddings_matrix)
 
 
-        # A - answer output TODO
-        answers_output = kg_embedding_output
+        # A - answer output TODO dot product
+        answers_output = K.dot(question_encoder_output, kg_embeddings)
 
         self.model_train = Model(inputs=[question_input],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
