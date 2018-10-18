@@ -131,7 +131,9 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
        
         if relation_limit:
             kb_adjacency = kb_adjacency[:relation_limit]
-       
+        
+        # convert dense numpy adjacency matrices to sparse
+        adjacencies = []
         for relation in kb_adjacency:
 
             # print ("Adjacency shape:", relation.shape)
