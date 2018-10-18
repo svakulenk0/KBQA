@@ -128,15 +128,14 @@ class KBQA2:
         question_encoder_output = GRU(kg_embeddings_matrix.shape[1], name='question_encoder')(question_encoder_output_4)
 
 
-        # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec TODO as constant/variable ?
+        # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec, as constant/variable ?
         kg_embeddings = K.variable(kg_embeddings_matrix)
 
-
-        # A - answer output TODO dot product
+        # A - answer output dot product
         answers_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
 
-        self.model_train = Model(inputs=[question_input],   # input question TODO input KB
-                                 outputs=[answers_output])  # ground-truth target answer set
+        self.model_train = Model(input=question_input,   # input question
+                                 output=answers_output)  # ground-truth target answer set
         print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr=0.001):
@@ -151,7 +150,7 @@ class KBQA2:
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
 
-        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=1, validation_split=0.3, shuffle='batch', batch_size=batch_size)
+        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, callbacks=callbacks_list, verbose=1, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
 
 def main(mode):
