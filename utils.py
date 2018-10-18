@@ -27,7 +27,6 @@ DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
 
 KB = DBPEDIA
 ADJACENCY_MATRIX = KB + "adjacency.pickle"
-# ADJACENCY_MATRIX = KB + "adjacency_short.pickle"
 ENTITIES_LIST = KB + "nodes_strings.pkl"
 
 
@@ -133,12 +132,8 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
        
         for relation in kb_adjacency:
 
-            if entity_limit:
-                relation = relation[:entity_limit]
-                adj_shape = (entity_limit, entity_limit)
-            
-            relation = np.array(relation)
             print ("Adjacency shape:", relation.shape)
+            adj_shape = (relation.shape, relation.shape)
 
             # split subject (row) and object (col) node URIs
             row, col = np.transpose(relation)
