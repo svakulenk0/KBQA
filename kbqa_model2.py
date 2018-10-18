@@ -54,7 +54,7 @@ class KBQA2:
         # load KG embeddings
         self.entityToIndex, self.indexToEntity, self.entityToVec, kb_embeddings_dimension = load_KB_embeddings()
         self.num_entities = len(self.entityToIndex.keys())
-        print("Number of entities with pre-trained embeddings: %d"%self.num_entitiess)
+        print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
 
     def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
         questions, answers = dataset
