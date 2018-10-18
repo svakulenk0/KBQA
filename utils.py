@@ -16,6 +16,8 @@ import pickle as pkl
 import numpy as np
 import random
 
+import scipy.sparse as sp
+
 from keras import backend as K
 
 # word embeddings
@@ -132,25 +134,25 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
        
         for relation in kb_adjacency:
 
-            print ("Adjacency shape:", relation.shape)
-            adj_shape = (relation.shape, relation.shape)
+            # print ("Adjacency shape:", relation.shape)
+            # adj_shape = (relation.shape, relation.shape)
 
             # split subject (row) and object (col) node URIs
-            row, col = np.transpose(relation)
+            # row, col = np.transpose(relation)
 
             # create adjacency matrix for this property
-            data = np.ones(len(row), dtype=np.int8)
-            adj = sp.csr_matrix((data, (row, col)), shape=adj_shape, dtype=np.int8)
+            # data = np.ones(len(row), dtype=np.int8)
+            adj = sp.csr_matrix(relation, dtype=np.int8)
             # if normalize:
             #     adj = normalize_adjacency_matrix(adj)
             adjacencies.append(adj)
 
             # create adjacency matrix for inverse property
-            if include_inverse:
-                adj = sp.csr_matrix((data, (col, row)), shape=adj_shape, dtype=np.int8)
-                # if normalize:
-                #     adj = normalize_adjacency_matrix(adj)
-                adjacencies.append(adj)
+            # if include_inverse:
+            #     adj = sp.csr_matrix((data, (col, row)), shape=adj_shape, dtype=np.int8)
+            #     # if normalize:
+            #     #     adj = normalize_adjacency_matrix(adj)
+            #     adjacencies.append(adj)
 
         # save reduced A
         # with open(KB+"adjacency_short.pickle", 'wb') as f:
