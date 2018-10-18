@@ -142,6 +142,7 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
         # TODO make tensor out of constant
         kb_entities = K.variable(np.random.randint(low=1, high=self.num_words+1, size=(self.num_entities, self.gc_units)))
+        kb_adjacency = K.variable(kb_relation_adjacency)
         # if entity_limit:
         #     kb_adjacency = [K.variable(kb_relation_adjacency[:entity_limit], dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
         # else:

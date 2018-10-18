@@ -160,7 +160,7 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
         # with open(KB+"adjacency_short.pickle", 'wb') as f:
         #     pkl.dump(kb_adjacency, f, pkl.HIGHEST_PROTOCOL)
 
-    return entityToIndex, adjacencies
+    return entityToIndex, sp.hstack(adjacencies, format="csr")
 
 
 def load_embeddings_from_index(embeddings_index, items_index):
