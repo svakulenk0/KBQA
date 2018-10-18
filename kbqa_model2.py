@@ -129,11 +129,11 @@ class KBQA2:
 
 
         # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec TODO as constant/variable ?
-        kg_embeddings = K.variable(kg_embeddings_matrix)
+        kg_embeddings = K.variable(kg_embeddings_matrix.T)
 
 
         # A - answer output TODO dot product
-        answers_output = K.dot(question_encoder_output, kg_embeddings.T)
+        answers_output = K.dot(question_encoder_output, kg_embeddings)
 
         self.model_train = Model(inputs=[question_input],   # input question TODO input KB
                                  outputs=[answers_output])  # ground-truth target answer set
