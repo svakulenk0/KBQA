@@ -129,13 +129,13 @@ class KBQA2:
 
 
         # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec, as constant/variable ?
-        kg_embeddings = K.constant(kg_embeddings_matrix)
+        # kg_embeddings = K.variable(kg_embeddings_matrix)
 
         # A - answer output dot product
-        answers_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
+        answers_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings_matrix])
 
-        self.model_train = Model(input=question_input,   # input question
-                                 output=answers_output)  # ground-truth target answer set
+        self.model_train = Model(inputs=[question_input],   # input question
+                                 outputs=[answers_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr=0.001):
@@ -150,7 +150,7 @@ class KBQA2:
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
 
-        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, callbacks=callbacks_list, verbose=1, validation_split=0.3, shuffle='batch', batch_size=batch_size)
+        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=1, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
 
 def main(mode):
