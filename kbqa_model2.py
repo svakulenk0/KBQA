@@ -43,7 +43,6 @@ class KBQA2:
 
         # set architecture parameters
         self.rnn_units = rnn_units
-        self.l2norm = l2norm
         self.train_word_embeddings = train_word_embeddings
         self.train_kg_embeddings = train_kg_embeddings
 
