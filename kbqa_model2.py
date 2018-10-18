@@ -129,7 +129,7 @@ class KBQA2:
 
 
         # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec TODO as constant/variable ?
-        kg_embeddings = K.variable(kg_embeddings_matrix.T)
+        kg_embeddings = K.variable(kg_embeddings_matrix)
 
 
         # A - answer output TODO dot product
