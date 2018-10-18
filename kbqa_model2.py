@@ -129,7 +129,7 @@ class KBQA2:
 
 
         # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec, as constant/variable ?
-        kg_embeddings = K.variable(kg_embeddings_matrix)
+        kg_embeddings = K.constant(kg_embeddings_matrix)
 
         # A - answer output dot product
         answers_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
