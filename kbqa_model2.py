@@ -13,6 +13,21 @@ Question - text as the sequence of words (word index)
 Answer - entity from KB (entity index)
 
 '''
+import sys
+from collections import Counter
+
+from keras.preprocessing.text import text_to_word_sequence
+from keras.preprocessing.sequence import pad_sequences
+
+from keras.models import Model
+from keras.models import load_model
+
+from keras.layers import Input, GRU, Dropout, Embedding, Dot
+from keras.callbacks import  ModelCheckpoint, EarlyStopping
+from keras.regularizers import l2
+from keras.optimizers import Adam
+from keras import backend as K
+
 from utils import *
 from kbqa2_settings import *
 
@@ -50,6 +65,7 @@ class KBQA2:
         # encode questions with word vocabulary and answers with entity vocabulary
         questions_data = []
         answers_data = []
+
         # track number of answers per question distribution
         n_answers_per_question = Counter()
 
@@ -123,7 +139,6 @@ class KBQA2:
         kg_embedding_output = kg_embeddings(kb_entities_input)
 
 
-        # answers_output = Dense(self.num_entities, activation="sigmoid")(kb_encoder_output)
         # S' - KB subgraph projection layer TODO
         kb_projection_output = Dot(axes=1, normalize=True)([question_encoder_output, kb_encoder_output])
 
