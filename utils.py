@@ -24,12 +24,18 @@ from keras import backend as K
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 
-# KB
+# KG
 DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
+KG = DBPEDIA
+ADJACENCY_MATRIX = KG + "adjacency.pickle"
+ENTITIES_LIST = KG + "nodes_strings.pkl"
 
-KB = DBPEDIA
-ADJACENCY_MATRIX = KB + "adjacency.pickle"
-ENTITIES_LIST = KB + "nodes_strings.pkl"
+# KG embeddings
+# rdf2vec embeddings 200 dimensions
+RDF2VEC_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
+# subset of the KB embeddings (rdf2vec embeddings 200 dimensions from KB_EMBEDDINGS_PATH) for the entities of the LC-Quad dataset (both train and test split)
+LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_answers_train_1_test_all.txt"
+KB_EMBEDDINGS_PATH = LCQUAD_KB_EMBEDDINGS_PATH
 
 
 def set_random_seed(seed=912):
@@ -171,3 +177,37 @@ def load_embeddings_from_index(embeddings_index, items_index):
     for item, index in items_index.items():
         embeddings_matrix[index, :] = embeddings_index[item] # create embedding: item index to item embedding
     return embeddings_matrix
+
+
+def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
+    '''
+    load all embeddings from file
+    '''
+    entity2vec = {}
+
+    print("Loading embeddings...")
+    
+    idx = 0
+    entity2index = {}  # map from a token to an index
+    index2entity = {}  # map from an index to a token 
+
+    with open(KB_embeddings_file) as embs_file:
+        # embeddings in a text file one per line for Global vectors and glove word embeddings
+        for line in embs_file:
+            entityAndVector = line.split(None, 1)
+            # match the entity labels in vector embeddings
+            entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
+            try:
+                embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+            except:
+                print entityAndVector
+
+            idx += 1  # 0 is reserved for masking in Keras
+            entity2index[entity] = idx
+            index2entity[idx] = entity
+            entity2vec[entity] = embedding_vector
+            n_dimensions = len(embedding_vector)
+
+    print("Loaded %d embeddings with %d dimensions" % (len(entity2vec), n_dimensions))
+
+    return (entity2index, index2entity, entity2vec, n_dimensions)
