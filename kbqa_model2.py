@@ -48,12 +48,12 @@ class KBQA2:
 
         # load word embeddings with its vocabulary into maps
         self.wordToIndex, self.indexToWord, self.wordToGlove = load_word_embeddings()
-        self.num_words = (len(self.wordToIndex.keys()))
+        self.num_words = len(self.wordToIndex.keys())
         print("Number of words with pre-trained embeddings: %d"%self.num_words)
 
         # load KG embeddings
         self.entityToIndex, self.indexToEntity, self.entityToVec, kb_embeddings_dimension = load_KB_embeddings()
-        self.num_entitiess = (len(self.entityToIndex.keys()))
+        self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities with pre-trained embeddings: %d"%self.num_entitiess)
 
     def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
