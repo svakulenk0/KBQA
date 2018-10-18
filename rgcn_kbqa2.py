@@ -67,7 +67,7 @@ class KBQA_RGCN:
         self.entityToIndex, self.kb_adjacency = loadKB(entity_limit=entity_limit, relation_limit=relation_limit)
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities in KB vocabulary: %d"%self.num_entities)
-        self.support = len(self.kb_adjacency)  # number of relations in KB?
+        self.support = self.kb_adjacency.shape[0]  # number of relations in KB?
         print("Number of relations in KB adjacency matrix: %d"%self.support)
 
     def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
