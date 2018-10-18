@@ -142,7 +142,7 @@ class KBQA_RGCN:
         # https://github.com/tkipf/relational-gcn
         # TODO make tensor out of constant
         kb_entities = K.variable(np.random.randint(low=1, high=self.num_words+1, size=(self.num_entities, self.gc_units)))
-        kb_adjacency = K.variable(kb_relation_adjacency)
+        kb_adjacency = K.variable(self.kb_adjacency)
         # if entity_limit:
         #     kb_adjacency = [K.variable(kb_relation_adjacency[:entity_limit], dtype=K.floatx()) for kb_relation_adjacency in self.kb_adjacency]
         # else:
@@ -159,7 +159,7 @@ class KBQA_RGCN:
 
         # K' - KB encoder layer via R-GCN
         # https://github.com/tkipf/relational-gcn
-        kb_encoder_output = GraphConvolution(self.num_entities, self.gc_units, kb_entities, self.kb_adjacency, self.support, num_bases=self.gc_bases, featureless=False,
+        kb_encoder_output = GraphConvolution(self.num_entities, self.gc_units, kb_entities, kb_adjacency, self.support, num_bases=self.gc_bases, featureless=False,
                                              activation='sigmoid', W_regularizer=l2(self.l2norm))(question_encoder_output)
 
         # S' - KB subgraph projection layer
