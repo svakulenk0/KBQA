@@ -135,7 +135,7 @@ class KBQA2:
         # answer_embedding_output = kg_embeddings(question_encoder_output)
 
         kg_embeddings = K.variable(kg_embeddings_matrix)
-        answer_embedding_output = Dot(axes=0, normalize=True)([question_encoder_output, kg_embeddings])
+        answer_embedding_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
         
 
         # A - answer decoder
