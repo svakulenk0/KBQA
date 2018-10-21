@@ -22,7 +22,7 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.models import Model
 from keras.models import load_model
 
-from keras.layers import Input, GRU, Dropout, Embedding, Multiply
+from keras.layers import Input, GRU, Dropout, Embedding, Dot
 from keras.callbacks import  ModelCheckpoint, EarlyStopping
 from keras.regularizers import l2
 from keras.optimizers import Adam
@@ -141,7 +141,7 @@ class KBQA2:
 
         # A - answer decoder
         answer_output = Dot()([question_encoder_output, kg_embeddings])
-        
+
         # answer_output = Multiply(name='answer_output')([question_encoder_output, kg_embeddings_input])
 
         # answer_decoder_output_1 = GRU(self.rnn_units, input_shape=(, self.num_entities), name='answer_decoder_1', return_sequences=True)(answer_output)
