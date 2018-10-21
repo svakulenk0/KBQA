@@ -135,7 +135,7 @@ class KBQA2:
         # answer_embedding_output = kg_embeddings(question_encoder_output)
 
         kg_embeddings = K.variable(kg_embeddings_matrix)
-        kg_embeddings_input = Input(tensor=kg_embeddings)
+        kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
 
         # answer_embedding_output = K.multiply(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
         
@@ -152,7 +152,7 @@ class KBQA2:
         # answer_decoder_output = Dense(self.num_entities, kernel_initializer='normal', activation='relu')(answer_embedding_output)
 
 
-        self.model_train = Model(inputs=[question_input],   # input question
+        self.model_train = Model(inputs=[question_input, kg_embeddings_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
