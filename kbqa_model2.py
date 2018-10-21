@@ -22,7 +22,7 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.models import Model
 from keras.models import load_model
 
-from keras.layers import Input, GRU, Dropout, Embedding, Dot, Dense
+from keras.layers import Input, GRU, Dropout, Embedding, Multiply
 from keras.callbacks import  ModelCheckpoint, EarlyStopping
 from keras.regularizers import l2
 from keras.optimizers import Adam
