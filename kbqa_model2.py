@@ -131,11 +131,19 @@ class KBQA2:
         # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec, as constant/variable ?
         kg_embeddings = K.variable(kg_embeddings_matrix)
 
-        # A - answer output dot product
-        answers_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
+        # A - answer output as the dot product between the question vector and the KG embeddings
+        answer_embedding_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
+        # answers_output = Dense(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
+
+        # A - answer decoder
+        answer_decoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(answer_embedding_output)
+        answer_decoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(answer_decoder_output_1)
+        answer_decoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(answer_decoder_output_2)
+        answer_decoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(answer_decoder_output_3)
+        answer_decoder_output = GRU(self.num_entities, name='answer_decoder')(answer_decoder_output_4)
 
         self.model_train = Model(inputs=[question_input],   # input question
-                                 outputs=[answers_output])  # ground-truth target answer set
+                                 outputs=[answer_decoder_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr=0.001):
