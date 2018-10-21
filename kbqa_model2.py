@@ -134,14 +134,14 @@ class KBQA2:
                                   # name='kg_embeddings', mask_zero=True)
         # answer_embedding_output = kg_embeddings(question_encoder_output)
 
-        kg_embeddings = K.variable(kg_embeddings_matrix)
-        kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
+        # kg_embeddings = K.variable(kg_embeddings_matrix)
+        # kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
 
         # answer_embedding_output = K.multiply(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
         
 
         # A - answer decoder
-        answer_output = Dot(self.num_entities, axes=1, normalize=True, name='answer_output')([question_encoder_output, kg_embeddings_input])
+        # answer_output = Dot(self.num_entities, axes=1, normalize=True, name='answer_output')([question_encoder_output, kg_embeddings_input])
 
         # answer_decoder_output_1 = GRU(self.rnn_units, input_shape=(, self.num_entities), name='answer_decoder_1', return_sequences=True)(answer_embedding_output)
         # answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
@@ -149,7 +149,7 @@ class KBQA2:
         # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
         # answer_decoder_output = GRU(self.num_entities, name='answer_decoder')(answer_decoder_output_4)
 
-        # answer_decoder_output = Dense(self.num_entities, kernel_initializer='normal', activation='relu')(answer_embedding_output)
+        answer_output = Dense(self.num_entities, kernel_initializer='normal', activation='relu', weights=[kg_embeddings_matrix])(question_encoder_output)
 
 
         self.model_train = Model(inputs=[question_input, kg_embeddings_input],   # input question
