@@ -83,8 +83,8 @@ class KBQA2:
                 n_answers_per_question[n_answers] += 1
                 questions_data.append(questions_sequence)
 
-                # encode all entities in the answer as a one-hot-vector for the corresponding entities indices TODO
-                answer_vector = np.zeros(self.num_entities)
+                # encode all entities in the answer as a one-hot-vector for the corresponding entities indices +1 for 0 index which is a mask
+                answer_vector = np.zeros(self.num_entities+1)
                 answer_vector[answer_set] = 1
                 answers_data.append(answer_vector)
 
@@ -149,9 +149,9 @@ class KBQA2:
         # kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
 
 
-        # A - answer decoder
+        # A - answer output
         # answer_output = K.dot(question_encoder_output, kg_embeddings_input)
-        answer_output = Lambda(self.answer_product)(question_encoder_output)
+        answer_output = Lambda(self.answer_product, name='answer_output')(question_encoder_output)
 
         # answer_output = Multiply(name='answer_output')([question_encoder_output, kg_embeddings_input])
 
