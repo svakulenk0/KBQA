@@ -66,7 +66,7 @@ class KBQA2:
         print("Number of words with pre-trained embeddings: %d"%self.num_words)
 
         # load KG embeddings
-        self.entityToIndex, self.indexToEntity, self.entityToVec, kb_embeddings_dimension = load_KB_embeddings()
+        self.entityToIndex, self.indexToEntity, self.entityToVec, self.kb_embeddings_dimension = load_KB_embeddings()
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
 
@@ -138,7 +138,7 @@ class KBQA2:
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
         question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_output_2)
         question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
-        question_encoder_output = GRU(kg_embeddings_matrix.shape[1], name='question_encoder')(question_encoder_output_4)
+        question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder')(question_encoder_output_4)
 
 
         # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec
