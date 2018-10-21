@@ -140,7 +140,7 @@ class KBQA2:
         
 
         # A - answer decoder
-        answer_output = K.dot([question_encoder_output, kg_embeddings_input])
+        answer_output = K.dot(question_encoder_output, kg_embeddings_input)
 
         # answer_output = Multiply(name='answer_output')([question_encoder_output, kg_embeddings_input])
 
