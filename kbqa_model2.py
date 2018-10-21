@@ -141,7 +141,7 @@ class KBQA2:
         
 
         # A - answer decoder
-        answer_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings_input])
+        answer_output = Dot(self.num_entities, axes=1, normalize=True, name='answer_output')([question_encoder_output, kg_embeddings_input])
 
         # answer_decoder_output_1 = GRU(self.rnn_units, input_shape=(, self.num_entities), name='answer_decoder_1', return_sequences=True)(answer_embedding_output)
         # answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
