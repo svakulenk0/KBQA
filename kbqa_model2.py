@@ -32,12 +32,11 @@ from utils import *
 from kbqa2_settings import *
 
 
-def answer_product(question_vector):
+def answer_product(kg_embeddings_matrix, question_vector):
     '''
     Custom layer producing a dot product between the KG embeddings and the question vector
     '''
     # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec
-    kg_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
     kg_embeddings = K.variable(kg_embeddings_matrix.T)
     # kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
     # q = K.constant(q_array.T)
@@ -123,6 +122,7 @@ class KBQA2:
 
         # load word & KG embeddings
         word_embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
+        kg_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
 
         # Q - question input
         question_input = Input(shape=(None,), name='question_input', dtype=K.floatx())
@@ -153,7 +153,7 @@ class KBQA2:
 
         # A - answer decoder
         # answer_output = K.dot(question_encoder_output, kg_embeddings_input)
-        answer_output = Lambda(answer_product)(question_encoder_output)
+        answer_output = Lambda(answer_product)(kg_embeddings_matrix, question_encoder_output)
 
         # answer_output = Multiply(name='answer_output')([question_encoder_output, kg_embeddings_input])
 
