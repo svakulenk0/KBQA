@@ -22,7 +22,7 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.models import Model
 from keras.models import load_model
 
-from keras.layers import Input, GRU, Dropout, Embedding
+from keras.layers import Input, GRU, Dropout, Embedding, Lambda
 from keras.callbacks import  ModelCheckpoint, EarlyStopping
 from keras.regularizers import l2
 from keras.optimizers import Adam
@@ -30,6 +30,20 @@ from keras import backend as K
 
 from utils import *
 from kbqa2_settings import *
+
+
+def answer_product(question_vector):
+    '''
+    Custom layer producing a dot product between the KG embeddings and the question vector
+    '''
+    # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec
+    kg_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
+    kg_embeddings = K.variable(kg_embeddings_matrix.T)
+    # kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
+    # q = K.constant(q_array.T)
+    return K.dot(question_vector, kg_embeddings)
+    # return Dot()([q, x])
+
 
 class KBQA2:
     '''
@@ -109,7 +123,6 @@ class KBQA2:
 
         # load word & KG embeddings
         word_embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
-        kg_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
 
         # Q - question input
         question_input = Input(shape=(None,), name='question_input', dtype=K.floatx())
@@ -134,13 +147,13 @@ class KBQA2:
                                   # name='kg_embeddings', mask_zero=True)
         # answer_embedding_output = kg_embeddings(question_encoder_output)
 
-        kg_embeddings = K.variable(kg_embeddings_matrix.T)
-        kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
+        # kg_embeddings = K.variable(kg_embeddings_matrix.T)
+        # kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
 
-        
 
         # A - answer decoder
-        answer_output = K.dot(question_encoder_output, kg_embeddings_input)
+        # answer_output = K.dot(question_encoder_output, kg_embeddings_input)
+        answer_output = Lambda(answer_product)(question_encoder_output)
 
         # answer_output = Multiply(name='answer_output')([question_encoder_output, kg_embeddings_input])
 
