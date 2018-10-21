@@ -129,20 +129,24 @@ class KBQA2:
 
 
         # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec
-        kg_embeddings = Embedding(kg_embeddings_matrix.shape[0], kg_embeddings_matrix.shape[1],
-                                  weights=[kg_embeddings_matrix], trainable=self.train_kg_embeddings,
-                                  name='kg_embeddings', mask_zero=True)
-        answer_embedding_output = kg_embeddings(question_encoder_output)
-        # kg_embeddings = K.variable(kg_embeddings_matrix)
-        # answer_embedding_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
-        # answers_output = Dense(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
+        # kg_embeddings = Embedding(kg_embeddings_matrix.shape[0], kg_embeddings_matrix.shape[1],
+                                  # weights=[kg_embeddings_matrix], trainable=self.train_kg_embeddings,
+                                  # name='kg_embeddings', mask_zero=True)
+        # answer_embedding_output = kg_embeddings(question_encoder_output)
+
+        kg_embeddings = K.variable(kg_embeddings_matrix)
+        answer_embedding_output = Dot(axes=1, normalize=True)([question_encoder_output, kg_embeddings])
+        
 
         # A - answer decoder
-        answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(answer_embedding_output)
-        answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
-        answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
-        answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
-        answer_decoder_output = GRU(self.num_entities, name='answer_decoder')(answer_decoder_output_4)
+        # answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(answer_embedding_output)
+        # answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
+        # answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
+        # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
+        # answer_decoder_output = GRU(self.num_entities, name='answer_decoder')(answer_decoder_output_4)
+
+        answer_decoder_output = Dense(self.num_entities, kernel_initializer='normal', activation='relu')(answer_embedding_output)
+
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_decoder_output])  # ground-truth target answer set
