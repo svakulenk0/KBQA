@@ -165,7 +165,7 @@ class KBQA2:
                               # weights=[kg_embeddings_matrix])(question_encoder_output)
 
 
-        self.model_train = Model(inputs=[question_input, kg_embeddings_input],   # input question
+        self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
