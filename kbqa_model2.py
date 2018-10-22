@@ -79,7 +79,7 @@ class KBQA2:
             n_answers = len(answer_set)
 
             # add sample
-            if answer_set & n_answers <= max_answers_per_question:
+            if answer_set and n_answers <= max_answers_per_question:
                 # print answer_set
                 n_answers_per_question[n_answers] += 1
                 questions_data.append(questions_sequence)
