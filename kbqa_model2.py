@@ -103,6 +103,10 @@ class KBQA2:
         if show_n_answers_distribution:
             print("Number of answers per question distribution: %s"%str(n_answers_per_question))
 
+        # check the input data 
+        print questions_data
+        print answers_data
+
     def answer_product(self, question_vector):
         '''
         Custom layer producing a dot product between the KG embeddings and the question vector
