@@ -18,5 +18,5 @@ rnn_units = 500  # dimension of the GRUs output layer for the hidden question re
 
 # training parameters
 batch_size = 32
-epochs = 10  # 10
+epochs = 50  # 10
 learning_rate = 1e-3
