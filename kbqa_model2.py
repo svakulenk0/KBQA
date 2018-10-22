@@ -79,7 +79,8 @@ class KBQA2:
             n_answers = len(answer_set)
 
             # add sample
-            if n_answers <= max_answers_per_question:
+            if n_answers & n_answers <= max_answers_per_question:
+                print answer_set
                 n_answers_per_question[n_answers] += 1
                 questions_data.append(questions_sequence)
 
@@ -104,8 +105,8 @@ class KBQA2:
             print("Number of answers per question distribution: %s"%str(n_answers_per_question))
 
         # check the input data 
-        print questions_data
-        print answers_data
+        # print questions_data
+        # print answers_data
 
     def answer_product(self, question_vector):
         '''
