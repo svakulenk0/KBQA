@@ -47,14 +47,23 @@ class KBQA:
         # self.train_word_embeddings = train_word_embeddings
         self.train_kg_embeddings = train_kg_embeddings
 
-        # load word embeddings
+        # load word embeddings model
         self.wordToVec = load_fasttext()
-        print("Fasttext model loaded")
+        self.word_embs_dim = self.wordToVec.get_word_vector('sample').shape[1]
+        print("Fasttext word embeddings dimension: %d"%self.word_embs_dim)
 
-        # load KG embeddings
+        # load KG relation embeddings
         self.entityToIndex, self.indexToEntity, self.entityToVec, self.kb_embeddings_dimension = load_KB_embeddings()
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
+        self.kg_relation_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
+
+        # generate KG word embeddings
+        self.kg_word_embeddings_matrix = np.zeros((self.num_entities+1, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
+        for entity_id, index in self.entityToIndex.items():
+            print index, entity_id
+            self.kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
+        self.kg_word_embeddings_matrix = np.asarray(answers_data, dtype=K.floatx())
 
     def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
         '''
@@ -97,7 +106,6 @@ class KBQA:
         
         self.num_samples = questions_data.shape[0]
         self.max_question_words = questions_data.shape[1]
-        self.word_embs_dim = questions_data.shape[2]
 
         print("Loaded the dataset")
         self.dataset = questions_data, answers_data
@@ -106,7 +114,6 @@ class KBQA:
         print("Number of samples: %d"%self.num_samples)
         # print(questions_data.shape)
         print("Maximum number of words in a question sequence: %d"%self.max_question_words)
-        print("Word embeddings dimension: %d"%self.word_embs_dim)
 
         if show_n_answers_distribution:
             print("Number of answers per question distribution: %s"%str(n_answers_per_question))
@@ -115,71 +122,37 @@ class KBQA:
         # print questions_data
         # print answers_data
 
-    def answer_product(self, question_vector):
+    def dot_product_layer(self, tensor1, tensor2):
         '''
-        Custom layer producing a dot product between the KG embeddings and the question vector
+        Custom layer producing a dot product
         '''
-        # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec
-        kg_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
-        # kg_embeddings = K.variable(kg_embeddings_matrix.T)
-        kg_embeddings = K.constant(kg_embeddings_matrix.T)
-        # kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
-        # q = K.constant(q_array.T)
-        return K.dot(question_vector, kg_embeddings)
-        # return Dot()([q, x])
+        return K.dot(tensor1, tensor2)
 
     def build_model(self):
         '''
         build layers required for training the NN
         '''
 
-        # Q - question input
-        question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
+        # Q - question embedding input
+        question_embeddings_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_embedding_input', dtype=K.floatx())
 
-        # E' - question words embedding: set up a trainable word embeddings layer initialized with pre-trained word embeddings
-        # load word embeddings
-            # word_embeddings_matrix = load_embeddings_from_index(self.wordToGlove, self.wordToIndex)
-            # question_words_embeddings = Embedding(word_embeddings_matrix.shape[0], word_embeddings_matrix.shape[1],
-            #                              weights=[word_embeddings_matrix], trainable=self.train_word_embeddings,
-            #                              name='question_words_embeddings', mask_zero=True)
-            # question_embedding_output = question_words_embeddings(question_input)
+        # K - KG word embeddings
+        kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
+        
+        # S - selected KG entities
+        selected_entities = Lambda(self.dot_product_layer, name='selected_entities')(question_embedding_input, kg_word_embeddings)
 
-        # Q' - question encoder
-        question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(question_input)
-        question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
-        question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_output_2)
-        question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
-        question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder')(question_encoder_output_4)
+        # R - KG relation embeddings
+        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix.T)
 
+        # S' - selected KG entities with relations subgraph
+        # selected_subgraph = 
 
-        # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec
-        # kg_embeddings = Embedding(kg_embeddings_matrix.shape[0], kg_embeddings_matrix.shape[1],
-                                  # weights=[kg_embeddings_matrix], trainable=self.train_kg_embeddings,
-                                  # name='kg_embeddings', mask_zero=True)
-        # answer_embedding_output = kg_embeddings(question_encoder_output)
+        # A - answer entities output decoder
+        # answer_entities_output =
 
-        # kg_embeddings = K.variable(kg_embeddings_matrix.T)
-        # kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
-
-
-        # A - answer output
-        # answer_output = K.dot(question_encoder_output, kg_embeddings_input)
-        answer_output = Lambda(self.answer_product, name='answer_output')(question_encoder_output)
-
-        # answer_output = Multiply(name='answer_output')([question_encoder_output, kg_embeddings_input])
-
-        # answer_decoder_output_1 = GRU(self.rnn_units, input_shape=(, self.num_entities), name='answer_decoder_1', return_sequences=True)(answer_output)
-        # answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
-        # answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
-        # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
-        # answer_decoder_output = GRU(self.num_entities, name='answer_decoder')(answer_decoder_output_4)
-
-        # answer_output = Dense(self.num_entities, kernel_initializer='normal', activation='relu', name='answer_output',
-                              # weights=[kg_embeddings_matrix])(question_encoder_output)
-
-
-        self.model_train = Model(inputs=[question_input],   # input question
-                                 outputs=[answer_output])  # ground-truth target answer set
+        self.model_train = Model(inputs=[question_embeddings_input],   # input question
+                                 outputs=[answer_entities_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr=0.001):
