@@ -223,5 +223,7 @@ def embed_with_fasttext(words, model_path=FASTTEXT_MODEL_PATH):
     model_path <str> path to the pre-trained FastText model binary file
     '''
     model = fasttext.load_model(model_path)
+    vectors = []
     for word in words:
-        print model[word] # produce a vector for the string
+        vectors.append(model[word]) # produce a vector for the string
+    return vectors
