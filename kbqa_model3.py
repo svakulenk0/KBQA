@@ -59,11 +59,11 @@ class KBQA:
         self.kg_relation_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
 
         # generate KG word embeddings
-        self.kg_word_embeddings_matrix = np.zeros((self.num_entities+1, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
+        kg_word_embeddings_matrix = np.zeros((self.num_entities+1, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
         for entity_id, index in self.entityToIndex.items():
-            print index, entity_id
-            self.kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
-        self.kg_word_embeddings_matrix = np.asarray(answers_data, dtype=K.floatx())
+            # print index, entity_id
+            kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
+        self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
 
     def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
         '''
