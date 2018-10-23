@@ -2,12 +2,28 @@
 
 ## Requirements
 
-(baseline: [Python 3.6.4](https://www.python.org/downloads/) [keras==2.1.6](https://keras.io/), which requires another backend lib. We used [Tensorflow 1.8.0](https://www.tensorflow.org/))
+* Python 3
+* keras==2.2.2
+* Tensorflow
+* [fastText](https://github.com/facebookresearch/fastText/tree/master/python)
 
-* theano==0.9.0
-* keras==1.2.1
-* [rgcn](https://github.com/tkipf/relational-gcn)
 
+## Setup
+
+Make sure you have the correct Keras version and the backend is set to Tensorflow (use vim ~/.keras/keras.json to specify the backend)
+
+python -c 'import keras; print(keras.__version__)'
+
+
+## Run
+
+Training the model:
+
+python rgcn_kbqa2.py train
+
+## Results
+
+Baseline on LC-Quad SELECT subset Hits@5: 15/737
 
 ## References
 
@@ -18,3 +34,5 @@
 ## Troubleshooting
 
 * Cleaning Theano cache: [rm -rf ~/.theano](https://stackoverflow.com/questions/43312593/theano-importerror-cannot-import-name-inplace-increment)
+
+* Exception: fastText: Cannot load /data/fasttext/wiki.en.bin due to C++ extension failed to allocate the memory
