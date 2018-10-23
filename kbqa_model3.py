@@ -95,6 +95,8 @@ class KBQA:
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'), dtype=K.floatx())
         answers_data = np.asarray(answers_data, dtype=K.floatx())
         self.num_samples = answers_data.shape[0]
+        self.max_question_words = answers_data.shape[1]
+        self.word_embs_dim = answers_data.shape[2]
 
         print("Loaded the dataset")
         self.dataset = questions_data, answers_data
@@ -102,8 +104,8 @@ class KBQA:
         # show dataset stats
         print("Number of samples: %d"%self.num_samples)
         # print(questions_data.shape)
-        print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
-        print("Word embeddings dimension: %d"%questions_data.shape[2])
+        print("Maximum number of words in a question sequence: %d"%self.max_question_words)
+        print("Word embeddings dimension: %d"%self.word_embs_dim)
 
         if show_n_answers_distribution:
             print("Number of answers per question distribution: %s"%str(n_answers_per_question))
@@ -131,7 +133,7 @@ class KBQA:
         '''
 
         # Q - question input
-        questions_embeddings = Input(shape=(None,,), name='question_input', dtype=K.floatx())
+        questions_embeddings = Input(shape=(None, self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # E' - question words embedding: set up a trainable word embeddings layer initialized with pre-trained word embeddings
         # load word embeddings
