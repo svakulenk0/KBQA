@@ -17,12 +17,15 @@ import numpy as np
 import random
 
 import scipy.sparse as sp
+import fasttext
 
 from keras import backend as K
 
 # word embeddings
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
+
+FASTTEXT_MODEL_PATH = "/data/fasttext/wiki.en.bin"
 
 # KG
 DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
@@ -32,7 +35,7 @@ ENTITIES_LIST = KG + "nodes_strings.pkl"
 
 # KG embeddings
 # rdf2vec embeddings 200 dimensions
-RDF2VEC_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
+# RDF2VEC_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 # subset of the KB embeddings (rdf2vec embeddings 200 dimensions from KB_EMBEDDINGS_PATH) for the entities of the LC-Quad dataset (both train and test split)
 # LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_answers_train_1_test_all.txt"
 LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_KGlove_PR_Split_lcquad_answers_train_1_test_all.txt"
@@ -186,7 +189,7 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     '''
     entity2vec = {}
 
-    print("Loading embeddings...")
+    # print("Loading embeddings...")
     
     idx = 0
     entity2index = {}  # map from a token to an index
@@ -209,6 +212,16 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
             entity2vec[entity] = embedding_vector
             n_dimensions = len(embedding_vector)
 
-    print("Loaded %d embeddings with %d dimensions" % (len(entity2vec), n_dimensions))
+    # print("Loaded %d KG embeddings with %d dimensions" % (len(entity2vec), n_dimensions))
 
     return (entity2index, index2entity, entity2vec, n_dimensions)
+
+
+def embed_with_fasttext(words, model_path=FASTTEXT_MODEL_PATH):
+    '''
+    words <list> of words to be translated into vectors
+    model_path <str> path to the pre-trained FastText model binary file
+    '''
+    model = fasttext.load_model(model_path)
+    for word in words:
+        print model[word] # produce a vector for the string
