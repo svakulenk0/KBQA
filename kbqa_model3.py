@@ -94,9 +94,10 @@ class KBQA:
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'), dtype=K.floatx())
         answers_data = np.asarray(answers_data, dtype=K.floatx())
-        self.num_samples = answers_data.shape[0]
-        self.max_question_words = answers_data.shape[1]
-        self.word_embs_dim = answers_data.shape[2]
+        
+        self.num_samples = questions_data.shape[0]
+        self.max_question_words = questions_data.shape[1]
+        self.word_embs_dim = questions_data.shape[2]
 
         print("Loaded the dataset")
         self.dataset = questions_data, answers_data
