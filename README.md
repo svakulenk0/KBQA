@@ -19,7 +19,7 @@ python -c 'import keras; print(keras.__version__)'
 
 Training the model:
 
-python rgcn_kbqa2.py train
+python kbqa_model3.py train
 
 ## Results
 
