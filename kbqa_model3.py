@@ -101,8 +101,9 @@ class KBQA:
 
         # show dataset stats
         print("Number of samples: %d"%self.num_samples)
-        print(questions_data.shape)
+        # print(questions_data.shape)
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
+        print("Word embeddings dimension: %d"%questions_data.shape[2])
 
         if show_n_answers_distribution:
             print("Number of answers per question distribution: %s"%str(n_answers_per_question))
@@ -130,7 +131,7 @@ class KBQA:
         '''
 
         # Q - question input
-        questions_embeddings = Input(shape=(None,), name='question_input', dtype=K.floatx())
+        questions_embeddings = Input(shape=(None,,), name='question_input', dtype=K.floatx())
 
         # E' - question words embedding: set up a trainable word embeddings layer initialized with pre-trained word embeddings
         # load word embeddings
