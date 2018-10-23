@@ -101,6 +101,7 @@ class KBQA:
 
         # show dataset stats
         print("Number of samples: %d"%self.num_samples)
+        print(questions_data.shape)
         print("Maximum number of words in a question sequence: %d"%questions_data.shape[1])
 
         if show_n_answers_distribution:
