@@ -50,7 +50,7 @@ class KBQA:
         # load word embeddings model
         self.wordToVec = load_fasttext()
         self.word_embs_dim = len(self.wordToVec.get_word_vector('sample'))
-        print("Fasttext word embeddings dimension: %d"%self.word_embs_dim)
+        print("FastText word embeddings dimension: %d"%self.word_embs_dim)
 
         # load KG relation embeddings
         self.entityToIndex, self.indexToEntity, self.entityToVec, self.kb_embeddings_dimension = load_KB_embeddings()
@@ -140,7 +140,7 @@ class KBQA:
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
         
         # S - selected KG entities
-        selected_entities = Lambda(self.dot_product_layer, name='selected_entities')(question_embedding_input, kg_word_embeddings)
+        selected_entities = Lambda(self.dot_product_layer, name='selected_entities')(question_embeddings_input, kg_word_embeddings)
 
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix.T)
