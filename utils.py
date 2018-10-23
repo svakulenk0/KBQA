@@ -217,8 +217,8 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
 
 
 def load_fasttext(model_path=FASTTEXT_MODEL_PATH):
-    import fasttext
-    return fasttext.load_model(model_path)
+    import fastText
+    return fastText.load_model(model_path)
 
 
 def embed_with_fasttext(words):
@@ -229,5 +229,5 @@ def embed_with_fasttext(words):
     model = load_fasttext()
     vectors = []
     for word in words:
-        vectors.append(model[word]) # produce a vector for the string
+        vectors.append(model.get_word_vector(word)) # produce a vector for the string
     return vectors
