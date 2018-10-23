@@ -134,7 +134,7 @@ class KBQA:
         '''
 
         # Q - question input
-        questions_embeddings = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
+        question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # E' - question words embedding: set up a trainable word embeddings layer initialized with pre-trained word embeddings
         # load word embeddings
@@ -145,7 +145,7 @@ class KBQA:
             # question_embedding_output = question_words_embeddings(question_input)
 
         # Q' - question encoder
-        question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(questions_embeddings)
+        question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(question_input)
         question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
         question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_output_2)
         question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
