@@ -78,7 +78,7 @@ class KBQA2:
             answer_set = [self.entityToIndex[entity] for entity in answers[i] if entity in self.entityToIndex]
             n_answers = len(answer_set)
 
-            # add sample
+            # add sample that has not too many answers but at least one
             if answer_set and n_answers <= max_answers_per_question:
                 # print answer_set
                 n_answers_per_question[n_answers] += 1
@@ -114,7 +114,8 @@ class KBQA2:
         '''
         # E'' - KG entity embeddings: load pre-trained vectors e.g. RDF2vec
         kg_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
-        kg_embeddings = K.variable(kg_embeddings_matrix.T)
+        # kg_embeddings = K.variable(kg_embeddings_matrix.T)
+        kg_embeddings = K.constant(kg_embeddings_matrix.T)
         # kg_embeddings_input = Input(tensor=kg_embeddings, name='kg_embeddings_input')
         # q = K.constant(q_array.T)
         return K.dot(question_vector, kg_embeddings)
