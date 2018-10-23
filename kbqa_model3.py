@@ -134,7 +134,7 @@ class KBQA:
         '''
 
         # Q - question input
-        questions_embeddings = Input(shape=(None, self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
+        questions_embeddings = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # E' - question words embedding: set up a trainable word embeddings layer initialized with pre-trained word embeddings
         # load word embeddings
