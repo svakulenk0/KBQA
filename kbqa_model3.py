@@ -74,7 +74,7 @@ class KBQA:
         # iterate over samples
         for i in range(num_samples):
             # encode words in the question using FastText
-            question_word_vectors = [self.wordToVec[word] for word in text_to_word_sequence(questions[i])]
+            question_word_vectors = [self.model.get_word_vector(word) for word in text_to_word_sequence(questions[i])]
 
             # encode all entities in the answer as a list of indices (ignore OOV entity labels i.e. entities in the answers but not in the KB)
             answer_set = [self.entityToIndex[entity] for entity in answers[i] if entity in self.entityToIndex]
