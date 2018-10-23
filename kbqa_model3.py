@@ -122,11 +122,11 @@ class KBQA:
         # print questions_data
         # print answers_data
 
-    def dot_product_layer(self, tensor1, tensor2):
+    def dot_product_layer(self, tensors):
         '''
         Custom layer producing a dot product
         '''
-        return K.dot(tensor1, tensor2)
+        return K.dot(tensors[0], tensors[1])
 
     def build_model(self):
         '''
@@ -140,7 +140,7 @@ class KBQA:
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
         
         # S - selected KG entities
-        selected_entities = Lambda(self.dot_product_layer, name='selected_entities')(question_embeddings_input, kg_word_embeddings)
+        selected_entities = Lambda(self.dot_product_layer, name='selected_entities')([question_embeddings_input, kg_word_embeddings])
 
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix.T)
