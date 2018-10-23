@@ -197,7 +197,7 @@ def main(mode):
     Train model by running: python kbqa_model2.py train
     '''
 
-    model = KBQA(rnn_units, train_word_embeddings, train_kg_embeddings)
+    model = KBQA(rnn_units)
     # train on train split / test on test split
     dataset_split = mode
 
