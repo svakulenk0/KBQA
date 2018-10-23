@@ -17,7 +17,6 @@ import numpy as np
 import random
 
 import scipy.sparse as sp
-import fasttext
 
 from keras import backend as K
 
@@ -217,12 +216,17 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     return (entity2index, index2entity, entity2vec, n_dimensions)
 
 
-def embed_with_fasttext(words, model_path=FASTTEXT_MODEL_PATH):
+def load_fasttext(model_path=FASTTEXT_MODEL_PATH):
+    import fasttext
+    return fasttext.load_model(model_path)
+
+
+def embed_with_fasttext(words):
     '''
     words <list> of words to be translated into vectors
     model_path <str> path to the pre-trained FastText model binary file
     '''
-    model = fasttext.load_model(model_path)
+    model = load_fasttext()
     vectors = []
     for word in words:
         vectors.append(model[word]) # produce a vector for the string
