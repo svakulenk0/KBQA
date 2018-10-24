@@ -54,9 +54,11 @@ class KBQA:
 
         # load KG relation embeddings
         self.entityToIndex, self.indexToEntity, self.entityToVec, self.kb_embeddings_dimension = load_KB_embeddings()
+        self.entities = self.entityToVec.keys()
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
         self.kg_relation_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
+        print("RDF2Vec embeddings dimension: %d"%self.kb_embeddings_dimension)
 
         # generate KG word embeddings
         kg_word_embeddings_matrix = np.zeros((self.num_entities+1, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
@@ -85,20 +87,13 @@ class KBQA:
             # encode words in the question using FastText
             question_word_vectors = [self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])]
 
-            # encode all entities in the answer as a list of indices (ignore OOV entity labels i.e. entities in the answers but not in the KB)
-            answer_set = [self.entityToIndex[entity] for entity in answers[i] if entity in self.entityToIndex]
-            n_answers = len(answer_set)
+            answers_to_question = answers[i]
+            first_answer = answers_to_question[0].encode('utf-8')
 
-            # add sample that has not too many answers but at least one
-            if answer_set and n_answers <= max_answers_per_question:
-                # print answer_set
+            if first_answer in self.entities:
                 n_answers_per_question[n_answers] += 1
                 questions_data.append(question_word_vectors)
-
-                # encode all entities in the answer as a one-hot-vector for the corresponding entities indices +1 for 0 index which is a mask
-                answer_vector = np.zeros(self.num_entities+1)
-                answer_vector[answer_set] = 1
-                answers_data.append(answer_vector)
+                answers_data.append(self.entityToVec[first_answer])
 
         # normalize length
         questions_data = np.asarray(pad_sequences(questions_data, padding='post'), dtype=K.floatx())
@@ -140,7 +135,7 @@ class KBQA:
         '''
 
         # Q - question embedding input
-        question_embeddings_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_embedding_input', dtype=K.floatx())
+        question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # K - KG word embeddings
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
@@ -159,10 +154,10 @@ class KBQA:
         answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
         answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
         answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
-        answer_decoder_output = GRU(self.num_entities, name='answer_decoder_output')(answer_decoder_4)
+        answer_output = GRU(self.kb_embeddings_dimension, name='answer_output')(answer_decoder_4)
 
-        self.model_train = Model(inputs=[question_embeddings_input],   # input question
-                                 outputs=[answer_decoder_output])  # ground-truth target answer set
+        self.model_train = Model(inputs=[question_input],   # input question
+                                 outputs=[answer_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr=0.001):
