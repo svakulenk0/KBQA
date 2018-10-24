@@ -127,11 +127,14 @@ class KBQA:
         # print questions_data
         # print answers_data
 
-    def dot_layer(self, tensors):
+    def answer_product_layer(self, question_vector):
         '''
         Custom layer producing a dot product
         '''
-        return K.dot(tensors[0], tensors[1])
+        # K - KG embeddings
+        kg_embeddings = K.constant(self.kg_concatenated_embeddings_matrix.T)
+
+        return K.dot(question_vector, kg_embeddings)
 
     def build_model(self):
         '''
@@ -148,11 +151,8 @@ class KBQA:
         question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
         question_encoder_output = GRU(self.kg_concatenated_embs_dim, name='question_encoder')(question_encoder_output_4)
 
-        # K - KG embeddings
-        kg_embeddings = K.constant(self.kg_concatenated_embeddings_matrix.T)
-
         # A - answer output
-        answer_output = Lambda(self.dot_layer, name='answer_output')([question_encoder_output, kg_embeddings])
+        answer_output = Lambda(self.answer_product_layer, name='answer_output')(question_encoder_output)
 
         self.model_train = Model(inputs=[question_embeddings_input],   # input question
                                  outputs=[answer_output])  # answer entities
