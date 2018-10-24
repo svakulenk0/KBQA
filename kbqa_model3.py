@@ -155,7 +155,7 @@ class KBQA:
         answer_output = Lambda(self.dot_layer, name='answer_output')([question_encoder_output, kg_embeddings])
 
         self.model_train = Model(inputs=[question_embeddings_input],   # input question
-                                 outputs=[answer_decoder_output])  # answer entities
+                                 outputs=[answer_output])  # answer entities
 
         print(self.model_train.summary())
 
