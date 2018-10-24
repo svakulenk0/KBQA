@@ -134,7 +134,7 @@ class KBQA:
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
         
         # S - selected KG entities
-        selected_entities = Lambda(self.dot_layer, name='selected_entities')([question_embeddings_input, kg_word_embeddings])
+        selected_entities = Lambda(self.dot_layer, name='selected_entities')([question_input, kg_word_embeddings])
 
         # R - KG relation embeddings
         # kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
