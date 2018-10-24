@@ -66,7 +66,7 @@ class KBQA:
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
         
-        self.kg_concatenated_embeddings_matrix = np.concatenate(self.kg_word_embeddings_matrix, self.kg_relation_embeddings_matrix, axis=0)
+        self.kg_concatenated_embeddings_matrix = np.concatenate((self.kg_word_embeddings_matrix, self.kg_relation_embeddings_matrix), axis=0)
         self.kg_concatenated_embs_dim = self.kg_concatenated_embeddings_matrix.shape[1]
         print("Concatenated KG embeddings dimension: %d"%self.kg_concatenated_embs_dim)
 
