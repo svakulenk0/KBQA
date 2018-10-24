@@ -223,7 +223,7 @@ class KBQA:
 
             # else:
             #     not_found_entities +=1
-        print("Samples indicators: %d" % len(samples_indicators))
+        # print("Samples indicators: %d" % len(samples_indicators))
         
         print ("Not found: %d entities"%not_found_entities)
         # normalize length
