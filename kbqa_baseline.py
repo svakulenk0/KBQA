@@ -133,7 +133,11 @@ class KBQA:
     '''
     Baseline neural network architecture for KBQA: projecting from word embeddings aggregation directly into the KG answer space
     '''
-    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate=0.2, model_dir='./models/'):
+    def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate=0.2, model_path='./models/model.best.hdf5'):
+        # define path to store pre-trained model
+        makedirs('./models')
+        self.model_path = model_path
+
         self.max_seq_len = max_seq_len
         self.rnn_units = rnn_units
         self.encoder_depth = encoder_depth
@@ -142,8 +146,7 @@ class KBQA:
         self.bases = bases
         self.l2norm = l2norm
         self.dropout_rate = dropout_rate
-        makedirs(model_dir)
-        self.model_dir = model_dir
+
         # load word vocabulary
         self.wordToIndex, self.indexToWord, self.wordToGlove = readGloveFile()
 
