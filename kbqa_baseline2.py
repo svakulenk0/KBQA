@@ -159,7 +159,7 @@ class KBQA:
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         
         # answer_output = Dropout(self.dropout_rate)(question_encoder_output)
-        # answer_output = question_encoder_output
+        answer_output = question_encoder_output
 
         answer_indicator_output = Concatenate(axis=1)([answer_output, sample_indicator])
         # answer_indicator_output = concatenate([answer_output, sample_indicator], axis=0)
