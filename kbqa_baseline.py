@@ -268,17 +268,16 @@ class KBQA:
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
-        
+
+        # define callbacks for early stopping
+        checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+        early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
+        callbacks_list = [early_stop]
+
+        # prepare QA dataset
         questions_vectors, answers_vectors, answers_indices = self.dataset
-        # for epoch in range(epochs):
-        #     print('\n***** Epoch %i/%i *****'%(epoch + 1, epochs))
-            # load training dataset
-            # encoder_input_data, decoder_input_data, decoder_target_data, _, _ = self.dataset.load_data('train', batch_size * batch_per_load)
-            # self.model_train.fit([questions] +[X] + A, answers, batch_size=batch_size,)
-        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, verbose=2, validation_split=0.3)
-        self.save_model('model.h5')
-            # self.save_model('model_epoch%i.h5'%(epoch + 1))
-        # self.save_model('model.h5')
+
+        self.model_train.fit(questions_vectors, answers_vectors, epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
     def test(self):
         questions_vectors, answers_vectors, answers_indices = self.dataset
