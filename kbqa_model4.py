@@ -110,11 +110,14 @@ class KBQA:
         # print questions_data
         # print answers_data
 
-    def dot_layer(self, tensors):
+    def answer_product_layer(self, question_vector):
         '''
         Custom layer producing a dot product
         '''
-        return K.dot(tensors[0], tensors[1])
+        # K - KG embeddings
+        kg_embeddings = K.constant(self.kg_concatenated_embeddings_matrix.T)
+
+        return K.dot(question_vector, kg_embeddings)
 
     def stack_layer(self, tensors):
         '''
@@ -130,11 +133,8 @@ class KBQA:
         # Q - question embedding input
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
-        # K - KG word embeddings
-        kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
-        
         # S - selected KG entities
-        selected_entities = Lambda(self.dot_layer, name='selected_entities')([question_input, kg_word_embeddings])
+        selected_entities = Lambda(self.answer_product_layer, name='selected_entities')(question_input)
 
         # R - KG relation embeddings
         # kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
