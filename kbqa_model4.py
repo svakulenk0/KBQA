@@ -67,7 +67,7 @@ class KBQA:
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
 
-    def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
+    def load_data(self, dataset, max_answers_per_question=100):
         '''
         Encode the dataset: questions and answers
         '''
@@ -79,9 +79,6 @@ class KBQA:
         questions_data = []
         answers_data = []
 
-        # track number of answers per question distribution
-        n_answers_per_question = Counter()
-
         # iterate over samples
         for i in range(num_samples):
             # encode words in the question using FastText
@@ -91,7 +88,6 @@ class KBQA:
             first_answer = answers_to_question[0].encode('utf-8')
 
             if first_answer in self.entities:
-                n_answers_per_question[n_answers] += 1
                 questions_data.append(question_word_vectors)
                 answers_data.append(self.entityToVec[first_answer])
 
@@ -109,9 +105,6 @@ class KBQA:
         print("Number of samples: %d"%self.num_samples)
         # print(questions_data.shape)
         print("Maximum number of words in a question sequence: %d"%self.max_question_words)
-
-        if show_n_answers_distribution:
-            print("Number of answers per question distribution: %s"%str(n_answers_per_question))
 
         # check the input data 
         # print questions_data
