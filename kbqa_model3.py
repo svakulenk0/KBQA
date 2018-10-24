@@ -159,7 +159,7 @@ class KBQA:
 
         print(self.model_train.summary())
 
-    def train(self, batch_size, epochs, lr=0.001):
+    def train(self, batch_size, epochs, lr=0.01):
         # define loss
         self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
 
