@@ -149,7 +149,7 @@ class KBQA:
         selected_entities = Lambda(self.dot_layer, name='selected_entities')([question_embeddings_input, kg_word_embeddings])
 
         # R - KG relation embeddings
-        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix.T)
+        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
 
         # S' - selected KG subgraph
         selected_subgraph = Lambda(self.stack_layer, name='selected_subgraph')([selected_entities, kg_relation_embeddings])
