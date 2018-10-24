@@ -57,6 +57,7 @@ class KBQA:
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
         self.kg_relation_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
+        print("RDF2Vec embeddings dimension: %d"%self.kb_embeddings_dimension)
 
         # generate KG word embeddings
         kg_word_embeddings_matrix = np.zeros((self.num_entities+1, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
@@ -64,6 +65,10 @@ class KBQA:
             # print index, entity_id
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
+        
+        self.kg_concatenated_embeddings_matrix = np.concatenate(self.kg_word_embeddings_matrix, self.kg_relation_embeddings_matrix, axis=0)
+        self.kg_concatenated_embs_dim = self.kg_concatenated_embeddings_matrix.shape[1]
+        print("Concatenated KG embeddings dimension: %d"%self.kg_concatenated_embs_dim)
 
     def load_data(self, dataset, max_answers_per_question=100, show_n_answers_distribution=False):
         '''
@@ -128,12 +133,6 @@ class KBQA:
         '''
         return K.dot(tensors[0], tensors[1])
 
-    def stack_layer(self, tensors):
-        '''
-        Custom layer adding matrix to a tensor
-        '''
-        return K.stack(tensors, axis=-1)
-
     def build_model(self):
         '''
         build layers required for training the NN
@@ -142,27 +141,22 @@ class KBQA:
         # Q - question embedding input
         question_embeddings_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_embedding_input', dtype=K.floatx())
 
-        # K - KG word embeddings
-        kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
-        
-        # S - selected KG entities
-        selected_entities = Lambda(self.dot_layer, name='selected_entities')([question_embeddings_input, kg_word_embeddings])
+        # Q' - question encoder
+        question_encoder_output_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(question_embeddings_input)
+        question_encoder_output_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_output_1)
+        question_encoder_output_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_output_2)
+        question_encoder_output_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_output_3)
+        question_encoder_output = GRU(self.kg_concatenated_embs_dim, name='question_encoder')(question_encoder_output_4)
 
-        # R - KG relation embeddings
-        # kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
+        # K - KG embeddings
+        kg_embeddings = K.constant(self.kg_concatenated_embeddings_matrix.T)
 
-        # # S' - selected KG subgraph
-        # selected_subgraph = Lambda(self.stack_layer, name='selected_subgraph')([selected_entities, kg_relation_embeddings])
-
-        # A - answer decoder
-        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_entities)
-        answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
-        answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
-        answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
-        answer_decoder_output = GRU(self.num_entities, name='answer_decoder_output')(answer_decoder_4)
+        # A - answer output
+        answer_output = Lambda(self.answer_product, name='answer_output')([question_encoder_output, kg_embeddings])
 
         self.model_train = Model(inputs=[question_embeddings_input],   # input question
-                                 outputs=[answer_decoder_output])  # ground-truth target answer set
+                                 outputs=[answer_decoder_output])  # answer entities
+
         print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr=0.001):
