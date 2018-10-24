@@ -45,7 +45,8 @@ GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
 # rdf2vec embeddings 200 dimensions
 KB_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 # subset of the KB embeddings (rdf2vec embeddings 200 dimensions from KB_EMBEDDINGS_PATH) for the entities of the LC-Quad dataset (both train and test split)
-LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_answers_train_1_test_all.txt"
+# LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_answers_train_1_test_all.txt"
+LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_KGlove_PR_Split_lcquad_answers_train_1_test_all.txt"
 
 
 def set_random_seed(seed=912):
@@ -129,7 +130,7 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
 
 class KBQA:
     '''
-    Baseline neural network architecture for KBQA
+    Baseline neural network architecture for KBQA: projecting from word embeddings aggregation directly into the KG answer space
     '''
     def __init__(self, max_seq_len, rnn_units, encoder_depth, decoder_depth, num_hidden_units, bases, l2norm, dropout_rate=0.2, model_dir='./models/'):
         self.max_seq_len = max_seq_len
@@ -196,7 +197,7 @@ class KBQA:
         answer_output = Dropout(self.dropout_rate)(question_encoder_output)
 
         self.model_train = Model(question_input,   # [input question, input KB],
-                                 answer_output)                        # ground-truth target answer
+                                 answer_output)    # ground-truth target answer
         print self.model_train.summary()
 
     def load_data(self, dataset, split):
@@ -249,8 +250,9 @@ class KBQA:
         print("Maximum question length %d"%questions_data.shape[1])
         answers_data = np.asarray(answers_data)
        
-        # print questions_data
-        # print answers_data
+        # check the input data 
+        print questions_data
+        print answers_data
 
         self.dataset = (questions_data, answers_data, answers_indices)
         print("Loaded the dataset")
