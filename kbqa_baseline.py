@@ -267,8 +267,7 @@ class KBQA:
         print('Saved to: '+path)
 
     def load_pretrained_model(self):
-        self.model_train = load_model(os.path.join(self.model_dir, 'model.h5'))
-        # self.build_model_test()
+        self.model_train = load_model(self.model_path)
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
@@ -383,7 +382,7 @@ def load_data(model, dataset_name, mode):
 if __name__ == '__main__':
     set_random_seed()
     # set mode and dataset
-    mode = 'train'
+    mode = 'test'
     dataset_name = 'lcquad'
     # dataset_name = 'lcquad_test'
 
