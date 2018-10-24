@@ -144,7 +144,7 @@ class KBQA:
         question_input = Input(shape=(None,), name='question_input')
 
         # I - positive/negative sample indicator (1/-1)
-        # sample_indicator = Input(shape=(1,), name='sample_indicator')
+        sample_indicator = Input(shape=(1,), name='sample_indicator')
 
         # E' - question words embedding
         word_embedding = self.create_pretrained_embedding_layer()
@@ -159,13 +159,13 @@ class KBQA:
         print("%d samples of max length %d with %d hidden layer dimensions"%(self.num_samples, self.max_seq_len, self.rnn_units))
         
         # answer_output = Dropout(self.dropout_rate)(question_encoder_output)
-        answer_output = question_encoder_output
+        # answer_output = question_encoder_output
 
-        # answer_indicator_output = Concatenate(axis=1)([answer_output, sample_indicator])
+        answer_indicator_output = Concatenate(axis=1)([answer_output, sample_indicator])
         # answer_indicator_output = concatenate([answer_output, sample_indicator], axis=0)
 
-        self.model_train = Model(inputs=[question_input],   # [input question, input KB],
-                                 outputs=[answer_output])                        # ground-truth target answer
+        self.model_train = Model(inputs=[question_input, sample_indicator],   # [input question, input KB],
+                                 outputs=[answer_indicator_output])                        # ground-truth target answer
         print self.model_train.summary()
 
     def load_data(self, dataset, split):
@@ -239,7 +239,7 @@ class KBQA:
         # print questions_data
         # print answers_data
 
-        self.dataset = (questions_data, answers_data, answers_indices)
+        self.dataset = (questions_data, answers_data, answers_indices, samples_indicators)
         print("Loaded the dataset")
 
     def load_pretrained_model(self):
@@ -267,13 +267,13 @@ class KBQA:
 
     def train(self, batch_size, epochs, batch_per_load=10, lr=0.001):
         self.model_train.compile(optimizer=Adam(lr=lr), loss=self.samples_loss())
-        questions_vectors, answers_vectors, answers_indices = self.dataset
+        questions_vectors, answers_vectors, answers_indices, samples_indicators = self.dataset
         
         # early stopping
         checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
         early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
         callbacks_list = [checkpoint, early_stop]
-        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
+        self.model_train.fit([questions_vectors, samples_indicators], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch')
 
     def test(self):
         questions_vectors, answers_vectors, answers_indices, sample_indicators = self.dataset
