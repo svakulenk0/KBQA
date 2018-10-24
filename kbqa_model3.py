@@ -155,7 +155,7 @@ class KBQA:
         selected_subgraph = Lambda(self.stack_layer, name='selected_subgraph')([selected_entities, kg_relation_embeddings])
 
         # A - answer decoder
-        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
+        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_entities)
         answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
         answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
         answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
