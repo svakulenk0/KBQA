@@ -155,7 +155,7 @@ class KBQA:
 
     def train(self, batch_size, epochs, lr=0.001):
         # define loss
-        self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
+        self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
 
         # define callbacks for early stopping
         checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
