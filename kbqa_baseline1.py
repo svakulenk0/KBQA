@@ -16,6 +16,7 @@ Answer - entity vector from KB (entity embeddings index)
 
 
 '''
+import sys
 import os
 import wget
 import zipfile
