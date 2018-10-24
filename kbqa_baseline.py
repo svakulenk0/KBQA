@@ -401,7 +401,7 @@ if __name__ == '__main__':
 
     # define training parameters
     batch_size = 100
-    epochs = 20  # 10
+    epochs = 100  # 10
     learning_rate = 1e-3
 
     # initialize the model
