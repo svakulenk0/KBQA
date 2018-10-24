@@ -218,7 +218,7 @@ class KBQA:
                 answers_indices.append(answer_indices)
                 # if answer_indices:
                 questions_data.append(questions_sequence)
-                # samples_indicators.append(1)
+                samples_indicators.append(1)
 
 
             # else:
