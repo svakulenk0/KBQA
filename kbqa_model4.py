@@ -115,7 +115,7 @@ class KBQA:
         Custom layer producing a dot product
         '''
         # K - KG embeddings
-        kg_embeddings = K.constant(self.kg_concatenated_embeddings_matrix.T)
+        kg_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
 
         return K.dot(question_vector, kg_embeddings)
 
