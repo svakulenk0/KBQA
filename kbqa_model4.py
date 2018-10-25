@@ -196,10 +196,8 @@ class KBQA:
         print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
         # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
-        # load embeddings into matrix
-        embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
         # calculate pairwise distances (via cosine similarity)
-        similarity_matrix = cosine_similarity(predicted_answers_vectors, embeddings_matrix)
+        similarity_matrix = cosine_similarity(predicted_answers_vectors, self.kg_relation_embeddings_matrix)
 
         # print np.argmax(similarity_matrix, axis=1)
         n = 5
