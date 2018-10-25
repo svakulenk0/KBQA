@@ -44,7 +44,7 @@ class KBQA:
 
         # set architecture parameters
         self.rnn_units = rnn_units
-        self.n_words = n_words  # maximum number of words in a question
+        # self.n_words = n_words  # maximum number of words in a question
 
         # self.train_word_embeddings = train_word_embeddings
         # self.train_kg_embeddings = train_kg_embeddings
@@ -137,7 +137,7 @@ class KBQA:
         '''
 
         # Q - question embedding input
-        question_input = Input(shape=(self.n_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
+        question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG entities
         selected_entities = Lambda(self.answer_product_layer, name='selected_entities')(question_input)
