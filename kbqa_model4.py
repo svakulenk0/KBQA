@@ -167,6 +167,44 @@ class KBQA:
 
         self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=1, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
+    def test(self):
+        '''
+        '''
+        self.model_train = load_model(self.model_path)
+        print("Loaded the pre-trained model")
+
+        questions_vectors, answers_vectors, answers_indices = self.dataset
+        print("Testing...")
+        # score = self.model_train.evaluate(questions, answers, verbose=0)
+        # print score
+        print("Questions vectors shape: " + " ".join([str(dim) for dim in questions_vectors.shape]))
+        # print("Answers vectors shape: " + " ".join([str(dim) for dim in answers_vectors.shape]))
+        print("Answers indices shape: %d" % len(answers_indices))
+
+        predicted_answers_vectors = self.model_train.predict(questions_vectors)
+        print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
+        # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
+
+        # load embeddings into matrix
+        embeddings_matrix = self.load_embeddings_from_index(self.entity2vec, self.entity2index)
+        # calculate pairwise distances (via cosine similarity)
+        similarity_matrix = cosine_similarity(predicted_answers_vectors, embeddings_matrix)
+
+        # print np.argmax(similarity_matrix, axis=1)
+        n = 5
+        # indices of the top n predicted answers for every question in the test set
+        top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
+        # print top_ns[:2]
+
+        hits = 0
+        for i, answers in enumerate(answers_indices):
+            # check if the correct and predicted answer sets intersect
+            if set.intersection(set(answers), set(top_ns[i])):
+            # if set.intersection(set([answers[0]]), set(top_ns[i])):
+                hits += 1
+
+        print("Hits in top %d: %d/%d"%(n, hits, len(answers_indices)))
+
 
 def main(mode):
     '''
@@ -174,9 +212,9 @@ def main(mode):
     '''
 
     model = KBQA(rnn_units)
+    
     # train on train split / test on test split
     dataset_split = mode
-
     # load data
     dataset = load_dataset(dataset_name, dataset_split)
     model.load_data(dataset)
@@ -187,6 +225,8 @@ def main(mode):
         model.build_model()
         # train model
         model.train(batch_size, epochs, lr=learning_rate)
+    elif mode == 'test':
+        model.test()
 
 
 if __name__ == '__main__':
