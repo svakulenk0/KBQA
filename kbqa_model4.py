@@ -69,7 +69,7 @@ class KBQA:
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
 
-    def load_data(self, dataset, max_answers_per_question=100):
+    def load_data(self, dataset, max_question_words, max_answers_per_question=100):
         '''
         Encode the dataset: questions and answers
         '''
@@ -102,19 +102,24 @@ class KBQA:
 
             all_answers_indices.append(correct_answers)
 
-        # normalize length
-        question_vectors = np.asarray(pad_sequences(question_vectors, padding='post'), dtype=K.floatx())
+        # normalize input length
+        if split == 'train':
+            # get the max size on the training set
+            question_vectors = np.asarray(pad_sequences(question_vectors, padding='post'), dtype=K.floatx())
+            self.max_question_words = question_vectors.shape[1]
+            print("Maximum number of words in a question sequence: %d"%self.max_question_words)
+        if split == 'test':
+            # pad to the size of the trained model
+            questions_data = np.asarray(pad_sequences(questions_data, padding='post', maxlen=max_question_words))
+            print("Maximum question length %d padded to %d"%(questions_data.shape[1], max_question_words))
+
         answer_vectors = np.asarray(answer_vectors, dtype=K.floatx())
         
         self.num_samples = question_vectors.shape[0]
-        self.max_question_words = question_vectors.shape[1]
+        print("Number of samples: %d"%self.num_samples)
 
         print("Loaded the dataset")
         self.dataset = (question_vectors, answer_vectors, all_answers_indices)
-
-        # show dataset stats
-        print("Number of samples: %d"%self.num_samples)
-        print("Maximum number of words in a question sequence: %d"%self.max_question_words)
 
     def answer_product_layer(self, question_vector):
         '''
@@ -213,7 +218,7 @@ class KBQA:
 
 def main(mode):
     '''
-    Train model by running: python kbqa_model2.py train
+    Train model by running: python kbqa_modeli.py train
     '''
 
     model = KBQA(rnn_units)
@@ -222,7 +227,7 @@ def main(mode):
     dataset_split = mode
     # load data
     dataset = load_dataset(dataset_name, dataset_split)
-    model.load_data(dataset)
+    model.load_data(dataset, max_question_words)
 
     # mode switch
     if mode == 'train':
