@@ -69,11 +69,12 @@ class KBQA:
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
 
-    def load_data(self, dataset, max_question_words, max_answers_per_question=100):
+    def load_data(self, mode, max_question_words=None, max_answers_per_question=100):
         '''
         Encode the dataset: questions and answers
         '''
-        questions, answers = dataset
+        # load data
+        questions, answers = load_dataset(dataset_name, dataset_split=mode)
         num_samples = len(questions)
         assert num_samples == len(answers)
 
@@ -103,15 +104,15 @@ class KBQA:
             all_answers_indices.append(correct_answers)
 
         # normalize input length
-        if split == 'train':
+        if max_question_words:
+            # pad to the size of the trained model
+            questions_data = np.asarray(pad_sequences(questions_data, padding='post', maxlen=max_question_words))
+            print("Maximum question length %d padded to %d"%(questions_data.shape[1], max_question_words))
+        else:
             # get the max size on the training set
             question_vectors = np.asarray(pad_sequences(question_vectors, padding='post'), dtype=K.floatx())
             self.max_question_words = question_vectors.shape[1]
             print("Maximum number of words in a question sequence: %d"%self.max_question_words)
-        if split == 'test':
-            # pad to the size of the trained model
-            questions_data = np.asarray(pad_sequences(questions_data, padding='post', maxlen=max_question_words))
-            print("Maximum question length %d padded to %d"%(questions_data.shape[1], max_question_words))
 
         answer_vectors = np.asarray(answer_vectors, dtype=K.floatx())
         
@@ -222,20 +223,17 @@ def main(mode):
     '''
 
     model = KBQA(rnn_units)
-    
-    # train on train split / test on test split
-    dataset_split = mode
-    # load data
-    dataset = load_dataset(dataset_name, dataset_split)
-    model.load_data(dataset, max_question_words)
 
     # mode switch
     if mode == 'train':
+        model.load_data(mode)
         # build model
         model.build_model()
         # train model
         model.train(batch_size, epochs, lr=learning_rate)
+    
     elif mode == 'test':
+        model.load_data(mode, max_question_words)
         model.test()
 
 
