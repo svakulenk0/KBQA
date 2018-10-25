@@ -126,7 +126,7 @@ class KBQA:
         print("Loaded the dataset")
         self.dataset = (question_vectors, answer_vectors, all_answers_indices)
 
-    def answer_product_layer(self, question_vector):
+    def entity_linking_layer(self, question_vector):
         '''
         Custom layer producing a dot product
         '''
@@ -135,11 +135,14 @@ class KBQA:
 
         return K.dot(question_vector, kg_embeddings)
 
-    def stack_layer(self, tensors):
+    def add_relations_layer(self, selected_entities):
         '''
         Custom layer adding matrix to a tensor
         '''
-        return K.stack(tensors, axis=-1)
+        # R - KG relation embeddings
+        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
+
+        return K.stack([selected_entities, kg_relation_embeddings], axis=-1)
 
     def build_model(self):
         '''
@@ -150,16 +153,13 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG entities
-        selected_entities = Lambda(self.answer_product_layer, name='selected_entities')(question_input)
+        selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
 
-        # R - KG relation embeddings
-        # kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
-
-        # # S' - selected KG subgraph
-        # selected_subgraph = Lambda(self.stack_layer, name='selected_subgraph')([selected_entities, kg_relation_embeddings])
+        # S' - selected KG subgraph
+        selected_subgraph = Lambda(self.add_relations_layer, name='selected_subgraph')(selected_entities)
 
         # A - answer decoder
-        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_entities)
+        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
         answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
         answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
         answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
