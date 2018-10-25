@@ -37,15 +37,17 @@ class KBQA:
     Second neural network architecture for KBQA: projecting from word and KG embeddings aggregation into the KG answer space
     '''
 
-    def __init__(self, rnn_units, model_path='./models/model.best.hdf5'):
+    def __init__(self, rnn_units, n_words, model_path='./models/model.best.hdf5'):
         # define path to store pre-trained model
         makedirs('./models')
         self.model_path = model_path
 
         # set architecture parameters
         self.rnn_units = rnn_units
+        self.n_words = n_words  # maximum number of words in a question
+
         # self.train_word_embeddings = train_word_embeddings
-        self.train_kg_embeddings = train_kg_embeddings
+        # self.train_kg_embeddings = train_kg_embeddings
 
         # load word embeddings model
         self.wordToVec = load_fasttext()
@@ -135,7 +137,7 @@ class KBQA:
         '''
 
         # Q - question embedding input
-        question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
+        question_input = Input(shape=(self.n_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG entities
         selected_entities = Lambda(self.answer_product_layer, name='selected_entities')(question_input)
@@ -164,7 +166,7 @@ class KBQA:
         # define callbacks for early stopping
         checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
         early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
-        callbacks_list = [early_stop]
+        callbacks_list = [checkpoint, early_stop]
         
         question_vectors, answer_vectors, all_answers_indices = self.dataset
 
@@ -214,7 +216,7 @@ def main(mode):
     Train model by running: python kbqa_model2.py train
     '''
 
-    model = KBQA(rnn_units)
+    model = KBQA(rnn_units, n_words)
     
     # train on train split / test on test split
     dataset_split = mode
