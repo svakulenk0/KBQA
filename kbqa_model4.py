@@ -83,17 +83,13 @@ class KBQA:
 
         # iterate over QA samples
         for i in range(num_samples):
-            question_word_vectors = 
-
-            # encode answer
-            sample_answer = False
             # evaluating against all correct answers at test time
             correct_answers = []
+            # train on one answer only
+            sample_answer = False
             for answer in answers[i]:
                 answer = answer.encode('utf-8')
                 if answer in self.entity2vec.keys():
-                    
-                    # train on one answer only
                     if not sample_answer:
                         answer_vectors.append(self.entityToVec[first_answer])
                         # encode words in the question using FastText
