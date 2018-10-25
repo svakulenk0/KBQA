@@ -89,9 +89,9 @@ class KBQA:
             sample_answer = False
             for answer in answers[i]:
                 answer = answer.encode('utf-8')
-                if answer in self.entity2vec.keys():
+                if answer in self.entities:
                     if not sample_answer:
-                        answer_vectors.append(self.entityToVec[first_answer])
+                        answer_vectors.append(self.entityToVec[answer])
                         # encode words in the question using FastText
                         question_vectors.append([self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])])
                         sample_answer = True
