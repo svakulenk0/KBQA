@@ -165,7 +165,7 @@ class KBQA:
         # prepare QA dataset
         questions_vectors, answers_vectors = self.dataset
 
-        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=1, validation_split=0.3, shuffle='batch', batch_size=batch_size)
+        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
     def test(self):
         '''
