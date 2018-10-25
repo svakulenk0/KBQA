@@ -16,6 +16,8 @@ Answer - entity from KB (entity index)
 import sys
 from collections import Counter
 
+from sklearn.metrics.pairwise import cosine_similarity
+
 from keras.preprocessing.text import text_to_word_sequence
 from keras.preprocessing.sequence import pad_sequences
 
