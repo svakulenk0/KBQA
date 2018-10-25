@@ -37,7 +37,7 @@ class KBQA:
     Second neural network architecture for KBQA: projecting from word and KG embeddings aggregation into the KG answer space
     '''
 
-    def __init__(self, rnn_units, n_words, model_path='./models/model.best.hdf5'):
+    def __init__(self, rnn_units, model_path='./models/model.best.hdf5'):
         # define path to store pre-trained model
         makedirs('./models')
         self.model_path = model_path
