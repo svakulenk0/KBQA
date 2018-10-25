@@ -10,8 +10,10 @@ Created on Oct 18, 2018
 dataset_name = 'lcquad'
 
 # architecture parameters
-# n_words = 24  # maximum number of words in a question
 rnn_units = 500  # dimension of the GRUs output layer for the hidden question representation
+
+# dataset parameters
+max_question_words = 24  # maximum number of words in a question
 
 # training parameters
 batch_size = 32
