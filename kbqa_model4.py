@@ -106,8 +106,8 @@ class KBQA:
         # normalize input length
         if max_question_words:
             # pad to the size of the trained model
-            questions_data = np.asarray(pad_sequences(questions_data, padding='post', maxlen=max_question_words))
-            print("Maximum question length %d padded to %d"%(questions_data.shape[1], max_question_words))
+            question_vectors = np.asarray(pad_sequences(question_vectors, padding='post', maxlen=max_question_words))
+            print("Maximum question length %d padded to %d"%(question_vectors.shape[1], max_question_words))
         else:
             # get the max size on the training set
             question_vectors = np.asarray(pad_sequences(question_vectors, padding='post'), dtype=K.floatx())
