@@ -76,39 +76,47 @@ class KBQA:
         assert num_samples == len(answers)
 
         # encode questions with word vocabulary and answers with entity vocabulary
-        questions_data = []
-        answers_data = []
+        question_vectors = []
+        answer_vectors = []
+        # evaluating against all correct answers at test time
+        all_answers_indices = []
 
-        # iterate over samples
+        # iterate over QA samples
         for i in range(num_samples):
-            # encode words in the question using FastText
-            question_word_vectors = [self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])]
+            question_word_vectors = 
 
-            answers_to_question = answers[i]
-            first_answer = answers_to_question[0].encode('utf-8')
+            # encode answer
+            sample_answer = False
+            # evaluating against all correct answers at test time
+            correct_answers = []
+            for answer in answers[i]:
+                answer = answer.encode('utf-8')
+                if answer in self.entity2vec.keys():
+                    
+                    # train on one answer only
+                    if not sample_answer:
+                        answer_vectors.append(self.entityToVec[first_answer])
+                        # encode words in the question using FastText
+                        question_vectors.append([self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])])
+                        sample_answer = True
 
-            if first_answer in self.entities:
-                questions_data.append(question_word_vectors)
-                answers_data.append(self.entityToVec[first_answer])
+                    correct_answers.append(self.entityToIndex[answer])
+
+            all_answers_indices.append(correct_answers)
 
         # normalize length
-        questions_data = np.asarray(pad_sequences(questions_data, padding='post'), dtype=K.floatx())
-        answers_data = np.asarray(answers_data, dtype=K.floatx())
+        question_vectors = np.asarray(pad_sequences(question_vectors, padding='post'), dtype=K.floatx())
+        answer_vectors = np.asarray(answer_vectors, dtype=K.floatx())
         
-        self.num_samples = questions_data.shape[0]
-        self.max_question_words = questions_data.shape[1]
+        self.num_samples = question_vectors.shape[0]
+        self.max_question_words = question_vectors.shape[1]
 
         print("Loaded the dataset")
-        self.dataset = questions_data, answers_data
+        self.dataset = (question_vectors, answer_vectors, all_answers_indices)
 
         # show dataset stats
         print("Number of samples: %d"%self.num_samples)
-        # print(questions_data.shape)
         print("Maximum number of words in a question sequence: %d"%self.max_question_words)
-
-        # check the input data 
-        # print questions_data
-        # print answers_data
 
     def answer_product_layer(self, question_vector):
         '''
@@ -162,10 +170,9 @@ class KBQA:
         early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
         callbacks_list = [early_stop]
         
-        # prepare QA dataset
-        questions_vectors, answers_vectors = self.dataset
+        question_vectors, answer_vectors, all_answers_indices = self.dataset
 
-        self.model_train.fit([questions_vectors], [answers_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
+        self.model_train.fit([question_vectors], [answer_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
     def test(self):
         '''
@@ -173,15 +180,15 @@ class KBQA:
         self.model_train = load_model(self.model_path)
         print("Loaded the pre-trained model")
 
-        questions_vectors, answers_vectors, answers_indices = self.dataset
+        question_vectors, answer_vectors, all_answers_indices = self.dataset
         print("Testing...")
         # score = self.model_train.evaluate(questions, answers, verbose=0)
         # print score
-        print("Questions vectors shape: " + " ".join([str(dim) for dim in questions_vectors.shape]))
+        print("Questions vectors shape: " + " ".join([str(dim) for dim in question_vectors.shape]))
         # print("Answers vectors shape: " + " ".join([str(dim) for dim in answers_vectors.shape]))
-        print("Answers indices shape: %d" % len(answers_indices))
+        print("Answers indices shape: %d" % len(all_answers_indices))
 
-        predicted_answers_vectors = self.model_train.predict(questions_vectors)
+        predicted_answers_vectors = self.model_train.predict(question_vectors)
         print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
         # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
@@ -197,13 +204,13 @@ class KBQA:
         # print top_ns[:2]
 
         hits = 0
-        for i, answers in enumerate(answers_indices):
+        for i, answers in enumerate(all_answers_indices):
             # check if the correct and predicted answer sets intersect
             if set.intersection(set(answers), set(top_ns[i])):
             # if set.intersection(set([answers[0]]), set(top_ns[i])):
                 hits += 1
 
-        print("Hits in top %d: %d/%d"%(n, hits, len(answers_indices)))
+        print("Hits in top %d: %d/%d"%(n, hits, len(all_answers_indices)))
 
 
 def main(mode):
