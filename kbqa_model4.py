@@ -175,7 +175,7 @@ class KBQA:
     def test(self):
         '''
         '''
-        self.model_train = load_model(self.model_path)
+        self.model_train = load_model(self.model_path, custom_objects={'selected_entities': self.answer_product_layer})
         print("Loaded the pre-trained model")
 
         question_vectors, answer_vectors, all_answers_indices = self.dataset
