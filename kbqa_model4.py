@@ -103,7 +103,9 @@ class KBQA:
 
                     correct_answers.append(self.entityToIndex[answer])
 
-            all_answers_indices.append(correct_answers)
+            # skip questions that have no answer embeddings
+            if correct_answers:
+                all_answers_indices.append(correct_answers)
 
         # normalize input length
         if max_question_words:
