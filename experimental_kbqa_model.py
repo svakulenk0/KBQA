@@ -158,12 +158,8 @@ class KBQA:
         '''
         Custom layer adding matrix to a tensor
         '''
-        # R - KG relation embeddings
-        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix.T)
-        kg_projection = K.dot(question_vector, kg_relation_embeddings)
-        answer_index = K.argmax(kg_projection, axis=1)
-        answer_vector = K.gather(K.constant(self.kg_relation_embeddings_matrix), answer_index)
-        return answer_vector
+        kg_projection = K.dot(question_vector, K.constant(self.kg_relation_embeddings_matrix.T))
+        return K.dot(kg_projection, K.constant(self.kg_relation_embeddings_matrix))
 
     def build_model(self):
         '''
