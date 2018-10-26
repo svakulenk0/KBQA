@@ -145,16 +145,18 @@ class KBQA:
         Custom layer producing a dot product
         '''
         # K - KG embeddings
-        kg_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
+        kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
+        # R - KG relation embeddings
+        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
+        selected_entities = K.dot(question_vector, kg_word_embeddings)
+        return K.dot(selected_entities, kg_relation_embeddings)
 
-        return K.dot(question_vector, kg_embeddings)
-
-    def kg_relations_layer(self, selected_entities):
+    def kg_projection_layer(self, selected_entities):
         '''
         Custom layer adding matrix to a tensor
         '''
         # R - KG relation embeddings
-        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
+        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix.T)
 
         return K.dot(selected_entities, kg_relation_embeddings)
 
@@ -166,11 +168,8 @@ class KBQA:
         # Q - question embedding input
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
-        # S - selected KG entities
-        selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
-
-        # S' - selected KG subgraph
-        selected_subgraph = Lambda(self.kg_relations_layer, name='selected_subgraph')(selected_entities)
+        # S - selected KG subgraph
+        selected_subgraph = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_input)
 
         # Q' - question encoder
         question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(selected_subgraph)
@@ -179,8 +178,8 @@ class KBQA:
         question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
         question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder_output')(question_encoder_4)
 
-        # S' - selected KG subgraph
-        answer_output = Lambda(self.kg_relations_layer, name='selected_subgraph')(question_encoder_output)
+        # A - answer projection
+        answer_output = Lambda(self.kg_projection_layer, name='kg_projection_layer')(question_encoder_output)
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
@@ -203,7 +202,7 @@ class KBQA:
         '''
         '''
         self.model_train = load_model(self.model_path, custom_objects={'entity_linking_layer': self.entity_linking_layer,
-                                                                       'kg_relations_layer': self.kg_relations_layer})
+                                                                       'kg_projection_layer': self.kg_projection_layer})
         print("Loaded the pre-trained model")
 
         question_vectors, answer_vectors, all_answers_indices = self.dataset
