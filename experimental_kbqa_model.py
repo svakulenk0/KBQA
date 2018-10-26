@@ -154,14 +154,14 @@ class KBQA:
 
         return K.dot(selected_entities, kg_relation_embeddings)
 
-    def kg_projection_layer(self, selected_entities):
+    def answer_selection_layer(self, question_vector):
         '''
         Custom layer adding matrix to a tensor
         '''
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix.T)
-
-        return K.dot(selected_entities, kg_relation_embeddings)
+        kg_projection = K.dot(question_vector, kg_relation_embeddings)
+        return K.max(kg_projection, axis=1)
 
     def build_model(self):
         '''
@@ -182,11 +182,8 @@ class KBQA:
         question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(selected_subgraph)
 
         # A - answer projection
-        kg_projection = Lambda(self.kg_projection_layer, name='kg_projection')(question_encoder_output)
-        # pick one entity with the max probability
-        # answer_output = 
-        # Dense(self.num_entities, activation='softmax')(kg_projection)
-        answer_output = GRU(self.kb_embeddings_dim, name='answer_output')(kg_projection)
+        answer_selection = Lambda(self.answer_selection_layer, name='answer_selection')(question_encoder_output)
+        # embed
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
