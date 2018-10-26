@@ -205,8 +205,8 @@ class KBQA:
 
 
         # define callbacks for early stopping
-        checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-        early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
+        checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='max')
+        early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='max') 
         callbacks_list = [checkpoint, early_stop]
         
         question_vectors, answer_vectors, all_answers_indices = self.dataset
