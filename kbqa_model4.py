@@ -39,13 +39,14 @@ class KBQA:
     Second neural network architecture for KBQA: projecting from word and KG embeddings aggregation into the KG answer space
     '''
 
-    def __init__(self, rnn_units, model_path='./models/model.best.hdf5'):
+    def __init__(self, rnn_units, output_vector, model_path='./models/model.best.hdf5'):
         # define path to store pre-trained model
         makedirs('./models')
         self.model_path = model_path
 
         # set architecture parameters
         self.rnn_units = rnn_units
+        self.output_vector = output_vector
         # self.n_words = n_words  # maximum number of words in a question
 
         # self.train_word_embeddings = train_word_embeddings
@@ -82,23 +83,28 @@ class KBQA:
         questions, answers = load_dataset(dataset_name, dataset_split=mode)
         num_samples = len(questions)
         assert num_samples == len(answers)
+        print('lcquad with %d %s samples' % (mode, questions))
 
         # encode questions with word vocabulary and answers with entity vocabulary
         question_vectors = []
         answer_vectors = []
+
         # evaluating against all correct answers at test time
         all_answers_indices = []
 
         # iterate over QA samples
         for i in range(num_samples):
+
             # evaluating against all correct answers at test time
             correct_answers = []
             # train on one answer only
             sample_answer = False
+            
             for answer in answers[i]:
                 answer = answer.encode('utf-8')
+                # consider only samples where we can embed the answer
                 if answer in self.entities:
-                    if not sample_answer:
+                    if output_vector == 'embedding' and not sample_answer:
                         answer_vectors.append(self.entityToVec[answer])
                         # encode words in the question using FastText
                         question_vectors.append([self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])])
@@ -110,13 +116,18 @@ class KBQA:
             if correct_answers:
                 all_answers_indices.append(correct_answers)
 
+                if output_vector == 'distribution':
+                    answer_vector = np.zeros(self.num_entities)
+                    answer_vector[correct_answers] = 1
+                    answer_vectors.append(answer_vector)
+
         # normalize input length
         if max_question_words:
-            # pad to the size of the trained model
+            # at test time: pad to the size of the trained model
             question_vectors = np.asarray(pad_sequences(question_vectors, padding='post', maxlen=max_question_words))
             print("Maximum question length %d padded to %d"%(question_vectors.shape[1], max_question_words))
         else:
-            # get the max size on the training set
+            # at training time: get the max size for this training set
             question_vectors = np.asarray(pad_sequences(question_vectors, padding='post'), dtype=K.floatx())
             self.max_question_words = question_vectors.shape[1]
             print("Maximum number of words in a question sequence: %d"%self.max_question_words)
@@ -159,14 +170,17 @@ class KBQA:
         selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
 
         # S' - selected KG subgraph
-        # selected_subgraph = Lambda(self.kg_relations_layer, name='selected_subgraph')(selected_entities)
+        selected_subgraph = Lambda(self.kg_relations_layer, name='selected_subgraph')(selected_entities)
 
-        # A - answer decoder
-        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_entities)
-        answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
-        answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
-        answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
-        answer_output = GRU(self.kb_embeddings_dimension, name='answer_output')(answer_decoder_4)
+        # Q' - question encoder
+        question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(selected_subgraph)
+        question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
+        question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
+        question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
+        question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder_output')(question_encoder_4)
+
+        # S' - selected KG subgraph
+        answer_output = Lambda(self.kg_relations_layer, name='selected_subgraph')(question_encoder_output)
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
@@ -228,7 +242,7 @@ def main(mode):
     Train model by running: python kbqa_modeli.py train
     '''
 
-    model = KBQA(rnn_units)
+    model = KBQA(rnn_units, output_vector)
 
     # mode switch
     if mode == 'train':
