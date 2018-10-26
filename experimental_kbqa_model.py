@@ -261,13 +261,13 @@ def main(mode):
     model.load_data('train')
 
     # mode switch
-    if 'train' in mode.split('&'):
+    if 'train' in mode.split('+'):
         # build model
         model.build_model()
         # train model
         model.train(batch_size, epochs, lr=learning_rate)
     
-    if 'test' in mode.split('&'):
+    if 'test' in mode.split('+'):
         # test on train data first
         model.test()
 
