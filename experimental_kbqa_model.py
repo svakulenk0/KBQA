@@ -186,8 +186,8 @@ class KBQA:
         # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
 
         # A - answer output
-        # answer_output = question_encoder_output
-        answer_output = kg_projection
+        answer_output = question_encoder_output
+        # answer_output = kg_projection
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
