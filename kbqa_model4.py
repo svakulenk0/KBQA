@@ -140,10 +140,12 @@ class KBQA:
         '''
         # K - KG embeddings
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
+        return K.dot(question_vector, kg_word_embeddings)
+
         # R - KG relation embeddings
-        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
-        selected_entities = K.dot(question_vector, kg_word_embeddings)
-        return K.dot(selected_entities, kg_relation_embeddings)
+        # kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
+        # selected_entities = K.dot(question_vector, kg_word_embeddings)
+        # return K.dot(selected_entities, kg_relation_embeddings)
 
     def kg_projection_layer(self, selected_entities):
         '''
@@ -163,17 +165,17 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG subgraph
-        selected_subgraph = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_input)
+        answer_output = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_input)
 
         # Q' - question encoder
-        question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(selected_subgraph)
-        question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
-        question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
-        question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
-        question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder_output')(question_encoder_4)
+        # question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(selected_subgraph)
+        # question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
+        # question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
+        # question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
+        # question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder_output')(question_encoder_4)
 
         # A - answer projection
-        answer_output = Lambda(self.kg_projection_layer, name='kg_projection_layer')(question_encoder_output)
+        # answer_output = Lambda(self.kg_projection_layer, name='kg_projection_layer')(question_encoder_output)
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
