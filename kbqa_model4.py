@@ -135,7 +135,7 @@ class KBQA:
 
         return K.dot(question_vector, kg_embeddings)
 
-    def kg_embedding_layer(self, selected_entities):
+    def kg_relations_layer(self, selected_entities):
         '''
         Custom layer adding matrix to a tensor
         '''
@@ -153,13 +153,13 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG entities
-        selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
+        # selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
 
         # S' - selected KG subgraph
-        selected_subgraph = Lambda(self.kg_embedding_layer, name='selected_subgraph')(selected_entities)
+        # selected_subgraph = Lambda(self.kg_relations_layer, name='selected_subgraph')(selected_entities)
 
         # A - answer decoder
-        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
+        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(question_input)
         answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
         answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
         answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
@@ -186,7 +186,7 @@ class KBQA:
         '''
         '''
         self.model_train = load_model(self.model_path, custom_objects={'entity_linking_layer': self.entity_linking_layer,
-                                                                       'kg_embedding_layer': self.kg_embedding_layer})
+                                                                       'kg_relations_layer': self.kg_relations_layer})
         print("Loaded the pre-trained model")
 
         question_vectors, answer_vectors, all_answers_indices = self.dataset
