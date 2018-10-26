@@ -269,7 +269,7 @@ def main(mode):
         model.train(batch_size, epochs, lr=learning_rate)
     
     if 'test' in mode.split('/'):
-        # test on train data first
+        model.load_data('test')
         model.test()
 
 
