@@ -159,11 +159,11 @@ class KBQA:
         selected_subgraph = Lambda(self.kg_embedding_layer, name='selected_subgraph')(selected_entities)
 
         # A - answer decoder
-        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
-        answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
-        answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
-        answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
-        answer_output = GRU(self.kb_embeddings_dimension, name='answer_output')(answer_decoder_4)
+        # answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
+        # answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
+        # answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
+        # answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
+        answer_output = GRU(self.kb_embeddings_dimension, name='answer_output')(selected_subgraph)
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
@@ -174,8 +174,8 @@ class KBQA:
         self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
 
         # define callbacks for early stopping
-        checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='max')
-        early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='max') 
+        checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+        early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
         callbacks_list = [checkpoint, early_stop]
         
         question_vectors, answer_vectors, all_answers_indices = self.dataset
