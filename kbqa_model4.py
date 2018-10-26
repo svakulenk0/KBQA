@@ -21,6 +21,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from keras.preprocessing.text import text_to_word_sequence
 from keras.preprocessing.sequence import pad_sequences
 
+
 from keras.models import Model
 from keras.models import load_model
 
@@ -28,7 +29,9 @@ from keras.layers import Input, GRU, Dropout, Embedding, Lambda
 from keras.callbacks import  ModelCheckpoint, EarlyStopping
 from keras.regularizers import l2
 from keras.optimizers import Adam
+
 from keras import backend as K
+from keras.utils.np_utils import to_categorical
 
 from utils import *
 from kbqa_settings import *
@@ -88,26 +91,16 @@ class KBQA:
         # encode questions with word vocabulary and answers with entity vocabulary
         question_vectors = []
         answer_vectors = []
-
         # evaluating against all correct answers at test time
         all_answers_indices = []
-
         # iterate over QA samples
         for i in range(num_samples):
-
             # evaluating against all correct answers at test time
             correct_answers = []
-            sample_answer = False
-            
             for answer in answers[i]:
                 answer = answer.encode('utf-8')
                 # consider only samples where we can embed the answer
                 if answer in self.entities:
-                    # train on one answer embedding only
-                    if output_vector == 'embedding' and not sample_answer:
-                        answer_vectors.append(self.entityToVec[answer])
-                        sample_answer = True
-
                     correct_answers.append(self.entityToIndex[answer])
 
             # skip questions that have no answer embeddings
@@ -115,11 +108,6 @@ class KBQA:
                 # encode words in the question using FastText
                 question_vectors.append([self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])])
                 all_answers_indices.append(correct_answers)
-
-                if output_vector == 'distribution':
-                    answer_vector = np.zeros(self.num_entities)
-                    answer_vector[correct_answers] = 1
-                    answer_vectors.append(answer_vector)
 
         # normalize input length
         if max_question_words:
@@ -132,7 +120,13 @@ class KBQA:
             self.max_question_words = question_vectors.shape[1]
             print("Maximum number of words in a question sequence: %d"%self.max_question_words)
 
-        answer_vectors = np.asarray(answer_vectors, dtype=K.floatx())
+        # train on the first available answer only
+        first_answers = [answers[0] for answers in all_answers_indices]
+        if output_vector == 'distribution':
+            answer_vectors = to_categorical(first_answers, num_classes=self.num_entities)
+        elif output_vector == 'embedding':
+            answer_vectors = [self.entityToVec[answer] for answer in first_answers]
+            answer_vectors = np.asarray(answer_vectors, dtype=K.floatx())
         
         self.num_samples = question_vectors.shape[0]
         print("Number of samples: %d"%self.num_samples)
