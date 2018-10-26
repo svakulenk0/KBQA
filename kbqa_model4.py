@@ -83,7 +83,7 @@ class KBQA:
         questions, answers = load_dataset(dataset_name, dataset_split=mode)
         num_samples = len(questions)
         assert num_samples == len(answers)
-        print('lcquad with %d %s samples' % (mode, questions))
+        print('lcquad with %d %s samples' % (num_samples, mode))
 
         # encode questions with word vocabulary and answers with entity vocabulary
         question_vectors = []
