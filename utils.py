@@ -199,7 +199,7 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
             entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
             try:
                 embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-                entity2vec[entity] = embedding_vector
+                entity2vec[idx] = embedding_vector
 
                 entity2index[entity] = idx
                 index2entity[idx] = entity
