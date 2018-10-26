@@ -84,12 +84,12 @@ class KBQA:
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
 
-    def load_data(self, mode, dataset_split, max_question_words=None, max_answers_per_question=100):
+    def load_data(self, mode, max_question_words=None, max_answers_per_question=100):
         '''
         Encode the dataset: questions and answers
         '''
         # load data
-        questions, answers = load_dataset(dataset_name, dataset_split)
+        questions, answers = load_dataset(dataset_name, mode)
         num_samples = len(questions)
         assert num_samples == len(answers)
         print('lcquad with %d %s samples' % (num_samples, mode))
