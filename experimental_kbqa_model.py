@@ -259,10 +259,10 @@ def main(mode):
 
     model = KBQA(rnn_units, output_vector)
 
-    model.load_data('train')
-
     # mode switch
     if 'train' in mode.split('/'):
+        model.load_data('train')
+
         # build model
         model.build_model()
         # train model
