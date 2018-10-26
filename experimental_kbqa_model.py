@@ -182,7 +182,7 @@ class KBQA:
         question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(selected_subgraph)
 
         # A - answer projection
-        answer_distribution = Lambda(self.kg_projection_layer, name='answer_distribution')(question_encoder_output)
+        answer_output = Lambda(self.kg_projection_layer, name='answer_distribution')(question_encoder_output)
         # pick one entity with the max probability
         # answer_output
         # answer_output = GRU(self.kb_embeddings_dim, name='answer_output')(selected_subgraph)
