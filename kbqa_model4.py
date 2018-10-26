@@ -68,7 +68,8 @@ class KBQA:
         kg_word_embeddings_matrix = np.zeros((self.num_entities, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
         for entity_id, index in self.entityToIndex.items():
             # print index, entity_id
-            entity = entity_id.split('/')[-1].split('_(')[0]
+            # entity = entity_id.split('/')[-1].split('_(')[0]
+            entity = entity_id.split('/')[-1]
             # print entity
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
