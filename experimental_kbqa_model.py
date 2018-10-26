@@ -182,7 +182,7 @@ class KBQA:
         question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(selected_subgraph)
 
         # A - answer projection
-        answer_selection = Lambda(self.answer_selection_layer, name='answer_selection')(question_encoder_output)
+        answer_output = Lambda(self.answer_selection_layer, name='answer_selection')(question_encoder_output)
         # embed
 
         self.model_train = Model(inputs=[question_input],   # input question
