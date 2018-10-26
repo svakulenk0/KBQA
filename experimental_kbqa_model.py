@@ -167,24 +167,27 @@ class KBQA:
         '''
 
         # Q - question embedding input
-        question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
+        question_words_embeddings = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG subgraph
-        selected_subgraph = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_input)
+        # selected_subgraph = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_input)
+
+        question_input = question_words_embeddings
+        # question_input = selected_subgraph
 
         # Q' - question encoder
         # question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(selected_subgraph)
         # question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
         # question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
         # question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
-        # question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(selected_subgraph)
-        question_encoder_output = GRU(500, name='question_encoder_output')(selected_subgraph)
+        question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(question_input)
 
         # K - KG projection
-        kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
+        # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
 
         # A - answer output
-        answer_output = kg_projection
+        answer_output = question_encoder_output
+        # answer_output = kg_projection
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
