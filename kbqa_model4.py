@@ -62,7 +62,7 @@ class KBQA:
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
         self.kg_relation_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
-        print("RDF2Vec embeddings dimension: %d"%self.kb_embeddings_dimension)
+        print("KG embeddings dimension: %d"%self.kb_embeddings_dimension)
 
         # generate KG word embeddings
         kg_word_embeddings_matrix = np.zeros((self.num_entities+1, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
@@ -156,10 +156,10 @@ class KBQA:
         selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
 
         # S' - selected KG subgraph
-        # selected_subgraph = Lambda(self.kg_embedding_layer, name='selected_subgraph')(selected_entities)
+        selected_subgraph = Lambda(self.kg_embedding_layer, name='selected_subgraph')(selected_entities)
 
         # A - answer decoder
-        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_entities)
+        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
         answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
         answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
         answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
