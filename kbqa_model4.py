@@ -165,7 +165,7 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG subgraph
-        answer_output = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_input)
+        selected_subgraph = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_input)
 
         # Q' - question encoder
         # question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(selected_subgraph)
@@ -175,7 +175,9 @@ class KBQA:
         # question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder_output')(question_encoder_4)
 
         # A - answer projection
-        # answer_output = Lambda(self.kg_projection_layer, name='kg_projection_layer')(question_encoder_output)
+        # answer_output = Lambda(self.kg_projection_layer, name='answer_output')(question_encoder_output)
+        answer_output = GRU(self.num_entities, name='answer_output')(selected_subgraph)
+
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
