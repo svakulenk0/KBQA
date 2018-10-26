@@ -146,11 +146,11 @@ class KBQA:
         '''
         # K - KG embeddings
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
-        # return K.dot(question_vector, kg_word_embeddings)
-
+        selected_entities = K.dot(question_vector, kg_word_embeddings)
+        return selected_entities
+        
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
-        selected_entities = K.dot(question_vector, kg_word_embeddings)
 
         return K.dot(selected_entities, kg_relation_embeddings)
 
