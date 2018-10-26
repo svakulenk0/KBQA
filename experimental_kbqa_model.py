@@ -197,7 +197,7 @@ class KBQA:
         # define loss
        
         if self.output_vector == 'embedding':
-            self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
+            self.model_train.compile(optimizer='sgd', loss='cosine_proximity')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss=my_loss())
 
         if self.output_vector == 'one-hot':
