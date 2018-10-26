@@ -185,7 +185,8 @@ class KBQA:
     def test(self):
         '''
         '''
-        self.model_train = load_model(self.model_path, custom_objects={'answer_product_layer': self.answer_product_layer})
+        self.model_train = load_model(self.model_path, custom_objects={'entity_linking_layer': self.entity_linking_layer,
+                                                                       'kg_embedding_layer': self.kg_embedding_layer})
         print("Loaded the pre-trained model")
 
         question_vectors, answer_vectors, all_answers_indices = self.dataset
