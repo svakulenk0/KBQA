@@ -142,7 +142,7 @@ class KBQA:
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
 
-        return K.stack([selected_entities, kg_relation_embeddings], axis=-1)
+        return K.concatenate([K.expand_dims(selected_entities), kg_relation_embeddings], axis=-1)
 
     def build_model(self):
         '''
