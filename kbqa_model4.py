@@ -135,14 +135,14 @@ class KBQA:
 
         return K.dot(question_vector, kg_embeddings)
 
-    def add_relations_layer(self, selected_entities):
+    def kg_embedding_layer(self, selected_entities):
         '''
         Custom layer adding matrix to a tensor
         '''
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
 
-        return K.concatenate([selected_entities, K.expand_dims(kg_relation_embeddings)], axis=-1)
+        return K.dot(selected_entities, kg_relation_embeddings)
 
     def build_model(self):
         '''
