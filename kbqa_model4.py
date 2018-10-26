@@ -97,23 +97,23 @@ class KBQA:
 
             # evaluating against all correct answers at test time
             correct_answers = []
-            # train on one answer only
             sample_answer = False
             
             for answer in answers[i]:
                 answer = answer.encode('utf-8')
                 # consider only samples where we can embed the answer
                 if answer in self.entities:
+                    # train on one answer embedding only
                     if output_vector == 'embedding' and not sample_answer:
                         answer_vectors.append(self.entityToVec[answer])
-                        # encode words in the question using FastText
-                        question_vectors.append([self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])])
                         sample_answer = True
 
                     correct_answers.append(self.entityToIndex[answer])
 
             # skip questions that have no answer embeddings
             if correct_answers:
+                # encode words in the question using FastText
+                question_vectors.append([self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])])
                 all_answers_indices.append(correct_answers)
 
                 if output_vector == 'distribution':
