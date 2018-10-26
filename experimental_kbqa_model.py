@@ -179,11 +179,11 @@ class KBQA:
         # question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
         # question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
         # question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
-        # question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(question_encoder_4)
+        question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(selected_subgraph)
 
         # A - answer projection
-        # answer_output = Lambda(self.kg_projection_layer, name='answer_output')(question_encoder_output)
-        answer_output = GRU(self.kb_embeddings_dim, name='answer_output')(selected_subgraph)
+        answer_output = Lambda(self.kg_projection_layer, name='answer_output')(question_encoder_output)
+        # answer_output = GRU(self.kb_embeddings_dim, name='answer_output')(selected_subgraph)
 
 
         self.model_train = Model(inputs=[question_input],   # input question
