@@ -154,7 +154,7 @@ class KBQA:
 
         return K.dot(selected_entities, kg_relation_embeddings)
 
-    def answer_selection_layer(self, question_vector):
+    def kg_projection_layer(self, question_vector):
         '''
         Custom layer adding matrix to a tensor
         '''
@@ -180,8 +180,7 @@ class KBQA:
         question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(selected_subgraph)
 
         # A - answer projection
-        answer_output = Lambda(self.answer_selection_layer, name='answer_selection')(question_encoder_output)
-        # embed
+        answer_output = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
