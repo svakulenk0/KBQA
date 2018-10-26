@@ -63,9 +63,9 @@ class KBQA:
         # load KG relation embeddings
         self.entityToIndex, self.indexToEntity, self.entityToVec, self.kg_relation_embeddings_matrix = load_KB_embeddings()
 
-        self.entities = self.entityToVec.keys()
-        self.num_entities = len(self.entityToIndex.keys())
-        assert len(self.entities) == self.num_entities
+        self.entities = self.entityToIndex.keys()
+        self.num_entities = len(self.entities)
+        assert len(self.self.entityToVec.keys()) == self.num_entities
         
         assert self.kg_relation_embeddings_matrix.shape[0] == self.num_entities
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
