@@ -71,7 +71,7 @@ class KBQA:
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
 
         self.kb_embeddings_dim = self.kg_relation_embeddings_matrix.shape[1]
-        assert self.kb_embeddings_dim == len(self.entityToVec[self.entities[0]])
+        assert self.kb_embeddings_dim == len(self.entityToVec[0])
         print("KG embeddings dimension: %d"%self.kg_relation_embeddings_matrix.shape[1])
 
         # generate KG word embeddings
