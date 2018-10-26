@@ -258,17 +258,17 @@ def main(mode):
 
     model = KBQA(rnn_units, output_vector)
 
+    model.load_data('train')
+
     # mode switch
-    if 'train' in mode:
-        model.load_data('train')
+    if 'train' in mode.split('_'):
         # build model
         model.build_model()
         # train model
         model.train(batch_size, epochs, lr=learning_rate)
     
-    if 'test' in mode:
+    if 'test' in mode.split('_'):
         # test on train data first
-        model.load_data(mode, 'train', max_question_words)
         model.test()
 
 
