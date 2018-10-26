@@ -61,12 +61,12 @@ class KBQA:
         print("FastText word embeddings dimension: %d"%self.word_embs_dim)
 
         # load KG relation embeddings
-        self.entityToIndex, self.indexToEntity, self.entityToVec, self.kb_embeddings_dimension = load_KB_embeddings()
+        self.entityToIndex, self.indexToEntity, self.entityToVec, self.kb_embeddings_dim = load_KB_embeddings()
         self.entities = self.entityToVec.keys()
         self.num_entities = len(self.entityToIndex.keys())
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
         self.kg_relation_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
-        print("KG embeddings dimension: %d"%self.kb_embeddings_dimension)
+        print("KG embeddings dimension: %d"%self.kb_embeddings_dim)
 
         # generate KG word embeddings
         kg_word_embeddings_matrix = np.zeros((self.num_entities, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
@@ -129,7 +129,7 @@ class KBQA:
             answer_vectors = np.asarray(answer_vectors, dtype=K.floatx())
         
         self.num_samples = question_vectors.shape[0]
-        print("Number of samples: %d"%self.num_samples)
+        print("Number of samples with embeddings: %d"%self.num_samples)
 
         print("Loaded the dataset")
         self.dataset = (question_vectors, answer_vectors, all_answers_indices)
@@ -172,11 +172,11 @@ class KBQA:
         # question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
         # question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
         # question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
-        # question_encoder_output = GRU(self.kb_embeddings_dimension, name='question_encoder_output')(question_encoder_4)
+        # question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(question_encoder_4)
 
         # A - answer projection
         # answer_output = Lambda(self.kg_projection_layer, name='answer_output')(question_encoder_output)
-        answer_output = GRU(self.num_entities, name='answer_output')(selected_subgraph)
+        answer_output = GRU(self.kb_embeddings_dim, name='answer_output')(selected_subgraph)
 
 
         self.model_train = Model(inputs=[question_input],   # input question
