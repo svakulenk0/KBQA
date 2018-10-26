@@ -215,3 +215,13 @@ def embed_with_fasttext(words):
     for word in words:
         vectors.append(model.get_word_vector(word)) # produce a vector for the string
     return vectors
+
+
+def my_loss():
+    def loss(y_true, y_pred):
+        print ("Predicted vectors: %s" % str(y_pred.shape))
+        y_true = K.l2_normalize(y_true, axis=-1)
+        y_pred = K.l2_normalize(y_pred, axis=-1)
+        loss_vector = -K.sum(y_true * y_pred, axis=-1)
+        return loss_vector
+    return loss
