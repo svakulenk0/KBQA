@@ -156,7 +156,7 @@ class KBQA:
         selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
 
         # S' - selected KG subgraph
-        selected_subgraph = Lambda(self.add_relations_layer, name='selected_subgraph')(selected_entities)
+        selected_subgraph = Lambda(self.kg_embedding_layer, name='selected_subgraph')(selected_entities)
 
         # A - answer decoder
         answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
