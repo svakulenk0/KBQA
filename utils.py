@@ -173,16 +173,6 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
     return entityToIndex, sp.hstack(adjacencies, format="csr")
 
 
-def load_embeddings_from_index(embeddings_index, items_index):
-    # load embeddings into matrix
-    vocab_len = len(items_index)
-    embDim = next(iter(embeddings_index.values())).shape[0]
-    embeddings_matrix = np.zeros((vocab_len, embDim))  # initialize with zeros
-    for item, index in items_index.items():
-        embeddings_matrix[index, :] = embeddings_index[item] # create embedding: item index to item embedding
-    return embeddings_matrix
-
-
 def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     '''
     load all embeddings from file
@@ -190,6 +180,7 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     entity2vec = {}
     entity2index = {}  # map from a token to an index
     index2entity = {}  # map from an index to a token 
+    kg_embeddings_matrix = []
 
     with open(KB_embeddings_file) as embs_file:
         # embeddings in a text file one per line for Global vectors and glove word embeddings
@@ -197,19 +188,16 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
             entityAndVector = line.split(None, 1)
             # match the entity labels in vector embeddings
             entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
-            try:
-                embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-                entity2vec[idx] = embedding_vector
+            embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+            kg_embeddings_matrix.append(embedding_vector)
+            entity2vec[idx] = embedding_vector
 
-                entity2index[entity] = idx
-                index2entity[idx] = entity
-                
-                idx += 1
+            entity2index[entity] = idx
+            index2entity[idx] = entity
 
-            except:
-                print entityAndVector
+    kg_embeddings_matrix = np.asarray(kg_embeddings_matrix, dtype=K.floatx())
 
-    return (entity2index, index2entity, entity2vec)
+    return (entity2index, index2entity, entity2vec, kg_embeddings_matrix)
 
 
 def load_fasttext(model_path=FASTTEXT_MODEL_PATH):
