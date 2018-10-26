@@ -128,7 +128,7 @@ class KBQA:
 
         # train on the first available answer only
         first_answers = [answers[0] for answers in all_answers_indices]
-        if output_vector == 'distribution':
+        if output_vector == 'one-hot':
             answer_vectors = to_categorical(first_answers, num_classes=self.num_entities)
         elif output_vector == 'embedding':
             answer_vectors = [self.entityToVec[answer] for answer in first_answers]
@@ -184,9 +184,9 @@ class KBQA:
         # A - answer projection
         kg_projection = Lambda(self.kg_projection_layer, name='kg_projection')(question_encoder_output)
         # pick one entity with the max probability
-        answer_output = Dense(self.num_entities, activation='softmax')(kg_projection)
-        # answer_output = GRU(self.kb_embeddings_dim, name='answer_output')(selected_subgraph)
-
+        # answer_output = 
+        # Dense(self.num_entities, activation='softmax')(kg_projection)
+        answer_output = GRU(self.kb_embeddings_dim, name='answer_output')(kg_projection)
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
@@ -198,7 +198,7 @@ class KBQA:
         if self.output_vector == 'embedding':
             self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
        
-        if self.output_vector == 'distribution':
+        if self.output_vector == 'one-hot':
             self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
 
 
