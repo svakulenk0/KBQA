@@ -69,7 +69,7 @@ class KBQA:
         for entity_id, index in self.entityToIndex.items():
             # print index, entity_id
             entity = entity_id.split('/')[-1].split('_(')[0]
-            print entity
+            # print entity
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
 
@@ -161,7 +161,7 @@ class KBQA:
         # selected_subgraph = Lambda(self.kg_relations_layer, name='selected_subgraph')(selected_entities)
 
         # A - answer decoder
-        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(question_input)
+        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_entities)
         answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
         answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
         answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
