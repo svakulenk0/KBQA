@@ -193,7 +193,7 @@ class KBQA:
                                  outputs=[answer_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
-    def train(self, batch_size, epochs, lr=0.0001):
+    def train(self, batch_size, epochs, lr=0.01):
         # define loss
        
         if self.output_vector == 'embedding':
