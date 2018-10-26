@@ -147,12 +147,12 @@ class KBQA:
         # K - KG embeddings
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
         selected_entities = K.dot(question_vector, kg_word_embeddings)
-        return selected_entities
-        
+        # return selected_entities  # model 1
+
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
 
-        return K.dot(selected_entities, kg_relation_embeddings)
+        return K.dot(selected_entities, kg_relation_embeddings)  # model 2
 
     def kg_projection_layer(self, question_vector):
         '''
@@ -177,13 +177,14 @@ class KBQA:
         # question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
         # question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
         # question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
-        question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(selected_subgraph)
+        # question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(selected_subgraph)
+        question_encoder_output = GRU(500, name='question_encoder_output')(selected_subgraph)
 
         # K - KG projection
-        # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)
+        kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
 
         # A - answer output
-        answer_output = question_encoder_output
+        answer_output = kg_projection
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
