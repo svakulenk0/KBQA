@@ -61,14 +61,11 @@ class KBQA:
         print("FastText word embeddings dimension: %d"%self.word_embs_dim)
 
         # load KG relation embeddings
-        self.entityToIndex, self.indexToEntity, self.entityToVec = load_KB_embeddings()
+        self.entityToIndex, self.indexToEntity, self.entityToVec, self.kg_relation_embeddings_matrix = load_KB_embeddings()
 
         self.entities = self.entityToVec.keys()
         self.num_entities = len(self.entityToIndex.keys())
         assert len(self.entities) == self.num_entities
-        
-
-        self.kg_relation_embeddings_matrix = load_embeddings_from_index(self.entityToVec, self.entityToIndex)
         
         assert self.kg_relation_embeddings_matrix.shape[0] == self.num_entities
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
