@@ -84,12 +84,12 @@ class KBQA:
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
 
-    def load_data(self, mode, max_question_words=None, max_answers_per_question=100):
+    def load_data(self, mode, dataset_split, max_question_words=None, max_answers_per_question=100):
         '''
         Encode the dataset: questions and answers
         '''
         # load data
-        questions, answers = load_dataset(dataset_name, dataset_split=mode)
+        questions, answers = load_dataset(dataset_name, dataset_split)
         num_samples = len(questions)
         assert num_samples == len(answers)
         print('lcquad with %d %s samples' % (num_samples, mode))
@@ -176,11 +176,11 @@ class KBQA:
         # question_input = selected_subgraph
 
         # Q' - question encoder
-        # question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(question_input)
-        # question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
-        # question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
-        # question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
-        question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(question_input)
+        question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(question_input)
+        question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
+        question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
+        question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
+        question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(question_encoder_1)
 
         # K - KG projection
         # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
@@ -243,8 +243,9 @@ class KBQA:
         hits = 0
         for i, answers in enumerate(all_answers_indices):
             # check if the correct and predicted answer sets intersect
-            if set.intersection(set(answers), set(top_ns[i])):
-            # if set.intersection(set([answers[0]]), set(top_ns[i])):
+            correct_answers = set.intersection(set(answers), set(top_ns[i]))
+            if correct_answers:
+                # print correct_answers
                 hits += 1
 
         print("Hits in top %d: %d/%d"%(n, hits, len(all_answers_indices)))
@@ -258,15 +259,16 @@ def main(mode):
     model = KBQA(rnn_units, output_vector)
 
     # mode switch
-    if mode == 'train':
-        model.load_data(mode)
+    if 'train' in mode:
+        model.load_data('train')
         # build model
         model.build_model()
         # train model
         model.train(batch_size, epochs, lr=learning_rate)
     
-    elif mode == 'test':
-        model.load_data(mode, max_question_words)
+    if 'test' in mode:
+        # test on train data first
+        model.load_data(mode, 'train', max_question_words)
         model.test()
 
 
