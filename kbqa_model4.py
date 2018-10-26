@@ -65,7 +65,7 @@ class KBQA:
         print("KG embeddings dimension: %d"%self.kb_embeddings_dimension)
 
         # generate KG word embeddings
-        kg_word_embeddings_matrix = np.zeros((self.num_entities+1, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
+        kg_word_embeddings_matrix = np.zeros((self.num_entities, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
         for entity_id, index in self.entityToIndex.items():
             # print index, entity_id
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity_id) # create embedding: item index to item embedding
@@ -153,7 +153,7 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG entities
-        # selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
+        selected_entities = Lambda(self.entity_linking_layer, name='selected_entities')(question_input)
 
         # S' - selected KG subgraph
         # selected_subgraph = Lambda(self.kg_relations_layer, name='selected_subgraph')(selected_entities)
