@@ -188,37 +188,28 @@ def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
     load all embeddings from file
     '''
     entity2vec = {}
-
-    # print("Loading embeddings...")
-    
-    idx = 0
     entity2index = {}  # map from a token to an index
     index2entity = {}  # map from an index to a token 
 
     with open(KB_embeddings_file) as embs_file:
         # embeddings in a text file one per line for Global vectors and glove word embeddings
-        for line in embs_file:
+        for idx, line in enumerate(embs_file):
             entityAndVector = line.split(None, 1)
             # match the entity labels in vector embeddings
             entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
             try:
                 embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+                entity2vec[entity] = embedding_vector
 
                 entity2index[entity] = idx
                 index2entity[idx] = entity
                 
                 idx += 1
 
-                entity2vec[entity] = embedding_vector
-                n_dimensions = len(embedding_vector)
-
             except:
                 print entityAndVector
 
-
-    # print("Loaded %d KG embeddings with %d dimensions" % (len(entity2vec), n_dimensions))
-
-    return (entity2index, index2entity, entity2vec, n_dimensions)
+    return (entity2index, index2entity, entity2vec)
 
 
 def load_fasttext(model_path=FASTTEXT_MODEL_PATH):
