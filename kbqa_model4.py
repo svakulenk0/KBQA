@@ -159,11 +159,11 @@ class KBQA:
         # selected_subgraph = Lambda(self.kg_embedding_layer, name='selected_subgraph')(selected_entities)
 
         # A - answer decoder
-        # answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
-        # answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
-        # answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
-        # answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
-        answer_output = GRU(self.kb_embeddings_dimension, name='answer_output')(selected_entities)
+        answer_decoder_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(selected_subgraph)
+        answer_decoder_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_1)
+        answer_decoder_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_2)
+        answer_decoder_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_3)
+        answer_output = GRU(self.kb_embeddings_dimension, name='answer_output')(answer_decoder_4)
 
         self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
