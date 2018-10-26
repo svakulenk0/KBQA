@@ -161,7 +161,9 @@ class KBQA:
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix.T)
         kg_projection = K.dot(question_vector, kg_relation_embeddings)
-        return K.max(kg_projection, axis=1)
+        answer_index = K.argmax(kg_projection, axis=1)
+        answer_vector = K.gather(K.constant(self.kg_relation_embeddings_matrix), answer_index)
+        return answer_vector
 
     def build_model(self):
         '''
