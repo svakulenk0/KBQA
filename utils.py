@@ -175,7 +175,7 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
 
 def load_embeddings_from_index(embeddings_index, items_index):
     # load embeddings into matrix
-    vocab_len = len(items_index) + 1  # adding 1 to account for masking
+    vocab_len = len(items_index)
     embDim = next(iter(embeddings_index.values())).shape[0]
     embeddings_matrix = np.zeros((vocab_len, embDim))  # initialize with zeros
     for item, index in items_index.items():
