@@ -32,6 +32,7 @@ from keras.optimizers import Adam
 
 from keras import backend as K
 from keras.utils.np_utils import to_categorical
+from keras.utils import CustomObjectScope
 
 from utils import *
 from kbqa_settings import *
@@ -208,43 +209,42 @@ class KBQA:
     def test(self):
         '''
         '''
-        self.model_train = load_model(self.model_path,
-                                      custom_objects={'EntityLinking': EntityLinking(self.kg_word_embeddings_matrix,
-                                                                                     self.kg_relation_embeddings_matrix,
-                                                                                     self.word_embs_dim,
-                                                                                     self.kg_embeddings_dim)})
-        print("Loaded the pre-trained model")
+        with CustomObjectScope({'EntityLinking': EntityLinking}):
 
-        question_vectors, answer_vectors, all_answers_indices = self.dataset
-        print("Testing...")
-        # score = self.model_train.evaluate(questions, answers, verbose=0)
-        # print score
-        print("Questions vectors shape: " + " ".join([str(dim) for dim in question_vectors.shape]))
-        # print("Answers vectors shape: " + " ".join([str(dim) for dim in answers_vectors.shape]))
-        print("Answers indices shape: %d" % len(all_answers_indices))
+            self.model_train = load_model(self.model_path)
+            print("Loaded the pre-trained model")
 
-        predicted_answers_vectors = self.model_train.predict(question_vectors)
-        print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
-        # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
-        # calculate pairwise distances (via cosine similarity)
-        similarity_matrix = cosine_similarity(predicted_answers_vectors, self.kg_relation_embeddings_matrix)
+            question_vectors, answer_vectors, all_answers_indices = self.dataset
+            print("Testing...")
+            # score = self.model_train.evaluate(questions, answers, verbose=0)
+            # print score
+            print("Questions vectors shape: " + " ".join([str(dim) for dim in question_vectors.shape]))
+            # print("Answers vectors shape: " + " ".join([str(dim) for dim in answers_vectors.shape]))
+            print("Answers indices shape: %d" % len(all_answers_indices))
 
-        # print np.argmax(similarity_matrix, axis=1)
-        n = 5
-        # indices of the top n predicted answers for every question in the test set
-        top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
-        # print top_ns[:2]
+            predicted_answers_vectors = self.model_train.predict(question_vectors)
+            print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
+            # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
-        hits = 0
-        for i, answers in enumerate(all_answers_indices):
-            # check if the correct and predicted answer sets intersect
-            correct_answers = set.intersection(set(answers), set(top_ns[i]))
-            if correct_answers:
-                # print correct_answers
-                hits += 1
+            # calculate pairwise distances (via cosine similarity)
+            similarity_matrix = cosine_similarity(predicted_answers_vectors, self.kg_relation_embeddings_matrix)
 
-        print("Hits in top %d: %d/%d"%(n, hits, len(all_answers_indices)))
+            # print np.argmax(similarity_matrix, axis=1)
+            n = 5
+            # indices of the top n predicted answers for every question in the test set
+            top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
+            # print top_ns[:2]
+
+            hits = 0
+            for i, answers in enumerate(all_answers_indices):
+                # check if the correct and predicted answer sets intersect
+                correct_answers = set.intersection(set(answers), set(top_ns[i]))
+                if correct_answers:
+                    # print correct_answers
+                    hits += 1
+
+            print("Hits in top %d: %d/%d"%(n, hits, len(all_answers_indices)))
 
 
 def main(mode):
