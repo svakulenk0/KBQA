@@ -166,7 +166,7 @@ class KBQA:
         encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
                                          self.kg_relation_embeddings_matrix,
                                          self.word_embs_dim,
-                                         self.kg_embeddings_dim)(question_words_embeddings)
+                                         400)(question_words_embeddings)
         print K.int_shape(encoded_question)
 
         # A' - answer decoder
