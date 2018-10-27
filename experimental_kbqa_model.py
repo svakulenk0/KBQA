@@ -189,7 +189,7 @@ class KBQA:
         answer_output = question_encoder_output
         # answer_output = kg_projection
 
-        self.model_train = Model(inputs=[question_input],   # input question
+        self.model_train = Model(inputs=[question_words_embeddings],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
