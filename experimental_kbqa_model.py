@@ -165,7 +165,7 @@ class KBQA:
                                          self.kb_embeddings_dim)(question_words_embeddings)
 
         # A' - answer decoder
-        answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
+        answer_decoder_output_1 = GRU(self.rnn_units, input_shape=(, self.kb_embeddings_dim), name='answer_decoder_1', return_sequences=True)(encoded_question)
         answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
         answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
         answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
