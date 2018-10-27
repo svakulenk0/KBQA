@@ -71,8 +71,8 @@ class KBQA:
         assert self.kg_relation_embeddings_matrix.shape[0] == self.num_entities
         print("Number of entities with pre-trained embeddings: %d"%self.num_entities)
 
-        self.kb_embeddings_dim = self.kg_relation_embeddings_matrix.shape[1]
-        assert self.kb_embeddings_dim == len(self.entityToVec[0])
+        self.kg_embeddings_dim = self.kg_relation_embeddings_matrix.shape[1]
+        assert self.kg_embeddings_dim == len(self.entityToVec[0])
         print("KG embeddings dimension: %d"%self.kg_relation_embeddings_matrix.shape[1])
 
         # generate KG word embeddings
@@ -160,17 +160,17 @@ class KBQA:
         question_words_embeddings = question_input
 
         # Q' - question encoder
-        encoded_question = question_words_embeddings
-        # encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
-                                         # self.kg_relation_embeddings_matrix,
-                                         # self.kb_embeddings_dim)(question_words_embeddings)
+        # encoded_question = question_words_embeddings
+        encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
+                                         self.kg_relation_embeddings_matrix,
+                                         self.kg_embeddings_dim)(question_words_embeddings)
 
         # A' - answer decoder
         answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
         answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
         answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
         answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
-        answer_decoder_output = GRU(self.kb_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
+        answer_decoder_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
 
         # K - KG projection
         # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
@@ -206,8 +206,7 @@ class KBQA:
     def test(self):
         '''
         '''
-        self.model_train = load_model(self.model_path, custom_objects={'entity_linking_layer': self.entity_linking_layer,
-                                                                       'kg_projection_layer': self.kg_projection_layer})
+        self.model_train = load_model(self.model_path, custom_objects={'EntityLinking': EntityLinking})
         print("Loaded the pre-trained model")
 
         question_vectors, answer_vectors, all_answers_indices = self.dataset
