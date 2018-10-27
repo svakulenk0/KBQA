@@ -140,7 +140,7 @@ class KBQA:
         print("Loaded the dataset")
         self.dataset = (question_vectors, answer_vectors, all_answers_indices)
 
-    def kg_embeddings_layer(self):
+    def kg_embeddings_layer(self, placeholder):
         # K - KG embeddings
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
@@ -170,7 +170,7 @@ class KBQA:
         question_words_embeddings = question_input
 
         
-        kg_embedding = Lambda(self.kg_embeddings_layer, name='kg_embeddings_layer')()
+        kg_embedding = Lambda(self.kg_embeddings_layer, name='kg_embeddings_layer')(None)
         # train word-to-kg embedding
 
         # Q' - question encoder
