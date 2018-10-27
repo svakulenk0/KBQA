@@ -159,9 +159,10 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
         question_words_embeddings = question_input
 
-        
         # Q' - question encoder
-        encoded_question = EntityLinking(question_words_embeddings, self.kg_word_embeddings_matrix, self.kg_relation_embeddings_matrix)
+        encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
+                                         self.kg_relation_embeddings_matrix,
+                                         self.kb_embeddings_dim)(question_words_embeddings)
 
         # A' - answer decoder
         answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
