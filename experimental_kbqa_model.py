@@ -170,7 +170,7 @@ class KBQA:
         question_words_embeddings = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
 
         # S - selected KG subgraph
-        selected_subgraph = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_input)
+        selected_subgraph = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_words_embeddings)
 
         # question_input = question_words_embeddings
         question_input = selected_subgraph
