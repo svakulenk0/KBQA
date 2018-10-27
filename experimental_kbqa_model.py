@@ -147,7 +147,7 @@ class KBQA:
         # K - KG embeddings
         kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
         selected_entities = K.dot(question_vector, kg_word_embeddings)
-        return selected_entities  # model 1
+        # return selected_entities  # model 1
 
         # R - KG relation embeddings
         kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
@@ -191,7 +191,7 @@ class KBQA:
                                  outputs=[answer_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
-    def train(self, batch_size, epochs, lr=0.01):
+    def train(self, batch_size, epochs, lr=0.001):
         # define loss
        
         if self.output_vector == 'embedding':
