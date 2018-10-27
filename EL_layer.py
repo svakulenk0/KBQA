@@ -22,4 +22,4 @@ def EntityLinking(question_words_embeddings, kg_word_embeddings_matrix, kg_relat
 
         # train word-to-kg embedding
 
-        return K.dot(question_vector, kg_embedding)
+        return K.dot(question_words_embeddings, kg_embedding)
