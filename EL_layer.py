@@ -31,7 +31,8 @@ class EntityLinking(Layer):
     def call(self, question_words_embeddings, mask=None):
         # train word-to-kg embedding
         # TODO weights
-        return K.dot(question_words_embeddings, self.kg_embedding)
+        return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))
+        # return K.dot(question_words_embeddings, self.kg_embedding)
 
     def get_output_shape_for(self, input_shape):
         return (input_shape[0], input_shape[1], self.kg_embedding_dim)
