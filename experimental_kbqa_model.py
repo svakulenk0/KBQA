@@ -208,7 +208,11 @@ class KBQA:
     def test(self):
         '''
         '''
-        self.model_train = load_model(self.model_path, custom_objects={'EntityLinking': EntityLinking})
+        self.model_train = load_model(self.model_path,
+                                      custom_objects={'EntityLinking': EntityLinking(self.kg_word_embeddings_matrix,
+                                                                                     self.kg_relation_embeddings_matrix,
+                                                                                     self.word_embs_dim,
+                                                                                     self.kg_embeddings_dim)})
         print("Loaded the pre-trained model")
 
         question_vectors, answer_vectors, all_answers_indices = self.dataset
