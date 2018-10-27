@@ -11,6 +11,7 @@ Entity Linking layer trained to align word and entity embeddings.
 
 '''
 from keras import backend as K
+from keras.engine.topology import Layer
 
 
 class EntityLinking(Layer):
