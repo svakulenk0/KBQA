@@ -16,9 +16,10 @@ from keras.engine.topology import Layer
 
 class EntityLinking(Layer):
 
-    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix, output_dim, **kwargs):
+    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix, num_entities, output_dim, **kwargs):
         self.kg_word_embeddings_matrix = kg_word_embeddings_matrix
         self.kg_relation_embeddings_matrix = kg_relation_embeddings_matrix
+        self.num_entities = num_entities
         self.output_dim = output_dim
 
         super(EntityLinking, self).__init__(**kwargs)
@@ -30,17 +31,17 @@ class EntityLinking(Layer):
         print K.int_shape(self.kg_embedding)
         
         # Create a trainable weight variable for word-to-kg embedding
-        # self.kernel = self.add_weight(name='kernel', 
-                                      # shape=(input_shape[1], self.output_dim),
-                                      # initializer='uniform',
-                                      # trainable=True)
+        self.kernel = self.add_weight(name='kernel', 
+                                      shape=(self.num_entities, self.output_dim),
+                                      initializer='uniform',
+                                      trainable=True)
 
         super(EntityLinking, self).build(input_shape)  # Be sure to call this at the end
 
     def call(self, question_words_embeddings, mask=None):
-        # TODO multiply with weights kernel
-        # return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))
-        return K.dot(question_words_embeddings, self.kg_embedding)
+        # multiply with weights kernel
+        kg_embedding = K.dot(self.kg_embedding, self.kernel)
+        return K.dot(question_words_embeddings, kg_embedding)
 
     def get_output_shape_for(self, input_shape):
         # return (input_shape[0], input_shape[1], 200)
