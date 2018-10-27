@@ -20,7 +20,8 @@ class EntityLinking(Layer):
         self.kg_word_embeddings_matrix = kg_word_embeddings_matrix
         self.kg_relation_embeddings_matrix = kg_relation_embeddings_matrix
         self.word_embs_dim = word_embs_dim
-        self.kg_embeddings_dim = kg_embeddings_dim
+        self.kg_embeddings_dim = 200
+        # self.kg_embeddings_dim = kg_embeddings_dim
 
         super(EntityLinking, self).__init__(**kwargs)
 
@@ -42,12 +43,10 @@ class EntityLinking(Layer):
         kg_embedding = K.dot(self.kg_embedding, self.kernel)
         question_kg_embedding = K.dot(question_words_embeddings, kg_embedding)
         print K.int_shape(question_kg_embedding)
-        
         return question_kg_embedding
 
     def get_output_shape_for(self, input_shape):
-        return (input_shape[0], input_shape[1], 200)
-        # return (input_shape[0], input_shape[1], self.kg_embeddings_dim)
+        return (input_shape[0], input_shape[1], self.kg_embeddings_dim)
 
     def get_config(self):
         base_config = super(EntityLinking, self).get_config()
