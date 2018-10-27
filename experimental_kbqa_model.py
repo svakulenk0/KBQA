@@ -163,7 +163,7 @@ class KBQA:
         # encoded_question = question_words_embeddings
         encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
                                          self.kg_relation_embeddings_matrix,
-                                         self.kg_embeddings_dim)(question_words_embeddings)
+                                         300)(question_words_embeddings)
 
         # A' - answer decoder
         answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
