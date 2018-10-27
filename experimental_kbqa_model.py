@@ -159,7 +159,7 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
         question_words_embeddings = question_input
 
-        print K.int_shape(question_words_embeddings)
+        # print K.int_shape(question_words_embeddings)
 
         # Q' - question encoder
         # encoded_question = question_words_embeddings
@@ -167,7 +167,7 @@ class KBQA:
                                          self.kg_relation_embeddings_matrix,
                                          self.word_embs_dim,
                                          self.kg_embeddings_dim)(question_words_embeddings)
-        print K.int_shape(encoded_question)
+        # print K.int_shape(encoded_question)
 
         # A' - answer decoder
         # answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
