@@ -140,6 +140,12 @@ class KBQA:
         print("Loaded the dataset")
         self.dataset = (question_vectors, answer_vectors, all_answers_indices)
 
+    def kg_embeddings_layer(self):
+        # K - KG embeddings
+        kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
+        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
+        kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
+
     def entity_linking_layer(self, input_tensors):
         '''
         Custom layer producing a dot product
@@ -163,11 +169,8 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
         question_words_embeddings = question_input
 
-        # K - KG embeddings
-        kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
-        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
-        kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
-
+        
+        kg_embedding = Lambda(self.kg_embeddings_layer, name='kg_embeddings_layer')()
         # train word-to-kg embedding
 
         # Q' - question encoder
