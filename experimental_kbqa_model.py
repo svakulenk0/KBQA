@@ -159,6 +159,8 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
         question_words_embeddings = question_input
 
+        print K.int_shape(question_words_embeddings)
+        
         # Q' - question encoder
         # encoded_question = question_words_embeddings
         encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
