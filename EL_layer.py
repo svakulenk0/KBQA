@@ -49,5 +49,10 @@ class EntityLinking(Layer):
 
     def get_config(self):
         base_config = super(EntityLinking, self).get_config()
-        base_config['output_dim'] = self.kg_embeddings_dim
-        return base_config
+        # base_config['output_dim'] = self.kg_embeddings_dim
+        # return base_config
+        config = {'kg_word_embeddings_matrix': self.kg_word_embeddings_matrix, 
+                  'kg_relation_embeddings_matrix': self.kg_relation_embeddings_matrix,
+                  'word_embs_dim': self.word_embs_dim,
+                  'kg_embeddings_dim': self.kg_embeddings_dim}
+        return dict(list(base_config.items()) + list(config.items()))
