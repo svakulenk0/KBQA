@@ -10,6 +10,8 @@ Created on Oct 27, 2018
 Entity Linking layer trained to align word and entity embeddings.
 
 '''
+from keras import backend as K
+
 
 def EntityLinking(question_words_embeddings, kg_word_embeddings_matrix, kg_relation_embeddings_matrix):
 
