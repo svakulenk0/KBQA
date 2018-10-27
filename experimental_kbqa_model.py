@@ -167,29 +167,27 @@ class KBQA:
         '''
 
         # Q - question embedding input
-        question_words_embeddings = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
-
-        # S - selected KG subgraph
-        # selected_subgraph = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_words_embeddings)
-
-        question_input = question_words_embeddings
-        # question_input = selected_subgraph
+        question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
+        question_words_embeddings = question_input
 
         # Q' - question encoder
-        question_encoder_1 = GRU(self.rnn_units, name='question_encoder_1', return_sequences=True)(question_input)
-        question_encoder_2 = GRU(self.rnn_units, name='question_encoder_2', return_sequences=True)(question_encoder_1)
-        question_encoder_3 = GRU(self.rnn_units, name='question_encoder_3', return_sequences=True)(question_encoder_2)
-        question_encoder_4 = GRU(self.rnn_units, name='question_encoder_4', return_sequences=True)(question_encoder_3)
-        question_encoder_output = GRU(self.kb_embeddings_dim, name='question_encoder_output')(question_encoder_4)
+        encoded_question = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_words_embeddings)
+
+        # A' - answer decoder
+        answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
+        answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
+        answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
+        answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
+        answer_decoder_output = GRU(self.kb_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
 
         # K - KG projection
         # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
 
         # A - answer output
-        answer_output = question_encoder_output
+        answer_output = answer_decoder_output
         # answer_output = kg_projection
 
-        self.model_train = Model(inputs=[question_words_embeddings],   # input question
+        self.model_train = Model(inputs=[question_input],   # input question
                                  outputs=[answer_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
@@ -269,7 +267,8 @@ def main(mode):
         model.train(batch_size, epochs, lr=learning_rate)
     
     if 'test' in mode.split('/'):
-        model.load_data('test', max_question_words)
+        # use test data
+        # model.load_data('test', max_question_words)
         model.test()
 
 
