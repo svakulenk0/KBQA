@@ -16,23 +16,23 @@ from keras.engine.topology import Layer
 
 class EntityLinking(Layer):
 
-    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix, num_entities, output_dim, **kwargs):
+    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix, word_embs_dim, kg_embeddings_dim, **kwargs):
         self.kg_word_embeddings_matrix = kg_word_embeddings_matrix
         self.kg_relation_embeddings_matrix = kg_relation_embeddings_matrix
-        self.num_entities = num_entities
-        self.output_dim = output_dim
+        self.word_embs_dim = word_embs_dim
+        self.kg_embeddings_dim = kg_embeddings_dim
 
         super(EntityLinking, self).__init__(**kwargs)
 
     def build(self, input_shape):
-        kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix.T)
-        kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix)
-        self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
+        kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix)
+        kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix.T)
+        self.kg_embedding = K.dot(kg_relation_embeddings, kg_word_embeddings)
         print K.int_shape(self.kg_embedding)
         
         # Create a trainable weight variable for word-to-kg embedding
         self.kernel = self.add_weight(name='kernel', 
-                                      shape=(self.num_entities, self.output_dim),
+                                      shape=(self.word_embs_dim, self.kg_embeddings_dim),
                                       initializer='uniform',
                                       trainable=True)
 
@@ -45,9 +45,9 @@ class EntityLinking(Layer):
 
     def get_output_shape_for(self, input_shape):
         # return (input_shape[0], input_shape[1], 200)
-        return (input_shape[0], input_shape[1], self.output_dim)
+        return (input_shape[0], input_shape[1], self.kg_embeddings_dim)
 
     def get_config(self):
         base_config = super(EntityLinking, self).get_config()
-        base_config['output_dim'] = self.output_dim
+        base_config['output_dim'] = self.kg_embeddings_dim
         return base_config
