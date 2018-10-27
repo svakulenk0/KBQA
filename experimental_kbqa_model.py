@@ -84,7 +84,7 @@ class KBQA:
             kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity) # create embedding: item index to item embedding
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
         
-        self.kg_embeddings_matrix = dot(self.kg_word_embeddings_matrix.T, self.kg_relation_embeddings_matrix)
+        self.kg_embeddings_matrix = np.dot(self.kg_word_embeddings_matrix.T, self.kg_relation_embeddings_matrix)
 
     def load_data(self, mode, max_question_words=None, max_answers_per_question=100):
         '''
