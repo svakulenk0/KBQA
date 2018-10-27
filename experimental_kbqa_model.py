@@ -35,6 +35,7 @@ from keras.utils.np_utils import to_categorical
 
 from utils import *
 from kbqa_settings import *
+from EL_layer import EntityLinking
 
 
 class KBQA:
@@ -142,13 +143,6 @@ class KBQA:
         print("Loaded the dataset")
         self.dataset = (question_vectors, answer_vectors, all_answers_indices)
 
-    def entity_linking_layer(self, input_tensors):
-        '''
-        Custom layer producing a dot product
-        '''
-        question_vector, kg_embedding = input_tensors
-        return K.dot(question_vector, kg_embedding)
-
     def kg_projection_layer(self, question_vector):
         '''
         Custom layer adding matrix to a tensor
@@ -166,12 +160,8 @@ class KBQA:
         question_words_embeddings = question_input
 
         
-        kg_embedding = K.constant(self.kg_embeddings_matrix)
-
-        # train word-to-kg embedding
-
         # Q' - question encoder
-        encoded_question = Lambda(self.entity_linking_layer, name='entity_linking_layer')([question_words_embeddings, kg_embedding])
+        encoded_question = EntityLinking(question_words_embeddings, self.kg_word_embeddings_matrix, self.kg_relation_embeddings_matrix)
 
         # A' - answer decoder
         answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
