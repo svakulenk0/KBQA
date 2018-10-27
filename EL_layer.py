@@ -28,6 +28,7 @@ class EntityLinking(Layer):
         kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix.T)
         kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix)
         self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
+        print input_shape
         print K.int_shape(self.kg_embedding)
         
         # Create a trainable weight variable for word-to-kg embedding
