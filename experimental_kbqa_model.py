@@ -140,19 +140,12 @@ class KBQA:
         print("Loaded the dataset")
         self.dataset = (question_vectors, answer_vectors, all_answers_indices)
 
-    def entity_linking_layer(self, question_vector):
+    def entity_linking_layer(self, input_tensors):
         '''
         Custom layer producing a dot product
         '''
-        # K - KG embeddings
-        kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
-        selected_entities = K.dot(question_vector, kg_word_embeddings)
-        # return selected_entities  # model 1
-
-        # R - KG relation embeddings
-        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
-
-        return K.dot(selected_entities, kg_relation_embeddings)  # model 2
+        question_words_embeddings, kg_embedding = input_tensors
+        return K.dot(question_vector, kg_embedding)
 
     def kg_projection_layer(self, question_vector):
         '''
@@ -170,8 +163,15 @@ class KBQA:
         question_input = Input(shape=(self.max_question_words, self.word_embs_dim), name='question_input', dtype=K.floatx())
         question_words_embeddings = question_input
 
+        # K - KG embeddings
+        kg_word_embeddings = K.constant(self.kg_word_embeddings_matrix.T)
+        kg_relation_embeddings = K.constant(self.kg_relation_embeddings_matrix)
+        kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
+
+        # train word-to-kg embedding
+
         # Q' - question encoder
-        encoded_question = Lambda(self.entity_linking_layer, name='selected_subgraph')(question_words_embeddings)
+        encoded_question = Lambda(self.entity_linking_layer, name='entity_linking_layer')([question_words_embeddings, kg_embedding])
 
         # A' - answer decoder
         answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
