@@ -144,7 +144,7 @@ class KBQA:
         '''
         Custom layer producing a dot product
         '''
-        question_words_embeddings, kg_embedding = input_tensors
+        question_vector, kg_embedding = input_tensors
         return K.dot(question_vector, kg_embedding)
 
     def kg_projection_layer(self, question_vector):
