@@ -35,23 +35,27 @@ class EntityLinking(Layer):
         self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
         
         # Create a trainable weight variable for word-to-kg embedding
-        # self.kernel = self.add_weight(name='kernel', 
-        #                               # shape=(self.kg_embeddings_dim, self.kg_embeddings_dim),
-        #                               shape=(self.word_embs_dim, self.word_embs_dim),
-        #                               initializer='uniform',
-        #                               trainable=True)
+        self.kernel = self.add_weight(name='kernel', 
+                                      # shape=(self.kg_embeddings_dim, self.kg_embeddings_dim),
+                                      # shape=(self.word_embs_dim, self.word_embs_dim),
+                                      # shape=(self.word_embs_dim, self.word_embs_dim),
+                                      shape=(self.num_entities, self.num_entities),  # model 2 trainable
+                                      initializer='uniform',
+                                      trainable=True)
 
         super(EntityLinking, self).build(input_shape)  # Be sure to call this at the end
 
     def call(self, question_words_embeddings, mask=None):
         # multiply with weights kernel
+        kg_embedding = K.dot(K.variable(self.kg_word_embeddings_matrix.T), self.kernel)  # model 2 trainable
         # kg_embedding = K.dot(self.kg_embedding, self.kernel)
         # question_kg_embedding = K.dot(question_words_embeddings, kg_embedding)
         # print K.int_shape(question_kg_embedding)
         # return question_kg_embedding
 
         # return K.dot(question_words_embeddings, self.kernel)  # model 1 (baseline) trainable
-        return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))  # model 2
+        # return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))  # model 2
+        return K.dot(question_words_embeddings, kg_embedding)  # model 2 trainable
 
     def compute_output_shape(self, input_shape):
         # return (input_shape[0], input_shape[1], self.word_embs_dim)  # model 1
