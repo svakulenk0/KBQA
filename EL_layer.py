@@ -49,7 +49,8 @@ class EntityLinking(Layer):
         return question_words_embeddings
 
     def compute_output_shape(self, input_shape):
-        return (input_shape[0], input_shape[1], self.kg_embeddings_dim)
+        return (input_shape[0], input_shape[1], self.word_embs_dim)
+        # return (input_shape[0], input_shape[1], self.kg_embeddings_dim)
 
     def get_config(self):
         base_config = super(EntityLinking, self).get_config()
