@@ -49,6 +49,8 @@ class KBQA:
         makedirs('./models')
         self.model_path = model_path
 
+        self.dataset = None
+
         # set architecture parameters
         self.rnn_units = rnn_units
         self.output_vector = output_vector
