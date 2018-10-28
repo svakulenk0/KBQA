@@ -36,8 +36,8 @@ class EntityLinking(Layer):
         
         # Create a trainable weight variable for word-to-kg embedding
         self.kernel = self.add_weight(name='kernel', 
-                                      # shape=(self.kg_embeddings_dim, self.kg_embeddings_dim),
-                                      shape=(self.word_embs_dim, self.word_embs_dim),
+                                      shape=(self.kg_embeddings_dim, self.kg_embeddings_dim),
+                                      # shape=(self.word_embs_dim, self.word_embs_dim),
                                       initializer='uniform',
                                       trainable=True)
 
@@ -45,20 +45,20 @@ class EntityLinking(Layer):
 
     def call(self, question_words_embeddings, mask=None):
         # multiply with weights kernel
-        question_words_embeddings = K.dot(question_words_embeddings, self.kernel)  # model 2 trainable
+        # question_words_embeddings = K.dot(question_words_embeddings, self.kernel)  # model 2 trainable
         
-        # kg_embedding = K.dot(self.kg_embedding, self.kernel)
-        # question_kg_embedding = K.dot(question_words_embeddings, kg_embedding)
+        kg_embedding = K.dot(self.kg_embedding, self.kernel)
+        question_kg_embedding = K.dot(question_words_embeddings, kg_embedding)
         # print K.int_shape(question_kg_embedding)
-        # return question_kg_embedding
+        return question_kg_embedding  # model 3
 
         # return K.dot(question_words_embeddings, self.kernel)  # model 1 (baseline) trainable
-        return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))  # model 2
+        # return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))  # model 2
 
     def compute_output_shape(self, input_shape):
         # return (input_shape[0], input_shape[1], self.word_embs_dim)  # model 1
-        return (input_shape[0], input_shape[1], self.num_entities)  # model 2
-        # return (input_shape[0], input_shape[1], self.kg_embeddings_dim)
+        # return (input_shape[0], input_shape[1], self.num_entities)  # model 2
+        return (input_shape[0], input_shape[1], self.kg_embeddings_dim)  # model 3
 
     def get_config(self):
         base_config = super(EntityLinking, self).get_config()
