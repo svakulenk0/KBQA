@@ -45,7 +45,8 @@ class EntityLinking(Layer):
         kg_embedding = K.dot(self.kg_embedding, self.kernel)
         question_kg_embedding = K.dot(question_words_embeddings, kg_embedding)
         # print K.int_shape(question_kg_embedding)
-        return question_kg_embedding
+        # return question_kg_embedding
+        return question_words_embeddings
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], input_shape[1], self.kg_embeddings_dim)
