@@ -10,6 +10,8 @@ Created on Oct 27, 2018
 Entity Linking layer trained to align word and entity embeddings.
 
 '''
+import numpy as np
+
 from keras import backend as K
 from keras.engine.topology import Layer
 
