@@ -37,9 +37,7 @@ class EntityLinking(Layer):
         # Create a trainable weight variable for word-to-kg embedding
         self.kernel = self.add_weight(name='kernel', 
                                       # shape=(self.kg_embeddings_dim, self.kg_embeddings_dim),
-                                      # shape=(self.word_embs_dim, self.word_embs_dim),
-                                      # shape=(self.word_embs_dim, self.word_embs_dim),
-                                      shape=(self.num_entities, self.num_entities),  # model 2 trainable
+                                      shape=(self.word_embs_dim, self.word_embs_dim),
                                       initializer='uniform',
                                       trainable=True)
 
@@ -47,15 +45,15 @@ class EntityLinking(Layer):
 
     def call(self, question_words_embeddings, mask=None):
         # multiply with weights kernel
-        kg_embedding = K.dot(K.variable(self.kg_word_embeddings_matrix.T), self.kernel)  # model 2 trainable
+        question_words_embeddings = K.dot(question_words_embeddings, self.kernel)  # model 2 trainable
+        
         # kg_embedding = K.dot(self.kg_embedding, self.kernel)
         # question_kg_embedding = K.dot(question_words_embeddings, kg_embedding)
         # print K.int_shape(question_kg_embedding)
         # return question_kg_embedding
 
         # return K.dot(question_words_embeddings, self.kernel)  # model 1 (baseline) trainable
-        # return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))  # model 2
-        return K.dot(question_words_embeddings, kg_embedding)  # model 2 trainable
+        return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))  # model 2
 
     def compute_output_shape(self, input_shape):
         # return (input_shape[0], input_shape[1], self.word_embs_dim)  # model 1
