@@ -35,11 +35,11 @@ class EntityLinking(Layer):
         self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
         
         # Create a trainable weight variable for word-to-kg embedding
-        self.kernel = self.add_weight(name='kernel', 
-                                      # shape=(self.kg_embeddings_dim, self.kg_embeddings_dim),
-                                      shape=(self.word_embs_dim, self.word_embs_dim),
-                                      initializer='uniform',
-                                      trainable=True)
+        # self.kernel = self.add_weight(name='kernel', 
+        #                               # shape=(self.kg_embeddings_dim, self.kg_embeddings_dim),
+        #                               shape=(self.word_embs_dim, self.word_embs_dim),
+        #                               initializer='uniform',
+        #                               trainable=True)
 
         super(EntityLinking, self).build(input_shape)  # Be sure to call this at the end
 
