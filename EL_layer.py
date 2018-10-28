@@ -18,12 +18,14 @@ from keras.engine.topology import Layer
 
 class EntityLinking(Layer):
 
-    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix, word_embs_dim, kg_embeddings_dim, **kwargs):
+    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix,
+                 word_embs_dim, kg_embeddings_dim, num_entities, **kwargs):
         # when loaded from config matrices are again lists not numpy arrays
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
         self.kg_relation_embeddings_matrix = np.asarray(kg_relation_embeddings_matrix, dtype=K.floatx())
         self.word_embs_dim = word_embs_dim
         self.kg_embeddings_dim = kg_embeddings_dim
+        self.num_entities = num_entities
 
         super(EntityLinking, self).__init__(**kwargs)
 
@@ -47,10 +49,13 @@ class EntityLinking(Layer):
         # question_kg_embedding = K.dot(question_words_embeddings, kg_embedding)
         # print K.int_shape(question_kg_embedding)
         # return question_kg_embedding
-        return K.dot(question_words_embeddings, self.kernel)
+
+        # return K.dot(question_words_embeddings, self.kernel)  # model 1 (baseline) trainable
+        return K.dot(question_words_embeddings, K.variable(self.kg_word_embeddings_matrix.T))  # model 2
 
     def compute_output_shape(self, input_shape):
-        return (input_shape[0], input_shape[1], self.word_embs_dim)
+        # return (input_shape[0], input_shape[1], self.word_embs_dim)  # model 1
+        return (input_shape[0], input_shape[1], self.num_entities)  # model 2
         # return (input_shape[0], input_shape[1], self.kg_embeddings_dim)
 
     def get_config(self):
@@ -59,6 +64,7 @@ class EntityLinking(Layer):
         # return base_config
         config = {'kg_word_embeddings_matrix': self.kg_word_embeddings_matrix, 
                   'kg_relation_embeddings_matrix': self.kg_relation_embeddings_matrix,
+                  'num_entities': self.num_entities,
                   'word_embs_dim': self.word_embs_dim,
                   'kg_embeddings_dim': self.kg_embeddings_dim}
         return dict(list(base_config.items()) + list(config.items()))
