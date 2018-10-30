@@ -134,9 +134,9 @@ class KBQA:
 
         # train on the first available answer only
         first_answers = [answers[0] for answers in all_answers_indices]
-        if output_vector == 'one-hot':
+        if self.output_vector == 'one-hot':
             answer_vectors = to_categorical(first_answers, num_classes=self.num_entities)
-        elif output_vector == 'embedding':
+        elif self.output_vector == 'embedding':
             answer_vectors = [self.entityToVec[answer] for answer in first_answers]
             answer_vectors = np.asarray(answer_vectors, dtype=K.floatx())
         
@@ -203,6 +203,7 @@ class KBQA:
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
 
         if self.output_vector == 'one-hot':
+            # self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
             self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
 
@@ -237,14 +238,18 @@ class KBQA:
             print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
             # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
-            # calculate pairwise distances (via cosine similarity)
-            similarity_matrix = cosine_similarity(predicted_answers_vectors, self.kg_relation_embeddings_matrix)
+            if self.output_vector == 'embedding':
+                # calculate pairwise distances (via cosine similarity)
+                similarity_matrix = cosine_similarity(predicted_answers_vectors, self.kg_relation_embeddings_matrix)
 
-            # print np.argmax(similarity_matrix, axis=1)
-            n = 5
-            # indices of the top n predicted answers for every question in the test set
-            top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
-            # print top_ns[:2]
+                # print np.argmax(similarity_matrix, axis=1)
+                n = 5
+                # indices of the top n predicted answers for every question in the test set
+                top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
+                # print top_ns[:2]
+
+            elif self.output_vector == 'one-hot':
+                top_ns = predicted_answers_vectors
 
             hits = 0
             for i, answers in enumerate(all_answers_indices):
