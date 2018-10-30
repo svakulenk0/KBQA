@@ -238,31 +238,31 @@ class KBQA:
             print("Predicted answers vectors shape: " + " ".join([str(dim) for dim in predicted_answers_vectors.shape]))
             # print("Answers indices: " + ", ".join([str(idx) for idx in answers_indices]))
 
+            hits = 0
+
             if self.output_vector == 'embedding':
                 # calculate pairwise distances (via cosine similarity)
                 similarity_matrix = cosine_similarity(predicted_answers_vectors, self.kg_relation_embeddings_matrix)
-
                 # print np.argmax(similarity_matrix, axis=1)
                 n = 5
                 # indices of the top n predicted answers for every question in the test set
                 top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
                 # print top_ns[:2]
 
-            elif self.output_vector == 'one-hot':
-                top_ns = predicted_answers_vectors
-
-            hits = 0
-            for i, answers in enumerate(all_answers_indices):
-                # check if the correct and predicted answer sets intersect
-                correct_answers = set.intersection(set(answers), set(top_ns[i]))
-                if correct_answers:
-                    # print correct_answers
-                    hits += 1
-            
-            if self.output_vector == 'embedding':
+                for i, answers in enumerate(all_answers_indices):
+                    # check if the correct and predicted answer sets intersect
+                    correct_answers = set.intersection(set(answers), set(top_ns[i]))
+                    if correct_answers:
+                        # print correct_answers
+                        hits += 1
                 print("Hits in top %d: %d/%d"%(n, hits, len(all_answers_indices)))
 
             elif self.output_vector == 'one-hot':
+                predicted_answers_indices = np.argmax(predicted_answers_vectors)
+                print predicted_answers_indices
+                for i, answers in enumerate(all_answers_indices):
+                    if predicted_answers_indices[i] in answers:
+                        hits += 1
                 print("Correct answers: %d/%d"%(hits, len(all_answers_indices)))
 
 
