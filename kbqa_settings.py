@@ -10,7 +10,7 @@ Created on Oct 18, 2018
 dataset_name = 'lcquad'
 
 # architecture parameters
-rnn_units = 500  # dimension of the GRUs output layer for the hidden question representation
+rnn_units = 100  # dimension of the GRUs output layer for the hidden question representation
 output_vector = 'one-hot'  # output as a 'one-hot' or KG 'embedding' vector
 
 # dataset parameters
