@@ -259,7 +259,7 @@ class KBQA:
 
             elif self.output_vector == 'one-hot':
                 for i, answers in enumerate(all_answers_indices):
-                    predicted_answer_index = np.argmax(predicted_answers_indices[i])
+                    predicted_answer_index = np.argmax(predicted_answers_vectors[i])
                     print predicted_answer_index
                     if predicted_answer_index in answers:
                         hits += 1
