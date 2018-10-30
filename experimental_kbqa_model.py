@@ -261,9 +261,9 @@ class KBQA:
             
             if self.output_vector == 'embedding':
                 print("Hits in top %d: %d/%d"%(n, hits, len(all_answers_indices)))
-                
+
             elif self.output_vector == 'one-hot':
-                print("Hits: %d/%d"%(hits, len(all_answers_indices)))
+                print("Correct answers: %d/%d"%(hits, len(all_answers_indices)))
 
 
 def main(mode):
