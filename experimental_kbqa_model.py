@@ -258,12 +258,14 @@ class KBQA:
                 print("Hits in top %d: %d/%d"%(n, hits, len(all_answers_indices)))
 
             elif self.output_vector == 'one-hot':
+                all_predicted_answers = Counter()
                 for i, answers in enumerate(all_answers_indices):
                     predicted_answer_index = np.argmax(predicted_answers_vectors[i])
-                    print predicted_answer_index
+                    all_predicted_answers[predicted_answer_index] += 1
                     if predicted_answer_index in answers:
                         hits += 1
                 print("Correct answers: %d/%d"%(hits, len(all_answers_indices)))
+                print all_predicted_answers
 
 
 def main(mode):
