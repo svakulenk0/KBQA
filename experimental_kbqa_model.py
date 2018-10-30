@@ -179,7 +179,8 @@ class KBQA:
         answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
         answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
         answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
-        answer_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
+        # answer_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
+        answer_output = GRU(self.num_entities, name='answer_decoder')(answer_decoder_output_4)
 
         # K - KG projection
         # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
@@ -190,16 +191,16 @@ class KBQA:
                                  outputs=[answer_output])  # ground-truth target answer set
         print(self.model_train.summary())
 
-    def train(self, batch_size, epochs, lr=0.001):
+    def train(self, batch_size, epochs, lr):
         # define loss
        
         if self.output_vector == 'embedding':
-            # self.model_train.compile(optimizer='rmsprop', loss='cosine_proximity')
-            self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
-            # self.model_train.compile(optimizer=Adam(lr=lr), loss=my_loss())
+            self.model_train.compile(optimizer='rmsprop', loss='cosine_proximity')
+            # self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
 
         if self.output_vector == 'one-hot':
-            self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
+            self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
+            # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
 
 
         # define callbacks for early stopping
