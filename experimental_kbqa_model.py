@@ -37,6 +37,7 @@ from keras.utils import CustomObjectScope
 from utils import *
 from kbqa_settings import *
 from EL_layer import EntityLinking
+from data.lcquad_train_balanced import lcquad_train_b
 
 
 class KBQA:
@@ -90,15 +91,15 @@ class KBQA:
         
         # self.kg_embeddings_matrix = np.dot(self.kg_word_embeddings_matrix.T, self.kg_relation_embeddings_matrix)
 
-    def load_data(self, mode, max_question_words=None, max_answers_per_question=100):
+    def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100):
         '''
         Encode the dataset: questions and answers
         '''
         # load data
-        questions, answers = load_dataset(dataset_name, mode)
+        questions, answers = load_dataset(dataset_name, split)
         num_samples = len(questions)
         assert num_samples == len(answers)
-        print('lcquad with %d %s samples' % (num_samples, mode))
+        print('Loaded %s with %d %s samples' % (dataset_name, num_samples, split))
 
         # encode questions with word vocabulary and answers with entity vocabulary
         question_vectors = []
@@ -180,10 +181,9 @@ class KBQA:
         answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
         answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
         # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4')(answer_decoder_output_3)
-        answer_decoder_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
-        
+
         # A - answer
-        answer_output = answer_decoder_output
+        answer_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
         # answer_output = Dense(self.num_entities, activation='softmax', name='answer_output')(answer_decoder_output_4)
         
         # K - KG projection
@@ -280,7 +280,7 @@ def main(mode):
 
     # mode switch
     if 'train' in mode.split('/'):
-        model.load_data('train')
+        model.load_data(dataset_name, 'train')
 
         # build model
         model.build_model()
