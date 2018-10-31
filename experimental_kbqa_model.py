@@ -28,7 +28,7 @@ from keras.models import load_model
 from keras.layers import Input, GRU, Dropout, Embedding, Lambda, Dense
 from keras.callbacks import  ModelCheckpoint, EarlyStopping
 from keras.regularizers import l2
-from keras.optimizers import Adam, Nadam
+from keras.optimizers import Adam, Nadam, Adadelta
 
 from keras import backend as K
 from keras.utils.np_utils import to_categorical
@@ -204,8 +204,9 @@ class KBQA:
 
         if self.output_vector == 'one-hot':
             # self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
+            self.model_train.compile(optimizer=Adadelta(), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
-            self.model_train.compile(optimizer=Nadam(), loss='categorical_crossentropy')
+            # self.model_train.compile(optimizer=Nadam(), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
 
 
