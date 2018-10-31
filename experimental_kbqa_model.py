@@ -180,11 +180,11 @@ class KBQA:
         answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
         # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
         answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4')(answer_decoder_output_3)
-        # answer_decoder_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
+        answer_decoder_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
         
         # A - answer
-        # answer_output = answer_decoder_output
-        answer_output = Dense(self.num_entities, activation='softmax', name='answer_output')(answer_decoder_output_4)
+        answer_output = answer_decoder_output
+        # answer_output = Dense(self.num_entities, activation='softmax', name='answer_output')(answer_decoder_output_4)
         
         # K - KG projection
         # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
@@ -199,8 +199,9 @@ class KBQA:
         # define loss
        
         if self.output_vector == 'embedding':
-            self.model_train.compile(optimizer='rmsprop', loss='cosine_proximity')
+            # self.model_train.compile(optimizer='rmsprop', loss='cosine_proximity')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
+            self.model_train.compile(optimizer=Adadelta(lr=1), loss='cosine_proximity')
 
         if self.output_vector == 'one-hot':
             self.model_train.compile(optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
