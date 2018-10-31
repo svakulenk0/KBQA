@@ -262,7 +262,7 @@ class KBQA:
                 # calculate pairwise distances (via cosine similarity)
                 similarity_matrix = cosine_similarity(predicted_answers_vectors, self.kg_relation_embeddings_matrix)
                 # print np.argmax(similarity_matrix, axis=1)
-                n = 5
+                n = 1
                 # indices of the top n predicted answers for every question in the test set
                 top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
                 # print top_ns[:2]
