@@ -179,13 +179,13 @@ class KBQA:
         # print K.int_shape(question_words_embeddings)
 
         # Q' - question encoder
-        encoded_question = question_words_embeddings  # model 1 (baseline)
+        # encoded_question = question_words_embeddings  # model 1 (baseline)
 
-        # encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
-        #                                  self.kg_relation_embeddings_matrix,
-        #                                  self.word_embs_dim,
-        #                                  self.kg_embeddings_dim,
-        #                                  self.num_entities)(question_words_embeddings)
+        encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
+                                         self.kg_relation_embeddings_matrix,
+                                         self.word_embs_dim,
+                                         self.kg_embeddings_dim,
+                                         self.num_entities)(question_words_embeddings)
         # print K.int_shape(encoded_question)
 
         # A' - answer decoder
@@ -220,8 +220,8 @@ class KBQA:
             # self.model_train.compile(optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
             #                          loss='categorical_crossentropy')
             # self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
-            # self.model_train.compile(optimizer=Adadelta(lr=5), loss='categorical_crossentropy')
-            self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
+            self.model_train.compile(optimizer=Adadelta(lr=1), loss='categorical_crossentropy')
+            # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Nadam(), loss='categorical_crossentropy')
 
         # define callbacks for early stopping
