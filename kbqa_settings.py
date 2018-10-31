@@ -11,7 +11,7 @@ dataset_name = 'lcquad'
 
 # architecture parameters
 rnn_units = 100  # dimension of the GRUs output layer for the hidden question representation
-output_vector = 'one-hot'  # output as a 'one-hot' or KG 'embedding' vector
+output_vector = 'embedding'  # output as a 'one-hot' or KG 'embedding' vector
 
 # dataset parameters
 max_question_words = 24  # maximum number of words in a question
