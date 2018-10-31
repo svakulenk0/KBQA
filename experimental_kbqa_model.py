@@ -91,7 +91,7 @@ class KBQA:
         
         # self.kg_embeddings_matrix = np.dot(self.kg_word_embeddings_matrix.T, self.kg_relation_embeddings_matrix)
 
-    def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100):
+    def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100, balance=True):
         '''
         Encode the dataset: questions and answers
         '''
@@ -99,7 +99,20 @@ class KBQA:
         questions, answers = load_dataset(dataset_name, split)
         num_samples = len(questions)
         assert num_samples == len(answers)
-        print('Loaded %s with %d %s samples' % (dataset_name, num_samples, split))
+        print('Loaded %s with %d %s QA samples' % (dataset_name, num_samples, split))
+
+        if balance:
+            # filter out questions with frequent answers using projection to the indices mask
+            balanced_question = []
+            balanced_answers = []
+            for idx in lcquad_train_b:
+                balanced_question.append(questions[idx])
+                balanced_answers.append(answers[idx])
+            # replace the original dataset with the filtered/balanced one
+            questions, answers = balanced_question, balanced_answers
+            num_samples = len(questions)
+            assert num_samples == len(answers)
+            print('Rebalanced to %d QA samples in the new %s dataset from %s' % (num_samples, split, dataset_name))
 
         # encode questions with word vocabulary and answers with entity vocabulary
         question_vectors = []
