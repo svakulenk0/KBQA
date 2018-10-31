@@ -37,7 +37,7 @@ from keras.utils import CustomObjectScope
 from utils import *
 from kbqa_settings import *
 from EL_layer import EntityLinking
-from data.lcquad_train_balanced import lcquad_train_b
+from lcquad_train_balanced import lcquad_train_b
 
 
 class KBQA:
