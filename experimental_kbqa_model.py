@@ -217,11 +217,11 @@ class KBQA:
             self.model_train.compile(optimizer=Adadelta(lr=1), loss='cosine_proximity')
 
         if self.output_vector == 'one-hot':
-            self.model_train.compile(optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
-                                     loss='categorical_crossentropy')
+            # self.model_train.compile(optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
+            #                          loss='categorical_crossentropy')
             # self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Adadelta(lr=5), loss='categorical_crossentropy')
-            # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
+            self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Nadam(), loss='categorical_crossentropy')
 
         # define callbacks for early stopping
