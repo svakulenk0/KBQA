@@ -91,7 +91,7 @@ class KBQA:
         
         # self.kg_embeddings_matrix = np.dot(self.kg_word_embeddings_matrix.T, self.kg_relation_embeddings_matrix)
 
-    def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100, balance=lcquad_train_max_1):
+    def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100, balance=lcquad_train_max_3):
         '''
         Encode the dataset: questions and answers
 
