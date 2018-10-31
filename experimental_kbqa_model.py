@@ -179,25 +179,25 @@ class KBQA:
         # print K.int_shape(question_words_embeddings)
 
         # Q' - question encoder
-        # encoded_question = question_words_embeddings  # model 1 (baseline)
+        encoded_question = question_words_embeddings  # model 1 (baseline)
 
-        encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
-                                         self.kg_relation_embeddings_matrix,
-                                         self.word_embs_dim,
-                                         self.kg_embeddings_dim,
-                                         self.num_entities)(question_words_embeddings)
+        # encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
+        #                                  self.kg_relation_embeddings_matrix,
+        #                                  self.word_embs_dim,
+        #                                  self.kg_embeddings_dim,
+        #                                  self.num_entities)(question_words_embeddings)
         # print K.int_shape(encoded_question)
 
         # A' - answer decoder
         answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
         answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
         answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
-        answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
-        # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4')(answer_decoder_output_3)
+        # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
+        answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4')(answer_decoder_output_3)
 
         # A - answer
-        answer_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
-        # answer_output = Dense(self.num_entities, activation='softmax', name='answer_output')(answer_decoder_output_4)
+        # answer_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
+        answer_output = Dense(self.num_entities, activation='softmax', name='answer_output')(answer_decoder_output_4)
         
         # K - KG projection
         # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
