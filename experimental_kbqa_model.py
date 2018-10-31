@@ -204,7 +204,7 @@ class KBQA:
 
         if self.output_vector == 'one-hot':
             # self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
-            self.model_train.compile(optimizer=Adadelta(), loss='categorical_crossentropy')
+            self.model_train.compile(optimizer=Adadelta(lr=5), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Nadam(), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
