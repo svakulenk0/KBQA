@@ -37,7 +37,7 @@ from keras.utils import CustomObjectScope
 from utils import *
 from kbqa_settings import *
 from EL_layer import EntityLinking
-from lcquad_train_balanced import lcquad_train_b
+from lcquad_train_balanced import *
 
 
 class KBQA:
@@ -91,9 +91,11 @@ class KBQA:
         
         # self.kg_embeddings_matrix = np.dot(self.kg_word_embeddings_matrix.T, self.kg_relation_embeddings_matrix)
 
-    def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100, balance=True):
+    def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100, balance=lcquad_train_max_1):
         '''
         Encode the dataset: questions and answers
+
+        balance <list> of indices to create a balanced dataset (lcquad_train_max_1 or lcquad_train_max_3)
         '''
         # load data
         questions, answers = load_dataset(dataset_name, split)
@@ -105,7 +107,7 @@ class KBQA:
             # filter out questions with frequent answers using projection to the indices mask
             balanced_question = []
             balanced_answers = []
-            for idx in lcquad_train_b:
+            for idx in balance:
                 balanced_question.append(questions[idx])
                 balanced_answers.append(answers[idx])
             # replace the original dataset with the filtered/balanced one
