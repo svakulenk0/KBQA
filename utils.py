@@ -23,7 +23,6 @@ from keras import backend as K
 # word embeddings
 EMBEDDINGS_PATH = "./embeddings/"
 GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
-
 FASTTEXT_MODEL_PATH = "/data/fasttext/wiki.en.bin"
 
 # KG
@@ -34,12 +33,12 @@ ENTITIES_LIST = KG + "nodes_strings.pkl"
 
 # KG embeddings
 # rdf2vec embeddings 200 dimensions
-# RDF2VEC_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
+RDF2VEC_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 # subset of the KB embeddings (rdf2vec embeddings 200 dimensions from KB_EMBEDDINGS_PATH) for the entities of the LC-Quad dataset (both train and test split)
 # LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_lcquad_answers_train_1_test_all.txt"
-LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_KGlove_PR_Split_lcquad_answers_train_1_test_all.txt"
+# LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_KGlove_PR_Split_lcquad_answers_train_1_test_all.txt"
 # LCQUAD_KB_EMBEDDINGS_PATH = "./data/selectedEmbeddings_rdf2vec_uniform_lcquad_answers_train_1_test_all.txt"
-KB_EMBEDDINGS_PATH = LCQUAD_KB_EMBEDDINGS_PATH
+KB_EMBEDDINGS_PATH = RDF2VEC_EMBEDDINGS_PATH
 
 
 def set_random_seed(seed=912):
