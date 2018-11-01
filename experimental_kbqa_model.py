@@ -194,12 +194,12 @@ class KBQA:
         answer_decoder_output_1 = GRU(self.rnn_units, name='answer_decoder_1', return_sequences=True)(encoded_question)
         answer_decoder_output_2 = GRU(self.rnn_units, name='answer_decoder_2', return_sequences=True)(answer_decoder_output_1)
         answer_decoder_output_3 = GRU(self.rnn_units, name='answer_decoder_3', return_sequences=True)(answer_decoder_output_2)
-        answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
-        # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4')(answer_decoder_output_3)
+        # answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4', return_sequences=True)(answer_decoder_output_3)
+        answer_decoder_output_4 = GRU(self.rnn_units, name='answer_decoder_4')(answer_decoder_output_3)
 
         # A - answer
-        answer_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
-        # answer_output = Dense(self.num_entities, activation='softmax', name='answer_output')(answer_decoder_output_4)
+        # answer_output = GRU(self.kg_embeddings_dim, name='answer_decoder')(answer_decoder_output_4)
+        answer_output = Dense(self.num_entities, activation='softmax', name='answer_output')(answer_decoder_output_4)
         
         # K - KG projection
         # kg_projection = Lambda(self.kg_projection_layer, name='answer_selection')(question_encoder_output)  # model 3
@@ -221,7 +221,8 @@ class KBQA:
         if self.output_vector == 'one-hot':
             # self.model_train.compile(optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
             #                          loss='categorical_crossentropy')
-            self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
+            # self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
+            self.model_train.compile(optimizer='rmsprop', loss='sparse_categorical_crossentropy(')
             # self.model_train.compile(optimizer=Adadelta(lr=1), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
             # self.model_train.compile(optimizer=Nadam(), loss='categorical_crossentropy')
