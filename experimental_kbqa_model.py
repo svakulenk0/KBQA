@@ -127,15 +127,16 @@ class KBQA:
                     entityAndVector = word_embs_file[idx].split(None, 1)
                     assert entity_label == entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
                     embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-                    self.kg_relation_embeddings_matrix.append(embedding_vector)
                 else:
                     embedding_vector = self.wordToVec.get_word_vector(entity_label)
                     word_embs_file.write("<%s> %s\n" % (entity, str(embedding_vector)))
                     # TODO test whether I can load it
                     break
+                
+                self.kg_relation_embeddings_matrix.append(embedding_vector)
 
-        self.kg_relation_embeddings_matrix = np.asarray(kg_relation_embeddings_matrix, dtype=K.floatx())
-        self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
+        self.kg_relation_embeddings_matrix = np.asarray(self.kg_relation_embeddings_matrix, dtype=K.floatx())
+        self.kg_word_embeddings_matrix = np.asarray(self.kg_word_embeddings_matrix, dtype=K.floatx())
 
     def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100, balance=lcquad_train_max_3):
         '''
