@@ -123,7 +123,7 @@ class KBQA:
                 entity_label = entity.split('/')[-1]
                 if load_word_embeddings:
                     entityAndVector = word_embs_file[idx].split(None, 1)
-                    assert entity_label = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
+                    assert entity_label == entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
                     embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
                     self.kg_relation_embeddings_matrix.append(embedding_vector)
                 else:
