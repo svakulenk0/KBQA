@@ -129,7 +129,7 @@ class KBQA:
                     embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
                 else:
                     embedding_vector = self.wordToVec.get_word_vector(entity_label)
-                    word_embs_file.write("<%s> %s\n" % (entity, [",".join(item) for item in embedding_vector.astype(str)]))
+                    word_embs_file.write("<%s> %s\n" % (entity, embedding_vector))
                     # TODO test whether I can load it
                     break
                 
