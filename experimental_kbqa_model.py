@@ -66,7 +66,7 @@ class KBQA:
         print("FastText word embeddings dimension: %d"%self.word_embs_dim)
 
         # load KG relation embeddings
-        self.entityToIndex, self.indexToEntity, self.entityToVec, self.kg_relation_embeddings_matrix = load_KB_embeddings()
+        self.load_KG_embeddings()
 
         self.entities = self.entityToIndex.keys()
         self.num_entities = len(self.entities)
@@ -79,17 +79,61 @@ class KBQA:
         assert self.kg_embeddings_dim == len(self.entityToVec[0])
         print("KG embeddings dimension: %d"%self.kg_relation_embeddings_matrix.shape[1])
 
-        # generate KG word embeddings
-        kg_word_embeddings_matrix = np.zeros((self.num_entities, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
-        for entity_id, index in self.entityToIndex.items():
-            # print index, entity_id
-            # entity = entity_id.split('/')[-1].split('_(')[0]
-            entity = entity_id.split('/')[-1]
-            # print entity
-            kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity) # create embedding: item index to item embedding
-        self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
+        # generate KG word embeddings and save them
+        # kg_word_embeddings_matrix = np.zeros((self.num_entities, self.word_embs_dim))  # initialize with zeros (adding 1 to account for masking)
+        # for entity_id, index in self.entityToIndex.items():
+        #     # print index, entity_id
+        #     # entity = entity_id.split('/')[-1].split('_(')[0]
+        #     entity = entity_id.split('/')[-1]
+        #     # print entity
+        #     kg_word_embeddings_matrix[index, :] = self.wordToVec.get_word_vector(entity) # create embedding: item index to item embedding
+        # self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
         
         # self.kg_embeddings_matrix = np.dot(self.kg_word_embeddings_matrix.T, self.kg_relation_embeddings_matrix)
+    
+    def load_KG_embeddings(KG_relation_embeddings_file=KB_RELATION_EMBEDDINGS_PATH,
+                           KG_word_embeddings_file=KB_WORD_EMBEDDINGS_PATH):
+        '''
+        load all KG embeddings from files
+        '''
+        self.entityToVec = {}
+        self.entityToIndex = {}  # map from a token to an index
+        # self.index2entity = {}  # map from an index to a token 
+        self.kg_relation_embeddings_matrix = []
+        self.kg_word_embeddings_matrix = []
+
+        # if word embeddings file does not exist create it
+        if not os.path.exists(KG_word_embeddins_file):
+            load_word_embeddings = True
+        else:
+            load_word_embeddings = False
+
+        with open(KG_relation_embeddings_file) as rels_embs_file, open(KG_word_embeddings_file, 'w') as word_embs_file:
+            # embeddings in a text file one per line for Global vectors and glove word embeddings
+            for idx, line in enumerate(rels_embs_file):
+                # 
+                entityAndVector = line.split(None, 1)
+                entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
+                embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+                self.kg_relation_embeddings_matrix.append(embedding_vector)
+                self.entityToVec[idx] = embedding_vector
+                self.entityToIndex[entity] = idx
+                # self.index2entity[idx] = entity
+                
+                entity_label = entity.split('/')[-1]
+                if load_word_embeddings:
+                    entityAndVector = word_embs_file[idx].split(None, 1)
+                    assert entity_label = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
+                    embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+                    self.kg_relation_embeddings_matrix.append(embedding_vector)
+                else:
+                    embedding_vector = self.wordToVec.get_word_vector(entity_label)
+                    word_embs_file.write("<%s> %s\n"(entity, str(embedding_vector)))
+                    # TODO test whether I can load it
+                    break
+
+        self.kg_relation_embeddings_matrix = np.asarray(kg_relation_embeddings_matrix, dtype=K.floatx())
+        self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
 
     def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100, balance=lcquad_train_max_3):
         '''
@@ -233,6 +277,8 @@ class KBQA:
         callbacks_list = [checkpoint, early_stop]
         
         question_vectors, answer_vectors, all_answers_indices = self.dataset
+
+        K.set_value(kg_word_embeddings,[self.kg_word_embeddings_matrix.T])
 
         self.model_train.fit([question_vectors], [answer_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 

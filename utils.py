@@ -36,9 +36,10 @@ ENTITIES_LIST = KG + "nodes_strings.pkl"
 RDF2VEC_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 
 # subset of the KB embeddings for all entities mentioned in LCQUAD + correct answers
-LCQUAD_KB_EMBEDDINGS_PATH = "./data/embeddings_subset_for_lcquad_entities_set.txt"
+LCQUAD_KB_EMBEDDINGS_PATH = "./data/embeddings_subset_for_lcquad_entities_set_dbpedia.txt"
 
-KB_EMBEDDINGS_PATH = LCQUAD_KB_EMBEDDINGS_PATH
+KB_RELATION_EMBEDDINGS_PATH = RDF2VEC_EMBEDDINGS_PATH
+KB_WORD_EMBEDDINGS_PATH = "./data/embeddings_subset_for_lcquad_entities_set_dbpedia_words.txt"
 
 
 def set_random_seed(seed=912):
@@ -53,11 +54,27 @@ def load_dbnqa():
 def load_lcquad(dataset_split):
     QS = []
     AS = []
-    with open("./data/lcquad_%s.json"%dataset_split, "r") as train_file:
+    templates = []
+    empty_answer = 0
+
+    with open("./data/lcquad_%s_new.json"%dataset_split, "r") as train_file:
         qas = json.load(train_file)
+        
+        print ("%d total QA pairs in lcquad %s" % (len(qas), dataset_split))
+
         for qa in qas:
-            QS.append(qa['question'])
-            AS.append(qa['answers'])
+            # filter only select queries
+            if "SELECT DISTINCT ?uri WHERE" in qa["sparql_query"]:
+                QS.append(qa['corrected_question'])
+                if qa['answers']:
+                    AS.append(qa['answers'])
+                else:
+                    empty_answer += 1
+                templates.append(qa['sparql_template_id'])
+    
+    print ("%d SELECT DISTINCT ?uri WHERE QA pairs in lcquad %s" % (len(QS), dataset_split))
+    print ("%d questions skipped because no answer was found" % len(empty_answer))
+    print ("%d unique templates" % len(set(templates)))
     return (QS, AS)
 
 
@@ -170,33 +187,6 @@ def loadKB(kb_entity_labels_list=ENTITIES_LIST, kb_adjacency_path=ADJACENCY_MATR
         #     pkl.dump(kb_adjacency, f, pkl.HIGHEST_PROTOCOL)
 
     return entityToIndex, sp.hstack(adjacencies, format="csr")
-
-
-def load_KB_embeddings(KB_embeddings_file=KB_EMBEDDINGS_PATH):
-    '''
-    load all embeddings from file
-    '''
-    entity2vec = {}
-    entity2index = {}  # map from a token to an index
-    index2entity = {}  # map from an index to a token 
-    kg_embeddings_matrix = []
-
-    with open(KB_embeddings_file) as embs_file:
-        # embeddings in a text file one per line for Global vectors and glove word embeddings
-        for idx, line in enumerate(embs_file):
-            entityAndVector = line.split(None, 1)
-            # match the entity labels in vector embeddings
-            entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
-            embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-            kg_embeddings_matrix.append(embedding_vector)
-            entity2vec[idx] = embedding_vector
-
-            entity2index[entity] = idx
-            index2entity[idx] = entity
-
-    kg_embeddings_matrix = np.asarray(kg_embeddings_matrix, dtype=K.floatx())
-
-    return (entity2index, index2entity, entity2vec, kg_embeddings_matrix)
 
 
 def load_fasttext(model_path=FASTTEXT_MODEL_PATH):
