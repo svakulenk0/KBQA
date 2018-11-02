@@ -104,10 +104,12 @@ class KBQA:
         # if word embeddings file does not exist create it
         if not os.path.exists(KG_word_embeddings_file):
             load_word_embeddings = True
+            word_embs_file = open(KG_word_embeddings_file, 'r')
         else:
             load_word_embeddings = False
+            word_embs_file = open(KG_word_embeddings_file, 'w')
 
-        with open(KG_relation_embeddings_file) as rels_embs_file, open(KG_word_embeddings_file, 'r+') as word_embs_file:
+        with open(KG_relation_embeddings_file) as rels_embs_file:
             # embeddings in a text file one per line for Global vectors and glove word embeddings
             if load_word_embeddings:
                 word_embs = word_embs_file.readlines()
