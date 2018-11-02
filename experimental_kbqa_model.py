@@ -135,7 +135,7 @@ class KBQA:
                     break
                 else:
                     embedding_vector = self.wordToVec.get_word_vector(entity_label)
-                    word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in embedding_vector])))
+                    word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in np.array_str(embedding_vector)])))
                     # TODO test whether I can load it
                     break
                 
