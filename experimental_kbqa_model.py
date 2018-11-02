@@ -126,9 +126,10 @@ class KBQA:
                 
                 entity_label = entity.split('/')[-1]
                 if load_word_embeddings:
-                    entityAndVector = word_embs_file[idx].split(None, 1)
+                    entityAndVector = word_embs[idx].split(None, 1)
                     assert entity_label == entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
                     embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+                    print embedding_vector
                 else:
                     embedding_vector = self.wordToVec.get_word_vector(entity_label)
                     word_embs_file.write("<%s> %s\n" % (entity, embedding_vector))
@@ -182,7 +183,7 @@ class KBQA:
 
             # skip questions that have no answer embeddings
             if correct_answers:
-                # encode words in the question using FastText
+                # encode words in the question using FastText TODO save word vectors
                 question_vectors.append([self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])])
                 all_answers_indices.append(correct_answers)
 
