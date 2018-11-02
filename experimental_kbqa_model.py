@@ -130,7 +130,7 @@ class KBQA:
                     self.kg_relation_embeddings_matrix.append(embedding_vector)
                 else:
                     embedding_vector = self.wordToVec.get_word_vector(entity_label)
-                    word_embs_file.write("<%s> %s\n"(entity, str(embedding_vector)))
+                    word_embs_file.write("<%s> %s\n" % (entity, str(embedding_vector)))
                     # TODO test whether I can load it
                     break
 
