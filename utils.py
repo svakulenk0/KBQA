@@ -38,7 +38,7 @@ RDF2VEC_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannhei
 # subset of the KB embeddings for all entities mentioned in LCQUAD + correct answers
 LCQUAD_KB_EMBEDDINGS_PATH = "./data/embeddings_subset_for_lcquad_entities_set.txt"
 
-KB_EMBEDDINGS_PATH = RDF2VEC_EMBEDDINGS_PATH
+KB_EMBEDDINGS_PATH = LCQUAD_KB_EMBEDDINGS_PATH
 
 
 def set_random_seed(seed=912):
