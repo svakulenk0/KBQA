@@ -73,7 +73,7 @@ def load_lcquad(dataset_split):
                 templates.append(qa['sparql_template_id'])
     
     print ("%d SELECT DISTINCT ?uri WHERE QA pairs in lcquad %s" % (len(QS), dataset_split))
-    print ("%d questions skipped because no answer was found" % len(empty_answer))
+    print ("%d questions skipped because no answer was found" % empty_answer)
     print ("%d unique templates" % len(set(templates)))
     return (QS, AS)
 
