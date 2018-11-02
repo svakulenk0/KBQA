@@ -102,7 +102,7 @@ class KBQA:
         self.kg_word_embeddings_matrix = []
 
         # if word embeddings file does not exist create it
-        if not os.path.exists(KG_word_embeddins_file):
+        if not os.path.exists(KG_word_embeddings_file):
             load_word_embeddings = True
         else:
             load_word_embeddings = False
