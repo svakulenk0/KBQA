@@ -30,8 +30,14 @@ class EntityLinking(Layer):
         super(EntityLinking, self).__init__(**kwargs)
 
     def build(self, input_shape):
-        kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix.T)
-        kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix)
+        # ValueError: Cannot create a tensor proto whose content is larger than 2GB.
+        # kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix.T)
+
+        # work-around
+        kg_word_embeddings_initializer = K.placeholder(tf.float32, shape=(self.word_embs_dim, self.num_entities))
+        kg_word_embeddings = K.Variable(kg_word_embeddings_initializer, trainable=False)
+
+        kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix, trainable=False)
         self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
         
         # Create a trainable weight variable for word-to-kg embedding
