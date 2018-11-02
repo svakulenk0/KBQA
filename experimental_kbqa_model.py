@@ -91,7 +91,7 @@ class KBQA:
         
         # self.kg_embeddings_matrix = np.dot(self.kg_word_embeddings_matrix.T, self.kg_relation_embeddings_matrix)
     
-    def load_KG_embeddings(KG_relation_embeddings_file=KB_RELATION_EMBEDDINGS_PATH,
+    def load_KG_embeddings(self, KG_relation_embeddings_file=KB_RELATION_EMBEDDINGS_PATH,
                            KG_word_embeddings_file=KB_WORD_EMBEDDINGS_PATH):
         '''
         load all KG embeddings from files
