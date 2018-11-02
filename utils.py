@@ -65,12 +65,12 @@ def load_lcquad(dataset_split):
         for qa in qas:
             # filter only select queries
             if "SELECT DISTINCT ?uri WHERE" in qa["sparql_query"]:
-                QS.append(qa['corrected_question'])
                 if qa['answers']:
+                    QS.append(qa['corrected_question'])
                     AS.append(qa['answers'])
+                    templates.append(qa['sparql_template_id'])
                 else:
                     empty_answer += 1
-                templates.append(qa['sparql_template_id'])
     
     print ("%d SELECT DISTINCT ?uri WHERE QA pairs in lcquad %s" % (len(QS), dataset_split))
     print ("%d questions skipped because no answer was found" % empty_answer)
