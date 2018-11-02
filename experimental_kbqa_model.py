@@ -127,12 +127,13 @@ class KBQA:
                 entity_label = entity.split('/')[-1]
                 if load_word_embeddings:
                     entityAndVector = word_embs[idx].split(None, 1)
-                    assert entity_label == entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
+                    assert entity_label == entityAndVector[0]
                     embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
                     print embedding_vector
+                    break
                 else:
                     embedding_vector = self.wordToVec.get_word_vector(entity_label)
-                    word_embs_file.write("<%s> %s\n" % (entity, embedding_vector))
+                    word_embs_file.write("<%s> %s\n" % (entity_label, embedding_vector))
                     # TODO test whether I can load it
                     break
                 
