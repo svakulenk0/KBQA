@@ -123,6 +123,9 @@ class KBQA:
                 self.entityToIndex[entity] = idx
                 # self.index2entity[idx] = entity
                 
+                if entity_label[-1] == '/':
+                    entity_label = entity_label[:-1]
+
                 entity_label = entity.split('/')[-1]
                 # print entity_label
                 if entity_label:
@@ -138,7 +141,7 @@ class KBQA:
 
                     self.kg_word_embeddings_matrix.append(embedding_vector)
                 else:
-                    print entity
+                    print("No word vector for %s" % entity)
 
         assert len(self.kg_word_embeddings_matrix) == len(self.kg_relation_embeddings_matrix)
 
