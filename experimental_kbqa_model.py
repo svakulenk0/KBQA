@@ -123,10 +123,10 @@ class KBQA:
                 # self.index2entity[idx] = entity
                 
                 entity_label = entity.split('/')[-1]
-                # print entity_label
+                print entity_label
                 if load_word_embeddings == 'r':
                     entityAndVector = word_embs[idx].split(None, 1)
-                    # print entityAndVector[0]
+                    print entityAndVector[0]
                     assert entity_label == entityAndVector[0]
                     embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
                 else:
