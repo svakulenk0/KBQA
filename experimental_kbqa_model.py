@@ -100,6 +100,7 @@ class KBQA:
         # self.index2entity = {}  # map from an index to a token 
         self.kg_relation_embeddings_matrix = []
         self.kg_word_embeddings_matrix = []
+        # self.kg_word_embeddings_matrix = np.zeros((self.num_entities, self.word_embs_dim))
 
         # if word embeddings file does not exist create it
         if os.path.exists(KG_word_embeddings_file):
@@ -130,9 +131,6 @@ class KBQA:
                         # print entityAndVector[0]
                         assert entity_label == entityAndVector[0]
                         embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-                        if len(embedding_vector) != 300:
-                            print entity_label
-                            print embedding_vector
                     else:
                         embedding_vector = self.wordToVec.get_word_vector(entity_label)
                         word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in embedding_vector.astype(str)])))
@@ -140,8 +138,12 @@ class KBQA:
 
                 self.kg_word_embeddings_matrix.append(embedding_vector)
 
+        assert len(self.kg_word_embeddings_matrix) == len(self.kg_relation_embeddings_matrix)
+
         self.kg_relation_embeddings_matrix = np.asarray(self.kg_relation_embeddings_matrix, dtype=K.floatx())
         print("KG relation embeddings loaded")
+
+        print(set([len(array) for array in self.kg_word_embeddings_matrix]))
         self.kg_word_embeddings_matrix = np.asarray(self.kg_word_embeddings_matrix, dtype=K.floatx())
         print("KG word embeddings loaded")
 
