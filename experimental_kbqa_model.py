@@ -124,8 +124,10 @@ class KBQA:
                 # self.index2entity[idx] = entity
                 
                 if entity[-1] == '/':
-                    # trim
-                    entity = entity[:-1]
+                    # loose last /
+                    print entity
+                    entity = entity[:-2]
+                    print entity
 
                 entity_label = entity.split('/')[-1]
                 # print entity_label
