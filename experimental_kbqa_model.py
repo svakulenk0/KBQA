@@ -136,14 +136,16 @@ class KBQA:
                         word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in embedding_vector.astype(str)])))
                         embedding_vector = np.asarray(embedding_vector, dtype='float32')
 
-                self.kg_word_embeddings_matrix.append(embedding_vector)
+                    self.kg_word_embeddings_matrix.append(embedding_vector)
+                else:
+                    print entity
 
         assert len(self.kg_word_embeddings_matrix) == len(self.kg_relation_embeddings_matrix)
 
         self.kg_relation_embeddings_matrix = np.asarray(self.kg_relation_embeddings_matrix, dtype=K.floatx())
         print("KG relation embeddings loaded")
 
-        print(set([len(array) for array in self.kg_word_embeddings_matrix]))
+        # print(set([len(array) for array in self.kg_word_embeddings_matrix]))
         self.kg_word_embeddings_matrix = np.asarray(self.kg_word_embeddings_matrix, dtype=K.floatx())
         print("KG word embeddings loaded")
 
