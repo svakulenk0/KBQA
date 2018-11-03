@@ -130,13 +130,12 @@ class KBQA:
                         # print entityAndVector[0]
                         assert entity_label == entityAndVector[0]
                         embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+                        print embedding_vector
                     else:
                         embedding_vector = self.wordToVec.get_word_vector(entity_label)
                         word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in embedding_vector.astype(str)])))
                         embedding_vector = np.asarray(embedding_vector, dtype='float32')
 
-                break
-                
                 self.kg_word_embeddings_matrix.append(embedding_vector)
 
         self.kg_relation_embeddings_matrix = np.asarray(self.kg_relation_embeddings_matrix, dtype=K.floatx())
