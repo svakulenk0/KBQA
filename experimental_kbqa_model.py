@@ -122,14 +122,8 @@ class KBQA:
                 self.entityToVec[idx] = embedding_vector
                 self.entityToIndex[entity] = idx
                 # self.index2entity[idx] = entity
-                
-                if entity[-1] == '/':
-                    # loose last /
-                    print entity
-                    entity = entity[:-1]
-                    print entity
 
-                entity_label = entity.split('/')[-1]
+                entity_label = entity.strip('/').split('/')[-1]
                 # print entity_label
                 if entity_label:
                     if load_word_embeddings == 'r':
