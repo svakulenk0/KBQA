@@ -123,16 +123,17 @@ class KBQA:
                 # self.index2entity[idx] = entity
                 
                 entity_label = entity.split('/')[-1]
-                print entity_label
-                if load_word_embeddings == 'r':
-                    entityAndVector = word_embs[idx].split(None, 1)
-                    print entityAndVector[0]
-                    assert entity_label == entityAndVector[0]
-                    embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-                else:
-                    embedding_vector = self.wordToVec.get_word_vector(entity_label)
-                    word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in embedding_vector.astype(str)])))
-                    embedding_vector = np.asarray(embedding_vector, dtype='float32')
+                # print entity_label
+                if entity_label:
+                    if load_word_embeddings == 'r':
+                        entityAndVector = word_embs[idx].split(None, 1)
+                        # print entityAndVector[0]
+                        assert entity_label == entityAndVector[0]
+                        embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
+                    else:
+                        embedding_vector = self.wordToVec.get_word_vector(entity_label)
+                        word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in embedding_vector.astype(str)])))
+                        embedding_vector = np.asarray(embedding_vector, dtype='float32')
                 
                 self.kg_word_embeddings_matrix.append(embedding_vector)
 
