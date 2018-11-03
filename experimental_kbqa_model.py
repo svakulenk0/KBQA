@@ -107,9 +107,9 @@ class KBQA:
         else:
             load_word_embeddings = 'w'
 
-        with open(KG_relation_embeddings_file) as rels_embs_file, open(KG_word_embeddings_file, load_word_embeddings):
+        with open(KG_relation_embeddings_file) as rels_embs_file, open(KG_word_embeddings_file, load_word_embeddings) as word_embs_file:
             # embeddings in a text file one per line for Global vectors and glove word embeddings
-            if load_word_embeddings:
+            if load_word_embeddings == 'r':
                 word_embs = word_embs_file.readlines()
             
             for idx, line in enumerate(rels_embs_file):
