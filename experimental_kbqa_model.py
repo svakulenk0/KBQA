@@ -125,10 +125,10 @@ class KBQA:
                 # self.index2entity[idx] = entity
                 
                 entity_label = entity.split('/')[-1]
-                print entity_label
+                # print entity_label
                 if load_word_embeddings:
                     entityAndVector = word_embs[idx].split(None, 1)
-                    print entityAndVector[0]
+                    # print entityAndVector[0]
                     assert entity_label == entityAndVector[0]
                     embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
                 else:
@@ -139,7 +139,9 @@ class KBQA:
                 self.kg_word_embeddings_matrix.append(embedding_vector)
 
         self.kg_relation_embeddings_matrix = np.asarray(self.kg_relation_embeddings_matrix, dtype=K.floatx())
+        print("KG relation embeddings loaded")
         self.kg_word_embeddings_matrix = np.asarray(self.kg_word_embeddings_matrix, dtype=K.floatx())
+        print("KG word embeddings loaded")
 
     def load_data(self, dataset_name, split, max_question_words=None, max_answers_per_question=100, balance=lcquad_train_max_3):
         '''
