@@ -126,7 +126,7 @@ class KBQA:
                 if entity[-1] == '/':
                     # loose last /
                     print entity
-                    entity = entity[:-2]
+                    entity = entity[:-1]
                     print entity
 
                 entity_label = entity.split('/')[-1]
