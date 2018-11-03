@@ -134,9 +134,9 @@ class KBQA:
                 else:
                     embedding_vector = self.wordToVec.get_word_vector(entity_label)
                     word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in embedding_vector.astype(str)])))
-                    # TODO test whether I can load it
+                    embedding_vector = np.asarray(embedding_vector, dtype='float32')
                 
-                self.kg_relation_embeddings_matrix.append(embedding_vector)
+                self.kg_word_embeddings_matrix.append(embedding_vector)
 
         self.kg_relation_embeddings_matrix = np.asarray(self.kg_relation_embeddings_matrix, dtype=K.floatx())
         self.kg_word_embeddings_matrix = np.asarray(self.kg_word_embeddings_matrix, dtype=K.floatx())
