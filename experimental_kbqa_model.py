@@ -103,13 +103,11 @@ class KBQA:
 
         # if word embeddings file does not exist create it
         if os.path.exists(KG_word_embeddings_file):
-            load_word_embeddings = True
-            word_embs_file = open(KG_word_embeddings_file, 'r')
+            load_word_embeddings = 'r'
         else:
-            load_word_embeddings = False
-            word_embs_file = open(KG_word_embeddings_file, 'w')
+            load_word_embeddings = 'w'
 
-        with open(KG_relation_embeddings_file) as rels_embs_file:
+        with open(KG_relation_embeddings_file) as rels_embs_file, open(KG_word_embeddings_file, load_word_embeddings):
             # embeddings in a text file one per line for Global vectors and glove word embeddings
             if load_word_embeddings:
                 word_embs = word_embs_file.readlines()
@@ -126,7 +124,7 @@ class KBQA:
                 
                 entity_label = entity.split('/')[-1]
                 # print entity_label
-                if load_word_embeddings:
+                if load_word_embeddings == 'r':
                     entityAndVector = word_embs[idx].split(None, 1)
                     # print entityAndVector[0]
                     assert entity_label == entityAndVector[0]
