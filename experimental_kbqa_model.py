@@ -130,7 +130,9 @@ class KBQA:
                         # print entityAndVector[0]
                         assert entity_label == entityAndVector[0]
                         embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')
-                        print len(embedding_vector)
+                        if len(embedding_vector) != 300:
+                            print entity_label
+                            print embedding_vector
                     else:
                         embedding_vector = self.wordToVec.get_word_vector(entity_label)
                         word_embs_file.write("%s %s\n" % (entity_label, ' '.join([dim for dim in embedding_vector.astype(str)])))
