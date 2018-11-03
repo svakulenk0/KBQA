@@ -338,7 +338,7 @@ class KBQA:
                     if predicted_answer_index in answers:
                         hits += 1
                 print("Correct answers: %d/%d"%(hits, len(all_answers_indices)))
-                print all_predicted_answers
+                print (all_predicted_answers)
 
 
 def main(mode):
