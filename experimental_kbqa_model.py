@@ -112,9 +112,12 @@ class KBQA:
             # embeddings in a text file one per line for Global vectors and glove word embeddings
             if load_word_embeddings == 'r':
                 word_embs = word_embs_file.readlines()
-            
+            stop = 100
             for idx, line in enumerate(rels_embs_file):
-                # 
+                # limit number of embeddings loaded
+                if idx == stop:
+                    break
+
                 entityAndVector = line.split(None, 1)
                 entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
                 embedding_vector = np.asarray(entityAndVector[1].split(), dtype='float32')

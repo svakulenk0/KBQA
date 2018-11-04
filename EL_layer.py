@@ -34,7 +34,7 @@ class EntityLinking(Layer):
         # kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix.T)
 
         # work-around
-        kg_word_embeddings_initializer = K.placeholder(tf.float32, shape=(self.word_embs_dim, self.num_entities))
+        kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
         kg_word_embeddings = K.Variable(kg_word_embeddings_initializer, trainable=False)
 
         kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix, trainable=False)
