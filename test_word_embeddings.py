@@ -57,7 +57,7 @@ def test_embeddings(questions=[test_q], correct_question_entities=[correct_entit
     for question in questions:
 
         # check that correct entities are in our KG
-        existing_correct_entities = [entity in kg_word_embeddings for entity in correct_question_entities[i]]
+        existing_correct_entities = [entity if entity in kg_word_embeddings for entity in correct_question_entities[i]]
         print("%d out of %d entities required to answer the question found in the KG"%(len(existing_correct_entities), len(correct_question_entities[i])))
 
         candidates = []
@@ -66,9 +66,9 @@ def test_embeddings(questions=[test_q], correct_question_entities=[correct_entit
             print(word)
             # top_key = kg_word_embeddings.most_similar(word, topn=100) # Most similar by key
             top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=10) # Most similar by vector
-            print(top)
+            # print(top)
             candidates.extend([entity_score[0] for entity_score in top])
-
+        print candidates
         hits = set.intersection(set(candidates), set(existing_correct_entities))
         print hits
         i += 1
