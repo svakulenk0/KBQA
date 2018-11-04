@@ -48,8 +48,12 @@ def test_embeddings(questions=[test_q], correct_entities=[correct_entities],
     # load embeddings
     kg_word_embeddings = Magnitude(fname_kg)
 
-    i = 0
+    # preprocess entities
+    correct_entities = [entity_uri.strip('\n').strip('/').strip('>').split('/')[-1] for entity_uri in correct_entities]
+    print correct_entities
     
+    # iterate over questions
+    i = 0
     for question in questions:
         
         candidates = []
