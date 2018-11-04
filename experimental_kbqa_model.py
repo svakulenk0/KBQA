@@ -121,8 +121,8 @@ class KBQA:
             for idx, line in enumerate(rels_embs_file):
                 
                 # limit number of embeddings loaded
-                if idx == n_embeddings:
-                    break
+                # if idx == n_embeddings:
+                #     break
 
                 entityAndVector = line.split(None, 1)
                 entity = entityAndVector[0][1:-1]  # Dbpedia global vectors strip <> to match the entity labels
