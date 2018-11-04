@@ -188,6 +188,7 @@ class KBQA:
         answer_vectors = []
         # evaluating against all correct answers at test time
         all_answers_indices = []
+        
         # iterate over QA samples
         for i in range(num_samples):
             # evaluating against all correct answers at test time
@@ -203,6 +204,8 @@ class KBQA:
                 # encode words in the question using FastText TODO save word vectors
                 question_vectors.append([self.wordToVec.get_word_vector(word) for word in text_to_word_sequence(questions[i])])
                 all_answers_indices.append(correct_answers)
+
+        print("Loaded the dataset")
 
         # normalize input length
         if max_question_words:
@@ -226,7 +229,7 @@ class KBQA:
         self.num_samples = question_vectors.shape[0]
         print("Number of samples with embeddings: %d"%self.num_samples)
 
-        print("Loaded the dataset")
+        # print("Loaded the dataset")
         self.dataset = (question_vectors, answer_vectors, all_answers_indices)
 
     def kg_projection_layer(self, question_vector):
