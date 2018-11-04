@@ -42,7 +42,7 @@ def produce_word_lists(questions=[test_q], kg_entities_path=kg_entities_path):
     save_words_list(entity_labels, './data/lcquad_train_entities_labels.txt')
 
 
-def test_embeddings(questions=[test_q], fname_kg='data/lcquad_train_entities_labels.magnitude'):
+def test_embeddings(questions=[test_q], fname_kg='./data/lcquad_train_entities_labels.magnitude'):
     
     # load embeddings
     kg_word_embeddings = Magnitude(fname_kg)
