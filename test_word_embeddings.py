@@ -64,7 +64,7 @@ def test_embeddings(questions=[test_q], correct_question_entities=[correct_entit
         for word in text_to_word_sequence(question):
             print(word)
             # top_key = kg_word_embeddings.most_similar(word, topn=100) # Most similar by key
-            top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=10) # Most similar by vector
+            top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=50) # Most similar by vector
             # print(top)
             candidates.extend([entity_score[0] for entity_score in top])
         print candidates
