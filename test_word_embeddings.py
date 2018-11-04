@@ -35,7 +35,7 @@ def produce_word_lists(questions=[test_q], kg_entities_path=kg_entities_path):
     with open(kg_entities_path) as entities_file:
         for entity_uri in entities_file:
             # strip the domain name from the entity_uri to produce a cleaner entity label
-            entity_label = entity_uri.strip('/').split('/')[-1]
+            entity_label = entity_uri.strip('\n').strip('/').strip('>').split('/')[-1]
             entity_labels.append(entity_label)
     save_words_list(entity_labels, './data/lcquad_train_entities_labels.txt')
 
