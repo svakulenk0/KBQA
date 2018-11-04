@@ -21,10 +21,13 @@ def save_words_list(words_list, file_name):
     with open(file_name, 'w') as out:
         out.writelines(words_list)
 
-def produce_word_lists():
+def produce_word_lists(questions=[test_q], kg_entities_path=kg_entities_path):
     # save a list of question words
-    question_words = [wordToVec.get_word_vector(word) for word in text_to_word_sequence(question)]
-    assert len(question_words) == 7
+    question_words = []
+    for question in questions:
+        question_words.extend([word for word in text_to_word_sequence(question)])
+        assert len(question_words) == 7
+    save_words_list(question_words, './data/test_question_words.txt')
 
     # save a list of entity labels
     entity_labels = []
@@ -33,6 +36,7 @@ def produce_word_lists():
             # strip the domain name from the entity_uri to produce a cleaner entity label
             entity_label = entity_uri.strip('/').split('/')[-1]
             entity_labels.append(entity_label)
+    save_words_list(entity_labels, './data/lcquad_train_entities_labels.txt')
 
 # generate fastText embeddings for both lists
 
