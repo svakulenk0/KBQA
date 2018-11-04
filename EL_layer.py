@@ -34,9 +34,6 @@ class EntityLinking(Layer):
         # ValueError: Cannot create a tensor proto whose content is larger than 2GB.
         # kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix.T)
 
-        # work-around
-        kg_word_embeddings = K.variable(self.kg_word_embeddings_initializer)
-
         kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix)
         self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
         
