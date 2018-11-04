@@ -18,11 +18,12 @@ from keras.engine.topology import Layer
 
 class EntityLinking(Layer):
 
-    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix,
+    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix, kg_word_embeddings_initializer,
                  word_embs_dim, kg_embeddings_dim, num_entities, **kwargs):
         # when loaded from config matrices are again lists not numpy arrays
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
         self.kg_relation_embeddings_matrix = np.asarray(kg_relation_embeddings_matrix, dtype=K.floatx())
+        self.kg_word_embeddings_initializer = kg_word_embeddings_initializer
         self.word_embs_dim = word_embs_dim
         self.kg_embeddings_dim = kg_embeddings_dim
         self.num_entities = num_entities
@@ -34,8 +35,7 @@ class EntityLinking(Layer):
         # kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix.T)
 
         # work-around
-        kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
-        kg_word_embeddings = K.variable(kg_word_embeddings_initializer)
+        kg_word_embeddings = K.variable(self.kg_word_embeddings_initializer)
 
         kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix)
         self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
