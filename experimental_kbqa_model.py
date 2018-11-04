@@ -251,8 +251,8 @@ class KBQA:
         # encoded_question = question_words_embeddings  # model 1 (baseline)
 
         # placeholder to hold KG embeddings
-        kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
-        self.kg_word_embeddings = K.variable(kg_word_embeddings_initializer)
+        self.kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
+        self.kg_word_embeddings = K.variable(self.kg_word_embeddings_initializer)
 
         encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
                                          self.kg_relation_embeddings_matrix,
@@ -306,7 +306,7 @@ class KBQA:
         
         question_vectors, answer_vectors, all_answers_indices = self.dataset
 
-        K.set_value(self.kg_word_embeddings, self.kg_word_embeddings_matrix.T)
+        K.set_value(self.kg_word_embeddings_initializer, self.kg_word_embeddings_matrix.T)
         # sess.run(tf.global_variables_initializer()) # initialize 
         # session.run([self.model_train.output], feed_dict={self.kg_word_embeddings_initializer: self.kg_word_embeddings_matrix.T})
 
