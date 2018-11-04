@@ -38,31 +38,30 @@ def produce_word_lists():
 
 # TODO
 # load all entities from file and embed
-kg_word_embeddings = []
-# store entity vocabulary
-ent2idx = {}
-idx2ent = {}
-with open(kg_entities_path) as entities_file:
-    idx = 0
-    for entity_uri in entities_file:
-        ent2idx[entity_uri] = idx
-        idx2ent[idx] = entity_uri
-        # strip the domain name from the entity_uri to produce a cleaner entity label
-        entity_label = entity_uri.strip('/').split('/')[-1]
-        # embed the produced entity label into the same word vector space
-        kg_word_embeddings.append(wordToVec.get_word_vector(entity_label))
+    # kg_word_embeddings = []
+    # # store entity vocabulary
+    # ent2idx = {}
+    # idx2ent = {}
+    # with open(kg_entities_path) as entities_file:
+    #     idx = 0
+    #     for entity_uri in entities_file:
+    #         ent2idx[entity_uri] = idx
+    #         idx2ent[idx] = entity_uri
+    #         # strip the domain name from the entity_uri to produce a cleaner entity label
+    #         entity_label = entity_uri.strip('/').split('/')[-1]
+    #         # embed the produced entity label into the same word vector space
+    #         kg_word_embeddings.append(wordToVec.get_word_vector(entity_label))
 
-# compute text similarity (cosine) between the question words and KG entity labels: all question words x all entities
-similarity_matrix = cosine_similarity(question_word_embeddings, kg_word_embeddings)
+    # # compute text similarity (cosine) between the question words and KG entity labels: all question words x all entities
+    # similarity_matrix = cosine_similarity(question_word_embeddings, kg_word_embeddings)
 
-# indices of the top n similar entities for every question word
-top_n = 5
-top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
-print [idx2ent[idx] for word_top_ns in top_ns for idx in word_top_ns]
+    # # indices of the top n similar entities for every question word
+    # top_n = 5
+    # top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
+    # print [idx2ent[idx] for word_top_ns in top_ns for idx in word_top_ns]
 
 # check the rank of the correct_entities
 # 
 
 if __name__ == '__main__':
     produce_word_lists()
-
