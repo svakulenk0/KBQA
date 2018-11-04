@@ -19,7 +19,8 @@ correct_entities = ["http://dbpedia.org/ontology/director", "http://dbpedia.org/
 
 def save_words_list(words_list, file_name):
     with open(file_name, 'w') as out:
-        out.writelines(words_list)
+        out.write('\n'.join(words_list) + '\n')
+
 
 def produce_word_lists(questions=[test_q], kg_entities_path=kg_entities_path):
     # save a list of question words
