@@ -35,9 +35,9 @@ class EntityLinking(Layer):
 
         # work-around
         kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
-        kg_word_embeddings = K.variable(kg_word_embeddings_initializer, trainable=False)
+        kg_word_embeddings = K.variable(kg_word_embeddings_initializer)
 
-        kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix, trainable=False)
+        kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix)
         self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
         
         # Create a trainable weight variable for word-to-kg embedding
