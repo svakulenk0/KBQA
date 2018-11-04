@@ -48,16 +48,15 @@ def test_embeddings(questions=[test_q], correct_question_entities=[correct_entit
     # load embeddings
     kg_word_embeddings = Magnitude(fname_kg)
 
-    # preprocess entities
-    correct_question_entities = [entity_uri.strip('\n').strip('/').strip('>').split('/')[-1] for correct_entities in correct_question_entities for entity_uri in correct_entities]
-    print correct_question_entities
-
     # iterate over questions
     i = 0
     for question in questions:
+        # preprocess entities
+        correct_question_entity_labels = [entity_uri.strip('\n').strip('/').strip('>').split('/')[-1]for entity_uri in correct_question_entities[i]]
+        print correct_question_entity_labels
 
         # check that correct entities are in our KG
-        existing_correct_entities = [entity for entity in correct_question_entities[i] if entity in kg_word_embeddings]
+        existing_correct_entities = [entity for entity in correct_question_entity_labels if entity in kg_word_embeddings]
         print("%d out of %d entities required to answer the question found in the KG"%(len(existing_correct_entities), len(correct_question_entities[i])))
 
         candidates = []
