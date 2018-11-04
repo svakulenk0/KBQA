@@ -183,6 +183,8 @@ class KBQA:
             assert num_samples == len(answers)
             print('Rebalanced to %d QA samples in the new %s dataset from %s' % (num_samples, split, dataset_name))
 
+        # TODO optimize pickle? loading the dataset
+
         # encode questions with word vocabulary and answers with entity vocabulary
         question_vectors = []
         answer_vectors = []
@@ -372,6 +374,7 @@ def main(mode):
     '''
     Train model by running: python kbqa_modeli.py train
     '''
+    sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
     model = KBQA(rnn_units, output_vector)
 
