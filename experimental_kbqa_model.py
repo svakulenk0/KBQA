@@ -251,8 +251,9 @@ class KBQA:
         # encoded_question = question_words_embeddings  # model 1 (baseline)
 
         # placeholder to hold KG embeddings
-        self.kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
-        self.kg_word_embeddings = K.variable(self.kg_word_embeddings_initializer)
+        # self.kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
+        self.kg_word_embeddings = K.variable(shape=(self.word_embs_dim, self.num_entities))
+        kg_word_embeddings_input = Input(tensor=self.kg_word_embeddings)
 
         encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
                                          self.kg_relation_embeddings_matrix,
