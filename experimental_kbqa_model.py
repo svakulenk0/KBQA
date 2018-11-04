@@ -18,6 +18,8 @@ from collections import Counter
 
 from sklearn.metrics.pairwise import cosine_similarity
 
+import tensorflow as tf
+
 from keras.preprocessing.text import text_to_word_sequence
 from keras.preprocessing.sequence import pad_sequences
 
@@ -112,10 +114,14 @@ class KBQA:
             # embeddings in a text file one per line for Global vectors and glove word embeddings
             if load_word_embeddings == 'r':
                 word_embs = word_embs_file.readlines()
-            stop = 100
+            
+            # limit number of embeddings loaded
+            n_embeddings = 100
+            
             for idx, line in enumerate(rels_embs_file):
+                
                 # limit number of embeddings loaded
-                if idx == stop:
+                if idx == n_embeddings:
                     break
 
                 entityAndVector = line.split(None, 1)
@@ -272,8 +278,8 @@ class KBQA:
         print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr):
+        sess = tf.Session()
         # define loss
-       
         if self.output_vector == 'embedding':
             self.model_train.compile(optimizer='rmsprop', loss='cosine_proximity')
             # self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
@@ -295,7 +301,9 @@ class KBQA:
         
         question_vectors, answer_vectors, all_answers_indices = self.dataset
 
-        K.set_value(kg_word_embeddings,[self.kg_word_embeddings_matrix.T])
+        # K.set_value(kg_word_embeddings, [self.kg_word_embeddings_matrix.T])
+        sess.run(tf.global_variables_initializer()) # initialize 
+        sess.run([model.output], feed_dict={kg_word_embeddings: [self.kg_word_embeddings_matrix.T]})
 
         self.model_train.fit([question_vectors], [answer_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
