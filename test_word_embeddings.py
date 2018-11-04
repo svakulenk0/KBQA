@@ -59,7 +59,7 @@ def load_lcquad(dataset_split='train'):
             else:
                 empty_answers += 1
     
-    print ("%d questions skipped because no answer was found" % empty_answer)
+    print ("%d questions skipped because no answer was found" % empty_answers)
     return (QS, ES)
 
 
