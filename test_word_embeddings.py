@@ -42,19 +42,28 @@ def produce_word_lists(questions=[test_q], kg_entities_path=kg_entities_path):
     save_words_list(entity_labels, './data/lcquad_train_entities_labels.txt')
 
 
-def test_embeddings(questions=[test_q], fname_kg='./data/lcquad_train_entities_labels_fasttext.magnitude'):
+def test_embeddings(questions=[test_q], correct_entities=[correct_entities],
+                    fname_kg='./data/lcquad_train_entities_labels_fasttext.magnitude'):
     
     # load embeddings
     kg_word_embeddings = Magnitude(fname_kg)
 
+    i = 0
+    
     for question in questions:
+        
+        candidates = []
+        
         for word in text_to_word_sequence(question):
             print(word)
-            top = kg_word_embeddings.most_similar(word, topn=100) # Most similar by key
-            print(top)
-            top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=100) # Most similar by vector
-            print(top)
-            print('\n')
+            # top_key = kg_word_embeddings.most_similar(word, topn=100) # Most similar by key
+            # print(top)
+            top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=10) # Most similar by vector
+            candidates.extend(top)
+
+        hits = set.intersection(set(candidates), set(correct_entities[i]))
+        print hits
+        i += 1
 
 
 if __name__ == '__main__':
