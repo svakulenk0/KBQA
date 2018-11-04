@@ -57,7 +57,7 @@ def test_embeddings(questions=[test_q], correct_question_entities=[correct_entit
     for question in questions:
 
         # check that correct entities are in our KG
-        existing_correct_entities = [entity if entity in kg_word_embeddings for entity in correct_question_entities[i]]
+        existing_correct_entities = [entity for entity in correct_question_entities[i] if entity in kg_word_embeddings]
         print("%d out of %d entities required to answer the question found in the KG"%(len(existing_correct_entities), len(correct_question_entities[i])))
 
         candidates = []
