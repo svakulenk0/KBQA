@@ -21,20 +21,20 @@ def save_words_list(words_list, file_name):
     with open(file_name, 'w') as out:
         out.writelines(words_list)
 
-# save a list of question words
-question_words = [wordToVec.get_word_vector(word) for word in text_to_word_sequence(question)]
-assert len(question_words) == 7
+def produce_word_lists():
+    # save a list of question words
+    question_words = [wordToVec.get_word_vector(word) for word in text_to_word_sequence(question)]
+    assert len(question_words) == 7
 
-# save a list of entity labels
-entity_labels = []
-with open(kg_entities_path) as entities_file:
-    for entity_uri in entities_file:
-        # strip the domain name from the entity_uri to produce a cleaner entity label
-        entity_label = entity_uri.strip('/').split('/')[-1]
-        entity_labels.append(entity_label)
-        
+    # save a list of entity labels
+    entity_labels = []
+    with open(kg_entities_path) as entities_file:
+        for entity_uri in entities_file:
+            # strip the domain name from the entity_uri to produce a cleaner entity label
+            entity_label = entity_uri.strip('/').split('/')[-1]
+            entity_labels.append(entity_label)
+
 # generate fastText embeddings for both lists
-return
 
 # TODO
 # load all entities from file and embed
@@ -62,3 +62,7 @@ print [idx2ent[idx] for word_top_ns in top_ns for idx in word_top_ns]
 
 # check the rank of the correct_entities
 # 
+
+if __name__ == '__main__':
+    produce_word_lists()
+
