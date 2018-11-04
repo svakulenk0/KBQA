@@ -46,7 +46,7 @@ def produce_word_lists(questions=[test_q], kg_entities_path=kg_entities_path):
 def load_lcquad(dataset_split='train'):
     QS = []
     ES = []
-
+    empty_answers = 0
     with open("./data/lcquad_%s_new.json"%dataset_split, "r") as train_file:
         qas = json.load(train_file)
         
@@ -57,7 +57,7 @@ def load_lcquad(dataset_split='train'):
                 QS.append(qa['corrected_question'])
                 ES.append(qa['entities'])
             else:
-                empty_answer += 1
+                empty_answers += 1
     
     print ("%d questions skipped because no answer was found" % empty_answer)
     return (QS, ES)
