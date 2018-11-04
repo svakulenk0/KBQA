@@ -9,8 +9,10 @@ Created on Nov 4, 2018
 
 Evaluate question entity selection using word embeddings
 '''
+import io
+
 from keras.preprocessing.text import text_to_word_sequence
-from sklearn.metrics.pairwise import cosine_similarity
+from pymagnitude import *
 
 
 test_q = "How many movies did Stanley Kubrick direct?"
@@ -39,34 +41,23 @@ def produce_word_lists(questions=[test_q], kg_entities_path=kg_entities_path):
             entity_labels.append(entity_label)
     save_words_list(entity_labels, './data/lcquad_train_entities_labels.txt')
 
-# generate fastText embeddings for both lists
 
-# TODO
-# load all entities from file and embed
-    # kg_word_embeddings = []
-    # # store entity vocabulary
-    # ent2idx = {}
-    # idx2ent = {}
-    # with open(kg_entities_path) as entities_file:
-    #     idx = 0
-    #     for entity_uri in entities_file:
-    #         ent2idx[entity_uri] = idx
-    #         idx2ent[idx] = entity_uri
-    #         # strip the domain name from the entity_uri to produce a cleaner entity label
-    #         entity_label = entity_uri.strip('/').split('/')[-1]
-    #         # embed the produced entity label into the same word vector space
-    #         kg_word_embeddings.append(wordToVec.get_word_vector(entity_label))
+def test_embeddings(questions=[test_q], fname_kg='data/lcquad_train_entities_labels.magnitude'):
+    
+    # load embeddings
+    kg_word_embeddings = Magnitude(fname_kg)
 
-    # # compute text similarity (cosine) between the question words and KG entity labels: all question words x all entities
-    # similarity_matrix = cosine_similarity(question_word_embeddings, kg_word_embeddings)
+    for question in questions:
+        for word in text_to_word_sequence(question):
+            print(word)
+            top = kg_word_embeddings.most_similar(word, topn=100) # Most similar by key
+            print(top)
+            top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=100) # Most similar by vector
+            print(top)
+            print('\n')
 
-    # # indices of the top n similar entities for every question word
-    # top_n = 5
-    # top_ns = similarity_matrix.argsort(axis=1)[:, -n:][::-1]
-    # print [idx2ent[idx] for word_top_ns in top_ns for idx in word_top_ns]
-
-# check the rank of the correct_entities
-# 
 
 if __name__ == '__main__':
-    produce_word_lists()
+    # produce_word_lists()
+    # Then generate fastText embeddings for both lists!
+    test_embeddings()
