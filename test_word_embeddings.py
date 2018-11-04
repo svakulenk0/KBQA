@@ -9,7 +9,6 @@ Created on Nov 4, 2018
 
 Evaluate question entity selection using word embeddings
 '''
-import fastText
 from keras.preprocessing.text import text_to_word_sequence
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -18,16 +17,26 @@ test_q = "How many movies did Stanley Kubrick direct?"
 kg_entities_path = './data/lcquad_train_entities.txt'
 correct_entities = ["http://dbpedia.org/ontology/director", "http://dbpedia.org/resource/Stanley_Kubrick"]
 
+def save_words_list(words_list, file_name):
+    with open(file_name, 'w') as out:
+        out.writelines(words_list)
 
-# load word embeddings model
-wordToVec = fastText.load_model(model_path)
-word_embs_dim = len(wordToVec.get_word_vector('sample'))
-print("FastText word embeddings dimension: %d" % word_embs_dim)
+# save a list of question words
+question_words = [wordToVec.get_word_vector(word) for word in text_to_word_sequence(question)]
+assert len(question_words) == 7
 
-# embed words in the question
-question_word_embeddings = [wordToVec.get_word_vector(word) for word in text_to_word_sequence(question)]
-assert len(question_word_embeddings) == 7
+# save a list of entity labels
+entity_labels = []
+with open(kg_entities_path) as entities_file:
+    for entity_uri in entities_file:
+        # strip the domain name from the entity_uri to produce a cleaner entity label
+        entity_label = entity_uri.strip('/').split('/')[-1]
+        entity_labels.append(entity_label)
+        
+# generate fastText embeddings for both lists
+return
 
+# TODO
 # load all entities from file and embed
 kg_word_embeddings = []
 # store entity vocabulary
