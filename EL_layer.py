@@ -18,12 +18,12 @@ from keras.engine.topology import Layer
 
 class EntityLinking(Layer):
 
-    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix, kg_word_embeddings_initializer,
+    def __init__(self, kg_word_embeddings_matrix, kg_relation_embeddings_matrix, kg_word_embeddings,
                  word_embs_dim, kg_embeddings_dim, num_entities, **kwargs):
         # when loaded from config matrices are again lists not numpy arrays
         self.kg_word_embeddings_matrix = np.asarray(kg_word_embeddings_matrix, dtype=K.floatx())
         self.kg_relation_embeddings_matrix = np.asarray(kg_relation_embeddings_matrix, dtype=K.floatx())
-        self.kg_word_embeddings_initializer = kg_word_embeddings_initializer
+        self.kg_word_embeddings = kg_word_embeddings
         self.word_embs_dim = word_embs_dim
         self.kg_embeddings_dim = kg_embeddings_dim
         self.num_entities = num_entities
@@ -34,10 +34,9 @@ class EntityLinking(Layer):
         # ValueError: Cannot create a tensor proto whose content is larger than 2GB.
         # kg_word_embeddings = K.variable(self.kg_word_embeddings_matrix.T)
 
-        kg_word_embeddings = K.variable(self.kg_word_embeddings_initializer)
         kg_relation_embeddings = K.variable(self.kg_relation_embeddings_matrix)
         
-        self.kg_embedding = K.dot(kg_word_embeddings, kg_relation_embeddings)
+        self.kg_embedding = K.dot(self.kg_word_embeddings, kg_relation_embeddings)
         
         # Create a trainable weight variable for word-to-kg embedding
         self.kernel = self.add_weight(name='kernel', 

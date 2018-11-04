@@ -251,11 +251,12 @@ class KBQA:
         # encoded_question = question_words_embeddings  # model 1 (baseline)
 
         # placeholder to hold KG embeddings
-        self.kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
+        kg_word_embeddings_initializer = K.placeholder(shape=(self.word_embs_dim, self.num_entities))
+        self.kg_word_embeddings = K.variable(kg_word_embeddings_initializer)
 
         encoded_question = EntityLinking(self.kg_word_embeddings_matrix,
                                          self.kg_relation_embeddings_matrix,
-                                         self.kg_word_embeddings_initializer,
+                                         self.kg_word_embeddings,
                                          self.word_embs_dim,
                                          self.kg_embeddings_dim,
                                          self.num_entities)(question_words_embeddings)
@@ -282,34 +283,34 @@ class KBQA:
         print(self.model_train.summary())
 
     def train(self, batch_size, epochs, lr):
-        with tf.Session() as session:
-            # define loss
-            if self.output_vector == 'embedding':
-                self.model_train.compile(optimizer='rmsprop', loss='cosine_proximity')
-                # self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
-                # self.model_train.compile(optimizer=Adadelta(lr=1), loss='cosine_proximity')
+        # with tf.Session() as session:
+        # define loss
+        if self.output_vector == 'embedding':
+            self.model_train.compile(optimizer='rmsprop', loss='cosine_proximity')
+            # self.model_train.compile(optimizer=Adam(lr=lr), loss='cosine_proximity')
+            # self.model_train.compile(optimizer=Adadelta(lr=1), loss='cosine_proximity')
 
-            if self.output_vector == 'one-hot':
-                # self.model_train.compile(optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
-                #                          loss='categorical_crossentropy')
-                self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
-                # self.model_train.compile(optimizer='rmsprop', loss='sparse_categorical_crossentropy(')
-                # self.model_train.compile(optimizer=Adadelta(lr=1), loss='categorical_crossentropy')
-                # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
-                # self.model_train.compile(optimizer=Nadam(), loss='categorical_crossentropy')
+        if self.output_vector == 'one-hot':
+            # self.model_train.compile(optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True),
+            #                          loss='categorical_crossentropy')
+            self.model_train.compile(optimizer='rmsprop', loss='categorical_crossentropy')
+            # self.model_train.compile(optimizer='rmsprop', loss='sparse_categorical_crossentropy(')
+            # self.model_train.compile(optimizer=Adadelta(lr=1), loss='categorical_crossentropy')
+            # self.model_train.compile(optimizer=Adam(lr=lr), loss='categorical_crossentropy')
+            # self.model_train.compile(optimizer=Nadam(), loss='categorical_crossentropy')
 
-            # define callbacks for early stopping
-            checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-            early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
-            callbacks_list = [checkpoint, early_stop]
-            
-            question_vectors, answer_vectors, all_answers_indices = self.dataset
+        # define callbacks for early stopping
+        checkpoint = ModelCheckpoint(self.model_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+        early_stop = EarlyStopping(monitor='val_loss', patience=5, mode='min') 
+        callbacks_list = [checkpoint, early_stop]
+        
+        question_vectors, answer_vectors, all_answers_indices = self.dataset
 
-            # K.set_value(self.kg_word_embeddings, [self.kg_word_embeddings_matrix.T])
-            # sess.run(tf.global_variables_initializer()) # initialize 
-            session.run([self.model_train.output], feed_dict={self.kg_word_embeddings_initializer: self.kg_word_embeddings_matrix.T})
+        K.set_value(self.kg_word_embeddings, [self.kg_word_embeddings_matrix.T])
+        # sess.run(tf.global_variables_initializer()) # initialize 
+        # session.run([self.model_train.output], feed_dict={self.kg_word_embeddings_initializer: self.kg_word_embeddings_matrix.T})
 
-            self.model_train.fit([question_vectors], [answer_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
+        self.model_train.fit([question_vectors], [answer_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
     def test(self):
         '''
