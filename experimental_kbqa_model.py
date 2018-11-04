@@ -307,7 +307,7 @@ class KBQA:
 
             # K.set_value(self.kg_word_embeddings, [self.kg_word_embeddings_matrix.T])
             # sess.run(tf.global_variables_initializer()) # initialize 
-            session.run([self.model_train.output], feed_dict={self.kg_word_embeddings_initializer: [self.kg_word_embeddings_matrix.T]})
+            session.run([self.model_train.output], feed_dict={self.kg_word_embeddings_initializer: self.kg_word_embeddings_matrix.T})
 
             self.model_train.fit([question_vectors], [answer_vectors], epochs=epochs, callbacks=callbacks_list, verbose=2, validation_split=0.3, shuffle='batch', batch_size=batch_size)
 
