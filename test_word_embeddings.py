@@ -15,32 +15,29 @@ import json
 from keras.preprocessing.text import text_to_word_sequence
 from pymagnitude import *
 
+KGLOVE_PATH = '/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt'
 
 test_q = "How many movies did Stanley Kubrick direct?"
 kg_entities_path = './data/lcquad_train_entities.txt'
 correct_entities = ["http://dbpedia.org/ontology/director", "http://dbpedia.org/resource/Stanley_Kubrick"]
+
 
 def save_words_list(words_list, file_name):
     with open(file_name, 'w') as out:
         out.write('\n'.join(words_list) + '\n')
 
 
-def produce_word_lists(questions=[test_q], kg_entities_path=kg_entities_path):
-    # save a list of question words
-    question_words = []
-    for question in questions:
-        question_words.extend([word for word in text_to_word_sequence(question)])
-        assert len(question_words) == 7
-    save_words_list(question_words, './data/test_question_words.txt')
-
-    # save a list of entity labels
-    entity_labels = []
-    with open(kg_entities_path) as entities_file:
-        for entity_uri in entities_file:
+def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpedia_KGlove_fasttext.txt'):
+    # parse entity embeddings file
+    with open(kg_embeddings_path) as embeddings_file, open(out_file_path, 'w') as out:
+        # iterate over lines (glove format)
+        for line in embeddings_file:
+            record = line.strip().split()
+            token = record[0] # take the token (word) from the text line
+            print token
             # strip the domain name from the entity_uri to produce a cleaner entity label
             entity_label = entity_uri.strip('\n').strip('/').strip('>').split('/')[-1]
-            entity_labels.append(entity_label)
-    save_words_list(entity_labels, './data/lcquad_train_entities_labels.txt')
+            out.write(entity_label + '\n')
 
 
 def load_lcquad(dataset_split='train'):
@@ -110,7 +107,6 @@ def test_embeddings(fname_kg='./data/lcquad_train_entities_labels_fasttext.magni
 
 
 if __name__ == '__main__':
-    # produce_word_lists()
-    # Then generate fastText embeddings for both lists!
-    # load 
-    test_embeddings()
+    produce_word_list()
+    # Then generate fastText embeddings for both lists! fasttext + magnitude
+    # test_embeddings()
