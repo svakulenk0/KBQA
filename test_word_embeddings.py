@@ -34,8 +34,8 @@ def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpe
         for line in embeddings_file:
             record = line.strip().split()
             entity_uri = record[0]
-            # strip the domain name from the entity_uri to produce a cleaner entity label
-            entity_label = entity_uri.strip('\n').strip('/').strip('>').split('/')[-1]
+            # strip the domain name from the entity_uri, brakets and category: prefix to produce a cleaner entity label
+            entity_label = entity_uri.strip('\n').strip('/').strip('>').split('/')[-1].split(':')[-1]
             print entity_label
             out.write(entity_label + '\n')
 
