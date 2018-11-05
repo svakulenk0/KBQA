@@ -64,8 +64,13 @@ def test_embeddings(fname_kg='./data/lcquad_train_entities_labels_fasttext.magni
     
     questions, correct_question_entities = load_lcquad()
 
+    # shuffle samples
+    # TODO
+
     # load embeddings
     kg_word_embeddings = Magnitude(fname_kg)
+    # sample
+    n_samples = 2
 
     # keep counters
     i = 0
@@ -82,7 +87,7 @@ def test_embeddings(fname_kg='./data/lcquad_train_entities_labels_fasttext.magni
         # check that correct entities are in our KG
         existing_correct_entities = [entity for entity in correct_question_entity_labels if entity in kg_word_embeddings]
         n_entities_kg = len(existing_correct_entities)
-        # print("%d out of %d entities required to answer the question found in the KG"%(n_entities_kg, n_entities))
+        print("%d out of %d entities required to answer the question found in the KG"%(n_entities_kg, n_entities))
 
         candidates = []
         
@@ -96,6 +101,9 @@ def test_embeddings(fname_kg='./data/lcquad_train_entities_labels_fasttext.magni
         hits += len(set.intersection(set(candidates), set(existing_correct_entities)))
         # print hits
         i += 1
+        # enough
+        if i == n_samples:
+            break
 
     print ("%d questions"%i)
     print ("%d entities"%n_entities)
@@ -107,6 +115,6 @@ def test_embeddings(fname_kg='./data/lcquad_train_entities_labels_fasttext.magni
 
 
 if __name__ == '__main__':
-    produce_word_list()
+    # produce_word_list()
     # Then generate fastText embeddings for both lists! fasttext + magnitude
-    # test_embeddings()
+    test_embeddings()
