@@ -60,7 +60,7 @@ def load_lcquad(dataset_split='train'):
     return (QS, ES)
 
 
-def test_embeddings(fname_kg='./data/lcquad_train_entities_labels_fasttext.magnitude'):
+def test_embeddings(fname_kg='./data/embeddings/DBpedia_KGlove_fasttext.magnitude'):
     
     questions, correct_question_entities = load_lcquad()
 
