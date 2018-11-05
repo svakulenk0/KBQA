@@ -69,6 +69,7 @@ def test_embeddings(fname_kg='./data/embeddings/DBpedia_KGlove_fasttext.magnitud
 
     # load embeddings
     kg_word_embeddings = Magnitude(fname_kg)
+
     # sample
     n_samples = 2
 
@@ -94,7 +95,7 @@ def test_embeddings(fname_kg='./data/embeddings/DBpedia_KGlove_fasttext.magnitud
         for word in text_to_word_sequence(question):
             print(word)
             # top = kg_word_embeddings.most_similar(word, topn=100) # Most similar by key
-            top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=50) # Most similar by vector
+            top = kg_word_embeddings.most_similar_approx(kg_word_embeddings.query(word), topn=50) # Most similar by vector
             print(top)
             candidates.extend([entity_score[0] for entity_score in top])
         print candidates
@@ -111,8 +112,6 @@ def test_embeddings(fname_kg='./data/embeddings/DBpedia_KGlove_fasttext.magnitud
     print ("%d entities in KG"%n_entities_kg)
     print ("%d entities in candidates"%hits)
     print ("%d missed entities"%(n_entities_kg-hits))
-    # analyse the error
-    # print(kg_word_embeddings.distance("director", "direct"))
 
 
 if __name__ == '__main__':
