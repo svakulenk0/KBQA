@@ -15,7 +15,7 @@ import json
 from keras.preprocessing.text import text_to_word_sequence
 from pymagnitude import *
 
-KGLOVE_PATH = '/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt'
+KGLOVE_PATH = './data/embeddings/DBpediaVecotrs200_20Shuffle.txt'
 
 test_q = "How many movies did Stanley Kubrick direct?"
 kg_entities_path = './data/lcquad_train_entities.txt'
@@ -27,7 +27,7 @@ def save_words_list(words_list, file_name):
         out.write('\n'.join(words_list) + '\n')
 
 
-def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpedia_KGlove_fasttext.txt'):
+def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpedia_KGlove_labels.txt'):
     # parse entity embeddings file
     with open(kg_embeddings_path) as embeddings_file, open(out_file_path, 'w') as out:
         # iterate over lines (glove format)
