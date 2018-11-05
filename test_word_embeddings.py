@@ -92,15 +92,16 @@ def test_embeddings(fname_kg='./data/embeddings/DBpedia_KGlove_fasttext.magnitud
         candidates = []
         
         for word in text_to_word_sequence(question):
-            # print(word)
+            print(word)
             # top = kg_word_embeddings.most_similar(word, topn=100) # Most similar by key
             top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=1000) # Most similar by vector
             # print(top)
             candidates.extend([entity_score[0] for entity_score in top])
-        # print candidates
+        print candidates
         hits += len(set.intersection(set(candidates), set(existing_correct_entities)))
-        # print hits
+        print hits
         i += 1
+        
         # enough
         if i == n_samples:
             break
