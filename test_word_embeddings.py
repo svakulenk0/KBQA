@@ -33,8 +33,8 @@ def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpe
         # iterate over lines (glove format)
         for line in embeddings_file:
             record = line.strip().split()
-            token = record[0] # take the token (word) from the text line
-            print token
+            entity_uri = record[0]
+            print entity_uri
             # strip the domain name from the entity_uri to produce a cleaner entity label
             entity_label = entity_uri.strip('\n').strip('/').strip('>').split('/')[-1]
             out.write(entity_label + '\n')
