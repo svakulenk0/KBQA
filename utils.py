@@ -32,7 +32,8 @@ ADJACENCY_MATRIX = KG + "adjacency.pickle"
 ENTITIES_LIST = KG + "nodes_strings.pkl"
 
 # KG embeddings
-KB_RELATION_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
+# KB_RELATION_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
+KB_RELATION_EMBEDDINGS_PATH = EMBEDDINGS_PATH + 'DBpediaVecotrs200_20Shuffle.txt'
 
 # subset of the KB embeddings for all entities mentioned in LCQUAD + correct answers
 # LCQUAD_KB_EMBEDDINGS_PATH = "./data/embeddings_subset_for_lcquad_entities_set_dbpedia.txt"
