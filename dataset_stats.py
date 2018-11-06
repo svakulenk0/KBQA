@@ -62,14 +62,16 @@ def check_qa_entities_in_kb(dataset_split='train'):
                 entities = qa['entities'].encode('utf-8')
                 # print entities
                 for entity in entities:
+                    entity = entity.encode('utf-8')
                     if entity not in entity_uris:
                         all_entities_found = False
                         break
                 if all_entities_found:
                     # make sure that at least one entity is the kg 
-                    answers = qa['answers'].encode('utf-8')
+                    answers = qa['answers']
                     # print answers
                     for answer in answers:
+                        answer = answer.encode('utf-8')
                         if answer in entity_uris:
                             n_select_questions_answerable += 1
                             break
