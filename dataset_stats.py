@@ -68,7 +68,7 @@ def check_qa_entities_in_kb(dataset_split='train'):
                     # make sure that at least one entity is the kg 
                     answers = qa['answers']
                     print answers
-                    for answer in answers
+                    for answer in answers:
                         if answer in entity_uris:
                             n_select_questions_answerable += 1
                             break
