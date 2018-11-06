@@ -40,7 +40,7 @@ def check_qa_entities_in_kb(dataset_split='train'):
     '''
     # get entity URis
     with open("./data/DBpedia_KGlove_uris.txt", "r") as train_file:
-        entity_uris = file.read().splitlines()
+        entity_uris = train_file.read().splitlines()
         print ("Loaded %d entity uris"%len(entity_uris))
         print ("Unique %d entity uris"%len(set(entity_uris)))
 
