@@ -21,9 +21,9 @@ import scipy.sparse as sp
 from keras import backend as K
 
 # word embeddings
-# EMBEDDINGS_PATH = "./embeddings/"
-# GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
-FASTTEXT_MODEL_PATH = "/data/embeddings/fasttext/wiki.en.bin"
+EMBEDDINGS_PATH = "./data/embeddings/"
+GLOVE_EMBEDDINGS_PATH = EMBEDDINGS_PATH + "glove.6B.50d.txt"
+FASTTEXT_MODEL_PATH = EMBEDDINGS_PATH + "fasttext/wiki.en.bin"
 
 # KG
 DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
