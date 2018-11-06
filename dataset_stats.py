@@ -39,8 +39,8 @@ def check_qa_entities_in_kb(dataset_split='train'):
     Check how many questions can be answered with the existing set of KG embeddings
     '''
     # get entity URis
-    with open("./data/DBpedia_KGlove_uris.txt", "r") as train_file:
-        entity_uris = train_file.read().splitlines()
+    with open("./data/DBpedia_KGlove_uris.txt", "r") as file:
+        entity_uris = file.read().splitlines()
         print ("Loaded %d entity uris"%len(entity_uris))
         print ("Unique %d entity uris"%len(set(entity_uris)))
 
@@ -59,16 +59,16 @@ def check_qa_entities_in_kb(dataset_split='train'):
             if "SELECT DISTINCT ?uri WHERE" in sparql_query:
                 n_select_questions += 1
                 # make sure that all entities are in the kg 
-                entities = qa['entities']
-                print entities
+                entities = qa['entities'].encode('utf-8')
+                # print entities
                 for entity in entities:
                     if entity not in entity_uris:
                         all_entities_found = False
                         break
                 if all_entities_found:
                     # make sure that at least one entity is the kg 
-                    answers = qa['answers']
-                    print answers
+                    answers = qa['answers'].encode('utf-8')
+                    # print answers
                     for answer in answers:
                         if answer in entity_uris:
                             n_select_questions_answerable += 1
