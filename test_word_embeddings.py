@@ -37,7 +37,7 @@ def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpe
             # strip the domain name from the entity_uri, brakets and category: prefix to produce a cleaner entity label
             # entity_label = entity_uri.strip('\n').strip('/').strip('>').split('/')[-1].split(':')[-1]
             # print entity_label
-            out.write(entity_uri + '\n')
+            out.write(entity_uri[1:-1] + '\n')
 
 
 def load_lcquad(dataset_split='train'):
