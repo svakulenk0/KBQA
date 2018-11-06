@@ -27,7 +27,7 @@ def save_words_list(words_list, file_name):
         out.write('\n'.join(words_list) + '\n')
 
 
-def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpedia_KGlove_labels.txt'):
+def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpedia_KGlove_uris.txt'):
     # parse entity embeddings file
     with open(kg_embeddings_path) as embeddings_file, open(out_file_path, 'w') as out:
         # iterate over lines (glove format)
@@ -35,9 +35,9 @@ def produce_word_list(kg_embeddings_path=KGLOVE_PATH, out_file_path='./data/DBpe
             record = line.strip().split()
             entity_uri = record[0]
             # strip the domain name from the entity_uri, brakets and category: prefix to produce a cleaner entity label
-            entity_label = entity_uri.strip('\n').strip('/').strip('>').split('/')[-1].split(':')[-1]
-            print entity_label
-            out.write(entity_label + '\n')
+            # entity_label = entity_uri.strip('\n').strip('/').strip('>').split('/')[-1].split(':')[-1]
+            # print entity_label
+            out.write(entity_uri + '\n')
 
 
 def load_lcquad(dataset_split='train'):
@@ -96,7 +96,7 @@ def test_embeddings(fname_kg='./data/embeddings/DBpedia_KGlove_fasttext.magnitud
             print(word)
             top = kg_word_embeddings.most_similar(word, topn=100) # Most similar by key
             # top = kg_word_embeddings.most_similar(kg_word_embeddings.query(word), topn=50) # Most similar by vector
-            print(top)
+            # print(top)
             candidates.extend([entity_score[0] for entity_score in top])
         print candidates
         hits += len(set.intersection(set(candidates), set(existing_correct_entities)))
@@ -115,6 +115,6 @@ def test_embeddings(fname_kg='./data/embeddings/DBpedia_KGlove_fasttext.magnitud
 
 
 if __name__ == '__main__':
-    # produce_word_list()
+    produce_word_list()
     # Then generate fastText embeddings for both lists! fasttext + magnitude
-    test_embeddings()
+    # test_embeddings()
