@@ -63,9 +63,9 @@ class KBQA:
         # self.train_kg_embeddings = train_kg_embeddings
 
         # load word embeddings model
-        self.wordToVec = load_fasttext()
-        self.word_embs_dim = len(self.wordToVec.get_word_vector('sample'))
-        print("FastText word embeddings dimension: %d"%self.word_embs_dim)
+        # self.wordToVec = load_fasttext()
+        # self.word_embs_dim = len(self.wordToVec.get_word_vector('sample'))
+        # print("FastText word embeddings dimension: %d"%self.word_embs_dim)
 
         # load KG relation embeddings
         self.load_KG_embeddings()
