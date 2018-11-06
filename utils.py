@@ -21,9 +21,9 @@ import scipy.sparse as sp
 from keras import backend as K
 
 # word embeddings
-EMBEDDINGS_PATH = "./embeddings/"
-GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
-FASTTEXT_MODEL_PATH = "/data/fasttext/wiki.en.bin"
+# EMBEDDINGS_PATH = "./embeddings/"
+# GLOVE_EMBEDDINGS_PATH = "./embeddings/glove.6B.50d.txt"
+FASTTEXT_MODEL_PATH = "/data/embeddings/fasttext/wiki.en.bin"
 
 # KG
 DBPEDIA = './data/graph/data/dbpedia2016_04_run2/'
@@ -33,10 +33,10 @@ ENTITIES_LIST = KG + "nodes_strings.pkl"
 
 # KG embeddings
 # rdf2vec embeddings 200 dimensions
-RDF2VEC_EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
+EMBEDDINGS_PATH = "/data/globalRecursive/data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit/DBpediaVecotrs200_20Shuffle.txt"
 
 # subset of the KB embeddings for all entities mentioned in LCQUAD + correct answers
-LCQUAD_KB_EMBEDDINGS_PATH = "./data/embeddings_subset_for_lcquad_entities_set_dbpedia.txt"
+# LCQUAD_KB_EMBEDDINGS_PATH = "./data/embeddings_subset_for_lcquad_entities_set_dbpedia.txt"
 
 KB_RELATION_EMBEDDINGS_PATH = RDF2VEC_EMBEDDINGS_PATH
 KB_WORD_EMBEDDINGS_PATH = "./data/embeddings_subset_for_lcquad_entities_set_dbpedia_words.txt"
