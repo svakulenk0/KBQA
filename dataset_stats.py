@@ -59,7 +59,7 @@ def check_qa_entities_in_kb(dataset_split='train'):
             if "SELECT DISTINCT ?uri WHERE" in sparql_query:
                 n_select_questions += 1
                 # make sure that all entities are in the kg 
-                entities = qa['entities'].encode('utf-8')
+                entities = qa['entities']
                 # print entities
                 for entity in entities:
                     entity = entity.encode('utf-8')
