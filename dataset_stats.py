@@ -75,6 +75,8 @@ def check_qa_entities_in_kb(dataset_split='train'):
                         if answer in entity_uris:
                             n_select_questions_answerable += 1
                             break
+    print n_select_questions = 0
+    print n_select_questions_answerable = 0
 
 
 if __name__ == '__main__':
