@@ -9,6 +9,8 @@ Created on Nov 7, 2018
 
 Lazy load for KG relation and word embeddings
 '''
+from pymagnitude import *
+
 
 EMBEDDINGS_PATH = "./data/embeddings/"
 KB_WORD_EMBEDDINGS_PATH = EMBEDDINGS_PATH + './data/embeddings/DBpedia_KGlove_fasttext.magnitude'
