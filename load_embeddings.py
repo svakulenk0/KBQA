@@ -17,13 +17,32 @@ KB_WORD_EMBEDDINGS_PATH = EMBEDDINGS_PATH + 'DBpedia_KGlove_fasttext.magnitude'
 # KB_RELATION_EMBEDDINGS_PATH = EMBEDDINGS_PATH + 'DBpediaVecotrs200_20Shuffle.txt'
 
 
-def load_embeddings():
-    kg_word_vectors = Magnitude(KB_WORD_EMBEDDINGS_PATH)
-    print("loaded %d KG word vectors with %d dimensions" % (len(kg_word_vectors), kg_word_vectors.dim))
-    kg_word_embeddings_matrix = kg_word_vectors.get_vectors_mmap()
-    kg_word_vectors.close()
+def test_load_embeddings(path=KB_WORD_EMBEDDINGS_PATH):
+    vectors = Magnitude(path)
+    print("loaded %d vectors with %d dimensions" % (len(vectors), vectors.dim))
+
+    # tests
+    print "cat" in vectors
+    print vectors.query("http://dbpedia.org/resource/Sunni_Islam")
+    print vectors[42]
+    print vectors.query(["http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder"])
+    # print vectors.query([["http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder", "a", "book"], ["I", "read", "a", "magazine"]])
+    print vectors[:42] # slice notation
+    print vectors[42, 1337, 2001] # tuple notation
+    print vectors.distance("http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder")
+    print vectors.similarity("http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder")
+    print vectors.most_similar_to_given("http://dbpedia.org/resource/Sunni_Islam", ["http://dbpedia.org/ontology/founder"])
+    print vectors.most_similar("http://dbpedia.org/resource/Sunni_Islam", topn = 100) # Most similar by key
+    print vectors.most_similar(vectors.query("http://dbpedia.org/resource/Sunni_Islam"), topn = 100) # Most similar by vector
+    print vectors.most_similar_approx("http://dbpedia.org/resource/Sunni_Islam")
+    print vectors.closer_than("http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder")
+
+    # kg_word_embeddings_matrix = kg_word_vectors.get_vectors_mmap()
+    
+    vectors.close()
+
     # kg_relation_embeddings = Magnitude(KB_RELATION_EMBEDDINGS_PATH)
 
 
 if __name__ == '__main__':
-    load_embeddings()
+    test_load_embeddings()
