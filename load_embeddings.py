@@ -13,7 +13,7 @@ from pymagnitude import *
 
 
 EMBEDDINGS_PATH = "./data/embeddings/"
-KB_WORD_EMBEDDINGS_PATH = EMBEDDINGS_PATH + './data/embeddings/DBpedia_KGlove_fasttext.magnitude'
+KB_WORD_EMBEDDINGS_PATH = EMBEDDINGS_PATH + 'DBpedia_KGlove_fasttext.magnitude'
 KB_RELATION_EMBEDDINGS_PATH = EMBEDDINGS_PATH + 'DBpediaVecotrs200_20Shuffle.txt'
 
 
