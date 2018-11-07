@@ -18,26 +18,33 @@ KB_WORD_EMBEDDINGS_PATH = EMBEDDINGS_PATH + 'DBpedia_KGlove_fasttext.magnitude'
 
 
 def test_load_embeddings(path=KB_WORD_EMBEDDINGS_PATH):
-    vectors = Magnitude(path)
-    print("loaded %d vectors with %d dimensions" % (len(vectors), vectors.dim))
+    vectors = Magnitude(path)  # very fast
+    print("loaded %d vectors with %d dimensions" % (len(vectors), vectors.dim))  # very fast
 
     # tests
-    print "cat" in vectors
-    print vectors.query("http://dbpedia.org/resource/Sunni_Islam")
-    print vectors[42]
-    print vectors.query(["http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder"])
-    # print vectors.query([["http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder", "a", "book"], ["I", "read", "a", "magazine"]])
-    print vectors[:42] # slice notation
-    print vectors[42, 1337, 2001] # tuple notation
-    print vectors.distance("http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder")
-    print vectors.similarity("http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder")
-    print vectors.most_similar_to_given("http://dbpedia.org/resource/Sunni_Islam", ["http://dbpedia.org/ontology/founder"])
-    print vectors.most_similar("http://dbpedia.org/resource/Sunni_Islam", topn = 100) # Most similar by key
-    print vectors.most_similar(vectors.query("http://dbpedia.org/resource/Sunni_Islam"), topn = 100) # Most similar by vector
-    print vectors.most_similar_approx("http://dbpedia.org/resource/Sunni_Islam")
-    print vectors.closer_than("http://dbpedia.org/resource/Sunni_Islam", "http://dbpedia.org/ontology/founder")
+    print "Sunni_Islam" in vectors  # very fast
 
-    # kg_word_embeddings_matrix = kg_word_vectors.get_vectors_mmap()
+    # get vectors
+        # print vectors.query("Sunni_Islam")  # very fast
+        # print vectors[42]  # very fast
+        # print vectors.query(["Sunni_Islam", "founder"])  # very fast
+        # # print vectors.query([["Sunni_Islam", "founder", "a", "book"], ["I", "read", "a", "magazine"]])
+        # print vectors[:42] # slice notation
+        # print vectors[42, 1337, 2001] # tuple notation
+
+        # # pairwise comparison
+        # print vectors.distance("Sunni_Islam", "founder")  # very fast
+        # print vectors.similarity("Sunni_Islam", "founder")  # very fast
+        # print vectors.most_similar_to_given("Sunni_Islam", ["founder"])  # very fast
+
+    # request KB
+    print vectors.most_similar("Sunni_Islam", topn = 10) # Most similar by key
+    print vectors.most_similar(vectors.query("Sunni_Islam"), topn = 10) # Most similar by vector
+    print vectors.most_similar_approx("Sunni_Islam")
+    
+    print vectors.closer_than("Sunni_Islam", "founder")  # throws some error
+
+    # kg_word_embeddings_matrix = kg_word_vectors.get_vectors_mmap()  # takes some time but possible
     
     vectors.close()
 
