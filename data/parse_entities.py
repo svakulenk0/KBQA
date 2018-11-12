@@ -44,9 +44,8 @@ def parse_dbpedia_entities(path="./entitiesWithObjects.txt"):
             # line template http://creativecommons.org/ns#license;2
             entity_uri = ''.join(line.split(';')[:-1])
             entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
-            print (entity_label)
-            
-            out.write("%s\n"%(entity_label))
+
+            out.write("%s\n"%(entity_label.encode('utf-8')))
 
 
 if __name__ == '__main__':
