@@ -56,7 +56,12 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     # load QA dataset
     with open(path_kg_uris, "r") as file:
         for entity in file:
-            print entity
+            entity = entity.strip('\n')
+            if entity in entities:
+                entities.remove(entity)
+
+    print ("%d entities left unmatched in lcquad %s" % (len(entities), dataset_split))
+
 
 if __name__ == '__main__':
     check_qa_entities_in_kb()
