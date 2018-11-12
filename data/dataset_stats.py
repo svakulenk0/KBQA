@@ -42,7 +42,7 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
 
     entities = []
     with open(path_qa_dataset, "r") as file:
-        qas = json.load(train_file)
+        qas = json.load(file)
         print ("%d total QA pairs in lcquad %s" % (len(qas), dataset_split))
 
         sparql_query = qa["sparql_query"]
