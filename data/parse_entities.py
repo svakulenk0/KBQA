@@ -42,6 +42,7 @@ def parse_dbpedia_entities(path="./entitiesWithObjects.txt"):
     with io.open(path, "r", encoding="utf-8") as infile, io.open("els.txt", 'w', encoding="utf-8") as out:
         for line in infile:
             # line template http://creativecommons.org/ns#license;2
+            print(line)
             entity_uri, count = line.split(';')
             entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
             out.write("%s\n"%(entity_label))
