@@ -34,7 +34,7 @@ def count_QA_entities(dataset_split='train'):
                 # return
 
 
-def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./data/entitiesWithObjects_uris.txt"):
+def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithObjects_uris.txt"):
     '''
     Check how many questions can be answered with the existing set of KG entities
     '''
