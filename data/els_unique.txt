@@ -1,0 +1,1210 @@
+a	class
+about	subject
+academic	academicjournal
+academic advisor	academicadvisor
+academic area	academicdiscipline
+academic discipline	academicdiscipline
+academic journal	academicjournal
+acted	starring
+actor	starring
+actors of	starring
+actress	starring
+adapted from	basedon
+admin hq	headquarter
+administrative centre	capital
+administrative headquarters	capital
+administrative region	administrativeregion
+administrator	maintainedby
+advisor	academicadvisor
+advisor	doctoraladvisor
+affiliation	affiliations
+affiliation	religiousaffiliation
+affiliations's	affiliations
+agencies	governmentagency
+agency	agencyname
+agency name	agencyname
+aircraft system anti	fsg-1_antiaircraft_defense_system
+aired	firstaired
+airlines	airline
+airport	hubairport
+airport	targetairport
+airport hub	hubairport
+album	nextalbum
+alma mater	almamater
+alma mater	education
+alumni of	almamater
+american football league	americanfootballleague
+american football player	americanfootballplayer
+american football players	americanfootballplayer
+american football team	americanfootballteam
+amusement park attraction	amusementparkattraction
+an/gsg-5	gsg-5_battery_integration_and_radar_display_equipment
+and	associatedband
+appliance	informationappliance
+appliance's	informationappliance
+appointed	appointer
+arch.	architect
+architects	architecture
+architectural	architecturalstyle
+architectural style	architecturalstyle
+architectural style	architecture
+architecture	architecturalstyle
+are	area
+are	birthplace
+are	label
+are	nearestcity
+are	party
+area	academicdiscipline
+area	discipline
+area	fields
+areas	area
+areas	broadcastarea
+art	artist
+artist music	associatedmusicalartist
+artist music	musicalartist
+artists	artist
+artists	associatedmusicalartist
+artists	creator
+artists	musicalartist
+ascented	firstascentperson
+assembles	assembly
+assembly of	ispartof
+associat	associatedacts
+associate acts	associatedacts
+associate band	associatedband
+associate musical	associatedmusicalartist
+associate musical artist	associatedmusicalartist
+associated	associate
+associated	associatedacts
+associated	associatedband
+associated	associatedmusicalartist
+associated act	associatedacts
+associated acts	associatedacts
+associated band	associatedband
+associated music	associatedmusicalartist
+associated musical	associatedmusicalartist
+associated musical artist	associatedmusicalartist
+associates	associatedacts
+at	occupation
+at	operator
+at	related
+athletic	athletics
+attend	education
+attended	education
+author	writer
+authorities	localauthority
+authority	binomialauthority
+authority local	localauthority
+authors	author
+authors	writer
+authors	writers
+automobile engine	automobileengine
+automobile latform	automobileplatform
+automobile platform	automobileplatform
+award	awards
+award won	award
+award won	awards
+awarded	award
+awarded	awards
+awards	award
+awards	honours
+awards received	award
+awards received	awards
+badminton player	badmintonplayer
+band	artist
+band	associatedband
+band	bandmember
+band	formerbandmember
+band	musicalartist
+band	musicalband
+band member	bandmember
+bands	associatedband
+bands	bandmember
+bands	musicalartist
+base currency	currency
+baseball player	baseballplayer
+baseball team	baseballteam
+based on	basedon
+based upon	basedon
+basket team ball	basketballteam
+basketball league	basketballleague
+basketball player	basketballplayer
+basketball team	basketballteam
+battle	battlehonours
+battle	battles
+battle	militaryconflict
+battle honours	battlehonours
+battled	battles
+bearer flag	flagbearer
+beatified by	beatifiedby
+before	previouswork
+belongs to	owner
+binomial authority	binomialauthority
+birth	birthplace
+birth	placeofbirth
+birth city	birthplace
+birth location	birthplace
+birth name	birthname
+birth place	birthplace
+birth place	placeofbirth
+boards	board
+body discovered	bodydiscovered
+books	book
+born	birthplace
+born	placeofbirth
+born in	birthplace
+bred	breeder
+breeded	breeder
+bridge over	crosses
+broad cast area	broadcastarea
+broadcast	broadcastnetwork
+broadcast	formerbroadcastnetwork
+broadcast area	broadcastarea
+broadcast network	broadcastnetwork
+broadcasted	broadcastarea
+broadcasts	broadcastarea
+bronze medal	bronzemedalist
+bronze medalist	bronzemedalist
+builder	manufacturer
+building type	buildingtype
+built	builder
+built	shipbuilder
+built by	builder
+built by	manufacturer
+built,	shipbuilder
+burial	placeofburial
+burial place	placeofburial
+buried	placeofburial
+buried in	placeofburial
+buried in	restingplace
+buried,	restingplace
+campuses	campus
+canonized	canonizedby
+canonized by	canonizedby
+capital	countyseat
+capital town	capital
+car	automobile
+career	occupation
+carry	carries
+cars	automobile
+cars	carries
+cast	starring
+cast area	broadcastarea
+cast members	starring
+central processing unit	cpu
+ceremonial county	ceremonialcounty
+chaired	chairman
+character	characters
+characters	charactername
+characters	comicscharacter
+characters	fictionalcharacter
+child	children
+children	child
+choreographed	formerchoreographer
+cinematographed	cinematography
+cinematographer	cinematography
+citizen of	citizenship
+citizens	citizenship
+citizenship	nationality
+city	administrativeregion
+city	capital
+city	cities
+city	cityserved
+city	country
+city	district
+city	hostcity
+city	locationcity
+city	nearestcity
+city's	locationcity
+club	currentclub
+club	managerclub
+club	soccerclub
+club	youthclubs
+club manager	manager
+clubs	soccerclub
+clubs	soccerclubseason
+co-founder	foundedby
+coach	headcoach
+coach	manager
+coached	headcoach
+comic characters	comicscharacter
+comics character	comicscharacter
+command structure	commandstructure
+commanded	commander
+commander	notablecommander
+commander	notablecommanders
+commanders	notablecommanders
+common	almamater
+companies	company
+companies	parentcompany
+company	companytype
+company	owningcompany
+company	parentcompany
+company parent	parentcompany
+company's	parentcompany
+compiler	editor
+composed	composer
+composed	musiccomposer
+composed	thememusiccomposer
+composed by	composer
+composer	author
+composer	musicby
+composer's	thememusiccomposer
+composers	musiccomposer
+composers	thememusiccomposer
+composing	thememusiccomposer
+computing platform	computingplatform
+conflict	militaryconflict
+conflicts	militaryconflict
+congressmen	congressman
+consort	spouse
+constituencies	constituency
+constructions	builder
+content licence	license
+content license	license
+conventions	convention
+count	city
+count	country
+count	type
+countries	country
+countries	locationcountry
+countries	sourcecountry
+country	county
+country	locationcountry
+country	mouthcountry
+country	nationality
+country	sourcecountry
+country source	sourcecountry
+country's	country
+country's	nationality
+county	ceremonialcounty
+county	counties
+county	state
+county seat	capital
+county seat	countyseat
+cover	coverartist
+cover artist	coverartist
+covered	coverartist
+create	creators
+created	creators
+created by	creator
+created by	creators
+creator	comicscreator
+creators	creator
+cross	crosses
+crossed	crosses
+currencies	currency
+current	currentclub
+current	currentmembers
+current club	currentclub
+current member	currentmembers
+current members	currentmembers
+current partner	currentpartner
+current team	currentteam
+daughter	child
+death	deathcause
+death	deathplace
+death	placeofdeath
+death cause	deathcause
+death location	deathplace
+death place	deathplace
+debut	debutteam
+debut team	debutteam
+debuted	debutteam
+denomination	religion
+deputies	deputy
+derived from	basedon
+design	designcompany
+design	designer
+designed	designcompany
+designed	designer
+designed by	designcompany
+designer company	designcompany
+destinations	destination
+develop	developer
+developed	developer
+developed by	developer
+development	developer
+develops	developer
+devices	informationappliance
+die	deathplace
+die from	deathcause
+die/	deathplace
+died	deathplace
+died in	deathplace
+died of	deathcause
+dies	deathplace
+direct	director
+directed	director
+directed by	director
+direction central combat	fsq-7_combat_direction_central
+directors	director
+discipline	academicdiscipline
+discovered	bodydiscovered
+discovered	discoverer
+discovered body	bodydiscovered
+discovered by	discoverer
+distribute	distributinglabel
+distributed	distributinglabel
+distributed	distributor
+distributed by	distributor
+distributes	distributor
+distributing label	distributinglabel
+district	city
+district	state
+division	divisions
+division	league
+doctoral	doctoraladvisor
+doctoral advisor	doctoraladvisor
+doctoral student	doctoralstudent
+doctoral student	doctoralstudents
+doctoral students	doctoralstudents
+doctoral supervisor	doctoraladvisor
+domain	discipline
+draft team	draftteam
+drafted	draftteam
+driver	firstdriver
+driver	poledriver
+driver	racingdriver
+driver first	firstdriver
+driver pole	poledriver
+edit	editing
+edit	editor
+edited	editing
+edited	editor
+edited by	editing
+edited by	editor
+editor	editing
+editors	editing
+edu	almamater
+edu	education
+education	almamater
+educational	educationalinstitution
+educational institution	educationalinstitution
+employed	employer
+employed by	employer
+employes	employer
+employment	occupation
+end	routeend
+ending	routeend
+ends	routeend
+episode	televisionepisode
+episode one	televisionepisode
+episodes	televisionepisode
+ethnic	ethnicity
+ethnic group	ethnicgroup
+executive producer	executiveproducer
+extended from	basedon
+faith	religion
+families	family
+family	languagefamily
+famous works	notableworks
+fashion designer	fashiondesigner
+fiction	nonfictionsubject
+fiction non	nonfictionsubject
+fictional character	fictionalcharacter
+field	fields
+fields	discipline
+figure skater	figureskater
+film director	director
+film genre	genre
+film starring	starring
+films	film
+find	ingredient
+first	firstaired
+first	firstascentperson
+first aired	firstaired
+first driver	firstdriver
+first team	firstteam
+flow	inflow
+flows	inflow
+flows	outflow
+football	americanfootballteam
+football	gridironfootballplayer
+football player	americanfootballplayer
+football team	americanfootballteam
+former	formerteam
+former band member	formerbandmember
+former broadcast network	formerbroadcastnetwork
+former choreographer	formerchoreographer
+former coach	formercoach
+former member	formerbandmember
+former member	pastmembers
+former partner	formerpartner
+former team	formerteam
+formula one racer	formulaoneracer
+fought	battle
+foundation place	foundationplace
+founded	foundation
+founded	foundationplace
+founded	foundedby
+founded	founder
+founded by	founded
+founded by	foundedby
+founded by	founder
+founder of	founded
+founder of	foundedby
+founder of	founder
+founders	foundedby
+founders	founder
+from	fromalbum
+from	rivermouth
+game platform	computingplatform
+games	computingplatform
+games	sport
+games	videogame
+garrison	headquarter
+genere	genre
+genre	literarygenre
+genre	musicgenre
+golf player	golfplayer
+governed	governingbody
+governing body	governingbody
+government	governmentagency
+government	governmenttype
+government	governor
+government agency	governmentagency
+government type	governmenttype
+governs	governingbody
+graduate	almamater
+graduate of	education
+graduated	education
+graduated from	almamater
+graduated from	education
+graduates	almamater
+graduates	education
+grand prix	grandprix
+gridiron football player	gridironfootballplayer
+grounds	ground
+group	ethnicgroup
+group	musicalartist
+groups	ethnicgroup
+guest	guests
+hair	haircolor
+hair color	haircolor
+haired	haircolor
+handball team	handballteam
+has child	child
+has children	children
+has kids	child
+has son	child
+has sons	child
+head	headquarter
+head coach	headcoach
+head quarters	headquarters
+headcoached	headcoach
+headed	leader
+headquarted	headquarters
+headquarter	headquarters
+headquartered	headquarter
+held in	location
+high school	highschool
+historic place	historicplace
+hockey	icehockeyplayer
+hockey team	hockeyteam
+holds stock	owner
+home stadium	homestadium
+home town	hometown
+homestadiums	homestadium
+honorary title	award
+hornet	f_super_hornet
+hornet super	f_super_hornet
+horses	horserace
+hosted	hostcity
+house	houses
+hq	headquarter
+hq	headquarters
+hub	hubairport
+hub	hubs
+hub airport	hubairport
+husband	partner
+ice hockey league	icehockeyleague
+ice hockey player	icehockeyplayer
+ideologies	ideology
+illustrated by	illustrator
+illustration by	illustrator
+in	children
+in	city
+in	country
+in	county
+in	discipline
+in	district
+in	garrison
+in	inflow
+in	institution
+in	ispartof
+in	locatedinarea
+in	mouthmountain
+in	origin
+in	province
+in	starring
+in	state
+in conflict	battle
+in power	constituency
+inflows	inflow
+influenced	influencedby
+influenced	influences
+influenced by	influencedby
+information appliance	informationappliance
+institues	educationalinstitution
+institution	workinstitutions
+institutions	educationalinstitution
+interest	maininterest
+interest	maininterests
+interests	maininterests
+interests main	maininterests
+invent	discoverer
+invented	discoverer
+is founded by	founder
+is located in	locatedinarea
+is owned by	owner
+is owned by	owners
+job	occupation
+jockeys	jockey
+journal	academicjournal
+journals	academicjournal
+judge	judges
+judged	judges
+junction	routejunction
+junction route	routejunction
+key	keypeople
+key people	keypeople
+key person	keyperson
+kid	child
+kind of	genre
+kind of music	genre
+know for	knownfor
+known for	knownfor
+label	recordlabel
+labels	recordlabel
+land	country
+language	languagefamily
+language	languages
+language	programminglanguage
+languages	programminglanguage
+languages.	languagefamily
+largest	largestcity
+largest city	largestcity
+launch site	launchsite
+launched	launchsite
+lead	leadername
+lead to	subsequentwork
+leader	leadername
+leader	leadertitle
+leader name	leadername
+leader title	leadertitle
+leader's	leadername
+leader's	leadertitle
+leaders	leader
+leaders	leadername
+leading	leadername
+league	sportsleague
+led	leader
+led	leadername
+led	leadertitle
+left	lefttributary
+left tributary	lefttributary
+licence	license
+license	licensee
+life stance	religion
+list	notableinstruments
+living in	residence
+local authority	localauthority
+location	locationcity
+location	locationcountry
+location	locations
+location	locationtown
+location	sourcelocation
+location city	locationcity
+location country	locationcountry
+location mouth	mouthlocation
+location of birth	birthplace
+location of death	deathplace
+location town	locationtown
+locations	locationcountry
+made	creator
+made	manufacturer
+made by	manufacturer
+magazine's	magazine
+main ingredient	mainingredient
+main interest	maininterest
+main interests	maininterests
+maintain	maintainedby
+maintained by	maintainedby
+maintainer	maintainedby
+maintains	maintainedby
+major shrine	majorshrine
+maker	manufacturer
+makes	manufacturer
+mammals	mammal
+manage a club	managerclub
+manage club	managerclubs
+managed	manager
+managed	managerclub
+managed	managerclubs
+manager	managerclubs
+manager	soccermanager
+manager	sportsmanager
+manager club	managerclub
+managers	managerclub
+managers	managerclubs
+manufactured	manufacturer
+manufactured by	manufacturer
+manufactures	manufacturer
+manufacturing	manufacturer
+marchand	militaryconflict
+married	spouse
+married to	partner
+married to	spouse
+marry	spouse
+martial artist	martialartist
+matches	footballmatch
+mater alma	almamater
+mayor	leadername
+me	automobile
+me	informationappliance
+mean	meaning
+medalist silver	silvermedalist
+medals	award
+member	bandmember
+member	currentmember
+member	currentmembers
+member	formerbandmember
+member	membership
+member	pastmembers
+member band	bandmember
+member band	formerbandmember
+member former	formerbandmember
+member of parliament	memberofparliament
+member past	pastmembers
+members	bandmember
+members	currentmembers
+members	formerbandmember
+members	membership
+members	organisationmember
+members	pastmembers
+members current	currentmembers
+mfr	manufacturer
+militaries	militaryperson
+military	militarybranch
+military	militaryconflict
+military	militaryperson
+military	militaryunit
+military branch	militarybranch
+military conflict	militaryconflict
+military person	militaryperson
+military rank	militaryrank
+military unit	militaryunit
+military.	militaryrank
+minister	primeminister
+minister prime	primeminister
+ministers	primeminister
+mountain	mountainrange
+mountain	mouthmountain
+mountain	parentmountainpeak
+mountain parent	parentmountainpeak
+mountain parent peak	parentmountainpeak
+mountain range	mountainrange
+mountains	mountainrange
+mountains	sourcemountain
+mouth	mouthcountry
+mouth	mouthlocation
+mouth	rivermouth
+mouth country	mouthcountry
+mouth location	mouthlocation
+mouth mountain	mouthmountain
+mouth place	mouthplace
+movie	film
+movies	film
+municipalities	municipality
+municipalities	neighboringmunicipalities
+municipality	neighboringmunicipalities
+muse	museum
+music	associatedmusicalartist
+music	musicalband
+music	musicby
+music	musiccomposer
+music band	musicalband
+music composer	musiccomposer
+music genre	genre
+music genre	musicgenre
+musical	associatedmusicalartist
+musical	musicalartist
+musical	musicby
+musical artist	associatedmusicalartist
+musical artist	musicalartist
+musical band	musicalband
+musical instrument	instrument
+musical work	musicalwork
+musician	musicalartist
+musicians associated	associatedmusicalartist
+name	agencyname
+name	leadername
+nation	country
+nation	county
+nation	locatedinarea
+nation	state
+nation team	nationalteam
+nation's	nationality
+national anthem	anthem
+national anthem	nationalanthem
+national motto	nationalmotto
+national origin	nationalorigin
+national team	nationalteam
+nationality	citizenship
+nations	country
+nations	nationality
+nations'	nationalteam
+native name	nativename
+near	nearestcity
+near are	nearestcity
+near city	nearestcity
+nearest	nearestcity
+nearest city	nearestcity
+neighboring	neighboringmunicipalities
+neighboring	neighboringmunicipality
+neighboring municipalities	neighboringmunicipalities
+neighboring municipality	neighboringmunicipality
+netball player	netballplayer
+network	broadcastnetwork
+networks	broadcastnetwork
+newspapers's	newspaper
+non-fiction	nonfictionsubject
+non-fiction subject	nonfictionsubject
+non-profit organisation	non-profitorganisation
+notable	notablework
+notable	notableworks
+notable commanders	notablecommanders
+notable instruments	notableinstruments
+notable work	notablework
+notable work	notableworks
+notable works	notableworks
+of	location
+of	office
+office holder	officeholder
+offices	officeholder
+official language	officiallanguage
+official name	officialname
+on	computingplatform
+one	genre
+opening theme	openingtheme
+opens	openingtheme
+operating system	operatingsystem
+orde	order
+order (taxonomy)	order
+organisation	parentorganisation
+origin	stateoforigin
+origin nation	nationalorigin
+originate	sourcemountain
+originate	stylisticorigins
+originates	origin
+other party	otherparty
+over	crosses
+own	owned
+own	owner
+owned	owner
+owned	owners
+owner	owners
+owners	owner
+ownes	owner
+owning company	owningcompany
+owning organisation	owningorganisation
+owns	owner
+owns	owningcompany
+owns	owningorganisation
+painted by	creator
+painters	creator
+parent	parentorganisation
+parent company	parentcompany
+parent mountain peak	parentmountainpeak
+parent organisation	parentorganisation
+parliament	memberofparliament
+parliament member	memberofparliament
+parliament,	memberofparliament
+part of	formerbandmember
+participant in conflict	battle
+parties	party
+parties	politicalparty
+partner	formerpartner
+partner	spouse
+party	mergedintoparty
+party	otherparty
+party	politicalparty
+party leaders	politician
+party the	otherparty
+past	pastmembers
+past members	pastmembers
+penned	author
+people	keypeople
+people	person
+people key	keypeople
+performer	artist
+performer	musicalartist
+person	firstascentperson
+person	keyperson
+person first	firstascentperson
+person that first ascented	firstascentperson
+phd advisor	doctoraladvisor
+phds under	doctoraladvisor
+place	birthplace
+place	deathplace
+place	placeofbirth
+place	placeofdeath
+place	restingplace
+place birth	birthplace
+place birth	placeofbirth
+place death	deathplace
+place death	placeofdeath
+place mouth	mouthplace
+place of birth	placeofbirth
+place of death	placeofdeath
+places	birthplace
+places	deathplace
+places	employer
+places	foundationplace
+places	placeofbirth
+places	placeofdeath
+places	restingplace
+platform	automobileplatform
+platform	computingplatform
+platforms	computingplatform
+play	playedfor
+play	team
+playboy playmate	playboyplaymate
+played for	playedfor
+played for	sportsteam
+played for	team
+player	athlete
+players	americanfootballplayer
+players	baseballplayer
+players	soccerplayer
+plays for	playedfor
+plays for	team
+pm	primeminister
+pod	deathplace
+pole	poledriver
+pole driver	poledriver
+pole position	poledriver
+political	politicalparty
+political part	politicalparty
+political party	party
+political party	politicalparty
+politician	leadername
+politicians	officeholder
+politicians	politician
+port home	homeport
+portrayed	portrayer
+presented	presenter
+presided	president
+president	governor
+president	vicepresident
+presidents	president
+previous work	previouswork
+prime minister	president
+prime minister	primeminister
+principal	capital
+prize awarded	award
+prize received	award
+produce	producer
+produced	executiveproducer
+produced	producer
+producer	manufacturer
+produces	producer
+product	products
+profession	occupation
+profit	non-profitorganisation
+program	programmeformat
+programme format	programmeformat
+programming language	programminglanguage
+prospect team	prospectteam
+protected area	protectedarea
+public transit system	publictransitsystem
+published	publisher
+publishes	publisher
+purposes	purpose
+race	ethnicity
+race horse	racehorse
+racer	formulaoneracer
+racing	race
+radio	radioprogram
+radio station	radiostation
+radio stations	radiostation
+radios	radiostation
+railway	railwayline
+railway	servingrailwayline
+railway line	railwayline
+railway lines	railwayline
+railways	railwaytunnel
+rank	militaryrank
+received	award
+record label	label
+record label	recordlabel
+recorded	recordedin
+recorded in	recordedin
+records	recordlabel
+region	sourceregion
+region admin	administrativeregion
+region serve	regionserved
+region served	regionserved
+regions	regionserved
+regions	wineregion
+regions served	regionserved
+related	relatedmeanoftransportation
+relative	relatives
+relegious	religion
+religion	denomination
+religion	religiousaffiliation
+religions	religion
+religious	religion
+religious affiliation	religion
+religious affiliation	religiousaffiliation
+reside	residence
+residing	residence
+resting	restingplace
+resting place	restingplace
+right tributary	righttributary
+rive	river
+river	rivermouth
+river mouth	rivermouth
+rivers	river
+rivers	rivermouth
+road tunnel	roadtunnel
+route end	routeend
+route junction	routejunction
+route start	routestart
+route,	routeend
+route,	routestart
+royal	royalty
+royal person	royalty
+royalties	royalty
+rugby player	rugbyplayer
+run by	governingbody
+school	highschool
+school	movement
+school high	highschool
+schools	school
+schools	schooltype
+screen play	screenplay
+sculptor	creator
+seasons	soccerclubseason
+seasons	sportsseason
+seat	headquarter
+section of	ispartof
+serve	cityserved
+served	regionserved
+served by	destinations
+served city	cityserved
+served region	regionserved
+service	services
+serving railway	servingrailwayline
+serving railway line	servingrailwayline
+share holder	owner
+shareholder	owner
+shareholders	owner
+ship builder	shipbuilder
+show	showname
+show	televisionshow
+show is	televisionshow
+show's	televisionshow
+shows	televisionshow
+shows'	televisionshow
+shrine	majorshrine
+shrines	majorshrine
+significant building	significantbuilding
+signs	genre
+siler medalist	silvermedalist
+silver medal	silvermedalist
+singer	musicalartist
+sister	sisternames
+sister	sisterstations
+sister name	sisternames
+sister names	sisternames
+sister station	sisterstation
+sister stations	sisterstations
+skate	figureskater
+soccer	soccerclubseason
+soccer club	soccerclub
+soccer club season	soccerclubseason
+soccer clubs	soccerclub
+soccer manager	soccermanager
+soccer player	soccerplayer
+son	child
+son	children
+songwriter	author
+songwriter	musicby
+source	sourcecountry
+source	sourcelocation
+source	sourceregion
+source country	sourcecountry
+source location	sourcelocation
+source mountain	sourcemountain
+source place	sourceplace
+source region	sourceregion
+sovereign state	country
+speaking	officiallanguage
+speedway league	speedwayleague
+sports	athletics
+sports	sport
+sports manager	sportsmanager
+sports team	sportsteam
+sports team	team
+spouse	partner
+stadium	ground
+star	starring
+starred	starring
+stars	starring
+start	routestart
+start	sourcecountry
+start,	routestart
+starting	routestart
+starts	routestart
+state	city
+state	country
+state	federalstate
+state	ispartof
+state	stateoforigin
+state of origin	stateoforigin
+station	radiostation
+station	sisterstations
+station	televisionstation
+station radio	radiostation
+station sister	sisterstations
+stations	radiostation
+stations	sisterstations
+stations	televisionstation
+stockholder	owner
+stockholders	owner
+structure command	commandstructure
+structured	commandstructure
+students	doctoralstudents
+students doctoral	doctoralstudents
+studied at	almamater
+studied at	education
+style of architecture	architecturalstyle
+stylistic origin	stylisticorigin
+stylistic origins	stylisticorigins
+subject	nonfictionsubject
+subjects	nonfictionsubject
+subsequent work	subsequentwork
+succeed	successor
+successor	predecessor
+supervisor	doctoraladvisor
+team	currentteam
+team	debutteam
+team	draftteam
+team	firstteam
+team	formerteam
+team	nationalteam
+team	pastteams
+team	playedfor
+team	prospectteam
+team	sportsteam
+team	teamname
+team for	formerteam
+team manager	manager
+team name	teamname
+team past	pastteams
+teams	debutteam
+teams	formerteam
+teams	pastteams
+teams	teamname
+television	televisionshow
+television show	televisionshow
+television show's	televisionshow
+television shows	televisionshow
+television station	televisionstation
+television.	televisionshow
+tenant	tenants
+tenants	tenant
+tenats	tenant
+tennis player	tennisplayer
+territories	territory
+theatre	battle
+theme	openingtheme
+theme	opentheme
+theme	thememusiccomposer
+theme music	thememusiccomposer
+theme music composer	thememusiccomposer
+things	ingredient
+time zone	timezone
+tomb	placeofburial
+tomb	restingplace
+town home	hometown
+towns	hometown
+trade union	tradeunion
+train	trainer
+trained	trainer
+trained	training
+tributary	lefttributary
+tributary	righttributary
+tunnels	roadtunnel
+tv show	televisionshow
+tv shows	televisionshow
+two	subsequentwork
+unit	militaryunit
+units	militaryunit
+universit's	university
+universities	university
+university attended	almamater
+university attended	education
+used	usedinwar
+used war	usedinwar
+venerated	veneratedin
+venerated in	veneratedin
+venerated,	veneratedin
+venerateds	veneratedin
+vice president	vicepresident
+video game	videogame
+vocals	voices
+voice	voices
+voiced	voices
+volleyball player	volleyballplayer
+war	battle
+wars	combatant
+was	pastmembers
+was founded by	founded
+was founded by	foundedby
+was founded by	founder
+water	bodyofwater
+water body of	bodyofwater
+wedded to	spouse
+where	location
+which	locationcity
+who	company
+who	name
+wife	spouse
+wine	wineregion
+wine region	wineregion
+winner	prizes
+work	artwork
+work	employer
+work	notablework
+work	notableworks
+work	occupation
+work	previouswork
+work for	occupation
+work institutions	workinstitutions
+working	workinstitutions
+working for	employer
+workplace	employer
+works	notablework
+works	notableworks
+works	workinstitutions
+works at	employer
+write	writers
+writer	author
+writer	writers
+writer screen	screenwriter
+writers	author
+writers	writer
+writing	writer
+written	writer
+written by	author
+written by	musicby
+written by	writer
+written by	writers
+wrote	writer
+youth club	youthclubs
+youth clubs	youthclubs
+youthclub	youthclubs
+zone time	timezone
