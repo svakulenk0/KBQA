@@ -62,6 +62,7 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
                 entities.remove(entity)
 
     print ("%d entities left unmatched in lcquad %s" % (len(entities), dataset_split))
+    print (entities)
 
 
 if __name__ == '__main__':
