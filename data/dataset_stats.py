@@ -38,46 +38,25 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     '''
     Check how many questions can be answered with the existing set of KG entities
     '''
-    # get entity URis
-    with open(path_kg_uris, "r") as file:
-        entity_uris = file.read().splitlines()
-        print ("Loaded %d entity uris"%len(entity_uris))
-        print ("Unique %d entity uris"%len(set(entity_uris)))
+    path_qa_dataset = "./data/lcquad_%s_new.json"%dataset_split
 
-    # init counter
-    n_select_questions = 0
-    n_select_questions_answerable = 0
-    # load QA dataset
-    with open("./data/lcquad_%s_new.json"%dataset_split, "r") as train_file:
+    entities = []
+    with open(path_qa_dataset, "r") as file:
         qas = json.load(train_file)
         print ("%d total QA pairs in lcquad %s" % (len(qas), dataset_split))
-        for qa in qas:
-            # skip bool and int queries
-            sparql_query = qa["sparql_query"]
-            # flag
-            all_entities_found = True
-            if "SELECT DISTINCT ?uri WHERE" in sparql_query:
-                n_select_questions += 1
-                # make sure that all entities are in the kg 
-                entities = qa['entities']
-                # print entities
-                for entity in entities:
-                    entity = entity.encode('utf-8')
-                    if entity not in entity_uris:
-                        all_entities_found = False
-                        break
-                if all_entities_found:
-                    # make sure that at least one entity is the kg 
-                    answers = qa['answers']
-                    # print answers
-                    for answer in answers:
-                        answer = answer.encode('utf-8')
-                        if answer in entity_uris:
-                            n_select_questions_answerable += 1
-                            break
-    print n_select_questions
-    print n_select_questions_answerable
 
+        sparql_query = qa["sparql_query"]
+        # skip bool and int queries
+        if "SELECT DISTINCT ?uri WHERE" in sparql_query:
+            entities.extend(qa['entities'])
+            entities.extend(qa['answers'])
+    entities = set(entities)
+    print ("%d entities in lcquad %s" % (len(entities), dataset_split))
+
+    # load QA dataset
+    with open(path_kg_uris, "r") as file:
+        for entity in file:
+            print entity
 
 if __name__ == '__main__':
     check_qa_entities_in_kb()
