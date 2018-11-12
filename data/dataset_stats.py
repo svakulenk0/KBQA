@@ -44,12 +44,12 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     with open(path_qa_dataset, "r") as file:
         qas = json.load(file)
         print ("%d total QA pairs in lcquad %s" % (len(qas), dataset_split))
-
-        sparql_query = qa["sparql_query"]
-        # skip bool and int queries
-        if "SELECT DISTINCT ?uri WHERE" in sparql_query:
-            entities.extend(qa['entities'])
-            entities.extend(qa['answers'])
+        for qa in qas:
+            sparql_query = qa["sparql_query"]
+            # skip bool and int queries
+            if "SELECT DISTINCT ?uri WHERE" in sparql_query:
+                entities.extend(qa['entities'])
+                entities.extend(qa['answers'])
     entities = set(entities)
     print ("%d entities in lcquad %s" % (len(entities), dataset_split))
 
