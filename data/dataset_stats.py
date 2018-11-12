@@ -38,7 +38,7 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     '''
     Check how many questions can be answered with the existing set of KG entities
     '''
-    path_qa_dataset = "./data/lcquad_%s_new.json"%dataset_split
+    path_qa_dataset = "./lcquad_%s_new.json"%dataset_split
 
     entities = []
     with open(path_qa_dataset, "r") as file:
