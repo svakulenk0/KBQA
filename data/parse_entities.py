@@ -42,7 +42,7 @@ def parse_dbpedia_entities(path="./entitiesWithObjectsURIs.txt"):
     with open(path, "r") as infile, open("entitiesWithObjectsURIs_labels.txt", 'w') as out:
         for line in infile:
             # line template http://creativecommons.org/ns#license;2
-            entity_uri = ''.join(line.split(';')[:-1])
+            entity_uri = ';'.join(line.split(';')[:-1])
             out.write("%s\n"%(entity_uri))
 
             # entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
