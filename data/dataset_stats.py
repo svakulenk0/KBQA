@@ -50,7 +50,7 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
             if "SELECT DISTINCT ?uri WHERE" in sparql_query:
                 if qa['answers']:
                     entities.extend(qa['entities'])
-                    entities.extend(qa['answers'])
+                    # entities.extend(qa['answers'])
     entities = set(entities)
     print ("%d entities in lcquad %s" % (len(entities), dataset_split))
 
@@ -58,7 +58,7 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     with open(path_kg_uris, "r") as file:
         for entity in file:
             entity = entity.strip('\n')
-            if entity in entities:
+            if entity.encode('utf-8') in entities:
                 entities.remove(entity)
 
     print ("%d entities left unmatched in lcquad %s" % (len(entities), dataset_split))
