@@ -43,7 +43,7 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     path_qa_dataset = "./lcquad_%s_new.json"%dataset_split
 
     entities = []
-    with io.open(path_qa_dataset, "r", encoding="utf-8") as file:
+    with io.open(path_qa_dataset, "r") as file:
         qas = json.load(file)
         print ("%d total QA pairs in lcquad %s" % (len(qas), dataset_split))
         for qa in qas:
@@ -52,12 +52,13 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
             if "SELECT DISTINCT ?uri WHERE" in sparql_query:
                 if qa['answers']:
                     # entities.extend(qa['entities'])
+                    # strip \n
                     entities.extend(qa['answers'])
     entities = set(entities)
     print ("%d entities in lcquad %s" % (len(entities), dataset_split))
 
     # load QA dataset
-    with io.open(path_kg_uris, "r", encoding="utf-8") as file:
+    with io.open(path_kg_uris, "r") as file:
         for entity in file:
             entity = entity.strip('\n')
             # strip type and language for literals
