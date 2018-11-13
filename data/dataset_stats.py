@@ -9,6 +9,7 @@ Created on Nov 6, 2018
 
 Check datasets statistics
 '''
+import io
 import json
 
 EMBEDDINGS_PATH = "./data/embeddings/"
@@ -41,7 +42,7 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     path_qa_dataset = "./lcquad_%s_new.json"%dataset_split
 
     entities = []
-    with open(path_qa_dataset, "r") as file:
+    with io.open(path_qa_dataset, "r", encoding="utf-8") as file:
         qas = json.load(file)
         print ("%d total QA pairs in lcquad %s" % (len(qas), dataset_split))
         for qa in qas:
@@ -55,10 +56,10 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     print ("%d entities in lcquad %s" % (len(entities), dataset_split))
 
     # load QA dataset
-    with open(path_kg_uris, "r") as file:
+    with io.open(path_kg_uris, "r", encoding="utf-8") as file:
         for entity in file:
             entity = entity.strip('\n')
-            if entity.encode('utf-8') in entities:
+            if entity in entities:
                 entities.remove(entity)
 
     print ("%d entities left unmatched in lcquad %s" % (len(entities), dataset_split))
