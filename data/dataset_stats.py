@@ -61,9 +61,9 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
         for entity in file:
             entity = entity.strip('\n')
             # strip type and language for literals
-            literal = re.search("^\"(.*)\"", entity).group()
+            literal = re.search("^\"(.*)\"", entity)
             if literal:
-                entity = literal[1:-1]
+                entity = literal.group()[1:-1]
             if entity in entities:
                 entities.remove(entity)
 
