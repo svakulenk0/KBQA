@@ -37,7 +37,7 @@ def count_QA_entities(dataset_split='train'):
 
 def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithObjects_uris.txt"):
     '''
-    Check how many questions can be answered with the existing set of KG entities
+    Check how many questions can be answered with the KG subset
     '''
     path_qa_dataset = "./lcquad_%s_new.json"%dataset_split
 
@@ -59,6 +59,10 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
     with io.open(path_kg_uris, "r", encoding="utf-8") as file:
         for entity in file:
             entity = entity.strip('\n')
+            # strip type and language for literals
+            literal = re.find("^\"(.*)\"", entity)
+            if literal:
+                entity = literal[1:-1]
             if entity in entities:
                 entities.remove(entity)
 
