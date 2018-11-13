@@ -11,6 +11,7 @@ Check datasets statistics
 '''
 import io
 import json
+import re
 
 EMBEDDINGS_PATH = "./data/embeddings/"
 KB_RELATION_EMBEDDINGS_PATH = EMBEDDINGS_PATH + 'DBpediaVecotrs200_20Shuffle.txt'
