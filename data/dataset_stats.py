@@ -50,8 +50,8 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
             # skip bool and int queries
             if "SELECT DISTINCT ?uri WHERE" in sparql_query:
                 if qa['answers']:
-                    entities.extend(qa['entities'])
-                    # entities.extend(qa['answers'])
+                    # entities.extend(qa['entities'])
+                    entities.extend(qa['answers'])
     entities = set(entities)
     print ("%d entities in lcquad %s" % (len(entities), dataset_split))
 
