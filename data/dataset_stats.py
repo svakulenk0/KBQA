@@ -36,11 +36,11 @@ def count_QA_entities(dataset_split='train'):
                 # return
 
 
-def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithObjects_uris.txt"):
+def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithObjectsURIs.txt"):
     '''
     Ensure LCQuAD coverage with the available KB entities
     '''
-    path_qa_dataset = "./lcquad_%s_new.json"%dataset_split
+    path_qa_dataset = "./lcquad_%s.json"%dataset_split
 
     entities = []
     with io.open(path_qa_dataset, "r", encoding='utf-8') as file:
