@@ -38,12 +38,12 @@ def count_QA_entities(dataset_split='train'):
 
 def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithObjects_uris.txt"):
     '''
-    Check how many questions can be answered with the KG subset
+    Ensure LCQuAD coverage with the available KB entities
     '''
     path_qa_dataset = "./lcquad_%s_new.json"%dataset_split
 
     entities = []
-    with io.open(path_qa_dataset, "r") as file:
+    with open(path_qa_dataset, "r") as file:
         qas = json.load(file)
         print ("%d total QA pairs in lcquad %s" % (len(qas), dataset_split))
         for qa in qas:
@@ -53,12 +53,12 @@ def check_qa_entities_in_kb(dataset_split='train', path_kg_uris="./entitiesWithO
                 if qa['answers']:
                     # entities.extend(qa['entities'])
                     # strip \n
-                    entities.extend(qa['answers'])
+                    entities.extend([answer.replace("\n", "") for answer in qa['answers']])
     entities = set(entities)
     print ("%d entities in lcquad %s" % (len(entities), dataset_split))
 
     # load QA dataset
-    with io.open(path_kg_uris, "r") as file:
+    with open(path_kg_uris, "r") as file:
         for entity in file:
             entity = entity.strip('\n')
             # strip type and language for literals
