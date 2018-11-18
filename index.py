@@ -101,7 +101,7 @@ class IndexSearch:
 def test_index_entities():
     es = IndexSearch()
     es.parse_kb_uris()
-    # es.index_entities_bulk()
+    es.index_entities_bulk()
 
 
 def test_match_entities():
