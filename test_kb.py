@@ -39,6 +39,7 @@ with open(path, "r") as in_file:
     # }
     # bulk_data.append(op_dict)
     bulk_data.append(data_dict)
+    print len(bulk_data)
      
     # header = csv_file_object.next()
     # header = [item.lower() for item in header]
