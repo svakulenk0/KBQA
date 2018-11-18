@@ -11,9 +11,12 @@ Parse KG entities
 '''
 path = "./data/entitiesWithObjectsURIs.txt"
 
-with open(path, "r") as infile:
-    print len(infile.read())
-    
+with open(path, "r") as f:
+    # print len(infile.read())
+    for i, l in enumerate(f):
+        pass
+    print i + 1
+
     # for line in infile:
     #     # line template http://creativecommons.org/ns#license;2
     #     parse = line.split(';')
