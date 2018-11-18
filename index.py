@@ -13,7 +13,6 @@ Following https://qbox.io/blog/building-an-elasticsearch-index-with-python
 '''
 
 from elasticsearch import Elasticsearch
-from parse_kb import parse_kb_uris
 
 
 class IndexSearch:
