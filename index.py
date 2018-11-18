@@ -8,9 +8,12 @@ Created on Nov 15, 2018
     <svitlana.vakulenko@gmail.com>
 
 Index entities into ES
+
+Following https://qbox.io/blog/building-an-elasticsearch-index-with-python
 '''
 
 from elasticsearch import Elasticsearch
+from parse_kb import parse_kb_uris
 
 
 class IndexSearch:
@@ -18,17 +21,17 @@ class IndexSearch:
     def __init__(self):
         # set up ES connection
         self.es = Elasticsearch()
-        self.index = 'dbpedia2016-04'
+        self.index = 'dbpedia201604'
         self.type = 'entities'
 
     def build(self):
         '''
-        following https://qbox.io/blog/building-an-elasticsearch-index-with-python
         '''
         if self.es.indices.exists(self.index):
             print("deleting '%s' index..." % (self.index))
             res = self.es.indices.delete(index = self.index)
             print(" response: '%s'" % (res))
+
         # since we are running locally, use one shard and no replicas
         request_body = {
             "settings" : {
@@ -37,7 +40,7 @@ class IndexSearch:
             }
         }
         print("creating '%s' index..." % (self.index))
-        res = self.es.indices.create(index = self.index, body = request_body)
+        res = self.es.indices.create(index=self.index, body=request_body)
         print(" response: '%s'" % (res))
 
     def match_entities(self, query):
@@ -48,30 +51,57 @@ class IndexSearch:
         #         return results['hits'][0]
         # return None
 
-    def index_entities(self, path="./data/entitiesWithObjectsURIs.txt"):
-        '''
-        Perform indexing 
-        '''
-        self.build()
-        with open(path, "r") as infile:
-            for line in infile:
+    def parse_kb_uris(self, path="./data/entitiesWithObjectsURIs.txt"):
+
+        with open(path, "r") as in_file:
+
+            bulk_data = []
+
+            for i, line in enumerate(in_file):
                 # line template http://creativecommons.org/ns#license;2
                 parse = line.split(';')
                 entity_uri = ';'.join(parse[:-1])
                 count = parse[-1].strip()
                 entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#')
 
-                self.es.index(index=self.index, doc_type=self.type,
-                              body={'id': entity_uri, 'label': entity_label, 'count': count})
+                data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count}
+
+                op_dict = {
+                    "index": {
+                        "_index": self.index, 
+                        "_type": self.type, 
+                        "_id": i + 1
+                    }
+                }
+                bulk_data.append(op_dict)
+                bulk_data.append(data_dict)
+
+            print len(bulk_data)
+            return bulk_data
+
+    def index_entities_bulk(self):
+        '''
+        Perform indexing 
+        '''
+        # create index
+        self.build()
+
+        # parse entities
+        bulk_data = self.parse_kb_uris()
+
+        # bulk index the data
+        print("bulk indexing...")
+        res = self.es.bulk(index=self.index, body=bulk_data, refresh=True)
 
         # sanity check
-        res = self.es.search(index = self.index, size=2, body={"query": {"match_all": {}}})
+        res = self.es.search(index=self.index, size=2, body={"query": {"match_all": {}}})
         print(" response: '%s'" % (res))
 
 
 def test_index_entities():
     es = IndexSearch()
-    es.index_entities()
+    es.parse_kb_uris()
+    # es.index_entities_bulk()
 
 
 def test_match_entities():
@@ -107,6 +137,6 @@ def test_match_lcquad_questions(limit=10):
 
 
 if __name__ == '__main__':
-    # test_index_entities()
+    test_index_entities()
     # test_match_entities()
-    test_match_lcquad_questions()
+    # test_match_lcquad_questions()
