@@ -100,10 +100,10 @@ def test_index_entities():
 def test_match_entities():
     es = IndexSearch()
     
-    print es.match_entities()
+    print (es.match_entities())
 
     query = 'license'
-    print es.match_entities(query)
+    print (es.match_entities(query))
 
 
 def test_match_lcquad_questions(limit=10):
