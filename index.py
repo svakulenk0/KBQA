@@ -87,7 +87,7 @@ class IndexSearch:
         # iterate via streaming_bulk following https://stackoverflow.com/questions/34659198/how-to-use-elasticsearch-helpers-streaming-bulk
         print("bulk indexing...")
 
-        for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=500):
+        for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=10000):
             if not ok:
                 # failure inserting
                 print (response)
