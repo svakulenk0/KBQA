@@ -124,9 +124,9 @@ def test_match_lcquad_questions(limit=10):
                 # print(wfd[word])
                 pass
             else:
-                print question
-                print word
-                print es.match_entities(word)
+                print (question)
+                print (word)
+                print (es.match_entities(word))
 
         if i == limit:
             break
