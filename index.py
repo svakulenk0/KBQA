@@ -11,6 +11,7 @@ Index entities into ES
 
 Following https://qbox.io/blog/building-an-elasticsearch-index-with-python
 '''
+import io
 
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import streaming_bulk
@@ -59,14 +60,14 @@ class IndexSearch:
 
     def uris_stream(self, file_to_index_path):
 
-        with open(file_to_index_path, "rb") as file:
+        with io.open(file_to_index_path, "r", encoding='utf-8') as file:
             for i, line in enumerate(file):
                 # print(line)
                 # line template http://creativecommons.org/ns#license;2
                 parse = line.split(';')
-                entity_uri = ';'.join(parse[:-1]).encode('utf-8')
-                count = int(parse[-1].strip())
-                entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#').encode('utf-8')
+                entity_uri = ';'.join(parse[:-1])
+                count = parse[-1].strip()
+                entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#')
 
                 data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count, "id": i + 1}
 
