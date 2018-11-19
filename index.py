@@ -13,6 +13,7 @@ Following https://qbox.io/blog/building-an-elasticsearch-index-with-python
 '''
 
 from elasticsearch import Elasticsearch
+from elasticsearch.helpers import streaming_bulk
 
 
 class IndexSearch:
@@ -42,69 +43,65 @@ class IndexSearch:
         res = self.es.indices.create(index=self.index, body=request_body)
         print(" response: '%s'" % (res))
 
-    def match_entities(self, query):
-        results = self.es.search(index=self.index, body={"query": {"match": {"label": query}}}, doc_type=self.type)['hits']
+    def match_entities(self, query=None):
+        if query:
+            results = self.es.search(index=self.index, body={"query": {"match": {"label": query}}}, doc_type=self.type)['hits']
+        else:
+            results = self.es.search(index=self.index, size=2, body={"query": {"match_all": {}}})['hits']
+
         return results['hits']
+
         # if results['max_score']:
         #     if results['max_score'] > threshold:
         #         return results['hits'][0]
         # return None
+        # sanity check
 
-    def parse_kb_uris(self, path="./data/entitiesWithObjectsURIs.txt"):
+    def uris_stream(self, file_to_index_path):
 
-        with open(path, "r") as in_file:
-
-            bulk_data = []
-
-            for i, line in enumerate(in_file):
+        with open(file_to_index_path, "rb") as file:
+            for i, line in enumerate(file):
+                # print(line)
                 # line template http://creativecommons.org/ns#license;2
                 parse = line.split(';')
                 entity_uri = ';'.join(parse[:-1])
                 count = parse[-1].strip()
                 entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#')
 
-                data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count}
+                data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count, "id": i + 1}
 
-                op_dict = {
-                    "index": {
-                        "_index": self.index, 
-                        "_type": self.type, 
-                        "_id": i + 1
-                    }
-                }
-                bulk_data.append(op_dict)
-                bulk_data.append(data_dict)
+                yield {"_index": self.index,
+                       "_type": self.type,
+                       "_source": data_dict
+                       }
 
-            print len(bulk_data)
-            return bulk_data
-
-    def index_entities_bulk(self):
+    def index_entities_bulk(self, file_to_index="./data/entitiesWithObjectsURIs.txt"):
         '''
-        Perform indexing 
+        Perform indexing
+        https://www.elastic.co/guide/en/elasticsearch/reference/current/tune-for-indexing-speed.html
         '''
         # create index
         self.build()
 
-        # parse entities
-        bulk_data = self.parse_kb_uris()
-
-        # bulk index the data
+        # iterate via streaming_bulk following https://stackoverflow.com/questions/34659198/how-to-use-elasticsearch-helpers-streaming-bulk
         print("bulk indexing...")
-        res = self.es.bulk(index=self.index, body=bulk_data, refresh=True)
 
-        # sanity check
-        res = self.es.search(index=self.index, size=2, body={"query": {"match_all": {}}})
-        print(" response: '%s'" % (res))
+        for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=500):
+            if not ok:
+                # failure inserting
+                print response
 
 
 def test_index_entities():
     es = IndexSearch()
-    es.parse_kb_uris()
     es.index_entities_bulk()
 
 
 def test_match_entities():
     es = IndexSearch()
+    
+    print es.match_entities()
+
     query = 'license'
     print es.match_entities(query)
 
@@ -137,5 +134,7 @@ def test_match_lcquad_questions(limit=10):
 
 if __name__ == '__main__':
     test_index_entities()
+
     # test_match_entities()
+
     # test_match_lcquad_questions()
