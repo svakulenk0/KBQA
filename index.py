@@ -64,9 +64,9 @@ class IndexSearch:
                 # print(line)
                 # line template http://creativecommons.org/ns#license;2
                 parse = line.split(';')
-                entity_uri = ';'.join(parse[:-1])
-                count = parse[-1].strip()
-                entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#')
+                entity_uri = ';'.join(parse[:-1]).encode('utf-8')
+                count = int(parse[-1].strip())
+                entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#').encode('utf-8')
 
                 data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count, "id": i + 1}
 
