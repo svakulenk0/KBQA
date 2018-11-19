@@ -89,7 +89,7 @@ class IndexSearch:
         for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=500):
             if not ok:
                 # failure inserting
-                print response
+                print (response)
 
 
 def test_index_entities():
