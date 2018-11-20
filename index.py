@@ -92,7 +92,7 @@ class IndexSearch:
         # iterate via streaming_bulk following https://stackoverflow.com/questions/34659198/how-to-use-elasticsearch-helpers-streaming-bulk
         print("bulk indexing...")
 
-        for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=10000):
+        for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=100000):
             if not ok:
                 # failure inserting
                 print (response)
@@ -119,7 +119,7 @@ def test_match_lcquad_questions(limit=10):
     es = IndexSearch()
 
     import pickle
-    # from keras.preprocessing.text import text_to_word_sequence
+    from keras.preprocessing.text import text_to_word_sequence
     from lcquad import load_lcquad
 
     wfd = pickle.load(open("wfd.pkl", "rb"))
@@ -130,7 +130,7 @@ def test_match_lcquad_questions(limit=10):
 
     # iterate over questions and check for how many questions we can hit the correct entity set
     hits = 0
-    samples = [["what is the fuel capacity", ["http://dbpedia.org/ontology/Automobile/fuelCapacity"]]]
+    # samples = [["what is the fuel capacity", ["http://dbpedia.org/ontology/Automobile/fuelCapacity"]]]
     for question, correct_question_entities in samples:
         # show sample
         print (question)
@@ -141,8 +141,8 @@ def test_match_lcquad_questions(limit=10):
         print(matched_uris)
 
         # select words to look up in ES
-        selected_words = [word for word in question.split()]
-        # selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
+        # selected_words = [word for word in question.split()]
+        selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
         print(selected_words)
 
         # look up all relevant URIs for the selected words
