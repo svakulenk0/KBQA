@@ -108,34 +108,46 @@ def test_match_entities():
 
 
 def test_match_lcquad_questions(limit=10):
+    '''
+    Estimate entity linking performance (candidate selection) via ES index
+    '''
     es = IndexSearch()
 
     import pickle
-    from keras.preprocessing.text import text_to_word_sequence
+    # from keras.preprocessing.text import text_to_word_sequence
     from lcquad import load_lcquad_qe
 
     wfd = pickle.load( open( "wfd.pkl", "rb" ) )
 
-    questions, correct_question_entities = load_lcquad_qe()
+    # get a random sample of questions from lcquad train split
+    questions, correct_question_entities = load_lcquad_qe('train', shuffle=True)
 
     # iterate over questions
     for i, question in enumerate(questions):
-        for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\''):
-            if word in wfd.keys():
-                # print(wfd[word])
-                pass
-            else:
-                print (question)
-                print (word)
-                print (es.match_entities(word))
+        
+        # select words to look up in ES
+        selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word in wfd.keys()]
+        
+        # look up all relevant URIs for the selected words
+        matched_uris = [match['_source']['uri'] for match in es.match_entities(word) for word in selected_words]
+        
+        # check them against correct uris and filter out only the correctly matched URIs
+        correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities[i]]
 
+        # consider a hit if we managed to match at least one correct URI
+        if correct_matched_uris:
+            hits += 1
+
+        # stop sampling
         if i == limit:
             break
 
+    print ("%d hits out of %d"%(hits, limit))
+
 
 if __name__ == '__main__':
-    test_index_entities()
+    # test_index_entities()
 
     # test_match_entities()
 
-    # test_match_lcquad_questions()
+    test_match_lcquad_questions()
