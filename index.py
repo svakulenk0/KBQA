@@ -114,7 +114,7 @@ def test_match_lcquad_questions(limit=10):
     es = IndexSearch()
 
     import pickle
-    # from keras.preprocessing.text import text_to_word_sequence
+    from keras.preprocessing.text import text_to_word_sequence
     from lcquad import load_lcquad
 
     wfd = pickle.load(open("wfd.pkl", "rb"))
@@ -141,10 +141,10 @@ def test_match_lcquad_questions(limit=10):
 
         # check them against correct uris and filter out only the correctly matched URIs
         correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities]
-        print(correct_matched_uris)
 
         # consider a hit if we managed to match at least one correct URI
         if correct_matched_uris:
+            print(correct_matched_uris)
             hits += 1
 
     print ("%d hits out of %d"%(hits, len(samples)))
