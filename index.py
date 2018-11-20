@@ -12,6 +12,7 @@ Index entities into ES
 Following https://qbox.io/blog/building-an-elasticsearch-index-with-python
 '''
 import io
+import re
 
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import streaming_bulk
@@ -22,7 +23,7 @@ class IndexSearch:
     def __init__(self):
         # set up ES connection
         self.es = Elasticsearch()
-        self.index = 'dbpedia201604'
+        self.index = 'dbpedia2016-04'
         self.type = 'entities'
 
     def build(self):
@@ -64,17 +65,21 @@ class IndexSearch:
             for i, line in enumerate(file):
                 # print(line)
                 # line template http://creativecommons.org/ns#license;2
-                parse = line.split(';')
-                entity_uri = ';'.join(parse[:-1])
-                count = parse[-1].strip()
-                entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#')
+                # filter out only dbpedia URIs
+                dbpedia_uri = re.search("^http://dbpedia.org", line)
+                if dbpedia_uri:
+                    # print (line)
+                    parse = line.split(';')
+                    entity_uri = ';'.join(parse[:-1])
+                    count = parse[-1].strip()
+                    entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#')
 
-                data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count, "id": i + 1}
+                    data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count, "id": i + 1}
 
-                yield {"_index": self.index,
-                       "_type": self.type,
-                       "_source": data_dict
-                       }
+                    yield {"_index": self.index,
+                           "_type": self.type,
+                           "_source": data_dict
+                           }
 
     def index_entities_bulk(self, file_to_index="./data/entitiesWithObjectsURIs.txt"):
         '''
@@ -151,8 +156,8 @@ def test_match_lcquad_questions(limit=10):
 
 
 if __name__ == '__main__':
-    # test_index_entities()
+    test_index_entities()
 
     # test_match_entities()
 
-    test_match_lcquad_questions()
+    # test_match_lcquad_questions()
