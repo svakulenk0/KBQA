@@ -115,34 +115,34 @@ def test_match_lcquad_questions(limit=10):
 
     import pickle
     # from keras.preprocessing.text import text_to_word_sequence
-    from lcquad import load_lcquad_qe
+    from lcquad import load_lcquad
 
-    wfd = pickle.load( open( "wfd.pkl", "rb" ) )
+    wfd = pickle.load(open("wfd.pkl", "rb"))
 
     # get a random sample of questions from lcquad train split
-    questions, correct_question_entities = load_lcquad_qe('train', shuffle=True)
+    samples = load_lcquad(fields=['corrected_question', 'entities'], dataset_split='train',
+                          shuffled=True, limit=limit)
 
-    # iterate over questions
-    for i, question in enumerate(questions):
+    # iterate over questions and check for how many questions we can hit the correct entity set
+    hits = 0
+
+    for question, correct_question_entities in samples:
         
         # select words to look up in ES
-        selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word in wfd.keys()]
+        selected_words = [word for word in question.split() if word in wfd.keys()]
+        # selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word in wfd.keys()]
         
         # look up all relevant URIs for the selected words
         matched_uris = [match['_source']['uri'] for match in es.match_entities(word) for word in selected_words]
         
         # check them against correct uris and filter out only the correctly matched URIs
-        correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities[i]]
+        correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities]
 
         # consider a hit if we managed to match at least one correct URI
         if correct_matched_uris:
             hits += 1
 
-        # stop sampling
-        if i == limit:
-            break
-
-    print ("%d hits out of %d"%(hits, limit))
+    print ("%d hits out of %d"%(hits, len(samples)))
 
 
 if __name__ == '__main__':
