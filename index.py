@@ -151,8 +151,8 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
 
         # select words to look up in ES
         # selected_words = [word for word in question.split()]
-        selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'')]
-        # selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
+        # selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'')]
+        selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
         # print(selected_words)
 
         # look up all relevant URIs for the selected words
@@ -166,11 +166,11 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
         # consider a hit if we managed to match at least one correct URI
         if correct_matched_uris:
             hits += 1
-        else:
-            # report case
-            print(question)
-            print(correct_question_entities)
-            print(matched_uris)
+        # else:
+        #     # report case
+        #     print(question)
+        #     print(correct_question_entities)
+        #     print(matched_uris)
 
     print ("%d hits out of %d"%(hits, len(samples)))
 
