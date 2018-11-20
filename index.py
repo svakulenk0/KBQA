@@ -112,7 +112,7 @@ def test_match_entities():
     print (es.match_entities(query))
 
 
-def test_match_lcquad_questions(limit=10):
+def test_match_lcquad_questions(limit=10, check_uri_exist=False):
     '''
     Estimate entity linking performance (candidate selection) via ES index
     '''
@@ -136,8 +136,27 @@ def test_match_lcquad_questions(limit=10):
         print(question)
         print(correct_question_entities)
 
-        # check that we have all the entities referenced in the question
-        matched_uris = [match['_source']['uri'] for entity_uri in correct_question_entities for match in es.match_entities(entity_uri, match_by='uri')]
+        if check_uri_exist:
+            # check that we have all the entities referenced in the question
+            matched_uris = [match['_source']['uri'] for entity_uri in correct_question_entities for match in es.match_entities(entity_uri, match_by='uri')]
+            print(matched_uris)
+
+            # check them against correct uris and filter out only the correctly matched URIs
+            correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities]
+            print(correct_matched_uris)
+
+            # consider a hit if we managed to match at least one correct URI
+            if correct_matched_uris:
+                hits += 1
+
+        # select words to look up in ES
+        # selected_words = [word for word in question.split()]
+        selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'')]
+        # selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
+        print(selected_words)
+
+        # look up all relevant URIs for the selected words
+        matched_uris = [match['_source']['uri'] for word in selected_words for match in es.match_entities(word, match_by='label')]
         print(matched_uris)
 
         # check them against correct uris and filter out only the correctly matched URIs
@@ -147,23 +166,6 @@ def test_match_lcquad_questions(limit=10):
         # consider a hit if we managed to match at least one correct URI
         if correct_matched_uris:
             hits += 1
-
-        # select words to look up in ES
-        # selected_words = [word for word in question.split()]
-            # selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
-            # print(selected_words)
-
-            # # look up all relevant URIs for the selected words
-            # matched_uris = [match['_source']['uri'] for word in selected_words for match in es.match_entities(word, match_by='label')]
-            # print(matched_uris)
-
-            # # check them against correct uris and filter out only the correctly matched URIs
-            # correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities]
-            # print(correct_matched_uris)
-
-            # # consider a hit if we managed to match at least one correct URI
-            # if correct_matched_uris:
-            #     hits += 1
 
     print ("%d hits out of %d"%(hits, len(samples)))
 
