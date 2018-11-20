@@ -133,8 +133,8 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
     # samples = [["what is the fuel capacity", ["http://dbpedia.org/ontology/Automobile/fuelCapacity"]]]
     for question, correct_question_entities in samples:
         # show sample
-        print(question)
-        print(correct_question_entities)
+        # print(question)
+        # print(correct_question_entities)
 
         if check_uri_exist:
             # check that we have all the entities referenced in the question
@@ -153,19 +153,24 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
         # selected_words = [word for word in question.split()]
         selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'')]
         # selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
-        print(selected_words)
+        # print(selected_words)
 
         # look up all relevant URIs for the selected words
         matched_uris = [match['_source']['uri'] for word in selected_words for match in es.match_entities(word, match_by='label')]
-        print(matched_uris)
+        # print(matched_uris)
 
         # check them against correct uris and filter out only the correctly matched URIs
         correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities]
-        print(correct_matched_uris)
+        # print(correct_matched_uris)
 
         # consider a hit if we managed to match at least one correct URI
         if correct_matched_uris:
             hits += 1
+        else:
+            # report case
+            print(question)
+            print(correct_question_entities)
+            print(matched_uris)
 
     print ("%d hits out of %d"%(hits, len(samples)))
 
