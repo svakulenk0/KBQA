@@ -129,14 +129,16 @@ def test_match_lcquad_questions(limit=10):
     for question, correct_question_entities in samples:
         
         # select words to look up in ES
-        selected_words = [word for word in question.split() if word in wfd.keys()]
-        # selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word in wfd.keys()]
+        # selected_words = [word for word in question.split() if word not in wfd.keys()]
+        selected_words = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
         print(selected_words)
-        
+
+        print(correct_question_entities)
+
         # look up all relevant URIs for the selected words
         matched_uris = [match['_source']['uri'] for match in es.match_entities(word) for word in selected_words]
         print(matched_uris)
-        
+
         # check them against correct uris and filter out only the correctly matched URIs
         correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities]
         print(correct_matched_uris)
