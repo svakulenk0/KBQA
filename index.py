@@ -141,7 +141,7 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
     # iterate over questions and check for how many questions we can hit the correct entity set
     hits = 0
     # TODO match string with whitespace
-    # samples = [["fuel capacity", ["http://dbpedia.org/ontology/Automobile/fuelCapacity"]]]
+    samples = [["fuel capacity", ["http://dbpedia.org/ontology/Automobile/fuelCapacity"]]]
     for question, correct_question_entities in samples:
         # show sample
         # print(question)
@@ -190,6 +190,7 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
 
 
 if __name__ == '__main__':
-    # test_index_entities()
+    # insert mapping first
+    test_index_entities()
     # test_match_entities()
-    test_match_lcquad_questions()
+    # test_match_lcquad_questions()
