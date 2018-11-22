@@ -16,6 +16,7 @@ import re
 
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import streaming_bulk
+from elasticsearch import TransportError
 
 
 class IndexSearch:
@@ -23,7 +24,7 @@ class IndexSearch:
     def __init__(self):
         # set up ES connection
         self.es = Elasticsearch()
-        self.index = 'dbpedia2016-04'
+        self.index = 'dbpedia201604'
         self.type = 'entities'
 
     def build(self):
@@ -42,8 +43,11 @@ class IndexSearch:
             }
         }
         print("creating '%s' index..." % (self.index))
-        res = self.es.indices.create(index=self.index, body=request_body)
-        print(" response: '%s'" % (res))
+        try:
+            res = self.es.indices.create(index=self.index, body=request_body)
+            print(" response: '%s'" % (res))
+        except TransportError as e:
+            print(e.info)
 
     def match_entities(self, query=None, match_by="label"):
         if query:
@@ -62,7 +66,7 @@ class IndexSearch:
         # return None
         # sanity check
 
-    def uris_stream(self, file_to_index_path):
+    def uris_stream(self, file_to_index_path="./data/entitiesWithObjectsURIs.txt"):
 
         with io.open(file_to_index_path, "r", encoding='utf-8') as file:
             for i, line in enumerate(file):
@@ -90,15 +94,18 @@ class IndexSearch:
         https://www.elastic.co/guide/en/elasticsearch/reference/current/tune-for-indexing-speed.html
         '''
         # create index
-        self.build()
+        # self.build()
 
         # iterate via streaming_bulk following https://stackoverflow.com/questions/34659198/how-to-use-elasticsearch-helpers-streaming-bulk
         print("bulk indexing...")
-
-        for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=100000):
-            if not ok:
-                # failure inserting
-                print (response)
+        try:
+            for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=100000):
+                if not ok:
+                    # failure inserting
+                    print (response)
+        except TransportError as e:
+            print(e.info)
+        
 
 
 def test_index_entities():
@@ -133,7 +140,8 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
 
     # iterate over questions and check for how many questions we can hit the correct entity set
     hits = 0
-    samples = [["fuel capacity", ["http://dbpedia.org/ontology/Automobile/fuelCapacity"]]]
+    # TODO match string with whitespace
+    # samples = [["fuel capacity", ["http://dbpedia.org/ontology/Automobile/fuelCapacity"]]]
     for question, correct_question_entities in samples:
         # show sample
         # print(question)

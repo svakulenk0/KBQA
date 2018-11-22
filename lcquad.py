@@ -28,7 +28,7 @@ def load_lcquad(fields, dataset_split='train', shuffled=False, limit=None):
         print ("%d total QA pairs in lcquad %s" % (dataset_size, dataset_split))
         
         # shuffle indices within the range for a sample of size limit
-        index_shuf = range(dataset_size)
+        index_shuf = list(range(dataset_size))
         if shuffled:
             shuffle(index_shuf)
 
