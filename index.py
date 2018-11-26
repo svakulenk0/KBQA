@@ -57,6 +57,7 @@ class IndexSearch:
         if query:
             results = self.es.search(index=self.index,
                                      body={"query": {"match": {match_by: {"query": query, "fuzziness": "AUTO"}}}},
+                                     size=100,
                                      # body={"query": {"match": {match_by: {"query": query, "operator" : "and", "fuzziness": "AUTO"}}}},
                                      doc_type=self.type)['hits']
         else:
@@ -154,11 +155,11 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
         if check_uri_exist:
             # check that we have all the entities referenced in the question
             matched_uris = [match['_source']['uri'] for entity_uri in correct_question_entities for match in es.match_entities(entity_uri, match_by='uri')]
-            print(matched_uris)
+            # print(matched_uris)
 
             # check them against correct uris and filter out only the correctly matched URIs
             correct_matched_uris = [matched_uri for matched_uri in matched_uris if matched_uri in correct_question_entities]
-            print(correct_matched_uris)
+            # print(correct_matched_uris)
 
         #     # consider a hit if we managed to match at least one correct URI
         #     if correct_matched_uris:
@@ -186,13 +187,13 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
         # selected_phrases = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'')]
 
         # selected_phrases = [word for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\'') if word not in wfd.keys()]
-        print(selected_phrases)
+        # print(selected_phrases)
 
         # match against the whole question
         # matched_uris = [match['_source']['uri'] for match in es.match_entities(question, match_by='label')]
         # look up all relevant URIs for the selected words
         matched_uris = [match['_source']['uri'] for phrase in selected_phrases for match in es.match_entities(phrase, match_by='label')]
-        print(matched_uris)
+        # print(matched_uris)
 
 
 
@@ -203,11 +204,11 @@ def test_match_lcquad_questions(limit=10, check_uri_exist=False):
         # consider a hit if we managed to match at least one correct URI
         if correct_matched_uris:
             hits += 1
-        # else:
-        #     # report case
-        #     print(question)
-        #     print(correct_question_entities)
-        #     print(matched_uris)
+        else:
+            # report case
+            print(question)
+            print(correct_question_entities)
+            print(matched_uris)
 
     print ("%d hits out of %d"%(hits, len(samples)))
 
