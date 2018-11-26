@@ -128,7 +128,7 @@ def test_match_entities():
     print (es.match_entities(query))
 
 
-def test_match_lcquad_questions(limit=20, check_uri_exist=False):
+def test_match_lcquad_questions(limit=100, check_uri_exist=False):
     '''
     Estimate entity linking performance (candidate selection) via ES index
     '''
@@ -208,7 +208,7 @@ def test_match_lcquad_questions(limit=20, check_uri_exist=False):
             # report case
             print(question)
             print(selected_phrases)
-            # print(matched_uris)
+            print(matched_uris)
             print(correct_question_entities)
 
     print ("%d hits out of %d"%(hits, len(samples)))
