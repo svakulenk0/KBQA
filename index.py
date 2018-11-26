@@ -166,7 +166,7 @@ def test_match_lcquad_questions(limit=20, check_uri_exist=False):
         #         hits += 1
 
         # select words to look up in ES
-        selected_phrases = []
+        selected_phrases = [question]
         phrase = []
         for word in text_to_word_sequence(question, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\''):
             if word in wfd.keys():
@@ -208,7 +208,7 @@ def test_match_lcquad_questions(limit=20, check_uri_exist=False):
             # report case
             print(question)
             print(selected_phrases)
-            print(matched_uris)
+            # print(matched_uris)
             print(correct_question_entities)
 
     print ("%d hits out of %d"%(hits, len(samples)))
