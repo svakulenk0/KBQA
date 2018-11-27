@@ -14,13 +14,14 @@ from subprocess import call
 from lcquad import load_lcquad
 from index import IndexSearch
 
+
 limit = 10
+
 # get a random sample of questions from lcquad train split
 samples = load_lcquad(fields=['corrected_question', 'entities'], dataset_split='train',
                       shuffled=True, limit=limit)
 
 es = IndexSearch()
-
 # interate over questions entities dataset
 for question, correct_question_entities in samples:
     print (correct_question_entities)
@@ -31,8 +32,9 @@ for question, correct_question_entities in samples:
     # request subgraph from the API (2 hops from the seed entity)
     # /home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 -o result.txt /home/zola/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
     hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/%s"
-    call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
-
+    subgraph = call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
+    print(subgraph)
+    
     # verify subgraph, i.e. all question entities are within the extracted subgraph
 
     # store subgraph
