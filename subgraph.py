@@ -15,7 +15,7 @@ from lcquad import load_lcquad
 from index import IndexSearch
 
 
-limit = 10
+limit = 2
 
 # get a random sample of questions from lcquad train split
 samples = load_lcquad(fields=['corrected_question', 'entities'], dataset_split='train',
@@ -26,24 +26,34 @@ es = IndexSearch()
 for question, correct_question_entities in samples:
     print (correct_question_entities)
     # pick a seed entity for each question
-    matched_uris = [match['_source']['uri'] for entity_uri in correct_question_entities for match in es.match_entities(entity_uri, match_by='uri') if match['_source']['term_type'] != "predicates"]
+    matched_uris = []
+    matched_ids = []
+    for entity_uri in correct_question_entities
+        for match in es.match_entities(entity_uri, match_by='uri'):
+            if match['_source']['term_type'] != "predicates":
+                matched_uris.append(match['_source']['uri'])
+            matched_ids.append(match['_source']['id'])
     print (matched_uris)
 
     # request subgraph from the API (2 hops from the seed entity)
     # /home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 /home/zola/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
     hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt"
-    # call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
     p = Popen(["/home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops", "-t", "<%s>"%matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', 'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
-    out, err = p.communicate()
-    print (out)
+    subgraph, err = p.communicate()
+    # print (subgraph)
 
-    # while True:
-    #   line = p.stdout.readline()
-    #   if line != '':
-    #     print (line.rstrip())
-    #   else:
-    #     break
-
+    # parse subgraph triples
+    # entities = []
+    # predicates = []
+    terms = []
+    for triple in subgraph:
+        terms.extend(triple.split())
+        # s, p, o = terms
+        # entities.append(s)
+        # predicates.append(p)
+        # entities.append(o)
+    terms = set(terms)
     # verify subgraph, i.e. all question entities are within the extracted subgraph
-
-    # store subgraph
+    for term_id in matched_ids:
+        if term_id not in terms:
+            print "%s not found in the extracted subgraph"
