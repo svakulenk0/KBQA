@@ -42,7 +42,24 @@ class IndexSearch:
             elif match_by == "uri":
                 # filter out only entities in s and o positions
                 results = self.es.search(index=self.index,
-                                         body={"query": {"match": {match_by: query, "term_type": 'terms'}}},
+                                         body={
+                                              "query": {
+                                                "bool": {
+                                                  "must": [
+                                                    {
+                                                      "match": {
+                                                        match_by: query
+                                                      }
+                                                    },
+                                                    {
+                                                      "match": {
+                                                        "term_type": "terms"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            },
                                          doc_type=self.type)['hits']
         else:
             # sample of size 2
@@ -200,6 +217,6 @@ def test_match_lcquad_questions(limit=100, check_uri_exist=False):
 
 if __name__ == '__main__':
     # insert mapping first
-    test_index_entities()
-    # test_match_entities()
+    # test_index_entities()
+    test_match_entities()
     # test_match_lcquad_questions()
