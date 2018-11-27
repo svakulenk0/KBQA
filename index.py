@@ -72,8 +72,8 @@ class IndexSearch:
         # return None
         # sanity check
 
-    def uris_stream(self, file_to_index_path="./data/entitiesWithObjectsURIs.txt"):
-
+    def uris_stream(self, term_type):
+        file_to_index = "./data/%s.txt" % term_type
         with io.open(file_to_index_path, "r", encoding='utf-8') as file:
             for i, line in enumerate(file):
                 # print(line)
@@ -87,27 +87,25 @@ class IndexSearch:
                     count = parse[-1].strip()
                     entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower().strip('ns#')
 
-                    data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count, "id": i + 1}
+                    data_dict = {'uri': entity_uri, 'label': entity_label, 'count': count, "id": i + 1, "term_type": term_type}
 
                     yield {"_index": self.index,
                            "_type": self.type,
                            "_source": data_dict
                            }
 
-    def index_entities_bulk(self, doc_type):
+    def index_entities_bulk(self, term_type):
         '''
         Perform indexing
         https://www.elastic.co/guide/en/elasticsearch/reference/current/tune-for-indexing-speed.html
         '''
         # create index
         # self.build()
-        file_to_index = "./data/%s.txt" % doc_type
-        self.type = doc_type
 
         # iterate via streaming_bulk following https://stackoverflow.com/questions/34659198/how-to-use-elasticsearch-helpers-streaming-bulk
         print("bulk indexing...")
         try:
-            for ok, response in streaming_bulk(self.es, actions=self.uris_stream(file_to_index), chunk_size=100000):
+            for ok, response in streaming_bulk(self.es, actions=self.uris_stream(term_type), chunk_size=100000):
                 if not ok:
                     # failure inserting
                     print (response)
