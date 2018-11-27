@@ -28,7 +28,7 @@ for question, correct_question_entities in samples:
     # pick a seed entity for each question
     matched_uris = []
     matched_ids = []
-    for entity_uri in correct_question_entities
+    for entity_uri in correct_question_entities:
         for match in es.match_entities(entity_uri, match_by='uri'):
             if match['_source']['term_type'] != "predicates":
                 matched_uris.append(match['_source']['uri'])
