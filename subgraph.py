@@ -18,17 +18,17 @@ from index import IndexSearch
 limit = 10
 
 # get a random sample of questions from lcquad train split
-samples = load_lcquad(fields=['corrected_question', 'entities'], dataset_split='train',
+samples = load_lcquad(fields=['corrected_question', 'entities', 'answers'], dataset_split='train',
                       shuffled=True, limit=limit)
 
 es = IndexSearch()
 # interate over questions entities dataset
-for question, correct_question_entities in samples:
+for question, correct_question_entities, answers in samples:
     print (correct_question_entities)
     # pick a seed entity for each question
     matched_uris = []
     matched_ids = []
-    for entity_uri in correct_question_entities:
+    for entity_uri in correct_question_entities.extend(answers):
         matches = es.match_entities(entity_uri, match_by='uri')
         # p
         if len(matches) > 1:
