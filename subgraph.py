@@ -43,15 +43,15 @@ for question, correct_question_entities in samples:
     hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt"
     p = Popen(["/home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops", "-t", "<%s>"%matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', 'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
     subgraph, err = p.communicate()
-    # print (subgraph)
+    print (subgraph)
 
     # parse subgraph triples
     # entities = []
     # predicates = []
     terms = []
-    for triple in subgraph:
+    for triple in subgraph.split('\n'):
         print (triple)
-        terms.extend(triple.split(" "))
+        terms.extend(triple.split())
         # s, p, o = terms
         # entities.append(s)
         # predicates.append(p)
