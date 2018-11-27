@@ -42,7 +42,7 @@ class IndexSearch:
             elif match_by == "uri":
                 # filter out only entities in s and o positions
                 results = self.es.search(index=self.index,
-                                         body={"query": {match_by: query, "term_type": 'terms'}},
+                                         body={"query": {"match": {match_by: query, "term_type": 'terms'}}},
                                          doc_type=self.type)['hits']
         else:
             # sample of size 2
