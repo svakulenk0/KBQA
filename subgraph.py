@@ -15,7 +15,7 @@ from lcquad import load_lcquad
 from index import IndexSearch
 
 
-limit = 2
+limit = 10
 
 # get a random sample of questions from lcquad train split
 samples = load_lcquad(fields=['corrected_question', 'entities'], dataset_split='train',
@@ -57,7 +57,7 @@ for question, correct_question_entities in samples:
         # predicates.append(p)
         # entities.append(o)
     terms = set(terms)
-    print terms
+    # print terms
     # verify subgraph, i.e. all question entities are within the extracted subgraph
     for term_id in matched_ids:
         if str(term_id) not in terms:
