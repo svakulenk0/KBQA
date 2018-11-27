@@ -32,7 +32,8 @@ for question, correct_question_entities in samples:
     # request subgraph from the API (2 hops from the seed entity)
     # /home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 /home/zola/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
     hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/%s"
-    call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', hdt_lib_path%'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
+    # call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', hdt_lib_path%'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
     # while True:
     #   line = p.stdout.readline()
     #   if line != '':
