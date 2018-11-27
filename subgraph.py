@@ -38,6 +38,8 @@ for question, correct_question_entities in samples:
         # s o
         elif matches:
             matched_uris.append(matches[0]['_source']['uri'])
+            matched_ids.append(matches[0]['_source']['id'])
+
 
     print (matched_uris)
     print (matched_ids)
