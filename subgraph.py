@@ -9,7 +9,7 @@ Created on Nov 26, 2018
 
 Crawl GS subgraph for each question from DBpedia HDT
 '''
-from subprocess import call
+from subprocess import Popen, PIPE
 
 from lcquad import load_lcquad
 from index import IndexSearch
@@ -30,11 +30,13 @@ for question, correct_question_entities in samples:
     print (matched_uris)
 
     # request subgraph from the API (2 hops from the seed entity)
-    # /home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 -o result.txt /home/zola/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
+    # /home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 /home/zola/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
     hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/%s"
-    subgraph = call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
-    print(subgraph)
-    
+    p = Popen([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', hdt_lib_path%'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    output, err = p.communicate()
+    # subgraph = call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
+    print(output)
+
     # verify subgraph, i.e. all question entities are within the extracted subgraph
 
     # store subgraph
