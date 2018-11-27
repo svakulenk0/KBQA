@@ -29,9 +29,9 @@ for question, correct_question_entities in samples:
     print (matched_uris)
 
     # request subgraph from the API (2 hops from the seed entity)
-    # ./tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 -o result.txt data/dbpedia2016-04en.hdt
-    file_path = "~/Projects/hdt-cpp-molecules/libhdt/tools/hops"
-    call([file_path, "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', 'data/dbpedia2016-04en.hdt'])
+    # ~/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 -o result.txt ~/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
+    hdt_lib_path = "~/Projects/hdt-cpp-molecules/libhdt/%s"
+    call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
 
     # verify subgraph, i.e. all question entities are within the extracted subgraph
 
