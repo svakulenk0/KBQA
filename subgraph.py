@@ -32,11 +32,10 @@ for question, correct_question_entities in samples:
         matches = es.match_entities(entity_uri, match_by='uri')
         for match in matches:
             # print(match)
-            if match['_source']['term_type'] == "predicates":
+            if match['_source']['term_type'] != "predicates":
+                matched_uris.append(match['_source']['uri'])
                 matched_ids.append(match['_source']['id'])
-                break
-            matched_uris.append(match['_source']['uri'])
-
+    print (matched_uris)
     print (matched_ids)
 
     # request subgraph from the API (2 hops from the seed entity)
@@ -51,7 +50,8 @@ for question, correct_question_entities in samples:
     # predicates = []
     terms = []
     for triple in subgraph:
-        terms.extend(triple.split())
+        print (triple)
+        terms.extend(triple.split(" "))
         # s, p, o = terms
         # entities.append(s)
         # predicates.append(p)
