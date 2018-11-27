@@ -43,14 +43,14 @@ for question, correct_question_entities in samples:
     hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt"
     p = Popen(["/home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops", "-t", "<%s>"%matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', 'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
     subgraph, err = p.communicate()
-    print (subgraph)
+    # print (subgraph)
 
     # parse subgraph triples
     # entities = []
     # predicates = []
     terms = []
     for triple in subgraph.split('\n'):
-        print (triple)
+        # print (triple)
         terms.extend(triple.split())
         # s, p, o = terms
         # entities.append(s)
@@ -60,5 +60,5 @@ for question, correct_question_entities in samples:
     print terms
     # verify subgraph, i.e. all question entities are within the extracted subgraph
     for term_id in matched_ids:
-        if term_id not in terms:
+        if str(term_id) not in terms:
             print "%s not found in the extracted subgraph" % term_id
