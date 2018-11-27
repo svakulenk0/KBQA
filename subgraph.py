@@ -36,7 +36,7 @@ for question, correct_question_entities in samples:
                 if match['_source']['term_type'] == "predicates":
                     matched_ids.append(match['_source']['id'])
         # s o
-        else:
+        elif matches:
             matched_uris.append(matches[0]['_source']['uri'])
 
     print (matched_uris)
