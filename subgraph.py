@@ -28,7 +28,9 @@ for question, correct_question_entities, answers in samples:
     # pick a seed entity for each question
     matched_uris = []
     matched_ids = []
-    for entity_uri in correct_question_entities.extend(answers):
+    # add answer entities
+    correct_question_entities.extend(answers)
+    for entity_uri in correct_question_entities:
         matches = es.match_entities(entity_uri, match_by='uri')
         # p
         if len(matches) > 1:
