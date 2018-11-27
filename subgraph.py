@@ -29,7 +29,7 @@ for question, correct_question_entities in samples:
     matched_uris = []
     matched_ids = []
     for entity_uri in correct_question_entities:
-        matches = in es.match_entities(entity_uri, match_by='uri'):
+        matches = es.match_entities(entity_uri, match_by='uri')
         for match in matches:
             # print(match)
             if match['_source']['term_type'] == "predicates":
