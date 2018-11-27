@@ -73,7 +73,7 @@ class IndexSearch:
         # sanity check
 
     def uris_stream(self, term_type):
-        file_to_index = "./data/%s.txt" % term_type
+        file_to_index_path = "./data/%s.txt" % term_type
         with io.open(file_to_index_path, "r", encoding='utf-8') as file:
             for i, line in enumerate(file):
                 # print(line)
