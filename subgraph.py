@@ -9,7 +9,7 @@ Created on Nov 26, 2018
 
 Crawl GS subgraph for each question from DBpedia HDT
 '''
-from subprocess import call
+from subprocess import call, Popen, PIPE
 
 from lcquad import load_lcquad
 from index import IndexSearch
@@ -31,9 +31,12 @@ for question, correct_question_entities in samples:
 
     # request subgraph from the API (2 hops from the seed entity)
     # /home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 /home/zola/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
-    hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/%s"
-    call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
-    # call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', hdt_lib_path%'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt"
+    # call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
+    p = Popen(["./tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', 'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
+    out, err = p.communicate()
+    print (out)
+
     # while True:
     #   line = p.stdout.readline()
     #   if line != '':
