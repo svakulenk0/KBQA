@@ -33,7 +33,7 @@ for question, correct_question_entities in samples:
             if match['_source']['term_type'] != "predicates":
                 matched_uris.append(match['_source']['uri'])
             matched_ids.append(match['_source']['id'])
-    print (matched_uris)
+    print (matched_ids)
 
     # request subgraph from the API (2 hops from the seed entity)
     # /home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 /home/zola/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
@@ -56,4 +56,4 @@ for question, correct_question_entities in samples:
     # verify subgraph, i.e. all question entities are within the extracted subgraph
     for term_id in matched_ids:
         if term_id not in terms:
-            print "%s not found in the extracted subgraph"
+            print "%s not found in the extracted subgraph" % term_id
