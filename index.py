@@ -60,6 +60,7 @@ class IndexSearch:
                                                 }
                                               }
                                             },
+                                         size = 1,
                                          doc_type=self.type)['hits']
         else:
             # sample of size 2
