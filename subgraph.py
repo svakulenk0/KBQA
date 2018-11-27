@@ -33,8 +33,9 @@ for question, correct_question_entities in samples:
     # /home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops -t "<http://dbpedia.org/resource/David_King-Wood>" -p "http://dbpedia.org/" -n 2 /home/zola/Projects/hdt-cpp-molecules/libhdt/data/dbpedia2016-04en.hdt
     hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt"
     # call([hdt_lib_path%"tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', hdt_lib_path%'data/dbpedia2016-04en.hdt'])
-    p = Popen(["/home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', 'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
+    p = Popen(["/home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops", "-t", matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', '-o', 'result.txt', 'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
     out, err = p.communicate()
+    print (p)
     print (out)
 
     # while True:
