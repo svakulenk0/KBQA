@@ -24,8 +24,8 @@ class IndexSearch:
     def __init__(self):
         # set up ES connection
         self.es = Elasticsearch()
-        self.index = 'dbpedia201604'
-        self.type = 'entities'
+        self.index = 'dbpedia2016-04'
+        self.type = 'terms'
 
     def build(self):
         '''
@@ -94,13 +94,15 @@ class IndexSearch:
                            "_source": data_dict
                            }
 
-    def index_entities_bulk(self, file_to_index="./data/entitiesWithObjectsURIs.txt"):
+    def index_entities_bulk(self, doc_type):
         '''
         Perform indexing
         https://www.elastic.co/guide/en/elasticsearch/reference/current/tune-for-indexing-speed.html
         '''
         # create index
         # self.build()
+        file_to_index = "./data/%s.txt" % doc_type
+        self.type = doc_type
 
         # iterate via streaming_bulk following https://stackoverflow.com/questions/34659198/how-to-use-elasticsearch-helpers-streaming-bulk
         print("bulk indexing...")
@@ -116,7 +118,8 @@ class IndexSearch:
 
 def test_index_entities():
     es = IndexSearch()
-    es.index_entities_bulk()
+    es.index_entities_bulk('predicates')
+    es.index_entities_bulk('terms')
 
 
 def test_match_entities():
@@ -216,6 +219,6 @@ def test_match_lcquad_questions(limit=100, check_uri_exist=False):
 
 if __name__ == '__main__':
     # insert mapping first
-    # test_index_entities()
+    test_index_entities()
     # test_match_entities()
-    test_match_lcquad_questions()
+    # test_match_lcquad_questions()
