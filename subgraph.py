@@ -25,7 +25,7 @@ es = IndexSearch()
 for question, correct_question_entities in samples:
     print (correct_question_entities)
     # pick a seed entity for each question
-    matched_uris = [match['_source']['uri'] for entity_uri in correct_question_entities for match in es.match_entities(entity_uri, match_by='uri') if match['_source']['term_type'] = "terms"]
+    matched_uris = [match['_source']['uri'] for entity_uri in correct_question_entities for match in es.match_entities(entity_uri, match_by='uri') if match['_source']['term_type'] == "terms"]
     print (matched_uris)
 
     # request subgraph from the API (2 hops from the seed entity)
