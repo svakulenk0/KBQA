@@ -44,23 +44,15 @@ class IndexSearch:
                 results = self.es.search(index=self.index,
                                          body={
                                               "query": {
-                                                "bool": {
-                                                  "must": [
-                                                    {
-                                                      "match": {
+                                                "constant_score": {
+                                                  "filter": {
+                                                      "term": {
                                                         match_by: query
                                                       }
-                                                    },
-                                                    {
-                                                      "match": {
-                                                        "term_type": "terms"
-                                                      }
                                                     }
-                                                  ]
+                                                  }
                                                 }
-                                              }
-                                            },
-                                         size = 1,
+                                              },
                                          doc_type=self.type)['hits']
         else:
             # sample of size 2
