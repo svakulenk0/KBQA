@@ -27,39 +27,23 @@ class IndexSearch:
         self.index = 'dbpedia2016-04'
         self.type = 'terms'
 
-    def build(self):
-        '''
-        '''
-        if self.es.indices.exists(self.index):
-            print("deleting '%s' index..." % (self.index))
-            res = self.es.indices.delete(index = self.index)
-            print(" response: '%s'" % (res))
-
-        # since we are running locally, use one shard and no replicas
-        request_body = {
-            "settings" : {
-                "number_of_shards": 1,
-                "number_of_replicas": 0
-            }
-        }
-        print("creating '%s' index..." % (self.index))
-        try:
-            res = self.es.indices.create(index=self.index, body=request_body)
-            print(" response: '%s'" % (res))
-        except TransportError as e:
-            print(e.info)
-
-    def match_entities(self, query=None, match_by="label"):
+    def match_entities(self, query=None, match_by="label", filter='terms'):
         '''
         Index search
         size – Number of hits to return (default: 10)
         '''
         if query:
-            results = self.es.search(index=self.index,
-                                     body={"query": {"match": {match_by: {"query": query, "fuzziness": "AUTO"}}}},
-                                     size=100,
-                                     # body={"query": {"match": {match_by: {"query": query, "operator" : "and", "fuzziness": "AUTO"}}}},
-                                     doc_type=self.type)['hits']
+            if match_by == "label":
+                results = self.es.search(index=self.index,
+                                         body={"query": {"match": {match_by: {"query": query, "fuzziness": "AUTO"}}}},
+                                         size=100,
+                                         # body={"query": {"match": {match_by: {"query": query, "operator" : "and", "fuzziness": "AUTO"}}}},
+                                         doc_type=self.type)['hits']
+            elif match_by == "uri":
+                # filter out only entities in s and o positions
+                results = self.es.search(index=self.index,
+                                         body={"query": {match_by: query, "term_type": 'terms'}},
+                                         doc_type=self.type)['hits']
         else:
             # sample of size 2
             results = self.es.search(index=self.index, size=2, body={"query": {"match_all": {}}})['hits']
@@ -111,7 +95,6 @@ class IndexSearch:
                     print (response)
         except TransportError as e:
             print(e.info)
-        
 
 
 def test_index_entities():
