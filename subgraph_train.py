@@ -23,7 +23,7 @@ limit = 1
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers'], dataset_split='train',
                       shuffled=True, limit=limit)
 
-es = IndexSearch()
+es = IndexSearch('dbpedia2016-04')
 # interate over questions entities dataset
 for question, correct_question_entities, answers in samples:
     print (question)
