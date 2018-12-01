@@ -21,7 +21,7 @@ from elasticsearch import TransportError
 
 class IndexSearch:
     
-    def __init__(self, index_name='dbpedia201604p'):
+    def __init__(self, index_name='dbpedia201604e'):
         # set up ES connection
         self.es = Elasticsearch()
         self.index = index_name
@@ -110,8 +110,8 @@ class IndexSearch:
 
 def test_index_entities():
     es = IndexSearch()
-    es.index_entities_bulk('predicates')
-    # es.index_entities_bulk('terms')
+    # es.index_entities_bulk('predicates')
+    es.index_entities_bulk('terms')
 
 
 def test_match_entities():
