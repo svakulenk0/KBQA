@@ -56,6 +56,7 @@ for question, correct_question_entities, answers in samples:
             answer_entity_ids.append(matches[0]['_source']['id'])
     print (answer_entity_ids)
 
+    print(matched_uris[0])
     # request subgraph from the API (2 hops from the seed entity)
     hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt"
     p = Popen(["/home/zola/Projects/hdt-cpp-molecules/libhdt/tools/hops", "-t", "<%s>"%matched_uris[0], '-p', "http://dbpedia.org/", '-n', '2', 'data/dbpedia2016-04en.hdt'], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
