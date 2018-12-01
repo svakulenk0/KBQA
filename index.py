@@ -27,7 +27,7 @@ class IndexSearch:
         self.index = index_name
         self.type = 'terms'
 
-    def match_entities(self, query=None, match_by="label", filter='terms'):
+    def match_entities(self, query=None, match_by="label", filter='terms', top=100):
         '''
         Index search
         size – Number of hits to return (default: 10)
@@ -36,7 +36,7 @@ class IndexSearch:
             if match_by == "label":
                 results = self.es.search(index=self.index,
                                          body={"query": {"match": {match_by: {"query": query, "fuzziness": "AUTO"}}}},
-                                         size=100,
+                                         size=top,
                                          # body={"query": {"match": {match_by: {"query": query, "operator" : "and", "fuzziness": "AUTO"}}}},
                                          doc_type=self.type)['hits']
             
