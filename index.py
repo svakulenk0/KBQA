@@ -24,7 +24,7 @@ class IndexSearch:
     def __init__(self):
         # set up ES connection
         self.es = Elasticsearch()
-        self.index = 'dbpedia2016-04'
+        self.index = 'dbpedia201604p'
         self.type = 'terms'
 
     def match_entities(self, query=None, match_by="label", filter='terms'):
@@ -39,7 +39,8 @@ class IndexSearch:
                                          size=100,
                                          # body={"query": {"match": {match_by: {"query": query, "operator" : "and", "fuzziness": "AUTO"}}}},
                                          doc_type=self.type)['hits']
-            elif match_by == "uri":
+            
+            elif match_by == "uri" or match_by == "id":
                 # filter out only entities in s and o positions
                 results = self.es.search(index=self.index,
                                          body={
@@ -110,7 +111,7 @@ class IndexSearch:
 def test_index_entities():
     es = IndexSearch()
     es.index_entities_bulk('predicates')
-    es.index_entities_bulk('terms')
+    # es.index_entities_bulk('terms')
 
 
 def test_match_entities():
@@ -210,6 +211,6 @@ def test_match_lcquad_questions(limit=100, check_uri_exist=False):
 
 if __name__ == '__main__':
     # insert mapping first
-    # test_index_entities()
-    test_match_entities()
-    # test_match_lcquad_questions()
+    test_index_entities()
+    # test_match_entities()
+    # test_match_lcquad_questions(check_uri_exist=True)
