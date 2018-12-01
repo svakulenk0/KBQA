@@ -21,10 +21,10 @@ from elasticsearch import TransportError
 
 class IndexSearch:
     
-    def __init__(self):
+    def __init__(self, index_name='dbpedia201604p'):
         # set up ES connection
         self.es = Elasticsearch()
-        self.index = 'dbpedia201604p'
+        self.index = index_name
         self.type = 'terms'
 
     def match_entities(self, query=None, match_by="label", filter='terms'):
