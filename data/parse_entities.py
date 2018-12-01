@@ -38,15 +38,15 @@ def parse_question_entities(path="./lcquad/lcquad.json"):
                                 out.write("%s\t%s\n"%(mention, entity_label))
 
 
-def parse_dbpedia_entities(path="./entitiesWithObjectsURIs.txt"):
-    with open(path, "r") as infile, open("entitiesWithObjectsURIs_labels.txt", 'w') as out:
+def parse_dbpedia_entities(path="./predicates.txt"):
+    with open(path, "r") as infile, open("predicates_labels.txt", 'w') as out:
         for line in infile:
             # line template http://creativecommons.org/ns#license;2
             entity_uri = ';'.join(line.split(';')[:-1])
-            out.write("%s\n"%(entity_uri))
+            # out.write("%s\n"%(entity_uri))
 
-            # entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
-            # out.write("%s\n"%(entity_label))
+            entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
+            out.write("%s\n"%(entity_label))
 
 
 if __name__ == '__main__':
