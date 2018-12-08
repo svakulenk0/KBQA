@@ -367,47 +367,6 @@ G = nx.parse_edgelist(edge_list, delimiter=' ', nodetype=str, create_using=nx.Di
 # all activations 1 hop and 2 hop
 answer_graph = G.subgraph(list(activations1)+list(activations2)+top_entities)
 
-
-get_ipython().run_line_magic('matplotlib', 'inline')
-from matplotlib import pylab as pl
-
-pos = nx.spring_layout(answer_graph)
-# position node labels above the nodes
-pos_higher = {}
-y_off = 0.1  # offset on the y axis
-for k, v in pos.items():
-    pos_higher[k] = (v[0], v[1]+y_off)
-
-# color code, label and size all nodes
-color_map = []
-size_map = []
-selected_labels = {}
-for node in answer_graph:
-    # label node
-    label = e_index.match_entities(node, match_by='id', top=1)[0]['_source']['label']
-    selected_labels[node] = label
-    # distribute the colors
-    if node in answer_entities_ids:
-        color_map.append('green')
-    elif node in question_entities_ids:
-        color_map.append('red')
-    else:
-        color_map.append('black')
-
-    # size down intermediate nodes
-    if node in activations1:
-        size_map.append(250)
-    else:
-        size_map.append(500)
-
-pl.figure(figsize=(10, 10))
-nx.draw_networkx(answer_graph, pos=pos, with_labels=False, node_color=color_map, node_size=size_map)
-_ = nx.draw_networkx_labels(answer_graph, pos_higher, selected_labels)
-
-
-# In[ ]:
-
-
 # error estimation
 # print Y
 # choose answers with maximum evidence support
@@ -432,10 +391,3 @@ error_vector = Y_gs - Y_pr
 n_errors = len(np.nonzero(error_vector)[0])
 print("%d errors"%n_errors)                     
 # TODO backpropagate
-
-
-# In[ ]:
-
-
-
-
