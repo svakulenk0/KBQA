@@ -25,7 +25,7 @@ def load_lcquad(fields, dataset_split='train', shuffled=False, limit=None):
     with open("../data/lcquad_%s.json"%dataset_split, "r") as train_file:
         qas = json.load(train_file)
         dataset_size = len(qas)
-        print ("%d total QA pairs in lcquad %s" % (dataset_size, dataset_split))
+        # print ("%d total QA pairs in lcquad %s" % (dataset_size, dataset_split))
         
         # shuffle indices within the range for a sample of size limit
         index_shuf = list(range(dataset_size))
