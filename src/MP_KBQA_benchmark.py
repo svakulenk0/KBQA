@@ -122,8 +122,8 @@ for sample in samples:
             # size of the subgraph (M triples)
             # print subgraph2_str
         #     print(seed_entity, len(subgraph2_str))
-            if len(subgraph2_str) < 1714283:
-                subgraph_strs.append(subgraph2_str)
+            # if len(subgraph2_str) < 1714283:
+            #     subgraph_strs.append(subgraph2_str)
         return subgraph_strs
 
     # get a 2 hop subgraph for each entity
