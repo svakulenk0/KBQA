@@ -416,11 +416,11 @@ for sample in samples:
         #         print(activations2)
 
             # look up activated entities by ids
-            activations2_labels = [e_index.match_entities(entity_id, match_by='id', top=1)[0]['_source']['label'] for entity_id in activations2]
-            topn = 7
-            # print(activations2_labels[:topn])
-            # activation values
-            # print Y2[top[:topn]]
+            activations2_labels = []
+            for entity_id in activations2:
+                matches = e_index.match_entities(int(entity_id), match_by='id', top=1)
+                if matches:
+                  activations2_labels.append(matches[0]['_source']['uri'])
 
             # did we hit the answer set already?
             # print(set(answer_entities_ids).issubset(set(activations2)))
