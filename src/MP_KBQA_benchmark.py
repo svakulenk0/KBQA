@@ -37,7 +37,7 @@ for sample in samples:
         continue
 
     # print('\n')
-    print(sparql_template_id)
+    print(template_id)
     # print (question_o)
     # print(sparql_query)
     # print(correct_question_entities)
