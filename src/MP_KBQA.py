@@ -1,33 +1,31 @@
 #!/usr/bin/env python
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
-# # Message Passing for KBQA
+'''
+Created on Dec 9, 2018
 
-# ## Setup
+.. codeauthor: svitlana vakulenko
+    <svitlana.vakulenko@gmail.com>
 
-# In[136]:
+Message Passing for KBQA
+'''
 
+from subprocess import Popen, PIPE
 
-import os
-os.chdir('/home/zola/Projects/KBQA/')
+from index import IndexSearch
+from lcquad import load_lcquad
 
 # path to KG
-from subprocess import Popen, PIPE
 hdt_lib_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt"
 hdt_file = 'data/dbpedia2016-04en.hdt'
 namespace = "http://dbpedia.org/"
 
 # connect to indices
-from index import IndexSearch
 e_index = IndexSearch('dbpedia201604e')  # entity index
 p_index = IndexSearch('dbpedia201604p')  # predicate index
 
 
-# In[137]:
-
-
 # get a sample question from lcquad-train
-from lcquad import load_lcquad
 limit = 1
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id'],
                       dataset_split='train', shuffled=True, limit=limit)
@@ -79,9 +77,6 @@ print(answers)
 
 # ## Context Subgraph
 
-# In[138]:
-
-
 # ! assume we know a correct seed entity
 # TODO choose the most infrequent one to get a smaller subgraph, get frequency from the index
 seed_entity = correct_question_entities[0]
@@ -98,10 +93,6 @@ if not skip_this_step:
 
 
 # ## Focus
-
-# In[139]:
-
-
 # ! assume we know all correct predicates
 top_properties = correct_question_predicates
 print(top_properties)
@@ -117,9 +108,6 @@ subgraph2_str, err = p.communicate()
 # size of the subgraph (M triples)
 # print subgraph2_str
 print len(subgraph2_str)
-
-
-# In[141]:
 
 
 # parse the subgraph into a sparse matrix
@@ -171,20 +159,20 @@ for triple_str in subgraph2_str.strip().split('\n'):
     # select only triples with one of the top predicates
     if p in question_predicates_ids:
             # print out selected subgraph triples
-        if show_tripples:
-            highlight_triple = []
-            highlighted = False
-            for term in terms:
-                if term in question_entities_ids:
-                    highlight_triple.append("\x1b[31m%s\x1b[0m"%term)
-                    highlighted = True
-                elif term in answer_entities_ids:
-                    highlight_triple.append("\x1b[32m%s\x1b[0m"%term)
-                    highlighted = True
-                else:
-                    highlight_triple.append(term)
-            if highlighted:
-                print ' '.join(highlight_triple)
+        # if show_tripples:
+        #     highlight_triple = []
+        #     highlighted = False
+        #     for term in terms:
+        #         if term in question_entities_ids:
+        #             highlight_triple.append("\x1b[31m%s\x1b[0m"%term)
+        #             highlighted = True
+        #         elif term in answer_entities_ids:
+        #             highlight_triple.append("\x1b[32m%s\x1b[0m"%term)
+        #             highlighted = True
+        #         else:
+        #             highlight_triple.append(term)
+        #     if highlighted:
+        #         print ' '.join(highlight_triple)
 
         # index
         if s not in entities.keys():
@@ -229,9 +217,6 @@ print (predicate_labels)
 
 # ## Message Passing
 
-# In[ ]:
-
-
 # ! assume we know all correct entities
 top_entities = question_entities_ids
 # activations of entities
@@ -243,9 +228,6 @@ X = np.zeros(len(entities))
 X[q_ids] = 1
 # print(X)
 print("%d entities activated"%len(q_ids))
-
-
-# In[ ]:
 
 
 # 1 hop
@@ -303,9 +285,6 @@ if n_activated:
         print(answers)
 
 
-# In[ ]:
-
-
 # 2 hop
 # activate the rest of the predicates
 p_activations2 = 1 - p_activations
@@ -353,9 +332,6 @@ if sum(p_activations2) > 0:
         print("%d correct answers"%n_answers)
         assert n_activated == n_answers
         print(answers)
-
-
-# In[ ]:
 
 
 # draw the propagation answer graph
