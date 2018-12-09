@@ -25,9 +25,12 @@ p_index = IndexSearch('dbpedia201604p')  # predicate index
 # get a sample question from lcquad-train
 from lcquad import load_lcquad
 
-limit = 10
+limit = 4000
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', 'sparql_query'],
-                      dataset_split='train', shuffled=False, limit=limit)
+                      dataset_split='train', shuffled=True, limit=limit)
+
+# keep track of the covered templates
+covered_templates = []
 
 for sample in samples:
     question_o, correct_question_entities, answers, template_id, sparql_query = sample
@@ -36,8 +39,13 @@ for sample in samples:
     if not answers:
         continue
 
+    # skip questions of the template we have already seen
+    if template_id in covered_templates:
+        continue
+
     # print('\n')
     print(template_id)
+    covered_templates.append(template_id)
     # print (question_o)
     # print(sparql_query)
     # print(correct_question_entities)
@@ -464,3 +472,5 @@ for sample in samples:
     if n_errors > 0:
         print("%d errors"%n_errors)
 
+
+print("All templates covered")
