@@ -27,7 +27,7 @@ from lcquad import load_lcquad
 
 limit = 10
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', 'sparql_query'],
-                      dataset_split='train', shuffled=True, limit=limit)
+                      dataset_split='train', shuffled=False, limit=limit)
 
 for sample in samples:
     question_o, correct_question_entities, answers, template_id, sparql_query = sample
@@ -36,14 +36,15 @@ for sample in samples:
     if not answers:
         continue
 
-    print('\n')
-    print (question_o)
-    print(sparql_query)
+    # print('\n')
+    print(sparql_template_id)
+    # print (question_o)
+    # print(sparql_query)
     # print(correct_question_entities)
 
     # parse the SPARQL query into the sequence of predicate expansions
     tripple_patterns = sparql_query[sparql_query.find("{")+1:sparql_query.find("}")].split('. ')
-    print('\n')
+    # print('\n')
     # print(tripple_patterns)
 
     # collect entitties and predicates separately for the intermediate nodes
@@ -51,24 +52,21 @@ for sample in samples:
     correct_question_predicates = []
     correct_question_entities = []
     for pattern in tripple_patterns:
-    #     print pattern
-        s, p, o = pattern.split()
-        if s[0] != '?':
-            correct_question_entities.append(s[1:-1])
-        if o[0] != '?':
-            correct_question_entities.append(o[1:-1])
-        p = p[1:-1]
-        if '?uri' not in pattern:
-            correct_intermediate_predicates.append(p)
-        else:
-            correct_question_predicates.append(p)
+        if pattern:
+            s, p, o = pattern.strip().split()
+            if s[0] != '?':
+                correct_question_entities.append(s[1:-1])
+            if o[0] != '?':
+                correct_question_entities.append(o[1:-1])
+            p = p[1:-1]
+            if '?uri' not in pattern:
+                correct_intermediate_predicates.append(p)
+            else:
+                correct_question_predicates.append(p)
 
-    print correct_question_entities
-    print correct_intermediate_predicates
-    print correct_question_predicates
-
-
-    # In[250]:
+    # print correct_question_entities
+    # print correct_intermediate_predicates
+    # print correct_question_predicates
 
 
     # get entity ids and degrees from the index
@@ -91,17 +89,15 @@ for sample in samples:
         for match in matches:
             answer_entities_ids.append(str(matches[0]['_source']['id']))
 
-    print('%d answer:'%len(answers))
-    print(answers[:5])
+    # print('%d answer:'%len(answers))
+    # print(answers[:5])
 
 
     # ## Context Subgraph
 
-    # In[251]:
 
-
-    print correct_question_entities
-    print question_entities_degrees
+    # print correct_question_entities
+    # print question_entities_degrees
 
     def get_KG_subgraph(seeds, predicates, nhops):
         subgraph_strs = []
@@ -131,10 +127,10 @@ for sample in samples:
         top_properties = correct_intermediate_predicates
     else:
         top_properties = correct_question_predicates
-    print(top_properties)
+    # print(top_properties)
 
     subgraph_strs = get_KG_subgraph(correct_question_entities, top_properties, nhops=1)
-    print("%d 1-hop subgraphs collected"%len(subgraph_strs))  
+    # print("%d 1-hop subgraphs collected"%len(subgraph_strs))  
 
     subgraphs_str = ''.join(subgraph_strs)
     # subgraphs_str = subgraph_strs[0]
@@ -182,7 +178,7 @@ for sample in samples:
         # keep a list of selected edges for visualisation with networkx
         edge_list = []
         # iterate over triples
-        print('Parsing subgraphs..\n')
+        # print('Parsing subgraphs..\n')
         for triple_str in triples_str.strip().split('\n'):
             terms = triple_str.split()
         #     print terms
@@ -232,11 +228,11 @@ for sample in samples:
         # check adjacency size
         # assert len(A) == len(top_properties)
         # show size of the subgraph
-        print("\nSubgraph:")
-        print("%d entities"%len(entities))
+        # print("\nSubgraph:")
+        # print("%d entities"%len(entities))
         # print("%d edges"%len(G.edges()))
         # print("%d predicates"%len(top_properties))
-        print (predicate_labels)
+        # print (predicate_labels)
         return A, entities, re_entities, predicate_labels, edge_list
 
     A, entities, re_entities, predicate_labels, edge_list = parse_triples(subgraphs_str)
@@ -262,11 +258,7 @@ for sample in samples:
     X = np.zeros(len(entities))
     X[q_ids] = 1
     # print(X)
-    print("%d entities activated"%len(q_ids))
-
-
-    # In[254]:
-
+    # print("%d entities activated"%len(q_ids))
 
     # 1 hop
     # ! assume we know the correct predicate sequence activation
@@ -296,7 +288,7 @@ for sample in samples:
 
     # check activated entities
     n_activated = np.nonzero(Y1)[0].shape[0]
-    print("%d entities activated"%n_activated)
+    # print("%d entities activated"%n_activated)
 
     # draw top activated entities from the distribution
     if n_activated:    
@@ -304,12 +296,12 @@ for sample in samples:
         top = Y1.argsort()[-n_activated:][::-1][:topn]
     #     print(top)
         # activation values
-        print Y1[top]
+        # print Y1[top]
         
         # choose only the max activated entities
         # indices of the answers with maximum evidence support
         ind = np.argwhere(Y1 == np.amax(Y1)).T[0].tolist()
-        print("%d answers selected"%len(ind))
+        # print("%d answers selected"%len(ind))
     #     print(ind)
 
         # all non-zero activations
@@ -331,17 +323,17 @@ for sample in samples:
             if matches:
               activations1_labels.append(matches[0]['_source']['uri'])
     #     print activations1_labels
-        print(activations1_labels[:topn])
+        # print(activations1_labels[:topn])
         # activation values
-        print Y1[top]
+        # print Y1[top]
     #     print("%d answers"%len(activations1))
 
         # did we hit the answer set already?
         hop1_answer = set(answer_entities_ids).issubset(set(activations1.tolist()))
-        print hop1_answer
+        # print hop1_answer
     #     if hop1_answer:
-        print("%d correct answers"%len(answer_entities_ids))
-        print(answers[:topn])
+        # print("%d correct answers"%len(answer_entities_ids))
+        # print(answers[:topn])
 
 
     # In[255]:
@@ -356,7 +348,7 @@ for sample in samples:
         # choose properties for the second hop
         top_properties2 = correct_question_predicates
         subgraph_strs2 = get_KG_subgraph(activations1_labels, top_properties2, nhops=1)
-        print("%d 1-hop subgraphs collected"%len(subgraph_strs2)) 
+        # print("%d 1-hop subgraphs collected"%len(subgraph_strs2)) 
         subgraphs_str2 = ''.join(subgraph_strs2)
 
         # parse the subgraph into A
@@ -378,7 +370,7 @@ for sample in samples:
         X2 = np.zeros(len(entities))
         X2[q_ids2] = 1
         # print(X)
-        print("%d entities activated"%len(q_ids2))
+        # print("%d entities activated"%len(q_ids2))
 
         # ! assume we know the correct predicate sequence activation
         # activate all predicates at once
@@ -404,7 +396,7 @@ for sample in samples:
 
         # check activated entities
         n_activated = np.nonzero(Y2)[0].shape[0]
-        print("%d answers activated"%n_activated)
+        # print("%d answers activated"%n_activated)
 
         # draw top activated entities from the distribution
         if n_activated:
@@ -418,19 +410,16 @@ for sample in samples:
             # look up activated entities by ids
             activations2_labels = [e_index.match_entities(entity_id, match_by='id', top=1)[0]['_source']['label'] for entity_id in activations2]
             topn = 7
-            print(activations2_labels[:topn])
+            # print(activations2_labels[:topn])
             # activation values
-            print Y2[top[:topn]]
+            # print Y2[top[:topn]]
 
             # did we hit the answer set already?
-            print(set(answer_entities_ids).issubset(set(activations2)))
+            # print(set(answer_entities_ids).issubset(set(activations2)))
             n_answers = len(answer_entities_ids)
-            print("%d correct answers"%n_answers)
+            # print("%d correct answers"%n_answers)
         #         assert n_activated == n_answers
-            print(answers[:topn])
-
-
-    # In[260]:
+            # print(answers[:topn])
 
 
     # draw the propagation answer graph
