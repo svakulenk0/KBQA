@@ -355,6 +355,8 @@ if n_activated:
 
 
 # 2 hop
+activations2 = []
+
 # check if we need the second hop to cover the remaining predicates
 if correct_intermediate_predicates:
     # get next 1-hop subgraphs for all activated entities and the remaining predicates
@@ -395,7 +397,6 @@ if correct_intermediate_predicates:
     A2 = p_activations2.T * A2
     # collect activations
     Y2 = np.zeros(len(entities))
-    activations2 = []
     # activate adjacency matrices per predicate
     for i, a_p in enumerate(A2):
         # propagate from the previous activation layer
@@ -449,48 +450,6 @@ G = nx.parse_edgelist(edge_list, delimiter=' ', nodetype=str, create_using=nx.Di
 answer_graph = G.subgraph(list(activations1)+list(activations2)+top_entities)
 
 
-get_ipython().run_line_magic('matplotlib', 'inline')
-from matplotlib import pylab as pl
-
-pos = nx.spring_layout(answer_graph)
-# position node labels above the nodes
-pos_higher = {}
-y_off = 0.08  # offset on the y axis
-for k, v in pos.items():
-    pos_higher[k] = (v[0], v[1]+y_off)
-
-# color code, label and size all nodes
-color_map = []
-size_map = []
-selected_labels = {}
-for node in answer_graph:
-    # label node
-    matches = e_index.match_entities(int(node), match_by='id', top=1)
-    if matches:
-        label = matches[0]['_source']['label']
-        selected_labels[node] = label
-    # distribute the colors
-    if node in answer_entities_ids:
-        color_map.append('green')
-    elif node in question_entities_ids:
-        color_map.append('red')
-    else:
-        color_map.append('black')
-
-    # size down intermediate nodes
-    if node in activations1:
-        size_map.append(250)
-    else:
-        size_map.append(500)
-
-pl.figure(figsize=(10, 10))
-nx.draw_networkx(answer_graph, pos=pos, with_labels=False, node_color=color_map, node_size=size_map)
-_ = nx.draw_networkx_labels(answer_graph, pos_higher, selected_labels)
-
-
-# In[261]:
-
-
 # error estimation
 # print Y
 
@@ -519,4 +478,7 @@ Y_gs[a_ids] = 1
 error_vector = Y_gs - Y_pr
 # print (error_vector)
 n_errors = len(np.nonzero(error_vector)[0])
-print("%d errors"%n_errors)
+# report on error
+if n_errors > 0:
+    print("%d errors"%n_errors)
+
