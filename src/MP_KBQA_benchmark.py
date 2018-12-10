@@ -352,8 +352,10 @@ for sample in samples:
                 # add up activations
                 Y2 += y_p
         
-        # normalize activations
-        Y2 -= len(a_ids2)
+        # if we propagated from both directions
+        if correct_question_entities:
+            # normalize activations
+            Y2 -= len(a_ids2)
         
         # check output size
         assert Y2.shape[0] == len(entities)
