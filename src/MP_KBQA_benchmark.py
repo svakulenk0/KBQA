@@ -94,7 +94,7 @@ for sample in samples:
                    '-n', str(nhops), hdt_file], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
         subgraph_str, err = p.communicate()
         # size of the subgraph (M triples)
-        print("Extracted 1-hop subgraph size %d"%len(subgraph_str))
+        # print("Extracted 1-hop subgraph size %d"%len(subgraph_str))
         return subgraph_str
 
 
