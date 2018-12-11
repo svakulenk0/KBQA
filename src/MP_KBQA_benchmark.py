@@ -80,7 +80,7 @@ for sample in samples:
 
 
     # get a 2 hop subgraph
-    def get_KG_subgraph(seed, predicates, nhops):
+    def get_KG_subgraph(seeds, predicates, nhops):
         # ./tools/hops data/dbpedia2016-04en.hdt -t "<http://dbpedia.org/resource/Delta_III>" -f "<http://dbpedia.org/ontology/manufacturer>" -n 1
         #  -f "<http://example.org/predicate1><http://example.org/predicate3>"
         p = Popen(["%s/tools/hops"%hdt_lib_path, "-t", "".join(["<%s>"%s for s in seeds]),
