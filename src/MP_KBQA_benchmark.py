@@ -43,17 +43,11 @@ for sample in samples:
     if template_id in covered_templates:
         continue
 
-    # print('\n')
     print(template_id)
     covered_templates.append(template_id)
-    # print (question_o)
-    # print(sparql_query)
-    # print(correct_question_entities)
 
     # parse the SPARQL query into the sequence of predicate expansions
     tripple_patterns = sparql_query[sparql_query.find("{")+1:sparql_query.find("}")].split('. ')
-    # print('\n')
-    # print(tripple_patterns)
 
     # collect entities and predicates separately for the intermediate nodes
     correct_intermediate_predicates = []
@@ -271,9 +265,7 @@ for sample in samples:
         # get next 1-hop subgraphs for all activated entities and the remaining predicates
         # choose properties for the second hop
         top_properties2 = correct_question_predicates
-        print(top_properties2)
         activations1_labels.extend(correct_question_entities)
-        print(activations1_labels)
         # propagate activations
         candidate_entities = entities.keys()
 
@@ -354,7 +346,6 @@ for sample in samples:
     # indices of the answers with maximum evidence support
     # all non-zero activations
     ind = np.argwhere(Y > 0)
-    # print(ind)
 
     # indicate predicted answers
     Y_pr = np.zeros(len(entities))
