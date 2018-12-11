@@ -254,16 +254,9 @@ for sample in samples:
 
         activations1 = list(np.asarray(re_entities)[ind])
         
-        # look up activated entities by ids
-        activations1_labels = []
-        for entity_id in activations1:
-            matches = e_index.match_entities(int(entity_id), match_by='id', top=1)
-            if matches:
-              activations1_labels.append(matches[0]['_source']['uri'])
-
         # did we hit the answer set already?
         # hop1_answer = set(answer_entities_ids).issubset(set(activations1.tolist()))
-        n_answers = len(answer_entities_ids)
+        n_answers = len(activations1)
 
 
 
@@ -275,7 +268,6 @@ for sample in samples:
         # get next 1-hop subgraphs for all activated entities and the remaining predicates
         # choose properties for the second hop
         top_properties2 = correct_question_predicates
-        activations1_labels.extend(correct_question_entities)
         
         # propagate activations
         X2 = np.zeros(len(entities))
@@ -294,12 +286,16 @@ for sample in samples:
 
         # activate entities selected at the previous hop and question entities activations for the 2nd hop
         top_entities2 = activations1
-        top_entities2.extend(question_entities_ids)
         
         # look up local entity id
         a_ids2 = [entities[entity_id] for entity_id in top_entities2 if entity_id in candidate_entities]
         # graph activation vector
         X2[a_ids2] = 1
+
+        # look up local entity id
+        a_ids_q = [entities[entity_id] for entity_id in question_entities_ids if entity_id in candidate_entities]
+        # graph activation vector
+        X2[a_ids_q] = len(a_ids2)
 
         # ! assume we know the correct predicate sequence activation
         # activate predicates for this hop
@@ -336,19 +332,10 @@ for sample in samples:
             n = n_activated
             top = Y2.argsort()[-n:][::-1]
             activations2 = np.asarray(re_entities)[top]
-
-            # look up activated entities by ids
-            activations2_labels = []
-            for entity_id in activations2:
-                matches = e_index.match_entities(int(entity_id), match_by='id', top=1)
-                if matches:
-                  activations2_labels.append(matches[0]['_source']['uri'])
-            
-            n_answers = len(answer_entities_ids)
+            n_answers = len(activations2)
 
 
-    # indices of the answers with maximum evidence support
-    # all non-zero activations
+    # indices of all answers with non-zero activations
     ind = np.argwhere(Y > 0)
 
     # indicate predicted answers
