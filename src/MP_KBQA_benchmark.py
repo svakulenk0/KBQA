@@ -252,7 +252,7 @@ for sample in samples:
         Y1[ind] = 1
         Y = Y1
 
-        activations1 = np.asarray(re_entities)[ind]
+        activations1 = list(np.asarray(re_entities)[ind])
         
         # look up activated entities by ids
         activations1_labels = []
@@ -293,7 +293,7 @@ for sample in samples:
         top_entities_ids = question_entities_ids
 
         # activate entities selected at the previous hop and question entities activations for the 2nd hop
-        top_entities2 = activations1.tolist()
+        top_entities2 = activations1
         top_entities2.extend(question_entities_ids)
         
         # look up local entity id
