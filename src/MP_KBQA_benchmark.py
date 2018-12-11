@@ -368,7 +368,7 @@ for sample in samples:
     n_errors = len(np.nonzero(error_vector)[0])
     # report on error
     if n_errors > 0:
-        print("%d errors out of %d answers"%(n_errors, n_answers))                     
+        print("%d/%d"%(n_errors, n_answers))                     
 
 
 print("All questions covered")
