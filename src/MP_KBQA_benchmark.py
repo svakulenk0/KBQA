@@ -27,7 +27,7 @@ from lcquad import load_lcquad
 
 limit = 4000
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', '_id', 'sparql_query'],
-                      dataset_split='train', shuffled=False, limit=limit)
+                      dataset_split='train', shuffled=True, limit=limit)
 
 # keep track of the covered templates
 covered_templates = []
@@ -136,7 +136,6 @@ for sample in samples:
                 adj = normalize_adjacency_matrix(adj)
 
             sp_adjacencies.append(adj)
-        
         return np.asarray(sp_adjacencies)
 
     def parse_triples(triples_str, show_tripples=False):
@@ -162,7 +161,7 @@ for sample in samples:
             edge_list.append(' '.join([s, o]))
             # collect all edges per predicate
             edge = np.array([entities[s], entities[o]])
-            if p not in adjacencies.keys():
+            if p not in adjacencies:
                 adjacencies[p] = []
             adjacencies[p].append(edge)
             
@@ -171,7 +170,7 @@ for sample in samples:
         # generate a list of adjacency matrices per predicate
         A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
         # look up predicate sequence labels in the predicate index
-        predicate_uris = [p_index.match_entities(p_id, match_by='id', top=1)[0]['_source']['uri'] for p_id in adjacencies.keys()]
+        predicate_uris = [p_index.match_entities(p_id, match_by='id', top=1)[0]['_source']['uri'] for p_id in adjacencies]
         # check adjacency size
         # show size of the subgraph
         return A, entities, re_entities, predicate_uris, edge_list
@@ -263,7 +262,9 @@ for sample in samples:
               activations1_labels.append(matches[0]['_source']['uri'])
 
         # did we hit the answer set already?
-        hop1_answer = set(answer_entities_ids).issubset(set(activations1.tolist()))
+        # hop1_answer = set(answer_entities_ids).issubset(set(activations1.tolist()))
+        n_answers = len(answer_entities_ids)
+
 
 
     # 2 hop
@@ -276,8 +277,6 @@ for sample in samples:
         top_properties2 = correct_question_predicates
         activations1_labels.extend(correct_question_entities)
         # propagate activations
-        candidate_entities = entities.keys()
-
         X2 = np.zeros(len(entities))
 
         # activate entities selected at the previous hop
@@ -350,8 +349,6 @@ for sample in samples:
             n_answers = len(answer_entities_ids)
 
 
-
-
     # indices of the answers with maximum evidence support
     # all non-zero activations
     ind = np.argwhere(Y > 0)
@@ -371,7 +368,7 @@ for sample in samples:
     n_errors = len(np.nonzero(error_vector)[0])
     # report on error
     if n_errors > 0:
-        print("%d errors"%n_errors)
+        print("%d errors out of %d answers"%(n_errors, n_answers))                     
 
 
 print("All questions covered")
