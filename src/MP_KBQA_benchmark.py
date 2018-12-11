@@ -154,10 +154,10 @@ for sample in samples:
             terms = triple_str.split()
             s, p, o = terms
             # index
-            if s not in entities.keys():
+            if s not in entities:
                 entities[s] = len(entities)
                 re_entities.append(s)
-            if o not in entities.keys():
+            if o not in entities:
                 entities[o] = len(entities)
                 re_entities.append(o)
 
