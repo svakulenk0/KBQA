@@ -276,32 +276,30 @@ for sample in samples:
         # choose properties for the second hop
         top_properties2 = correct_question_predicates
         activations1_labels.extend(correct_question_entities)
+        
         # propagate activations
         X2 = np.zeros(len(entities))
 
-        # activate entities selected at the previous hop
-        top_entities2 = activations1
+        # look up their ids in index
+        question_entities_ids = []
+        for entity_uri in correct_question_entities:
+            # if not in predicates check entities
+            matches = e_index.match_entities(entity_uri, match_by='uri')
+            if matches:
+                question_entities_ids.append(str(matches[0]['_source']['id']))
+            else:
+                pass
+
+        top_entities_ids = question_entities_ids
+
+        # activate entities selected at the previous hop and question entities activations for the 2nd hop
+        top_entities2 = activations1.tolist()
+        top_entities2.extend(question_entities_ids)
+        
         # look up local entity id
         a_ids2 = [entities[entity_id] for entity_id in top_entities2 if entity_id in candidate_entities]
         # graph activation vector
         X2[a_ids2] = 1
-
-
-        # and question entities activations for the 2nd hop
-        if correct_question_entities:
-            # look up their ids in the index
-            question_entities_ids2 = []
-            for entity_uri in correct_question_entities:
-                # if not in predicates check entities
-                matches = e_index.match_entities(entity_uri, match_by='uri')
-                if matches:
-                    question_entities_ids2.append(str(matches[0]['_source']['id']))
-                else:
-                    pass
-            # look up local entity id
-            q_ids2 = [entities[entity_id] for entity_id in question_entities_ids2 if entity_id in candidate_entities]
-            # graph activation vector in the size of the previous activation layer to balance out
-            X2[q_ids2] = len(a_ids2)
 
         # ! assume we know the correct predicate sequence activation
         # activate predicates for this hop
@@ -324,13 +322,13 @@ for sample in samples:
         
         if correct_question_entities:
             # normalize activations
-            Y2 -= len(a_ids2)
+            Y2 -= len(activations1)
         
         # check output size
         assert Y2.shape[0] == len(entities)
 
         # check activated entities
-        n_activated = np.nonzero(Y2)[0].shape[0]
+        n_activated = len(np.argwhere(Y2 > 0))
 
         # draw top activated entities from the distribution
         if n_activated:
@@ -368,7 +366,7 @@ for sample in samples:
     n_errors = len(np.nonzero(error_vector)[0])
     # report on error
     if n_errors > 0:
-        print("%d/%d"%(n_errors, n_answers))                     
+        print("!%d/%d"%(n_errors, n_answers))                     
 
 
 print("All questions covered")
