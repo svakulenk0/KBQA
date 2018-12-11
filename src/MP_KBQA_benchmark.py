@@ -26,25 +26,25 @@ p_index = IndexSearch('dbpedia201604p')  # predicate index
 from lcquad import load_lcquad
 
 limit = 4000
-samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', 'sparql_query'],
-                      dataset_split='train', shuffled=True, limit=limit)
+samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', '_id', 'sparql_query'],
+                      dataset_split='train', shuffled=False, limit=limit)
 
 # keep track of the covered templates
 covered_templates = []
 
 for sample in samples:
-    question_o, correct_question_entities, answers, template_id, sparql_query = sample
+    question_o, correct_question_entities, answers, template_id, question_id, sparql_query = sample
 
     # skip questions with no answer found
     if not answers:
         continue
 
     # skip questions of the template we have already seen
-    if template_id in covered_templates:
-        continue
+    # if template_id in covered_templates:
+        # continue
 
-    print(template_id)
-    covered_templates.append(template_id)
+    print(question_id)
+    # covered_templates.append(template_id)
 
     # parse the SPARQL query into the sequence of predicate expansions
     tripple_patterns = sparql_query[sparql_query.find("{")+1:sparql_query.find("}")].split('. ')
@@ -94,14 +94,23 @@ for sample in samples:
     # reduce the subgraph to the top properties as a whitelist ("roads")
     # ! assume we know all correct predicates and entities
     entities = correct_intermediate_entities + correct_question_entities
-    seed_entity = entities[0]
+    
+    # choose the least frequent entity for the seed
+    entity_counts = []
+    for entity_uri in entities:
+        matches = e_index.match_entities(entity_uri, match_by='uri')
+        if matches:
+            entity_counts.append(int(matches[0]['_source']['count']))
+    
+    import numpy as np
+    seed_entity = entities[np.argmin(np.array(entity_counts))]
+
     predicates = correct_intermediate_predicates + correct_question_predicates
     subgraphs_str = get_KG_subgraph(seed_entity, predicates, nhops=2)
 
 
 
     # parse the subgraph into a sparse matrix
-    import numpy as np
     import scipy.sparse as sp
 
     def generate_adj_sp(adjacencies, adj_shape, normalize=False, include_inverse=False):
@@ -365,4 +374,4 @@ for sample in samples:
         print("%d errors"%n_errors)
 
 
-print("All templates covered")
+print("All questions covered")
