@@ -83,7 +83,7 @@ for sample in samples:
     def get_KG_subgraph(seed, predicates, nhops):
         # ./tools/hops data/dbpedia2016-04en.hdt -t "<http://dbpedia.org/resource/Delta_III>" -f "<http://dbpedia.org/ontology/manufacturer>" -n 1
         #  -f "<http://example.org/predicate1><http://example.org/predicate3>"
-        p = Popen(["%s/tools/hops"%hdt_lib_path, "-t", "<%s>"%seed,
+        p = Popen(["%s/tools/hops"%hdt_lib_path, "-t", "".join(["<%s>"%s for s in seeds]),
                    "-f", "".join(["<%s>"%p for p in predicates]),
                    '-p', namespace,
                    '-n', str(nhops), hdt_file], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
@@ -93,20 +93,25 @@ for sample in samples:
 
     # reduce the subgraph to the top properties as a whitelist ("roads")
     # ! assume we know all correct predicates and entities
-    entities = correct_intermediate_entities + correct_question_entities
-    
+    if correct_intermediate_entities:
+        entities = correct_intermediate_entities
+    else:
+        entities = correct_question_entities
+
     # choose the least frequent entity for the seed
     entity_counts = []
     for entity_uri in entities:
         matches = e_index.match_entities(entity_uri, match_by='uri')
         if matches:
             entity_counts.append(int(matches[0]['_source']['count']))
-    
+
     import numpy as np
-    seed_entity = entities[np.argmin(np.array(entity_counts))]
+    seed_entities = [entities[np.argmin(np.array(entity_counts))]]
+    if correct_intermediate_entities:
+        seed_entities += correct_question_entities
 
     predicates = correct_intermediate_predicates + correct_question_predicates
-    subgraphs_str = get_KG_subgraph(seed_entity, predicates, nhops=2)
+    subgraphs_str = get_KG_subgraph(seed_entities, predicates, nhops=2)
 
 
 
