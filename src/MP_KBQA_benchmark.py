@@ -85,29 +85,25 @@ for sample in samples:
             answer_entities_ids.append(str(matches[0]['_source']['id']))
 
 
-    def get_KG_subgraph(seeds, predicates, nhops):
+    # get a 2 hop subgraph
+    def get_KG_subgraph(seed, predicates, nhops):
         # ./tools/hops data/dbpedia2016-04en.hdt -t "<http://dbpedia.org/resource/Delta_III>" -f "<http://dbpedia.org/ontology/manufacturer>" -n 1
         #  -f "<http://example.org/predicate1><http://example.org/predicate3>"
-        p = Popen(["%s/tools/hops"%hdt_lib_path, "-t", "".join(["<%s>"%s for s in seeds]),
+        p = Popen(["%s/tools/hops"%hdt_lib_path, "-t", "<%s>"%seed,
                    "-f", "".join(["<%s>"%p for p in predicates]),
                    '-p', namespace,
                    '-n', str(nhops), hdt_file], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=hdt_lib_path)
         subgraph_str, err = p.communicate()
         # size of the subgraph (M triples)
-        # print("Extracted 1-hop subgraph size %d"%len(subgraph_str))
         return subgraph_str
-
 
     # reduce the subgraph to the top properties as a whitelist ("roads")
     # ! assume we know all correct predicates and entities
-    # do the intermediate hop if required
-    if correct_intermediate_predicates:
-        top_entities, top_properties = correct_intermediate_entities, correct_intermediate_predicates
-    else:
-        top_entities, top_properties = correct_question_entities, correct_question_predicates
-    # print(top_properties)
+    entities = correct_intermediate_entities + correct_question_entities
+    seed_entity = entities[0]
+    predicates = correct_intermediate_predicates + correct_question_predicates
+    subgraphs_str = get_KG_subgraph(seed_entity, predicates, nhops=2)
 
-    subgraphs_str = get_KG_subgraph(top_entities, top_properties, nhops=1)
 
 
     # parse the subgraph into a sparse matrix
@@ -149,7 +145,6 @@ for sample in samples:
         # keep a list of selected edges for visualisation with networkx
         edge_list = []
         # iterate over triples
-        # print('Parsing subgraphs..\n')
         for triple_str in triples_str.strip().split('\n'):
             terms = triple_str.split()
             s, p, o = terms
@@ -171,21 +166,26 @@ for sample in samples:
         adj_shape = (len(entities), len(entities))
         # assuming the graph is undirected wo self-loops
         # generate a list of adjacency matrices per predicate
-        # print adjacencies
         A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
-        # print(A.shape)
         # look up predicate sequence labels in the predicate index
-        predicate_labels = [p_index.match_entities(p_id, match_by='id', top=1)[0]['_source']['label'] for p_id in adjacencies.keys()]
-        return A, entities, re_entities, predicate_labels, edge_list
-
-    A, entities, re_entities, predicate_labels, edge_list = parse_triples(subgraphs_str)
+        predicate_uris = [p_index.match_entities(p_id, match_by='id', top=1)[0]['_source']['uri'] for p_id in adjacencies.keys()]
+        # check adjacency size
+        # show size of the subgraph
+        return A, entities, re_entities, predicate_uris, edge_list
+     
+    A, entities, re_entities, predicate_uris, edge_list = parse_triples(subgraphs_str)
 
 
     # ## Message Passing
 
 
+    # initial activation
     # ! assume we know all correct entities
-
+    # get entities and predicates for the 1st hop
+    if correct_intermediate_predicates:
+        top_entities, top_properties = correct_intermediate_entities, correct_intermediate_predicates
+    else:
+        top_entities, top_properties = correct_question_entities, correct_question_predicates
     # look up their ids in index
     question_entities_ids = []
     for entity_uri in top_entities:
@@ -195,31 +195,29 @@ for sample in samples:
             question_entities_ids.append(str(matches[0]['_source']['id']))
         else:
             pass
-            # print "%s not found" % entity_uri
 
-    # print question_entities_ids
     top_entities_ids = question_entities_ids
     candidate_entities = entities.keys()
 
     # activations of entities
     # look up local entity id
     q_ids = [entities[entity_id] for entity_id in top_entities_ids if entity_id in candidate_entities]
-    # assert len(q_ids) == len(top_entities)
     # graph activation vector TODO activate with the scores
     X = np.zeros(len(entities))
     X[q_ids] = 1
 
+
+
     # 1 hop
     # ! assume we know the correct predicate sequence activation
-    # activate all predicates at once
-    p_activations = np.ones(len(predicate_labels))
-    # activate only the first entity
-    # p_activations[[0, 1]] = 1
-    # print p_activations.shape
+    # activate predicates for this hop
+    p_activations = np.zeros(len(predicate_uris))
+    # get indices of the predicates for this hop
+    p_ids = [i for i, uri in enumerate(predicate_uris) if uri in top_properties]
+    p_activations[p_ids] = 1
 
     # activate adjacency matrices per predicate
     A1 = p_activations.T * A
-    # print A1.shape
 
     # collect activations
     Y1 = np.zeros(len(entities))
@@ -237,33 +235,22 @@ for sample in samples:
 
     # check activated entities
     n_activated = np.nonzero(Y1)[0].shape[0]
-    # print("%d entities activated"%n_activated)
 
     # draw top activated entities from the distribution
-    if n_activated:    
+    if n_activated:
         topn = 5
         top = Y1.argsort()[-n_activated:][::-1][:topn]
-    #     print(top)
-        # activation values
-        # print Y1[top]
         
         # choose only the max activated entities
         # indices of the answers with maximum evidence support
         ind = np.argwhere(Y1 == np.amax(Y1)).T[0].tolist()
-        # print("%d answers selected"%len(ind))
-    #     print(ind)
 
-        # all non-zero activations
-    #     ind = np.argwhere(Y != 0)
-        # print(ind)
         # indicate predicted answers
         Y1 = np.zeros(len(entities))
         Y1[ind] = 1
         Y = Y1
 
-
         activations1 = np.asarray(re_entities)[ind]
-    #     print activations1
         
         # look up activated entities by ids
         activations1_labels = []
@@ -271,18 +258,9 @@ for sample in samples:
             matches = e_index.match_entities(int(entity_id), match_by='id', top=1)
             if matches:
               activations1_labels.append(matches[0]['_source']['uri'])
-    #     print activations1_labels
-        # print(activations1_labels[:topn])
-        # activation values
-        # print Y1[top]
-    #     print("%d answers"%len(activations1))
 
         # did we hit the answer set already?
         hop1_answer = set(answer_entities_ids).issubset(set(activations1.tolist()))
-        # print hop1_answer
-    #     if hop1_answer:
-        # print("%d correct answers"%len(answer_entities_ids))
-        # print(answers[:topn])
 
 
     # 2 hop
@@ -293,17 +271,12 @@ for sample in samples:
         # get next 1-hop subgraphs for all activated entities and the remaining predicates
         # choose properties for the second hop
         top_properties2 = correct_question_predicates
-    #     print(top_properties2)
+        print(top_properties2)
         activations1_labels.extend(correct_question_entities)
-        subgraph_strs2 = get_KG_subgraph(activations1_labels, top_properties2, nhops=1)
-    #     print(subgraphs_str2)
-        # parse the subgraph into A
-        A2, entities, re_entities2, predicate_labels2, edge_list2 = parse_triples(subgraph_strs2, show_tripples=False)
-
-
+        print(activations1_labels)
         # propagate activations
         candidate_entities = entities.keys()
-    #     print(candidate_entities)
+
         X2 = np.zeros(len(entities))
 
         # activate entities selected at the previous hop
@@ -313,34 +286,31 @@ for sample in samples:
         # graph activation vector
         X2[a_ids2] = 1
 
+
         # and question entities activations for the 2nd hop
         if correct_question_entities:
             # look up their ids in the index
             question_entities_ids2 = []
             for entity_uri in correct_question_entities:
-    #             print(entity_uri)
                 # if not in predicates check entities
                 matches = e_index.match_entities(entity_uri, match_by='uri')
                 if matches:
                     question_entities_ids2.append(str(matches[0]['_source']['id']))
                 else:
                     pass
-                    # print "%s not found" % entity_uri
-    #         print(question_entities_ids2)
             # look up local entity id
             q_ids2 = [entities[entity_id] for entity_id in question_entities_ids2 if entity_id in candidate_entities]
             # graph activation vector in the size of the previous activation layer to balance out
             X2[q_ids2] = len(a_ids2)
-            # print(X)
 
         # ! assume we know the correct predicate sequence activation
-        # activate all predicates at once
-        p_activations2 = np.ones(len(predicate_labels2))
-        # activate only the first entity
-        # p_activations2[[0, 1]] = 1
-        # print p_activations.shape
+        # activate predicates for this hop
+        p_activations2 = np.zeros(len(predicate_uris))
+        # get indices of the predicates for this hop
+        p_ids = [i for i, uri in enumerate(predicate_uris) if uri in top_properties2]
+        p_activations2[p_ids] = 1
 
-        A2 = p_activations2.T * A2
+        A2 = p_activations2.T * A
         # collect activations
         Y2 = np.zeros(len(entities))
         # activate adjacency matrices per predicate
@@ -352,7 +322,6 @@ for sample in samples:
                 # add up activations
                 Y2 += y_p
         
-        # if we propagated from both directions
         if correct_question_entities:
             # normalize activations
             Y2 -= len(a_ids2)
@@ -368,7 +337,7 @@ for sample in samples:
             Y = Y2
             n = n_activated
             top = Y2.argsort()[-n:][::-1]
-            activations2 = np.asarray(re_entities2)[top]
+            activations2 = np.asarray(re_entities)[top]
 
             # look up activated entities by ids
             activations2_labels = []
@@ -377,11 +346,12 @@ for sample in samples:
                 if matches:
                   activations2_labels.append(matches[0]['_source']['uri'])
             
-            # did we hit the answer set already?
             n_answers = len(answer_entities_ids)
 
+
+
+
     # indices of the answers with maximum evidence support
-    # ind = np.argwhere(Y == np.amax(Y))
     # all non-zero activations
     ind = np.argwhere(Y > 0)
     # print(ind)
@@ -389,19 +359,15 @@ for sample in samples:
     # indicate predicted answers
     Y_pr = np.zeros(len(entities))
     Y_pr[ind] = 1
-    # print(Y_pr)
-
 
     # produce correct answers vector
     Y_gs = np.zeros(len(entities))
     # translate correct answers ids to local subgraph ids
     a_ids = [entities[entity_id] for entity_id in answer_entities_ids if entity_id in candidate_entities]
     Y_gs[a_ids] = 1
-    # print(Y_gs)
 
     # check errors as difference between distributions
     error_vector = Y_gs - Y_pr
-    # print (error_vector)
     n_errors = len(np.nonzero(error_vector)[0])
     # report on error
     if n_errors > 0:
