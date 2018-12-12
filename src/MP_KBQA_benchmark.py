@@ -240,29 +240,18 @@ for sample in samples:
     # check output size
     assert Y1.shape[0] == len(entities)
 
+    # normalize activations by checking the 'must' constraints: number of constraints * weights
+    Y1 -= (len(q_ids) - 1) * 1
+
     # check activated entities
-    n_activated = np.nonzero(Y1)[0].shape[0]
+    n_activated = len(np.argwhere(Y1 > 0))
 
     # draw top activated entities from the distribution
     if n_activated:
-        topn = 5
-        top = Y1.argsort()[-n_activated:][::-1][:topn]
-        
-        # choose only the max activated entities
-        # indices of the answers with maximum evidence support
-        ind = np.argwhere(Y1 == np.amax(Y1)).T[0].tolist()
-
-        # indicate predicted answers
-        Y1 = np.zeros(len(entities))
-        Y1[ind] = 1
-        Y = Y1
-
-        activations1 = list(np.asarray(re_entities)[ind])
-        
-        # did we hit the answer set already?
-        # hop1_answer = set(answer_entities_ids).issubset(set(activations1.tolist()))
+        top = Y1.argsort()[-n_activated:][::-1]
+        activations1 = np.asarray(re_entities)[top]
         n_answers = len(activations1)
-
+        Y = Y1
 
 
     # 2 hop
@@ -321,9 +310,8 @@ for sample in samples:
                 # add up activations
                 Y2 += y_p
         
-        if correct_question_entities:
-            # normalize activations
-            Y2 -= len(activations1)
+        # normalize activations by checking the 'must' constraints: number of constraints * weights
+        Y2 -= len(a_ids_q) * len(a_ids2)
         
         # check output size
         assert Y2.shape[0] == len(entities)
@@ -333,11 +321,10 @@ for sample in samples:
 
         # draw top activated entities from the distribution
         if n_activated:
-            Y = Y2
-            n = n_activated
-            top = Y2.argsort()[-n:][::-1]
+            top = Y2.argsort()[-n_activated:][::-1]
             activations2 = np.asarray(re_entities)[top]
             n_answers = len(activations2)
+            Y = Y2
 
 
     # indices of all answers with non-zero activations
