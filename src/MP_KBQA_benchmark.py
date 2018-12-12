@@ -203,12 +203,12 @@ for sample in samples:
         else:
             pass
 
-    top_entities_ids = question_entities_ids
+    top_entities_ids1 = question_entities_ids
     candidate_entities = entities.keys()
 
     # activations of entities
     # look up local entity id
-    q_ids = [entities[entity_id] for entity_id in top_entities_ids if entity_id in candidate_entities]
+    q_ids = [entities[entity_id] for entity_id in top_entities_ids1 if entity_id in candidate_entities]
     # graph activation vector TODO activate with the scores
     X = np.zeros(len(entities))
     X[q_ids] = 1
@@ -276,7 +276,7 @@ for sample in samples:
             else:
                 pass
 
-        top_entities_ids = question_entities_ids
+        top_entities_ids2 = question_entities_ids
 
         # activate entities selected at the previous hop and question entities activations for the 2nd hop
         top_entities2 = activations1
@@ -287,7 +287,7 @@ for sample in samples:
         X2[a_ids2] = 1
 
         # look up local entity id
-        a_ids_q = [entities[entity_id] for entity_id in question_entities_ids if entity_id in candidate_entities]
+        a_ids_q = [entities[entity_id] for entity_id in top_entities_ids2 if entity_id in candidate_entities]
         # graph activation vector
         X2[a_ids_q] = len(a_ids2)
 
