@@ -26,7 +26,7 @@ p_index = IndexSearch('dbpedia201604p')  # predicate index
 # get a sample question from lcquad-train
 from lcquad import load_lcquad
 
-limit = 10
+limit = 500
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', '_id', 'sparql_query'],
                       dataset_split='train', shuffled=True, limit=limit)
 
