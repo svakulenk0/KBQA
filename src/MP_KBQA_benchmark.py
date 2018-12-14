@@ -30,8 +30,6 @@ limit = 10
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', '_id', 'sparql_query'],
                       dataset_split='train', shuffled=True, limit=limit)
 
-# keep track of the covered templates
-covered_templates = []
 # hold average stats for the model performance over the samples
 ps, rs, fs = [], [], []
 
@@ -42,12 +40,7 @@ for sample in samples:
     if not answers:
         continue
 
-    # skip questions of the template we have already seen
-    # if template_id in covered_templates:
-        # continue
-
     print(question_id)
-    # covered_templates.append(template_id)
 
     # parse the SPARQL query into the sequence of predicate expansions
     tripple_patterns = sparql_query[sparql_query.find("{")+1:sparql_query.find("}")].split('. ')
@@ -80,7 +73,8 @@ for sample in samples:
         matches = e_index.match_entities(entity_uri, match_by='uri')
         for match in matches:
             answer_entities_ids.append(str(matches[0]['_source']['id']))
-    n_gs_answers = len(answers)
+    
+    n_gs_answers = len(answer_entities_ids)
 
     # get a 2 hop subgraph
     def get_KG_subgraph(seeds, predicates, nhops):
@@ -94,7 +88,6 @@ for sample in samples:
         # size of the subgraph (M triples)
         return subgraph_str
 
-    # reduce the subgraph to the top properties as a whitelist ("roads")
     # ! assume we know all correct predicates and entities
     if correct_intermediate_entities:
         entities = correct_intermediate_entities
@@ -111,7 +104,8 @@ for sample in samples:
     seed_entities = [entities[np.argmin(np.array(entity_counts))]]
     if correct_intermediate_entities:
         seed_entities += correct_question_entities
-
+    
+    # reduce the subgraph to the top properties as a whitelist ("roads")
     predicates = correct_intermediate_predicates + correct_question_predicates
     subgraphs_str = get_KG_subgraph(seed_entities, predicates, nhops=2)
 
@@ -152,6 +146,7 @@ for sample in samples:
         entities = {}
         # keep a list of selected edges for visualisation with networkx
         edge_list = []
+        re_entities = []
         # iterate over triples
         for triple_str in triples_str.strip().split('\n'):
             terms = triple_str.split()
@@ -159,8 +154,10 @@ for sample in samples:
             # index
             if s not in entities:
                 entities[s] = len(entities)
+                re_entities.append(s)
             if o not in entities:
                 entities[o] = len(entities)
+                re_entities.append(o)
 
             edge_list.append(' '.join([s, o]))
             # collect all edges per predicate
@@ -177,14 +174,13 @@ for sample in samples:
         predicate_uris = [p_index.match_entities(p_id, match_by='id', top=1)[0]['_source']['uri'] for p_id in adjacencies]
         # check adjacency size
         # show size of the subgraph
-        return A, entities, predicate_uris, edge_list
+        return A, entities, re_entities, predicate_uris, edge_list
      
-    A, entities, predicate_uris, edge_list = parse_triples(subgraphs_str)
-    re_entities = entities.keys()
+    A, entities, re_entities, predicate_uris, edge_list = parse_triples(subgraphs_str)
+
 
 
     # ## Message Passing
-
 
     # initial activation
     # ! assume we know all correct entities
