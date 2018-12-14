@@ -9,6 +9,7 @@ Created on Dec 9, 2018
 
 Message Passing for KBQA
 '''
+import numpy as np
 
 # path to KG
 from subprocess import Popen, PIPE
@@ -25,12 +26,14 @@ p_index = IndexSearch('dbpedia201604p')  # predicate index
 # get a sample question from lcquad-train
 from lcquad import load_lcquad
 
-limit = 4000
+limit = 10
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', '_id', 'sparql_query'],
                       dataset_split='train', shuffled=True, limit=limit)
 
 # keep track of the covered templates
 covered_templates = []
+# hold average stats for the model performance over the samples
+ps, rs, fs = [], [], []
 
 for sample in samples:
     question_o, correct_question_entities, answers, template_id, question_id, sparql_query = sample
@@ -105,7 +108,6 @@ for sample in samples:
         if matches:
             entity_counts.append(int(matches[0]['_source']['count']))
 
-    import numpy as np
     seed_entities = [entities[np.argmin(np.array(entity_counts))]]
     if correct_intermediate_entities:
         seed_entities += correct_question_entities
@@ -148,7 +150,6 @@ for sample in samples:
         adjacencies = {}
         # store mappings from local subgraph ids to global entity ids
         entities = {}
-        re_entities = []
         # keep a list of selected edges for visualisation with networkx
         edge_list = []
         # iterate over triples
@@ -158,10 +159,8 @@ for sample in samples:
             # index
             if s not in entities:
                 entities[s] = len(entities)
-                re_entities.append(s)
             if o not in entities:
                 entities[o] = len(entities)
-                re_entities.append(o)
 
             edge_list.append(' '.join([s, o]))
             # collect all edges per predicate
@@ -178,9 +177,10 @@ for sample in samples:
         predicate_uris = [p_index.match_entities(p_id, match_by='id', top=1)[0]['_source']['uri'] for p_id in adjacencies]
         # check adjacency size
         # show size of the subgraph
-        return A, entities, re_entities, predicate_uris, edge_list
+        return A, entities, predicate_uris, edge_list
      
-    A, entities, re_entities, predicate_uris, edge_list = parse_triples(subgraphs_str)
+    A, entities, predicate_uris, edge_list = parse_triples(subgraphs_str)
+    re_entities = entities.keys()
 
 
     # ## Message Passing
@@ -345,7 +345,21 @@ for sample in samples:
     n_errors = len(np.nonzero(error_vector)[0])
     # report on error
     if n_errors > 0:
-        print("!%d/%d"%(n_errors, n_answers))                     
+        print("!%d/%d"%(n_errors, n_answers))
+
+    n_correct = n_answers - n_errors
+
+    # precision: answers that are correct / number of answers
+    p = float(n_correct) / n_answers
+    # recall: answers that are correct / number of correct answers
+    r = float(n_correct) / n_gs_answers
+    # f-measure
+    f = 2 * p * r / (p + r)
+    # add stats
+    ps.append(p)
+    rs.append(r)
+    fs.append(f)
 
 
-print("All questions covered")
+print("%.2f %.2f %.2f"%(np.mean(ps), np.mean(rs), np.mean(fs)))
+print("Fin.")
