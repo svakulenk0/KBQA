@@ -362,4 +362,4 @@ for sample in samples:
 
 
 print("%.2f %.2f %.2f"%(np.mean(ps), np.mean(rs), np.mean(fs)))
-print("Fin.")
+print("Fin. Results for %d questions"%len(ps))
