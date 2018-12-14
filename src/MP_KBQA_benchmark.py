@@ -80,7 +80,7 @@ for sample in samples:
         matches = e_index.match_entities(entity_uri, match_by='uri')
         for match in matches:
             answer_entities_ids.append(str(matches[0]['_source']['id']))
-
+    n_gs_answers = len(answers)
 
     # get a 2 hop subgraph
     def get_KG_subgraph(seeds, predicates, nhops):
