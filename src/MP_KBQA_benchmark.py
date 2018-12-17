@@ -16,7 +16,7 @@ from hdt import HDTDocument
 from enum import Enum
 hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_file = 'dbpedia2016-04en.hdt'
-kg = HDTDocument(hdt_path + hdt_file)
+kg = HDTDocument(hdt_path+hdt_file)
 namespace = "http://dbpedia.org/"
 
 # connect to indices
@@ -74,7 +74,7 @@ for sample in samples:
     for entity_uri in answers:
         matches = e_index.match_entities(entity_uri, match_by='uri')
         for match in matches:
-            answer_entities_ids.append(str(matches[0]['_source']['id']))
+            answer_entities_ids.append(matches[0]['_source']['id'])
     
     n_gs_answers = len(answer_entities_ids)
 
