@@ -73,9 +73,8 @@ for sample in samples:
     answer_entities_ids = []
     for entity_uri in answers:
         matches = e_index.match_entities(entity_uri, match_by='uri')
-        for match in matches:
-            answer_entities_ids.append(matches[0]['_source']['id'])
-    
+        answer_entities_ids.append(matches[0]['_source']['id'])
+
     n_gs_answers = len(answer_entities_ids)
 
 
