@@ -75,6 +75,7 @@ for sample in samples:
         matches = e_index.match_entities(entity_uri, match_by='uri')
         answer_entities_ids.append(matches[0]['_source']['id'])
 
+    assert len(answers) == len(answer_entities_ids)
     n_gs_answers = len(answer_entities_ids)
 
 
@@ -121,6 +122,9 @@ for sample in samples:
     kg.configure_hops(2, predicates, namespace, True)
     entities, predicate_ids, adjacencies = kg.compute_hops(seed_entities)
 
+    # index entity ids global -> local
+    entities_dict = {k: v for v, k in enumerate(entities)}
+
     # parse the subgraph into a sparse matrix
     import numpy as np
     import scipy.sparse as sp
@@ -162,7 +166,7 @@ for sample in samples:
 
     # initial activations of entities
     # look up local entity id
-    q_ids = [entities.index(entity_id) for entity_id in question_entities_ids1 if entity_id in entities]
+    q_ids = [entities_dict[entity_id] for entity_id in question_entities_ids1 if entity_id in entities_dict]
     # graph activation vector TODO activate with the scores
     X = np.zeros(len(entities))
     X[q_ids] = 1
@@ -234,12 +238,12 @@ for sample in samples:
         top_entities2 = activations1.tolist()
         
         # look up local entity id
-        a_ids2 = [entities.index(entity_id) for entity_id in top_entities2 if entity_id in entities]
+        a_ids2 = [entities_dict[entity_id] for entity_id in top_entities2 if entity_id in entities_dict]
         # graph activation vector
         X2[a_ids2] = 1
 
         # look up local entity id
-        a_ids_q = [entities.index(entity_id) for entity_id in question_entities_ids2 if entity_id in entities]
+        a_ids_q = [entities_dict[entity_id] for entity_id in question_entities_ids2 if entity_id in entities_dict]
         # graph activation vector
         X2[a_ids_q] = len(a_ids2)
 
@@ -291,7 +295,7 @@ for sample in samples:
 
 
     # translate correct answers ids to local subgraph ids
-    a_ids = [entities.index(entity_id) for entity_id in answer_entities_ids if entity_id in entities]
+    a_ids = [entities_dict[entity_id] for entity_id in answer_entities_ids if entity_id in entities_dict]
     n_correct = len(set(top) & set(a_ids))
 
     # report on error
