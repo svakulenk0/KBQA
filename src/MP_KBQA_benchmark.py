@@ -119,8 +119,8 @@ for sample in samples:
 
     predicates = correct_intermediate_predicates + correct_question_predicates
 
-    document.configure_hops(2, predicates, namespace, True)
-    entities, predicate_ids, adjacencies = document.compute_hops(seed_entities)
+    kg.configure_hops(2, predicates, namespace, True)
+    entities, predicate_ids, adjacencies = kg.compute_hops(seed_entities)
 
     # parse the subgraph into a sparse matrix
     import numpy as np
