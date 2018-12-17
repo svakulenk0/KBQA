@@ -76,7 +76,7 @@ for sample in samples:
         if matches:
             answer_entities_ids.append(matches[0]['_source']['id'])
 
-    assert len(answers) == len(answer_entities_ids)
+    # assert len(answers) == len(answer_entities_ids)
     n_gs_answers = len(answer_entities_ids)
 
 
