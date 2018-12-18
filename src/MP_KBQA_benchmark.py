@@ -187,13 +187,11 @@ for sample in samples:
 
     p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids]
 
-    # slice A
-    A1 = A[p_ids]
-
     # collect activations
     Y1 = np.zeros(len(entities))
     activations1 = []
-    for i, a_p in enumerate(A1):
+    # slice A
+    for i, a_p in enumerate(A[p_ids]):
         # activate current adjacency matrix via input propagation
         y_p = X*a_p
         # check if there is any signal through
@@ -256,13 +254,12 @@ for sample in samples:
         
         # get indices of the predicates for this hop
         p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids2]
-        # slice A
-        A2 = A[p_ids]
-
+       
         # collect activations
         Y2 = np.zeros(len(entities))
         # activate adjacency matrices per predicate
-        for i, a_p in enumerate(A2):
+        # slice A
+        for i, a_p in enumerate(A[p_ids]):
             # propagate from the previous activation layer
             y_p = X2*a_p
             # check if there is any signal through
