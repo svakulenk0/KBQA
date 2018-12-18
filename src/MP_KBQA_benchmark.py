@@ -16,7 +16,6 @@ from hdt import HDTDocument
 from enum import Enum
 hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_file = 'dbpedia2016-04en.hdt'
-kg = HDTDocument(hdt_path+hdt_file)
 namespace = "http://dbpedia.org/"
 
 # connect to indices
@@ -119,9 +118,11 @@ for sample in samples:
         seed_entities += question_entities_ids2
 
     predicates = correct_intermediate_predicates + correct_question_predicates
-
+    
+    kg = HDTDocument(hdt_path+hdt_file)
     kg.configure_hops(2, predicates, namespace, True)
     entities, predicate_ids, adjacencies = kg.compute_hops(seed_entities)
+    del kg
 
     # index entity ids global -> local
     entities_dict = {k: v for v, k in enumerate(entities)}
