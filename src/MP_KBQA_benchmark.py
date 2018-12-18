@@ -17,6 +17,7 @@ from hdt import HDTDocument
 from enum import Enum
 hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_file = 'dbpedia2016-04en.hdt'
+kg = HDTDocument(hdt_path + hdt_file)
 namespace = "http://dbpedia.org/"
 
 # connect to indices
@@ -120,12 +121,8 @@ for sample in samples:
 
     predicates = correct_intermediate_predicates + correct_question_predicates
 
-    kg = HDTDocument(hdt_path+hdt_file)
     kg.configure_hops(2, predicates, namespace, True)
     entities, predicate_ids, adjacencies = kg.compute_hops(seed_entities)
-    # garbage collection
-    del kg
-    gc.collect()
 
     # index entity ids global -> local
     entities_dict = {k: v for v, k in enumerate(entities)}
@@ -165,7 +162,7 @@ for sample in samples:
     # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
     A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
     # garbage collection
-    del adjacencies
+    adjacencies = None
     gc.collect()
 
     # ## Message Passing
@@ -220,9 +217,7 @@ for sample in samples:
         n_answers = len(activations1)
 
     # garbage collection
-    del a_p
-    del X1
-    del Y1
+    Y1, X1, a_p = None, None, None
     gc.collect()
 
 
@@ -293,9 +288,7 @@ for sample in samples:
             n_answers = len(activations2)
 
         # garbage collection
-        del a_p
-        del X2
-        del Y2
+        Y2, X2, a_p = None, None, None
         gc.collect()
 
 
@@ -303,9 +296,7 @@ for sample in samples:
     a_ids = [entities_dict[entity_id] for entity_id in answer_entities_ids if entity_id in entities_dict]
     
     # garbage collection
-    del A
-    del entities
-    del entities_dict
+    A, entities, entities_dict = None, None, None
     gc.collect()
 
     n_correct = len(set(top) & set(a_ids))
