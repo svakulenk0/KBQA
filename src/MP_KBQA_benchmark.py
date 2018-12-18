@@ -17,7 +17,6 @@ from hdt import HDTDocument
 from enum import Enum
 hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_file = 'dbpedia2016-04en.hdt'
-kg = HDTDocument(hdt_path+hdt_file)
 namespace = "http://dbpedia.org/"
 
 # connect to indices
@@ -121,8 +120,12 @@ for sample in samples:
 
     predicates = correct_intermediate_predicates + correct_question_predicates
 
+    kg = HDTDocument(hdt_path+hdt_file)
     kg.configure_hops(2, predicates, namespace, True)
     entities, predicate_ids, adjacencies = kg.compute_hops(seed_entities)
+    # garbage collection
+    del kg
+    gc.collect()
 
     # index entity ids global -> local
     entities_dict = {k: v for v, k in enumerate(entities)}
@@ -163,7 +166,7 @@ for sample in samples:
     A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
     # garbage collection
     del adjacencies
-
+    gc.collect()
 
     # ## Message Passing
 
@@ -201,8 +204,6 @@ for sample in samples:
             # add up activations
             Y1 += y_p
 
-    del a_p
-
     # check output size
     assert Y1.shape[0] == len(entities)
 
@@ -219,8 +220,10 @@ for sample in samples:
         n_answers = len(activations1)
 
     # garbage collection
+    del a_p
     del X1
     del Y1
+    gc.collect()
 
 
     # 2 hop
@@ -274,9 +277,6 @@ for sample in samples:
                 # add up activations
                 Y2 += y_p
         
-        # garbage collection
-        del a_p
-
         # normalize activations by checking the 'must' constraints: number of constraints * weights
         Y2 -= len(a_ids_q) * len(a_ids2)
         
@@ -293,17 +293,17 @@ for sample in samples:
             n_answers = len(activations2)
 
         # garbage collection
+        del a_p
         del X2
         del Y2
+        gc.collect()
 
-
-    # garbage collection
-    del A
 
     # translate correct answers ids to local subgraph ids
     a_ids = [entities_dict[entity_id] for entity_id in answer_entities_ids if entity_id in entities_dict]
     
     # garbage collection
+    del A
     del entities
     del entities_dict
     gc.collect()
