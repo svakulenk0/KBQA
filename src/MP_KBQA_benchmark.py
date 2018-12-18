@@ -170,8 +170,8 @@ for sample in samples:
     # look up local entity id
     q_ids = [entities_dict[entity_id] for entity_id in question_entities_ids1 if entity_id in entities_dict]
     # graph activation vector TODO activate with the scores
-    X = np.zeros(len(entities))
-    X[q_ids] = 1
+    X1 = np.zeros(len(entities))
+    X1[q_ids] = 1
 
 
     # 1 hop
@@ -192,13 +192,15 @@ for sample in samples:
     Y1 = np.zeros(len(entities))
     activations1 = []
     # slice A
-    for i, a_p in enumerate(A[p_ids]):
+    for a_p in A[p_ids]:
         # activate current adjacency matrix via input propagation
-        y_p = X*a_p
+        y_p = X1 * a_p
         # check if there is any signal through
         if sum(y_p) > 0:
             # add up activations
             Y1 += y_p
+
+    del a_p
 
     # check output size
     assert Y1.shape[0] == len(entities)
@@ -214,7 +216,10 @@ for sample in samples:
         top = Y1.argsort()[-n_activated:][::-1]
         activations1 = np.asarray(entities)[top]
         n_answers = len(activations1)
-        Y = Y1
+
+    # garbage collection
+    del X1
+    del Y1
 
 
     # 2 hop
@@ -260,7 +265,7 @@ for sample in samples:
         Y2 = np.zeros(len(entities))
         # activate adjacency matrices per predicate
         # slice A
-        for i, a_p in enumerate(A[p_ids]):
+        for a_p in A[p_ids]:
             # propagate from the previous activation layer
             y_p = X2*a_p
             # check if there is any signal through
@@ -268,6 +273,9 @@ for sample in samples:
                 # add up activations
                 Y2 += y_p
         
+        # garbage collection
+        del a_p
+
         # normalize activations by checking the 'must' constraints: number of constraints * weights
         Y2 -= len(a_ids_q) * len(a_ids2)
         
@@ -282,7 +290,10 @@ for sample in samples:
             top = Y2.argsort()[-n_activated:][::-1]
             activations2 = np.asarray(entities)[top]
             n_answers = len(activations2)
-            Y = Y2
+
+        # garbage collection
+        del X2
+        del Y2
 
 
     # garbage collection
@@ -290,6 +301,11 @@ for sample in samples:
 
     # translate correct answers ids to local subgraph ids
     a_ids = [entities_dict[entity_id] for entity_id in answer_entities_ids if entity_id in entities_dict]
+    
+    # garbage collection
+    del entities
+    del entities_dict
+
     n_correct = len(set(top) & set(a_ids))
 
     # report on error
