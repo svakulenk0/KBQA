@@ -175,9 +175,6 @@ for sample in samples:
 
     # 1 hop
     # ! assume we know the correct predicate sequence activation
-    # activate predicates for this hop
-    p_activations = np.zeros(len(predicate_ids))
-    
     # look up ids in index
     top_p_ids = []
     for p_uri in top_properties:
@@ -190,10 +187,8 @@ for sample in samples:
 
     p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids]
 
-    p_activations[p_ids] = 1
-
-    # activate adjacency matrices per predicate
-    A1 = p_activations.T * A
+    # slice A
+    A1 = A[p_ids]
 
     # collect activations
     Y1 = np.zeros(len(entities))
@@ -249,8 +244,6 @@ for sample in samples:
         X2[a_ids_q] = len(a_ids2)
 
         # ! assume we know the correct predicate sequence activation
-        # activate predicates for this hop
-        p_activations2 = np.zeros(len(predicate_ids))
         # look up ids in index
         top_p_ids2 = []
         for p_uri in top_properties2:
@@ -263,9 +256,9 @@ for sample in samples:
         
         # get indices of the predicates for this hop
         p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids2]
-        p_activations2[p_ids] = 1
+        # slice A
+        A2 = A[p_ids]
 
-        A2 = p_activations2.T * A
         # collect activations
         Y2 = np.zeros(len(entities))
         # activate adjacency matrices per predicate
