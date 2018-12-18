@@ -124,7 +124,7 @@ for sample in samples:
     kg.configure_hops(2, predicates, namespace, True)
     entities, predicate_ids, adjacencies = kg.compute_hops(seed_entities)
     # garbage collection
-    kg = None
+    del kg
     gc.collect()
 
     # index entity ids global -> local
@@ -165,7 +165,7 @@ for sample in samples:
     # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
     A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
     # garbage collection
-    adjacencies = None
+    del adjacencies
     gc.collect()
 
     # ## Message Passing
@@ -220,7 +220,7 @@ for sample in samples:
         n_answers = len(activations1)
 
     # garbage collection
-    Y1, X1, a_p = None, None, None
+    del Y1, X1, a_p
     gc.collect()
 
 
@@ -291,7 +291,7 @@ for sample in samples:
             n_answers = len(activations2)
 
         # garbage collection
-        Y2, X2, a_p = None, None, None
+        del Y2, X2, a_p
         gc.collect()
 
 
@@ -299,7 +299,7 @@ for sample in samples:
     a_ids = [entities_dict[entity_id] for entity_id in answer_entities_ids if entity_id in entities_dict]
     
     # garbage collection
-    A, entities, entities_dict = None, None, None
+    del A, entities, entities_dict
     gc.collect()
 
     n_correct = len(set(top) & set(a_ids))
