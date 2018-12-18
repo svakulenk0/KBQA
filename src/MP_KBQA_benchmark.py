@@ -160,7 +160,8 @@ for sample in samples:
     adj_shape = (len(entities), len(entities))
     # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
     A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
-
+    # garbage collection
+    del adjacencies
 
 
     # ## Message Passing
@@ -284,6 +285,8 @@ for sample in samples:
             Y = Y2
 
 
+    # garbage collection
+    del A
 
     # translate correct answers ids to local subgraph ids
     a_ids = [entities_dict[entity_id] for entity_id in answer_entities_ids if entity_id in entities_dict]
