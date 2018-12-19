@@ -123,9 +123,6 @@ for sample in samples:
 
     kg.configure_hops(2, predicates, namespace, True)
     entities, predicate_ids, adjacencies = kg.compute_hops(seed_entities)
-    # garbage collection
-    del kg
-    gc.collect()
 
     # index entity ids global -> local
     entities_dict = {k: v for v, k in enumerate(entities)}
