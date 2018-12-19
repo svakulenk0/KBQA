@@ -217,7 +217,7 @@ for sample in samples:
         n_answers = len(activations1)
 
     # garbage collection
-    del Y1, X1, a_p
+    del Y1, X1, a_p, p_ids
     gc.collect()
 
 
@@ -288,7 +288,7 @@ for sample in samples:
             n_answers = len(activations2)
 
         # garbage collection
-        del Y2, X2, a_p
+        del Y2, X2, a_p, p_ids
         gc.collect()
 
 
@@ -296,7 +296,7 @@ for sample in samples:
     a_ids = [entities_dict[entity_id] for entity_id in answer_entities_ids if entity_id in entities_dict]
     
     # garbage collection
-    del A, entities, entities_dict
+    del A, entities, entities_dict, predicate_ids
     gc.collect()
 
     n_correct = len(set(top) & set(a_ids))
