@@ -225,7 +225,7 @@ for sample in samples:
 
     # draw top activated entities from the distribution
     if n_answers:
-        # top = Y1.argsort()[-n_activated:][::-1]
+        top = Y1.argsort()[-n_activated:][::-1]
         activations1 = np.asarray(entities)[top]
         # n_answers = len(activations1)
 
@@ -303,7 +303,7 @@ for sample in samples:
 
         # draw top activated entities from the distribution
         if n_answers:
-            # top = Y2.argsort()[-n_activated:][::-1]
+            top = Y2.argsort()[-n_activated:][::-1]
             activations2 = np.asarray(entities)[top]
             # n_answers = len(activations2)
 
