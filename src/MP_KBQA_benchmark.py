@@ -319,7 +319,7 @@ for sample in samples:
     # del A, entities, entities_dict, predicate_ids
     # gc.collect()
 
-    n_correct = len(set(top.tolist()) & set(a_ids))
+    n_correct = len(set(top) & set(a_ids))
 
     # report on error
     if n_correct != n_gs_answers:
