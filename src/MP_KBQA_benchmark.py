@@ -28,7 +28,7 @@ p_index = IndexSearch('dbpedia201604p')  # predicate index
 # get a sample question from lcquad-train
 from lcquad import load_lcquad
 
-limit = 500
+limit = 5000
 samples = load_lcquad(fields=['corrected_question', 'entities', 'answers', 'sparql_template_id', '_id', 'sparql_query'],
                       dataset_split='train', shuffled=True, limit=limit)
 
@@ -88,6 +88,9 @@ for sample in samples:
         top_entities, top_properties = correct_intermediate_entities, correct_intermediate_predicates
     else:
         top_entities, top_properties = correct_question_entities, correct_question_predicates
+    
+    top_entities = list(set(top_entities))
+    top_properties = list(set(top_properties))
 
     # look up entities ids in index
     question_entities_ids1 = []
@@ -325,12 +328,18 @@ for sample in samples:
     if n_correct != n_gs_answers:
         print("!%d/%d"%(n_correct, n_gs_answers))
 
-    # precision: answers that are correct / number of answers
-    p = float(n_correct) / n_answers
     # recall: answers that are correct / number of correct answers
-    r = float(n_correct) / n_gs_answers
-    # f-measure
-    f = 2 * p * r / (p + r)
+    r = float(n_correct) / n_gs_answers    
+
+    if n_answers > 0:
+        # precision: answers that are correct / number of answers
+        p = float(n_correct) / n_answers
+        # f-measure
+        f = 2 * p * r / (p + r)
+    else:
+        p = 0
+        f = 0
+
     # add stats
     ps.append(p)
     rs.append(r)
