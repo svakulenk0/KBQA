@@ -220,7 +220,7 @@ for sample in samples:
 
     # check activated entities
     # n_activated = len(np.argwhere(Y1 > 0))
-    top = np.argwhere(y > 0)
+    top = np.argwhere(Y1 > 0)
     n_answers = len(top)
 
     # draw top activated entities from the distribution
@@ -298,7 +298,7 @@ for sample in samples:
 
         # check activated entities
         # n_activated = len(np.argwhere(Y2 > 0))
-        top = np.argwhere(y > 0)
+        top = np.argwhere(Y2 > 0)
         n_answers = len(top)
 
         # draw top activated entities from the distribution
