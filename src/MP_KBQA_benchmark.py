@@ -244,20 +244,20 @@ for sample in samples:
         top_properties2 = correct_question_predicates
         
         # propagate activations
-        X2 = np.zeros(len(entities))
+        # X2 = np.zeros(len(entities))
 
-        # activate entities selected at the previous hop and question entities activations for the 2nd hop
-        top_entities2 = activations1.tolist()
+        # # activate entities selected at the previous hop and question entities activations for the 2nd hop
+        # top_entities2 = activations1.tolist()
         
-        # look up local entity id
-        a_ids2 = [entities_dict[entity_id] for entity_id in top_entities2 if entity_id in entities_dict]
-        # graph activation vector
-        X2[a_ids2] = 1
+        # # look up local entity id
+        # a_ids2 = [entities_dict[entity_id] for entity_id in top_entities2 if entity_id in entities_dict]
+        # # graph activation vector
+        # X2[a_ids2] = 1
 
-        # look up local entity id
-        a_ids_q = [entities_dict[entity_id] for entity_id in question_entities_ids2 if entity_id in entities_dict]
-        # graph activation vector
-        X2[a_ids_q] = len(a_ids2)
+        # # look up local entity id
+        # a_ids_q = [entities_dict[entity_id] for entity_id in question_entities_ids2 if entity_id in entities_dict]
+        # # graph activation vector
+        # X2[a_ids_q] = len(a_ids2)
 
         # ! assume we know the correct predicate sequence activation
         # look up ids in index
@@ -279,7 +279,7 @@ for sample in samples:
         n_p = len(p_ids)
 
         # slice A by the selected predicates and concatenate edge lists
-        Y2 = (X2 * sp.hstack(A[p_ids])).reshape([n_p, n_e]).sum(0)
+        Y2 = (Y1 * sp.hstack(A[p_ids])).reshape([n_p, n_e]).sum(0)
         # # activate adjacency matrices per predicate
         # # slice A
         # for a_p in A[p_ids]:
