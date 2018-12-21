@@ -189,7 +189,7 @@ for sample in samples:
         if matches:
             top_p_ids.append(matches[0]['_source']['id'])
         else:
-            print "%s not found" % p_uri
+            print ("%s not found" % p_uri)
 
     p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids]
 
@@ -268,7 +268,7 @@ for sample in samples:
             if matches:
                 top_p_ids2.append(matches[0]['_source']['id'])
             else:
-                print "%s not found" % p_uri
+                print ("%s not found" % p_uri)
         
         # get indices of the predicates for this hop
         p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids2]
