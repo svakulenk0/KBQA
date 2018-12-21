@@ -124,9 +124,9 @@ for sample in samples:
     kg.configure_hops(2, predicates, namespace, True)
     entities, predicate_ids, adjacencies = kg.compute_hops(seed_entities)
     kg.remove()
-    kg = None
-    del kg
-    gc.collect()
+    # kg = None
+    # del kg
+    # gc.collect()
 
     # index entity ids global -> local
     entities_dict = {k: v for v, k in enumerate(entities)}
@@ -166,8 +166,8 @@ for sample in samples:
     # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
     A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
     # garbage collection
-    del adjacencies
-    gc.collect()
+    # del adjacencies
+    # gc.collect()
 
     # ## Message Passing
 
@@ -196,14 +196,21 @@ for sample in samples:
     # collect activations
     Y1 = np.zeros(len(entities))
     activations1 = []
+
+    n_p = len(p_ids)
+    n_e = len(entities)
+
+    # slice A by the selected predicates and concatenate edge lists
+    Y1 = (X1 * sp.hstack(A[p_ids])).reshape([n_p, n_e]).sum(0)
+    
     # slice A
-    for a_p in A[p_ids]:
-        # activate current adjacency matrix via input propagation
-        y_p = X1 * a_p
-        # check if there is any signal through
-        if sum(y_p) > 0:
-            # add up activations
-            Y1 += y_p
+    # for a_p in A[p_ids]:
+    #     # activate current adjacency matrix via input propagation
+    #     y_p = X1 * a_p
+    #     # check if there is any signal through
+    #     if sum(y_p) > 0:
+    #         # add up activations
+    #         Y1 += y_p
 
     # check output size
     assert Y1.shape[0] == len(entities)
@@ -212,17 +219,19 @@ for sample in samples:
     Y1 -= (len(q_ids) - 1) * 1
 
     # check activated entities
-    n_activated = len(np.argwhere(Y1 > 0))
+    # n_activated = len(np.argwhere(Y1 > 0))
+    top = np.argwhere(y > 0)
+    n_answers = len(top)
 
     # draw top activated entities from the distribution
-    if n_activated:
-        top = Y1.argsort()[-n_activated:][::-1]
+    if n_answers:
+        # top = Y1.argsort()[-n_activated:][::-1]
         activations1 = np.asarray(entities)[top]
-        n_answers = len(activations1)
+        # n_answers = len(activations1)
 
     # garbage collection
-    del Y1, X1, a_p, p_ids
-    gc.collect()
+    # del Y1, X1, a_p, p_ids
+    # gc.collect()
 
 
     # 2 hop
@@ -266,15 +275,20 @@ for sample in samples:
        
         # collect activations
         Y2 = np.zeros(len(entities))
-        # activate adjacency matrices per predicate
-        # slice A
-        for a_p in A[p_ids]:
-            # propagate from the previous activation layer
-            y_p = X2*a_p
-            # check if there is any signal through
-            if sum(y_p) > 0:
-                # add up activations
-                Y2 += y_p
+        
+        n_p = len(p_ids)
+
+        # slice A by the selected predicates and concatenate edge lists
+        Y2 = (X2 * sp.hstack(A[p_ids])).reshape([n_p, n_e]).sum(0)
+        # # activate adjacency matrices per predicate
+        # # slice A
+        # for a_p in A[p_ids]:
+        #     # propagate from the previous activation layer
+        #     y_p = X2*a_p
+        #     # check if there is any signal through
+        #     if sum(y_p) > 0:
+        #         # add up activations
+        #         Y2 += y_p
         
         # normalize activations by checking the 'must' constraints: number of constraints * weights
         Y2 -= len(a_ids_q) * len(a_ids2)
@@ -283,25 +297,27 @@ for sample in samples:
         assert Y2.shape[0] == len(entities)
 
         # check activated entities
-        n_activated = len(np.argwhere(Y2 > 0))
+        # n_activated = len(np.argwhere(Y2 > 0))
+        top = np.argwhere(y > 0)
+        n_answers = len(top)
 
         # draw top activated entities from the distribution
-        if n_activated:
-            top = Y2.argsort()[-n_activated:][::-1]
+        if n_answers:
+            # top = Y2.argsort()[-n_activated:][::-1]
             activations2 = np.asarray(entities)[top]
-            n_answers = len(activations2)
+            # n_answers = len(activations2)
 
         # garbage collection
-        del Y2, X2, a_p, p_ids
-        gc.collect()
+        # del Y2, X2, a_p, p_ids
+        # gc.collect()
 
 
     # translate correct answers ids to local subgraph ids
     a_ids = [entities_dict[entity_id] for entity_id in answer_entities_ids if entity_id in entities_dict]
     
     # garbage collection
-    del A, entities, entities_dict, predicate_ids
-    gc.collect()
+    # del A, entities, entities_dict, predicate_ids
+    # gc.collect()
 
     n_correct = len(set(top) & set(a_ids))
 
