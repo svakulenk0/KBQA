@@ -2,9 +2,9 @@
 
 ## Requirements
 
-* Python 2.7
-* keras
+* Python 3.6
 * Tensorflow
+* Keras
 
 
 ## Setup
@@ -12,8 +12,8 @@
 1. Create virtual environment and install all dependencies
 
 '''
-conda create -n tensorflow2 python=2.7 pip
-conda activate tensorflow2
+conda create -n tf36 python=3.6 pip
+conda activate tf36
 pip install -r requirements.txt
 '''
 
@@ -28,33 +28,19 @@ rm wiki.en.zip
 
 ./fasttext print-word-vectors ../KBQA/data/fasttext/wiki.en.bin < ../KBQA/data/test_question_words.txt > ../KBQA/data/test_question_words_fasttext.txt
 
-./fasttext print-word-vectors ../KBQA/data/fasttext/wiki.en.bin < ../KBQA/data/test_question_words.txt > ../KBQA/data/test_question_words_fasttext.txt
-
-
-3. Download KGlove embeddings
-
-wget http://data.dws.informatik.uni-mannheim.de/rdf2vec/models/DBpedia/2016-04/GlobalVectors/11_pageRankSplit
-
 
 ## Run
 
-Training the model:
-
-python kbqa_model4.py train
-
-Test the model with:
-
-python kbqa_model4.py test
+see notebooks
 
 ## Results
 
-Baseline on LC-Quad SELECT subset Hits@5: 15/737
+TODO
+
 
 ## References
 
 * [Relational Graph Convolutional Networks (RGCN)](https://github.com/tkipf/relational-gcn)
-* [Simple seq2seq model as a baseline model for DSTC7 Task 2](https://github.com/DSTC-MSR-NLP/DSTC7-End-to-End-Conversation-Modeling/blob/master/baseline/baseline.py)
-
 
 ## Troubleshooting
 
