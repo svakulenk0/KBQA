@@ -74,14 +74,14 @@ class IndexSearch:
 
     def look_up_by_uri(self, uri, top=1):
         results = self.es.search(index=self.index,
-                              body={"query": {"term": {"uri": quote(uri, safe='():/,')}}},
-                              size=top, doc_type=self.type)['hits']['hits']
+                                 body={"query": {"term": {"uri": quote(uri, safe='():/,')}}},
+                                 size=top, doc_type=self.type)['hits']['hits']
         return results
 
     def look_up_by_id(self, _id, top=1):
         results = self.es.search(index=self.index,
-                              body={"query": {"term": {"id": _id}}},
-                              size=top, doc_type=self.type)['hits']['hits']
+                                 body={"query": {"term": {"id": _id}}},
+                                 size=top, doc_type=self.type)['hits']['hits']
         return results
 
 
@@ -170,7 +170,6 @@ for doc in samples:
     # graph activation vector TODO activate with the scores
     X1 = np.zeros(len(entities))
     X1[q_ids] = 1
-    print("%d question entities activated"%len(q_ids))
 
     # 1 hop
     # activate predicates for this hop
@@ -179,12 +178,7 @@ for doc in samples:
     top_p_ids = []
     # TODO activate properties in top_properties
     for p_uri in top_properties:
-      # if not in predicates check entities
-      matches = p_index.look_up_by_uri(p_uri)
-      if matches:
-          top_p_ids.append(matches[0]['_source']['id'])
-      else:
-          print ("%s not found" % p_uri)
+        top_p_ids.append(p_index.look_up_by_uri(p_uri.replace("'", ""))[0]['_source']['id'])
 
     p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids]
 
@@ -228,7 +222,10 @@ for doc in samples:
         # precision: answers that are correct / number of answers
         p = float(n_correct) / n_answers
         # f-measure
-        f = 2 * p * r / (p + r)
+        try:
+            f = 2 * p * r / (p + r)
+        except ZeroDivisionError:
+            f = 0
     else:
         p = 0
         f = 0
