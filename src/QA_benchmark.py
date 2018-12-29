@@ -75,7 +75,7 @@ class IndexSearch:
     def look_up_by_uri(self, uri, top=1):
         results = self.es.search(index=self.index,
                                  body={"query": {"constant_score": {"filter": {"term": {"uri": uri}}}}},
-                                 size=top, doc_type=self.type)['hits']['hits']
+                                 doc_type=self.type)['hits']['hits']
         return results
 
     def look_up_by_id(self, _id, top=1):
