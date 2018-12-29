@@ -178,7 +178,12 @@ for doc in samples:
     top_p_ids = []
     # TODO activate properties in top_properties
     for p_uri in top_properties:
-        top_p_ids.append(p_index.look_up_by_uri(p_uri.replace("'", ""))[0]['_source']['id'])
+        # if not in predicates check entities
+        matches = p_index.look_up_by_uri(p_uri.replace("'", ""))
+        if matches:
+          top_p_ids.append(matches[0]['_source']['id'])
+        else:
+            print(p_uri)
 
     p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids]
 
