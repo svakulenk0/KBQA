@@ -75,7 +75,7 @@ class IndexSearch:
     def look_up_by_uri(self, uri, top=1):
         results = self.es.search(index=self.index,
                                  body={"query": {"constant_score": {"filter": {"term": {"uri": uri}}}}},
-                                 doc_type=self.type)['hits']['hits']
+                                 size=top, doc_type=self.type)['hits']['hits']
         return results
 
     def look_up_by_id(self, _id, top=1):
@@ -83,6 +83,39 @@ class IndexSearch:
                                  body={"query": {"term": {"id": _id}}},
                                  size=top, doc_type=self.type)['hits']['hits']
         return results
+
+    def match_entities(self, query=None, match_by="label", filter='terms', top=100):
+        '''
+        Index search
+        size – Number of hits to return (default: 10)
+        '''
+        if query:
+            if match_by == "label":
+                results = self.es.search(index=self.index,
+                                         body={"query": {"match": {match_by: {"query": query, "fuzziness": "AUTO"}}}},
+                                         size=top,
+                                         # body={"query": {"match": {match_by: {"query": query, "operator" : "and", "fuzziness": "AUTO"}}}},
+                                         doc_type=self.type)['hits']
+            
+            elif match_by == "uri" or match_by == "id":
+                # filter out only entities in s and o positions
+                results = self.es.search(index=self.index,
+                                         body={
+                                              "query": {
+                                                "constant_score": {
+                                                  "filter": {
+                                                      "term": {
+                                                        match_by: query
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                         doc_type=self.type)['hits']
+        else:
+            # sample of size 2
+            results = self.es.search(index=self.index, size=2, body={"query": {"match_all": {}}})['hits']
+        return results['hits']
 
 
 e_index = IndexSearch('%se'%kg_name)
@@ -179,7 +212,7 @@ for doc in samples:
     # TODO activate properties in top_properties
     for p_uri in top_properties:
         # if not in predicates check entities
-        matches = p_index.look_up_by_uri(p_uri.replace("'", ""))
+        matches = p_index.match_entities(p_uri, match_by='uri')
         if matches:
           top_p_ids.append(matches[0]['_source']['id'])
         else:
