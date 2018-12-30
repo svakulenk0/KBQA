@@ -55,6 +55,8 @@ namespace = "http://dbpedia.org/"
 # connect to entity catalog
 from elasticsearch import Elasticsearch
 from urllib.parse import quote
+import string
+
 
 class IndexSearch:
     
@@ -74,9 +76,8 @@ class IndexSearch:
 
     def look_up_by_uri(self, uri, top=1):
         results = self.es.search(index=self.index,
-                                 body={"query": {"constant_score": {"filter": {"term": {"uri": uri}}}}},
+                                 body={"query": {"term": {"uri": quote(uri, safe=string.punctuation)}}},
                                  size=top, doc_type=self.type)['hits']['hits']
-        return results
 
     def look_up_by_id(self, _id, top=1):
         results = self.es.search(index=self.index,
