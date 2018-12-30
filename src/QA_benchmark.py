@@ -251,8 +251,8 @@ for doc in samples:
     n_correct = len(set(top) & set(a_ids))
 
     # report on error
-    if n_correct != n_gs_answers:
-        print("!%d/%d"%(n_correct, n_gs_answers))
+    # if n_correct != n_gs_answers:
+    #     print("!%d/%d"%(n_correct, n_gs_answers))
 
     # recall: answers that are correct / number of correct answers
     r = float(n_correct) / n_gs_answers
