@@ -173,11 +173,12 @@ for doc in samples:
     # get correct entities and predicates from the GS annotations
     top_entities = doc[e_field]
     top_properties = doc[p_field]
+    if not gs_annotations:
+        top_entities = list(set([e_id for e_ids in top_entities for e_id in e_ids]))
+        top_properties = list(set([e_id for e_ids in top_properties for e_id in e_ids] + [68655]))
     # extract the subgraph
     kg = HDTDocument(hdt_path+hdt_file)
     kg.configure_hops(nhops, top_properties, namespace, True)
-    if not gs_annotations:
-        top_entities = list(set([e_id for e_ids in top_entities for e_id in e_ids]))
     entities, predicate_ids, adjacencies = kg.compute_hops(top_entities)
     kg.remove()
 
