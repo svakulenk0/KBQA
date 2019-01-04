@@ -229,8 +229,8 @@ for doc in samples:
     activations1 = []
     # slice A
     # for a_p in A[p_ids]:
-    # use all predicates except type
-    for a_p in A[:-1]:
+    # use all predicates
+    for a_p in A:
       # activate current adjacency matrix via input propagation
       y_p = X1 * a_p
       # check if there is any signal through
