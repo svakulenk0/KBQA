@@ -175,8 +175,7 @@ for doc in samples:
     top_properties = doc[p_field]
     if not gs_annotations:
         top_entities = list(set([e_id for e_ids in top_entities for e_id in e_ids]))
-        #  + ['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']
-        top_properties = list(set([e_id for e_ids in top_properties for e_id in e_ids]))
+        top_properties = list(set([e_id for e_ids in top_properties for e_id in e_ids] + ['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']))
     # extract the subgraph
     kg = HDTDocument(hdt_path+hdt_file)
     kg.configure_hops(nhops, top_properties, namespace, True)
@@ -211,25 +210,27 @@ for doc in samples:
 
     # 1 hop
     # activate predicates for this hop
-    p_activations = np.zeros(len(predicate_ids))
-    # look up ids in index
-    top_p_ids = []
-    # TODO activate properties in top_properties
-    for p_uri in top_properties:
-        # if not in predicates check entities
-        matches = p_index.match_entities(p_uri, match_by='uri')
-        if matches:
-          top_p_ids.append(matches[0]['_source']['id'])
-        else:
-            print(p_uri)
+    # p_activations = np.zeros(len(predicate_ids))
+    # # look up ids in index
+    # top_p_ids = []
+    # # TODO activate properties in top_properties
+    # for p_uri in top_properties:
+    #     # if not in predicates check entities
+    #     matches = p_index.match_entities(p_uri, match_by='uri')
+    #     if matches:
+    #       top_p_ids.append(matches[0]['_source']['id'])
+    #     else:
+    #         print(p_uri)
 
-    p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids]
+    # p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids]
 
     # collect activations
     Y1 = np.zeros(len(entities))
     activations1 = []
     # slice A
-    for a_p in A[p_ids]:
+    # for a_p in A[p_ids]:
+    # use all predicates except type
+    for a_p in A[:-1]:
       # activate current adjacency matrix via input propagation
       y_p = X1 * a_p
       # check if there is any signal through
