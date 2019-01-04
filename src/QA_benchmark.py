@@ -175,7 +175,8 @@ for doc in samples:
     top_properties = doc[p_field]
     if not gs_annotations:
         top_entities = list(set([e_id for e_ids in top_entities for e_id in e_ids]))
-        top_properties = list(set([e_id for e_ids in top_properties for e_id in e_ids] + ['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']))
+        # top_properties = list(set([e_id for e_ids in top_properties for e_id in e_ids] + ['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']))
+        top_properties = list(set([e_id for e_ids in top_properties for e_id in e_ids]))
     # extract the subgraph
     kg = HDTDocument(hdt_path+hdt_file)
     kg.configure_hops(nhops, top_properties, namespace, True)
