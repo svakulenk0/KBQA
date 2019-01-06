@@ -13,7 +13,7 @@ Prepare lcquad dataset for training MPNet
 dataset_name = 'lcquad'
 kg_name = 'dbpedia201604'
 
-limit = 10
+limit = None
 gs_annotations = False
 nhops = 1
 
@@ -166,12 +166,15 @@ accs = []
 # hold macro-average stats for the model performance over the samples
 ps, rs, fs = [], [], []
 
+max_x = 380080
+max_p = 714
+e_cutoff = 5
 # iterate over the cursor
 for doc in samples:
     # get correct entities and predicates from the GS annotations
     top_entities = doc[e_field]
     top_properties = doc[p_field]
-    top_entities_ids = list(set([e_candidate['id'] for e in top_entities.values() for e_candidate in e]))
+    top_entities_ids = list(set([e_candidate['id'] for span in top_entities.values() for e_candidate in span]))  # [:e_cutoff]
     top_properties_ids = list(set([e_candidate['uri'] for e in top_properties.values() for e_candidate in e]))
     top_p_scores = {e_candidate['id']: e_candidate['score'] for e in top_properties.values() for e_candidate in e}
     n_e_activations = len(top_entities_ids)
@@ -183,6 +186,11 @@ for doc in samples:
     entities, predicate_ids, adjacencies = kg.compute_hops(top_entities_ids)
     kg.remove()
 
+    if not max_x:
+        max_x = len(entities)
+    if not max_p:
+        max_p = len(predicate_ids)
+
     # check if we hit the answer set
     correct_answers_ids = set(doc['answers_ids'])
     n_gs_answers = len(correct_answers_ids)
@@ -190,38 +198,45 @@ for doc in samples:
     # accuracy
     acc = float(n_hits) / len(correct_answers_ids)
     accs.append(acc)
+    # pick only the samples where we find the correct subgraph
+    if acc == 1:
+        # build adjacency matrix
 
-    # build adjacency matrix
+        # index entity ids global -> local
+        entities_dict = {k: v for v, k in enumerate(entities)}
 
-    # index entity ids global -> local
-    entities_dict = {k: v for v, k in enumerate(entities)}
+        # adj_shape = (len(entities), len(entities))
+        adj_shape = (max_x, max_x)
+        # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
+        A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
+        
+        p = np.zeros(max_p)
+        for _id in predicate_ids
+            if _id in top_p_scores:
+                p[_id] = top_p_scores[_id]
 
-    adj_shape = (len(entities), len(entities))
-    # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
-    A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
-    p_scores = np.asarray([top_p_scores[_id] if _id in top_p_scores else 1 for _id in predicate_ids])
+        # initial activations of entities
+        # look up local entity id
+        q_ids = [entities_dict[entity_id] for entity_id in top_entities if entity_id in entities_dict]
+        # graph activation vector TODO activate with the scores
+        x = np.zeros(max_x)
+        for es in top_entities.values():
+            # choose the first top entity per span
+            for e in es:
+                if e['id'] in entities_dict:
+                    x[entities_dict[e['id']]] = e['score']
 
-    # initial activations of entities
-    # look up local entity id
-    q_ids = [entities_dict[entity_id] for entity_id in top_entities if entity_id in entities_dict]
-    # graph activation vector TODO activate with the scores
-    X1 = np.zeros(len(entities))
-    for es in top_entities.values():
-        # choose the first top entity per span
-        for e in es:
-            if e['id'] in entities_dict:
-                X1[entities_dict[e['id']]] = e['score']
+        y = np.zeros(max_x)
+        for entity_id in correct_answers_ids:
+            if entity_id in entities_dict:
+                y[entities_dict[entity_id]] = 1
 
-    y = np.zeros(len(entities))
-    for entity_id in correct_answers_ids:
-        if entity_id in entities_dict:
-            y[entities_dict[entity_id]] = 1
-
-    # store the adjacency matrix of the subgraph, vector-activations and correct answer vector: X1, A, p_scores, y
-    data_set = {'x': X1, 'A': A,
-                'p': p_scores, 'y': y}
-    f = open('data/mp_lcquad/%s.pkl'%doc['id'], 'wb')
-    pkl.dump(data_set, f, -1)
-    f.close()
+        # store the adjacency matrix of the subgraph, vector-activations and correct answer vector: X1, A, p_scores, y
+        data_set = {'x': x, 'A': A,
+                    'p': p, 'y': y}
+        f = open('data/mp_lcquad/%s.pkl'%doc['id'], 'wb')
+        pkl.dump(data_set, f, -1)
+        f.close()
 
 print("Dataset ready.")
+print("Acc: %.2f"%(np.mean(accs)))
