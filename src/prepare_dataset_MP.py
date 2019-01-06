@@ -216,7 +216,7 @@ for doc in samples:
     # store the adjacency matrix of the subgraph, vector-activations and correct answer vector: X1, A, p_scores, y
     data_set = {'x': X1, 'A': A,
                 'p': p_scores, 'y': y}
-    f = open('data/mp_lcquad/%d.pkl'%doc['id'], 'wb')
+    f = open('data/mp_lcquad/%s.pkl'%doc['id'], 'wb')
     pkl.dump(data_set, f, -1)
     f.close()
 print("Dataset ready.")
