@@ -211,7 +211,7 @@ for doc in samples:
         A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
         
         p = np.zeros(max_p)
-        for _id in predicate_ids
+        for _id in predicate_ids:
             if _id in top_p_scores:
                 p[_id] = top_p_scores[_id]
 
