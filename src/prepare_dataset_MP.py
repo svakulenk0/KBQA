@@ -211,9 +211,9 @@ for doc in samples:
         A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
         
         p = np.zeros(max_p)
-        for _id in predicate_ids:
+        for i, _id in enumerate(predicate_ids):
             if _id in top_p_scores:
-                p[_id] = top_p_scores[_id]
+                p[i] = top_p_scores[_id]
 
         # initial activations of entities
         # look up local entity id
