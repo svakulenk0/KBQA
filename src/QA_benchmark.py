@@ -229,7 +229,7 @@ for doc in samples:
 
     n_answers = 0
     # check activated entities
-    if y1:
+    if sum(y1) > 0:
         top = np.argwhere(y1 == np.amax(y1)).T.tolist()[0]
         n_answers = len(top)
         activations1 = np.asarray(entities)[top]
