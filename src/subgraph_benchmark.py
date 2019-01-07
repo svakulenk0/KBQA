@@ -100,34 +100,38 @@ def evaluate_subgraph_extraction(nhops, e_field, p_field, limit=None, show_error
         kg.remove()
         
         # check if we hit the answer set
-        correct_answers_ids = set(doc['answers_ids'])
-#         print(correct_answers_ids)
-        n_hits = len(correct_answers_ids & set(entities))
-        # accuracy
-        acc = float(n_hits) / len(correct_answers_ids)
-        accs.append(acc)
-        if show_errors & (acc < 1):
-            print(doc['question'])
-            print(doc['entity_ids'])
-            print(doc['predicate_uris'])
+        if 'answers_ids' in doc:
+            correct_answers_ids = set(doc['answers_ids'])
+    #         print(correct_answers_ids)
+            n_hits = len(correct_answers_ids & set(entities))
+            # accuracy
+            acc = float(n_hits) / len(correct_answers_ids)
+            accs.append(acc)
+            if show_errors & (acc < 1):
+                print(doc['question'])
+                print(doc['entity_ids'])
+                print(doc['predicate_uris'])
     return accs
 
 # 1-hop subgraphs
-accs1 = evaluate_subgraph_extraction(nhops=1, e_field='entity_ids', p_field='predicate_uris_guess')
-print("Acc: %.2f"%np.mean(accs1))
+# accs1 = evaluate_subgraph_extraction(nhops=1, e_field='entity_ids', p_field='predicate_uris_guess')
+# print("Acc: %.2f"%np.mean(accs1))
 
-accs1 = evaluate_subgraph_extraction(nhops=1, e_field='entity_ids_guess', p_field='predicate_uris')
-print("Acc: %.2f"%np.mean(accs1))
+# accs1 = evaluate_subgraph_extraction(nhops=1, e_field='entity_ids_guess', p_field='predicate_uris')
+# print("Acc: %.2f"%np.mean(accs1))
 
-accs1 = evaluate_subgraph_extraction(nhops=1, e_field='entity_ids_guess', p_field='predicate_uris_guess')
-print("Acc: %.2f"%np.mean(accs1))
+# accs1 = evaluate_subgraph_extraction(nhops=1, e_field='entity_ids_guess', p_field='predicate_uris_guess')
+# print("Acc: %.2f"%np.mean(accs1))
 
 # 2-hop subgraphs
-accs2 = evaluate_subgraph_extraction(nhops=2, e_field='entity_ids', p_field='predicate_uris_guess')
+accs2 = evaluate_subgraph_extraction(nhops=2, e_field='entity_ids', p_field='predicate_uris')
 print("Acc: %.2f"%np.mean(accs2))
 
-accs2 = evaluate_subgraph_extraction(nhops=2, e_field='entity_ids_guess', p_field='predicate_uris')
-print("Acc: %.2f"%np.mean(accs2))
+# accs2 = evaluate_subgraph_extraction(nhops=2, e_field='entity_ids', p_field='predicate_uris_guess')
+# print("Acc: %.2f"%np.mean(accs2))
 
-accs2 = evaluate_subgraph_extraction(nhops=2, e_field='entity_ids_guess', p_field='predicate_uris_guess')
-print("Acc: %.2f"%np.mean(accs2))
+# accs2 = evaluate_subgraph_extraction(nhops=2, e_field='entity_ids_guess', p_field='predicate_uris')
+# print("Acc: %.2f"%np.mean(accs2))
+
+# accs2 = evaluate_subgraph_extraction(nhops=2, e_field='entity_ids_guess', p_field='predicate_uris_guess')
+# print("Acc: %.2f"%np.mean(accs2))
