@@ -15,7 +15,6 @@ dataset_name = 'lcquad'
 kg_name = 'dbpedia201604'
 
 limit = None
-gs_annotations = False
 nhops = 1
 
 # connect to MongoDB (27017 is the default port) to access the dataset
@@ -154,12 +153,7 @@ def generate_adj_sp(adjacencies, adj_shape, normalize=False, include_inverse=Fal
 
 # get a context subgraph by seed entities and predicates sets
 
-if gs_annotations:
-    annotation = ''
-else:
-    annotation = '_guess'
-
-e_field, p_field = 'entity_ids%s'%annotation, 'predicate_uris%s'%annotation
+e_field, p_field = 'entity_guess', 'predicate_guess'
 
 samples = mongo.get_sample(limit=limit)
 
@@ -170,17 +164,18 @@ ps, rs, fs = [], [], []
 
 # iterate over the cursor
 for doc in samples:
-    # get correct entities and predicates from the GS annotations
     top_entities = doc[e_field]
     top_properties = doc[p_field]
-    if not gs_annotations:
-        top_entities = list(set([e_id for e_ids in top_entities for e_id in e_ids]))
-        # top_properties = list(set([e_id for e_ids in top_properties for e_id in e_ids] + ['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']))
-        top_properties = list(set([e_id for e_ids in top_properties for e_id in e_ids]))
+    top_entities_ids = list(set([e_candidate['id'] for span in top_entities.values() for e_candidate in span]))  # [:e_cutoff]
+    top_properties_ids = list(set([e_candidate['uri'] for e in top_properties.values() for e_candidate in e]))
+    top_p_scores = {e_candidate['id']: e_candidate['score'] for e in top_properties.values() for e_candidate in e}
+    n_e_activations = len(top_entities_ids)
+    n_p_activations = len(top_properties_ids)
+
     # extract the subgraph
     kg = HDTDocument(hdt_path+hdt_file)
-    kg.configure_hops(nhops, top_properties, namespace, True)
-    entities, predicate_ids, adjacencies = kg.compute_hops(top_entities)
+    kg.configure_hops(nhops, top_properties_ids, namespace, True)
+    entities, predicate_ids, adjacencies = kg.compute_hops(top_entities_ids)
     kg.remove()
 
     # check if we hit the answer set
@@ -196,48 +191,35 @@ for doc in samples:
     # index entity ids global -> local
     entities_dict = {k: v for v, k in enumerate(entities)}
 
-    adj_shape = (len(entities), len(entities))
     # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
+    adj_shape = (len(entities), len(entities))
     A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
-    # garbage collection
-    del adjacencies
 
-    # initial activations of entities
-    # look up local entity id
-    q_ids = [entities_dict[entity_id] for entity_id in top_entities if entity_id in entities_dict]
-    # graph activation vector TODO activate with the scores
-    X1 = np.zeros(len(entities))
-    X1[q_ids] = 1
+    # entity activation vector
+    x = np.zeros(len(entities))
+    for es in top_entities.values():
+        # choose the first top entity per span
+        for e in es:
+            if e['id'] in entities_dict:
+                x[entities_dict[e['id']]] = e['score']
+                break
+
+    # predicate activation vector
+    p = np.array([top_p_scores[_id] if _id in top_p_scores else 1 for _id in predicate_ids])
 
     # 1 hop
-    # activate predicates for this hop
-    # p_activations = np.zeros(len(predicate_ids))
-    # # look up ids in index
-    # top_p_ids = []
-    # # TODO activate properties in top_properties
-    # for p_uri in top_properties:
-    #     # if not in predicates check entities
-    #     matches = p_index.match_entities(p_uri, match_by='uri')
-    #     if matches:
-    #       top_p_ids.append(matches[0]['_source']['id'])
-    #     else:
-    #         print(p_uri)
-
-    # p_ids = [i for i, p_id in enumerate(predicate_ids) if p_id in top_p_ids]
+    A1 = A * p
 
     # collect activations
-    Y1 = np.zeros(len(entities))
+    y1 = np.zeros(len(entities))
     activations1 = []
-    # slice A
-    # for a_p in A[p_ids]:
-    # use all predicates
-    for a_p in A:
-      # activate current adjacency matrix via input propagation
-      y_p = X1 * a_p
-      # check if there is any signal through
-      if sum(y_p) > 0:
-          # add up activations
-          Y1 += y_p
+    for i, a_p in enumerate(A1):
+        # activate current adjacency matrix via input propagation
+        y_p = x @ a_p
+        y1 += y_p
+
+    # check output size
+    assert y1.shape[0] == len(entities)
 
     # normalize activations by checking the 'must' constraints: number of constraints * weights
     # Y1 -= (len(q_ids) - 1) * 1
@@ -249,7 +231,6 @@ for doc in samples:
     # draw top activated entities from the distribution
     if n_answers:
         activations1 = np.asarray(entities)[top]
-
 
     # translate correct answers ids to local subgraph ids
     a_ids = [entities_dict[entity_id] for entity_id in correct_answers_ids if entity_id in entities_dict]
