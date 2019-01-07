@@ -178,13 +178,14 @@ for doc in samples:
     entities, predicate_ids, adjacencies = kg.compute_hops(top_entities_ids)
     kg.remove()
 
-    # check if we hit the answer set
-    correct_answers_ids = set(doc['answers_ids'])
-    n_gs_answers = len(correct_answers_ids)
-    n_hits = len(correct_answers_ids & set(entities))
-    # accuracy
-    acc = float(n_hits) / len(correct_answers_ids)
-    accs.append(acc)
+    # check if we hit the answer set (for SELECT queries only)
+    if 'answers_ids' in doc:
+        correct_answers_ids = set(doc['answers_ids'])
+        n_gs_answers = len(correct_answers_ids)
+        n_hits = len(correct_answers_ids & set(entities))
+        # accuracy
+        acc = float(n_hits) / len(correct_answers_ids)
+        accs.append(acc)
 
     # build adjacency matrix
 
@@ -228,35 +229,50 @@ for doc in samples:
     assert y1.shape[0] == len(entities)
 
     n_answers = 0
+    top, activations1_labels = [], []
     # check activated entities
     if sum(y1) > 0:
         top = np.argwhere(y1 == np.amax(y1)).T.tolist()[0]
         n_answers = len(top)
         activations1 = np.asarray(entities)[top]
 
-    # translate correct answers ids to local subgraph ids
-    a_ids = [entities_dict[entity_id] for entity_id in correct_answers_ids if entity_id in entities_dict]
-    
-    n_correct = len(set(top) & set(a_ids))
+    # answer post-processing for different question types
+    q_type = doc['question_type_guess']
+    gs_answer = doc['answers']
+    answers = top
+    if q_type == 'SELECT' == doc['question_type']:
+            a_ids = [entities_dict[entity_id] for entity_id in correct_answers_ids if entity_id in entities_dict]
+            n_correct = len(set(answers) & set(a_ids))
+            # recall: answers that are correct / number of correct answers
+            r = float(n_correct) / n_gs_answers
 
-    # report on error
-    # if n_correct != n_gs_answers:
-    #     print("!%d/%d"%(n_correct, n_gs_answers))
-
-    # recall: answers that are correct / number of correct answers
-    r = float(n_correct) / n_gs_answers
-
-    if n_answers > 0:
-        # precision: answers that are correct / number of answers
-        p = float(n_correct) / n_answers
-        # f-measure
-        try:
-            f = 2 * p * r / (p + r)
-        except ZeroDivisionError:
-            f = 0
+            if n_answers > 0:
+                # precision: answers that are correct / number of answers
+                p = float(n_correct) / n_answers
+                # f-measure
+                try:
+                    f = 2 * p * r / (p + r)
+                except ZeroDivisionError:
+                    f = 0
+            else:
+                p = 0
+                f = 0
+    elif q_type == 'ASK' == doc['question_type']:
+        answer = bool(answers)
+        if gs_answer and answer:
+            p, r, f = 1, 1, 1
+        elif not gs_answer and not answer:
+            p, r, f = 1, 1, 1
+        else:
+            p, r, f = 0, 0, 0
+    elif q_type == 'COUNT' == doc['question_type']:
+        answer = len(answers)
+        if int(gs_answer) == answer:
+            p, r, f = 1, 1, 1
+        else:
+            p, r, f = 0, 0, 0
     else:
-        p = 0
-        f = 0
+        p, r, f = 0, 0, 0
 
     # add stats
     ps.append(p)
