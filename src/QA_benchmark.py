@@ -212,7 +212,7 @@ for doc in samples:
         for e in es:
             if e['id'] in predicate_ids:
                 p[predicate_ids.index(e['id'])] = e['score']
-                break
+                # break
 
     # 1 hop
     A1 = A * p
