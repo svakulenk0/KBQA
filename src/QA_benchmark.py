@@ -205,7 +205,13 @@ for doc in samples:
                 break
 
     # predicate activation vector
-    p = np.array([top_p_scores[_id] if _id in top_p_scores else 1 for _id in predicate_ids])
+    p = np.zeros(len(predicate_ids))
+    for es in top_properties.values():
+        # choose the first top entity per span
+        for e in es:
+            if e['id'] in predicate_ids:
+                p[predicate_ids.index(e['id'])] = e['score']
+                break
 
     # 1 hop
     A1 = A * p
