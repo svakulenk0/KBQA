@@ -227,15 +227,11 @@ for doc in samples:
     # check output size
     assert y1.shape[0] == len(entities)
 
-    # normalize activations by checking the 'must' constraints: number of constraints * weights
-    # Y1 -= (len(q_ids) - 1) * 1
-
+    n_answers = 0
     # check activated entities
-    top = np.argwhere(y1 == np.amax(y1)).T.tolist()[0]
-    n_answers = len(top)
-
-    # draw top activated entities from the distribution
-    if n_answers:
+    if y1:
+        top = np.argwhere(y1 == np.amax(y1)).T.tolist()[0]
+        n_answers = len(top)
         activations1 = np.asarray(entities)[top]
 
     # translate correct answers ids to local subgraph ids
