@@ -225,7 +225,7 @@ for doc in samples:
     # Y1 -= (len(q_ids) - 1) * 1
 
     # check activated entities
-    top = np.argwhere(Y1 > 0).T.tolist()[0]
+    top = np.argwhere(y1 > 0).T.tolist()[0]
     n_answers = len(top)
 
     # draw top activated entities from the distribution
