@@ -1,0 +1,103 @@
+
+Replaced:
+
+* ('https://www.w3.org', 'http://www.w3.org')
+* ("?uri, ?x", "?uri")
+
+* wrong question type (SELECT instead of COUNT):
+
+  What are some other great things by the person who produced Queer as Folk?
+  Things going to the mediterranean sea also go where?
+  Who were fighting the war where the QF Hotchkiss was used?
+  What are all the TV shows which are related to the ones produced by Julie Gardner?
+  Give me everything owned by networks which is lead by Steve Burke?
+  Where did the genres originate, which were in the Harry and the Potters album?
+  Who all were venerated in Islam?
+  What are some things people born in Louisiana are famous for?
+
+
+
+Removed:
+
+* wrong question-query alignment:
+
+{
+    "sparql_id": "306",
+    "question": "List down the schools whose mascot is an animal from the order of Even toed Ungulates?",
+    "SerialNumber": "3632",
+    "sparql_query": "SELECT DISTINCT ?uri WHERE { ?x \u003chttp://dbpedia.org/property/designer\u003e \u003chttp://dbpedia.org/resource/Bjarne_Stroustrup\u003e . ?uri \u003chttp://dbpedia.org/property/programmingLanguage\u003e ?x  . ?uri \u003chttps://www.w3.org/1999/02/22-rdf-syntax-ns#type\u003e \u003chttp://dbpedia.org/ontology/School\u003e}",
+    "checked": "false",
+    "entity mapping": [
+      {
+        "label": "",
+        "matchedBy": "miss",
+        "uri": "http://dbpedia.org/resource/Bjarne_Stroustrup",
+        "seq": "999,1000"
+      }
+    ],
+    "id": "0954b94157bc4c35a1bcb0ec0107cb74",
+    "predicate mapping": [
+      {
+        "label": "order",
+        "uri": "http://dbpedia.org/property/designer",
+        "seq": "57,61",
+        "mappedBy": "miss"
+      },
+      {
+        "label": "ungulates",
+        "uri": "http://dbpedia.org/property/programmingLanguage",
+        "seq": "76,84",
+        "mappedBy": "miss"
+      },
+      {
+        "label": "school",
+        "uri": "http://dbpedia.org/ontology/School",
+        "seq": "14,20",
+        "mappedBy": "byLabelMatch"
+      }
+    ]
+  },
+
+
+{
+    "sparql_id": "308",
+    "question": "Which university with athletics department in NCAA Division I Football Bowl Subdivision has nickname Tulane Green Wave ?",
+    "SerialNumber": "2682",
+    "sparql_query": "SELECT DISTINCT ?uri WHERE {?uri \u003chttp://dbpedia.org/ontology/mouthMountain\u003e \u003chttp://dbpedia.org/resource/St._Louis\u003e . ?uri \u003chttp://dbpedia.org/ontology/rightTributary\u003e \u003chttp://dbpedia.org/resource/Madison_River\u003e  . ?uri \u003chttp://www.w3.org/1999/02/22-rdf-syntax-ns#type\u003e \u003chttp://dbpedia.org/ontology/University\u003e}",
+    "checked": "false",
+    "entity mapping": [
+      {
+        "label": "",
+        "matchedBy": "miss",
+        "uri": "http://dbpedia.org/resource/St._Louis",
+        "seq": "999,1000"
+      },
+      {
+        "label": "",
+        "matchedBy": "miss",
+        "uri": "http://dbpedia.org/resource/Madison_River",
+        "seq": "999,1000"
+      }
+    ],
+    "id": "560edd5735a04aed942d6c71d7d47f1f",
+    "predicate mapping": [
+      {
+        "label": "tulane",
+        "uri": "http://dbpedia.org/ontology/mouthMountain",
+        "seq": "101,106",
+        "mappedBy": "miss"
+      },
+      {
+        "label": "tulane",
+        "uri": "http://dbpedia.org/ontology/rightTributary",
+        "seq": "101,106",
+        "mappedBy": "miss"
+      },
+      {
+        "label": "university",
+        "uri": "http://dbpedia.org/ontology/University",
+        "seq": "6,16",
+        "mappedBy": "byLabelMatch"
+      }
+    ]
+  },
