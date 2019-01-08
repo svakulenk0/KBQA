@@ -14,8 +14,8 @@ import os
 import json
 import requests
 
-LCQUAD_DATASET_PATH = "lcquad.json"  # wget https://raw.githubusercontent.com/AskNowQA/EARL/master/data/lcquad.json
-ENDPOINT = 'http://wikidata.communidata.at/dbpedia/query'
+LCQUAD_DATASET_PATH = "lcquad_clean.json"  # wget https://raw.githubusercontent.com/AskNowQA/EARL/master/data/lcquad.json
+ENDPOINT = 'http://localhost:8164/sparql'
 ns_filter = "http://dbpedia.org/"  # process only entities with URIs from the DBpedia namespace
 
 
@@ -27,10 +27,10 @@ def load_lcquad_answers(save=True):
         questions = json.load(f)
     dataset = []
     for question in questions:
-        # print(question['question'])
+        print(question['question'])
         answers = []
         # fix queries
-        sparql_query = question["sparql_query"].replace('https://www.w3.org', 'http://www.w3.org').replace("'", "").replace("?uri, ?x", "?uri")
+        sparql_query = question["sparql_query"]  # .replace("'", "")
         if "SELECT DISTINCT COUNT" in sparql_query:
             sparql_query = sparql_query.replace("SELECT DISTINCT COUNT(?uri)", "SELECT DISTINCT ?uri")
             question['question_type'] = 'COUNT'
