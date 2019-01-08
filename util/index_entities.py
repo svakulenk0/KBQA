@@ -8,6 +8,19 @@ Created on Jan 8, 2018
     <svitlana.vakulenko@gmail.com>
 
 Index KG entities in ES
+
+To restart indexing:
+
+1. Delete previous index
+curl -X DELETE "localhost:9200/dbpedia201604e"
+
+2. Put mapping (see mapping.json file)
+curl -X PUT "localhost:9200/dbpedia201604e" -H 'Content-Type: application/json' -d'
+...
+
+3. Run this script. Check progress via curl -XGET "localhost:9200/dbpedia201604e/_count"
+DBpedia201604 HDT contains 26,395,358 entities with the URIs starting http://dbpedia.org/
+
 '''
 
 from elasticsearch import Elasticsearch

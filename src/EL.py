@@ -75,7 +75,7 @@ class Mongo_Connector():
         '''
         Set limit to None to get all docs
         '''
-        cursor = self.col.find()
+        cursor = self.col.find({'train': True})
         if limit:
             cursor = cursor.limit(limit)
         return cursor
@@ -93,7 +93,7 @@ e_vectors = Magnitude(embeddings_path+embeddings['fasttext_e_labels'])
 # match and save matched entity URIs to MongoDB TODO evaluate against correct spans
 limit = None
 string_cutoff = 100  # maximum number of candidate entities per mention
-semantic_cutoff = 1
+semantic_cutoff = 10
 
 # path to KG relations
 from hdt import HDTDocument
@@ -110,10 +110,10 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
     # hold macro-average stats for the model performance over the samples
     ps, rs, fs = [], [], []
     for doc in samples:
-        correct_uris = doc[spans_field][0]
+        correct_uris = doc[spans_field]
         print(set(correct_uris))
         # get entity spans
-        e_spans = doc[spans_field+'_spans_guess'][0]
+        e_spans = doc[spans_field+'_guess']
     #     print(e_spans)
         # get entity matches TODO save scores
         top_ids = []
@@ -161,7 +161,7 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
                     _id = match['_source']['id']
                     uri = match['_source']['uri']
                     print(uri)
-                    top_entities[span].append({'distance': distance, 'degree': degree, 'id': _id, 'uri': uri})
+                    top_entities[span].append({'rank': i+1, 'distance': distance, 'degree': degree, 'id': _id, 'uri': uri})
                     top_ids.append(_id)
         print(top_entities)
             
@@ -189,7 +189,7 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
 
         # save to MongoDB
         if save:
-            doc[spans_field+'_guess'] = top_entities
+            doc['entities_guess'] = top_entities
             mongo.col.update_one({'_id': doc['_id']}, {"$set": doc}, upsert=True)
             count += 1
 
@@ -199,5 +199,4 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
         print("%d documents annotated with entity ids guess"%count)
 
 # evaluate entity linking on extracted entity spans
-entity_linking(spans_field='1hop', save=True)
-entity_linking(spans_field='2hop', save=True)
+entity_linking(spans_field='entity_spans', save=True)
