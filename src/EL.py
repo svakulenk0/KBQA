@@ -13,6 +13,9 @@ Evaluate entity linking performance and store annotations
 # setup
 dataset_name = 'lcquad'
 
+import os
+os.chdir('/home/zola/Projects/KBQA/src')
+
 # connect to entity catalog indexed with Lucene 
 from elasticsearch import Elasticsearch
 from urllib.parse import quote
@@ -91,7 +94,7 @@ embeddings = {'fasttext_p_labels': "predicates_labels_fasttext.magnitude",
 e_vectors = Magnitude(embeddings_path+embeddings['fasttext_e_labels'])
 
 # match and save matched entity URIs to MongoDB TODO evaluate against correct spans
-limit = None
+limit = 5
 string_cutoff = 100  # maximum number of candidate entities per mention
 semantic_cutoff = 20
 
@@ -110,7 +113,7 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
     # hold macro-average stats for the model performance over the samples
     ps, rs, fs = [], [], []
     for doc in samples:
-        correct_uris = doc[spans_field]
+        correct_uris = doc['entity_uris']
         print(set(correct_uris))
         # get entity spans
         e_spans = doc[spans_field+'_guess']
@@ -143,10 +146,10 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
                         if label not in guessed_labels:
                             guessed_labels.append(label)
                 guessed_ids.extend(entities)
-
+            
             # remove duplicates
-            guessed_labels = list(set(guessed_labels))
-
+#             guessed_labels = list(set(guessed_labels))
+            
             # score with embeddings
             top_labels = []
             print("%d candidate labels"%len(guessed_labels))
@@ -197,7 +200,7 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
 
         # save to MongoDB
         if save:
-            doc['entities_guess'] = top_entities
+            doc[spans_field+'_guess'] = top_entities
             mongo.col.update_one({'_id': doc['_id']}, {"$set": doc}, upsert=True)
             count += 1
 
@@ -205,6 +208,8 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
     print("Fin. Results for %d questions"%len(ps))    
     if save:
         print("%d documents annotated with entity ids guess"%count)
+
+    
 
 # evaluate entity linking on extracted entity spans
 entity_linking(spans_field='entity_spans', save=True)
