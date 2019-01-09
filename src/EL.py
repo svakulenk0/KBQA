@@ -93,7 +93,7 @@ e_vectors = Magnitude(embeddings_path+embeddings['fasttext_e_labels'])
 # match and save matched entity URIs to MongoDB TODO evaluate against correct spans
 limit = None
 string_cutoff = 100  # maximum number of candidate entities per mention
-semantic_cutoff = 10
+semantic_cutoff = 20
 
 # path to KG relations
 from hdt import HDTDocument
@@ -123,7 +123,9 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
             print("Index lookup..")
             guessed_labels, guessed_ids = [], []
             for match in e_index.match_label(span, top=string_cutoff):
-                guessed_labels.append(match['_source']['label_exact'])
+                label = match['_source']['label_exact']
+                if label not in guessed_labels:
+                    guessed_labels.append(label)
                 guessed_ids.append(match['_source']['id'])
             
             print("%d candidate labels"%len(guessed_labels))
@@ -137,7 +139,9 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
                 for e_id in entities:
                     match = e_index.look_up_by_id(e_id)
                     if match:
-                        guessed_labels.append(match[0]['_source']['label_exact'])
+                        label = match[0]['_source']['label_exact']
+                        if label not in guessed_labels:
+                            guessed_labels.append(label)
                 guessed_ids.extend(entities)
 
             # remove duplicates
