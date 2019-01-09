@@ -158,48 +158,49 @@ def hop(activations, constraints, top_predicates_ids, verbose=False):
     e_ids = [entities_dict[entity_id] for entity_id in top_entities_ids if entity_id in entities_dict]
     assert len(top_entities_ids) == len(e_ids)
     p_ids = [predicate_ids.index(entity_id) for entity_id in top_predicates_ids if entity_id in predicate_ids]
-    assert len(top_predicates_ids) == len(p_ids)
-    
-    # graph activation vectors
-    x = np.zeros(len(entities))
-    x[e_ids] = 1
-    p = np.zeros(len(predicate_ids))
-    p[p_ids] = 1
+    # assert len(top_predicates_ids) == len(p_ids)
+    # missing entities due to incorrect unicode match
+    if p_ids:
+        # graph activation vectors
+        x = np.zeros(len(entities))
+        x[e_ids] = 1
+        p = np.zeros(len(predicate_ids))
+        p[p_ids] = 1
 
-    # slice A by the selected predicates and concatenate edge lists
-    y = (x@sp.hstack(A*p)).reshape([len(predicate_ids), len(entities)]).sum(0)
+        # slice A by the selected predicates and concatenate edge lists
+        y = (x@sp.hstack(A*p)).reshape([len(predicate_ids), len(entities)]).sum(0)
 
-    # check output size
-    assert y.shape[0] == len(entities)
-    
-    if constraints:
-        # normalize activations by checking the 'must' constraints: number of constraints * weights
-        y -= len(constraints) * 1
+        # check output size
+        assert y.shape[0] == len(entities)
+        
+        if constraints:
+            # normalize activations by checking the 'must' constraints: number of constraints * weights
+            y -= len(constraints) * 1
 
-    top = np.argwhere(y > 0).T.tolist()[0]
-    
-    # check activated entities
-    if len(top) > 0:
-        activations1 = np.asarray(entities)[top]
-        activations1 = [int(entity_id) for entity_id in activations1.tolist()]
-        # look up activated entities by ids
-        activations1_labels = []
-        for entity_id in activations1:
-            matches = e_index.look_up_by_id(entity_id)
-            for match in matches:
-                activations1_labels.append(match['_source']['uri'])
+        top = np.argwhere(y > 0).T.tolist()[0]
         
-        # show predicted answer
-        if verbose:
-            print("%d answers"%len(top))
-            print(activations1_labels[:5])
-        
-            # activation values
-            scores = y[top]
-            print(scores[:5])
-        
-        # return HDT ids of the activated entities
-        return list(set(activations1)), list(set(activations1_labels))
+        # check activated entities
+        if len(top) > 0:
+            activations1 = np.asarray(entities)[top]
+            activations1 = [int(entity_id) for entity_id in activations1.tolist()]
+            # look up activated entities by ids
+            activations1_labels = []
+            for entity_id in activations1:
+                matches = e_index.look_up_by_id(entity_id)
+                for match in matches:
+                    activations1_labels.append(match['_source']['uri'])
+            
+            # show predicted answer
+            if verbose:
+                print("%d answers"%len(top))
+                print(activations1_labels[:5])
+            
+                # activation values
+                scores = y[top]
+                print(scores[:5])
+            
+            # return HDT ids of the activated entities
+            return list(set(activations1)), list(set(activations1_labels))
     return [], []
 
 limit = None
