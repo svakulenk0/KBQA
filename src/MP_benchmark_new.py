@@ -135,6 +135,9 @@ def generate_adj_sp(adjacencies, adj_shape, normalize=False, include_inverse=Fal
     return np.asarray(sp_adjacencies)
 
 
+max_matrix_size = 900000
+
+
 def hop(activations, constraints, top_predicates_ids, verbose=False):
     # extract the subgraph
     top_entities_ids = activations + constraints
@@ -147,6 +150,10 @@ def hop(activations, constraints, top_predicates_ids, verbose=False):
         print("Subgraph extracted:")
         print("%d entities"%len(entities))
         print("%d predicates"%len(predicate_ids))
+
+    if len(entities) > max_matrix_size:
+        print("Skipping large subgraph.")
+        return [], []
     
     # index entity ids global -> local
     entities_dict = {k: v for v, k in enumerate(entities)}
