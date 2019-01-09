@@ -34,7 +34,7 @@ class Mongo_Connector():
         '''
         Set limit to None to get all docs
         '''
-        cursor = self.col.find({'question_type': {'$ne': 'ASK'}, 'train': True})
+        cursor = self.col.find({'question_type': {'$ne': 'ASK'}, 'train': True}, no_cursor_timeout=True)
         if limit:
             cursor = cursor.limit(limit)
         return cursor
@@ -203,66 +203,66 @@ def hop(activations, constraints, top_predicates_ids, verbose=False):
     return [], []
 
 limit = None
-samples = mongo.get_sample(limit=limit)
-
+cursor = mongo.get_sample(limit=limit)
 verbose = False
 
 # hold average stats for the model performance over the samples
 ps, rs, fs = [], [], []
 
-for doc in samples:
-    print(doc['SerialNumber'])
-    
-    if verbose:
-        print(doc['question'])
-        print(doc['sparql_query'])
-        print(doc["1hop"])
-        print(doc["2hop"])
-    
-    assert doc['train'] == True
-    
-    top_entities_ids1 = doc['1hop_ids'][0]
-    top_predicates_ids1 = doc['1hop_ids'][1]
-    answers_ids, answers_uris = hop([top_entities_ids1[0]], top_entities_ids1[1:], top_predicates_ids1, verbose=verbose)
+with cursor:
+    for doc in samples:
+        print(doc['SerialNumber'])
 
-    _2hops = doc['2hop'] != [[], []]
-    if _2hops:
-        top_entities_ids2 = doc['2hop_ids'][0]
-        top_predicates_ids2 = doc['2hop_ids'][1]
-        answers_ids, answers_uris = hop(answers_ids, top_entities_ids2, top_predicates_ids2, verbose=verbose)
-        
-    # error estimation
-    answers_ids = set(answers_ids)
-    n_answers = len(answers_ids)
-    gs_answer_uris = set(doc['answers_ids'])
-    n_gs_answers = len(gs_answer_uris)
-    n_correct = len(answers_ids & gs_answer_uris)
+        if verbose:
+            print(doc['question'])
+            print(doc['sparql_query'])
+            print(doc["1hop"])
+            print(doc["2hop"])
 
-    if verbose:
-        print("%d predicted answers:"%n_answers)
-        print(set(answers_uris))
-        print("%d gs answers:"%n_gs_answers)
-        print(set(doc['answers']))
-        print(n_correct)
+        assert doc['train'] == True
 
-    try:
-        r = float(n_correct) / n_gs_answers
-    except ZeroDivisionError:\
-        print(doc['question'])
-    try:
-        p = float(n_correct) / n_answers
-    except ZeroDivisionError:
-        p = 0
-    try:
-        f = 2 * p * r / (p + r)
-    except ZeroDivisionError:
-        f = 0
-    print("P: %.2f R: %.2f F: %.2f"%(p, r, f))
-    
-    # add stats
-    ps.append(p)
-    rs.append(r)
-    fs.append(f)
+        top_entities_ids1 = doc['1hop_ids'][0]
+        top_predicates_ids1 = doc['1hop_ids'][1]
+        answers_ids, answers_uris = hop([top_entities_ids1[0]], top_entities_ids1[1:], top_predicates_ids1, verbose=verbose)
+
+        _2hops = doc['2hop'] != [[], []]
+        if _2hops:
+            top_entities_ids2 = doc['2hop_ids'][0]
+            top_predicates_ids2 = doc['2hop_ids'][1]
+            answers_ids, answers_uris = hop(answers_ids, top_entities_ids2, top_predicates_ids2, verbose=verbose)
+
+        # error estimation
+        answers_ids = set(answers_ids)
+        n_answers = len(answers_ids)
+        gs_answer_uris = set(doc['answers_ids'])
+        n_gs_answers = len(gs_answer_uris)
+        n_correct = len(answers_ids & gs_answer_uris)
+
+        if verbose:
+            print("%d predicted answers:"%n_answers)
+            print(set(answers_uris))
+            print("%d gs answers:"%n_gs_answers)
+            print(set(doc['answers']))
+            print(n_correct)
+
+        try:
+            r = float(n_correct) / n_gs_answers
+        except ZeroDivisionError:\
+            print(doc['question'])
+        try:
+            p = float(n_correct) / n_answers
+        except ZeroDivisionError:
+            p = 0
+        try:
+            f = 2 * p * r / (p + r)
+        except ZeroDivisionError:
+            f = 0
+        print("P: %.2f R: %.2f F: %.2f"%(p, r, f))
+
+        # add stats
+        ps.append(p)
+        rs.append(r)
+        fs.append(f)
 
 
 print("\nFin. Results for %d questions:"%len(ps))
