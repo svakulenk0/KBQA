@@ -155,12 +155,10 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
             
             # score with embeddings
             top_labels = []
+            guessed_labels = [label for label in guessed_labels if label in e_vectors]
             print("%d candidate labels"%len(guessed_labels))
-#             for candidate in guessed_labels:
-#                 if candidate not in e_vectors:
-#                     print(candidate)
             print("Embeddings lookup..")
-            dists = e_vectors.distance(span, [label for label in guessed_labels if label in e_vectors])
+            dists = e_vectors.distance(span, guessed_labels)
             top = np.argsort(dists)[:semantic_cutoff].tolist()
             top_labels = [guessed_labels[i] for i in top]
         
