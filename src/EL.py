@@ -113,7 +113,7 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
     # hold macro-average stats for the model performance over the samples
     ps, rs, fs = [], [], []
     for doc in samples:
-        if spans_field+'_guess' not in doc:
+        if 'entity_guess' not in doc:
             correct_uris = doc['entity_uris']
             print(set(correct_uris))
             # get entity spans
@@ -203,7 +203,7 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
 
             # save to MongoDB
             if save:
-                doc[spans_field+'_guess'] = top_entities
+                doc['entity_guess'] = top_entities
                 mongo.col.update_one({'_id': doc['_id']}, {"$set": doc}, upsert=True)
                 count += 1
 
