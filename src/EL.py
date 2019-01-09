@@ -125,7 +125,8 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
             for match in e_index.match_label(span, top=string_cutoff):
                 guessed_labels.append(match['_source']['label_exact'])
                 guessed_ids.append(match['_source']['id'])
-
+            
+            print("%d candidate labels"%len(guessed_labels))
             if add_nieghbours:
                 print("KG lookup..")
                 kg = HDTDocument(hdt_path+hdt_file)
@@ -138,6 +139,9 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
                     if match:
                         guessed_labels.append(match[0]['_source']['label_exact'])
                 guessed_ids.extend(entities)
+
+            # remove duplicates
+            guessed_labels = list(set(guessed_labels))
 
             # score with embeddings
             top_labels = []
@@ -167,7 +171,7 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
             
         # evaluate against the correct entity ids
         top_ids = list(set(top_ids))
-        correct_ids = set(doc[spans_field+'_ids'][0])
+        correct_ids = set(doc['entity_ids'])
         n_hits = len(correct_ids & set(top_ids))
         try:
             r = float(n_hits) / len(correct_ids)
