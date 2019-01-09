@@ -130,6 +130,7 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
                 if label not in guessed_labels:
                     guessed_labels.append(label)
                 # avoid expanding heavy hitters
+                degree = match['_source']['count']
                 if int(degree) < 100000:
                     guessed_ids.append(match['_source']['id'])
             
