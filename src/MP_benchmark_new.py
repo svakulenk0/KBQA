@@ -211,7 +211,7 @@ verbose = False
 ps, rs, fs = [], [], []
 
 with cursor:
-    for doc in samples:
+    for doc in cursor:
         print(doc['SerialNumber'])
 
         if verbose:
