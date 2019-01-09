@@ -65,7 +65,7 @@ index_name = '%se' % KB  # entities index
 print("bulk indexing...")
 try:
     for ok, response in streaming_bulk(es, actions=uris_stream(index_name, file_path, doc_type, ns_filter),
-                                       chunk_size=200000):
+                                       chunk_size=100000):
         if not ok:
             # failure inserting
             print (response)
