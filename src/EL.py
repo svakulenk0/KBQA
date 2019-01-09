@@ -94,7 +94,7 @@ embeddings = {'fasttext_p_labels': "predicates_labels_fasttext.magnitude",
 e_vectors = Magnitude(embeddings_path+embeddings['fasttext_e_labels'])
 
 # match and save matched entity URIs to MongoDB TODO evaluate against correct spans
-limit = 5
+limit = None
 string_cutoff = 100  # maximum number of candidate entities per mention
 semantic_cutoff = 20
 
