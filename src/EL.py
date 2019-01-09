@@ -157,24 +157,25 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
             top_labels = []
             guessed_labels = [label for label in guessed_labels if label in e_vectors]
             print("%d candidate labels"%len(guessed_labels))
-            print("Embeddings lookup..")
-            dists = e_vectors.distance(span, guessed_labels)
-            top = np.argsort(dists)[:semantic_cutoff].tolist()
-            top_labels = [guessed_labels[i] for i in top]
-        
-            print("selected labels: %s"%top_labels)
-            print("Index lookup..")
-            top_entities[span] = []
-            for i, label in enumerate(top_labels):
-                print(label)
-                for match in e_index.look_up_by_label(label):
-                    distance = float(dists[top[i]])
-                    degree = match['_source']['count']
-                    _id = match['_source']['id']
-                    uri = match['_source']['uri']
-                    print(uri)
-                    top_entities[span].append({'rank': i+1, 'distance': distance, 'degree': degree, 'id': _id, 'uri': uri})
-                    top_ids.append(_id)
+            if guessed_labels:
+                print("Embeddings lookup..")
+                dists = e_vectors.distance(span, guessed_labels)
+                top = np.argsort(dists)[:semantic_cutoff].tolist()
+                top_labels = [guessed_labels[i] for i in top]
+            
+                print("selected labels: %s"%top_labels)
+                print("Index lookup..")
+                top_entities[span] = []
+                for i, label in enumerate(top_labels):
+                    print(label)
+                    for match in e_index.look_up_by_label(label):
+                        distance = float(dists[top[i]])
+                        degree = match['_source']['count']
+                        _id = match['_source']['id']
+                        uri = match['_source']['uri']
+                        print(uri)
+                        top_entities[span].append({'rank': i+1, 'distance': distance, 'degree': degree, 'id': _id, 'uri': uri})
+                        top_ids.append(_id)
         print(top_entities)
             
         # evaluate against the correct entity ids
