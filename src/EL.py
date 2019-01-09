@@ -113,98 +113,99 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True):
     # hold macro-average stats for the model performance over the samples
     ps, rs, fs = [], [], []
     for doc in samples:
-        correct_uris = doc['entity_uris']
-        print(set(correct_uris))
-        # get entity spans
-        e_spans = doc[spans_field+'_guess']
-    #     print(e_spans)
-        # get entity matches TODO save scores
-        top_ids = []
-        top_entities = {}
-        for span in e_spans:
-            print("Span: %s"%span)
-            print("Index lookup..")
-            guessed_labels, guessed_ids = [], []
-            for match in e_index.match_label(span, top=string_cutoff):
-                label = match['_source']['label_exact']
-                if label not in guessed_labels:
-                    guessed_labels.append(label)
-                # avoid expanding heavy hitters
-                degree = match['_source']['count']
-                if int(degree) < 100000:
-                    guessed_ids.append(match['_source']['id'])
-            
-            print("%d candidate labels"%len(guessed_labels))
-            if add_nieghbours:
-                print("KG lookup..")
-                kg = HDTDocument(hdt_path+hdt_file)
-                kg.configure_hops(1, [], namespace, True)
-                entities, predicate_ids, adjacencies = kg.compute_hops(guessed_ids)
-                kg.remove()
-                # look up labels
-                for e_id in entities:
-                    match = e_index.look_up_by_id(e_id)
-                    if match:
-                        label = match[0]['_source']['label_exact']
-                        if label not in guessed_labels:
-                            guessed_labels.append(label)
-                guessed_ids.extend(entities)
-            
-            # remove duplicates
-#             guessed_labels = list(set(guessed_labels))
-            
-            # score with embeddings
-            top_labels = []
-            guessed_labels = [label for label in guessed_labels if label in e_vectors]
-            print("%d candidate labels"%len(guessed_labels))
-            if guessed_labels:
-                print("Embeddings lookup..")
-                dists = e_vectors.distance(span, guessed_labels)
-                top = np.argsort(dists)[:semantic_cutoff].tolist()
-                top_labels = [guessed_labels[i] for i in top]
-            
-                print("selected labels: %s"%top_labels)
+        if spans_field+'_guess' not in doc:
+            correct_uris = doc['entity_uris']
+            print(set(correct_uris))
+            # get entity spans
+            e_spans = doc[spans_field+'_guess']
+        #     print(e_spans)
+            # get entity matches TODO save scores
+            top_ids = []
+            top_entities = {}
+            for span in e_spans:
+                print("Span: %s"%span)
                 print("Index lookup..")
-                top_entities[span] = []
-                for i, label in enumerate(top_labels):
-                    print(label)
-                    for match in e_index.look_up_by_label(label):
-                        distance = float(dists[top[i]])
-                        degree = match['_source']['count']
-                        _id = match['_source']['id']
-                        uri = match['_source']['uri']
-                        print(uri)
-                        top_entities[span].append({'rank': i+1, 'distance': distance, 'degree': degree, 'id': _id, 'uri': uri})
-                        top_ids.append(_id)
-        print(top_entities)
-            
-        # evaluate against the correct entity ids
-        top_ids = list(set(top_ids))
-        correct_ids = set(doc['entity_ids'])
-        n_hits = len(correct_ids & set(top_ids))
-        try:
-            r = float(n_hits) / len(correct_ids)
-        except ZeroDivisionError:\
-            print(doc['question'])
-        try:
-            p = float(n_hits) / len(top_ids)
-        except ZeroDivisionError:
-            p = 0
-        try:
-            f = 2 * p * r / (p + r)
-        except ZeroDivisionError:
-            f = 0
+                guessed_labels, guessed_ids = [], []
+                for match in e_index.match_label(span, top=string_cutoff):
+                    label = match['_source']['label_exact']
+                    if label not in guessed_labels:
+                        guessed_labels.append(label)
+                    # avoid expanding heavy hitters
+                    degree = match['_source']['count']
+                    if int(degree) < 100000:
+                        guessed_ids.append(match['_source']['id'])
+                
+                print("%d candidate labels"%len(guessed_labels))
+                if add_nieghbours:
+                    print("KG lookup..")
+                    kg = HDTDocument(hdt_path+hdt_file)
+                    kg.configure_hops(1, [], namespace, True)
+                    entities, predicate_ids, adjacencies = kg.compute_hops(guessed_ids)
+                    kg.remove()
+                    # look up labels
+                    for e_id in entities:
+                        match = e_index.look_up_by_id(e_id)
+                        if match:
+                            label = match[0]['_source']['label_exact']
+                            if label not in guessed_labels:
+                                guessed_labels.append(label)
+                    guessed_ids.extend(entities)
+                
+                # remove duplicates
+    #             guessed_labels = list(set(guessed_labels))
+                
+                # score with embeddings
+                top_labels = []
+                guessed_labels = [label for label in guessed_labels if label in e_vectors]
+                print("%d candidate labels"%len(guessed_labels))
+                if guessed_labels:
+                    print("Embeddings lookup..")
+                    dists = e_vectors.distance(span, guessed_labels)
+                    top = np.argsort(dists)[:semantic_cutoff].tolist()
+                    top_labels = [guessed_labels[i] for i in top]
+                
+                    print("selected labels: %s"%top_labels)
+                    print("Index lookup..")
+                    top_entities[span] = []
+                    for i, label in enumerate(top_labels):
+                        print(label)
+                        for match in e_index.look_up_by_label(label):
+                            distance = float(dists[top[i]])
+                            degree = match['_source']['count']
+                            _id = match['_source']['id']
+                            uri = match['_source']['uri']
+                            print(uri)
+                            top_entities[span].append({'rank': i+1, 'distance': distance, 'degree': degree, 'id': _id, 'uri': uri})
+                            top_ids.append(_id)
+            print(top_entities)
+                
+            # evaluate against the correct entity ids
+            top_ids = list(set(top_ids))
+            correct_ids = set(doc['entity_ids'])
+            n_hits = len(correct_ids & set(top_ids))
+            try:
+                r = float(n_hits) / len(correct_ids)
+            except ZeroDivisionError:\
+                print(doc['question'])
+            try:
+                p = float(n_hits) / len(top_ids)
+            except ZeroDivisionError:
+                p = 0
+            try:
+                f = 2 * p * r / (p + r)
+            except ZeroDivisionError:
+                f = 0
 
-        # add stats
-        ps.append(p)
-        rs.append(r)
-        fs.append(f)
+            # add stats
+            ps.append(p)
+            rs.append(r)
+            fs.append(f)
 
-        # save to MongoDB
-        if save:
-            doc[spans_field+'_guess'] = top_entities
-            mongo.col.update_one({'_id': doc['_id']}, {"$set": doc}, upsert=True)
-            count += 1
+            # save to MongoDB
+            if save:
+                doc[spans_field+'_guess'] = top_entities
+                mongo.col.update_one({'_id': doc['_id']}, {"$set": doc}, upsert=True)
+                count += 1
 
     print("P: %.2f R: %.2f F: %.2f"%(np.mean(ps), np.mean(rs), np.mean(fs)))
     print("Fin. Results for %d questions"%len(ps))    
