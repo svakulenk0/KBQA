@@ -198,9 +198,14 @@ def hop(activations, constraints, top_predicates_ids, verbose=False):
             # check output size
             assert y.shape[0] == len(entities)
             
-            # store the activation values per id answer id
-            for i, e in enumerate(entities):
-                activations[e] += y[i]
+            # harvest activations
+            top = np.argwhere(y > 0).T.tolist()[0]
+            if len(top) > 0:
+                activations1 = np.asarray(entities)[top]
+                # store the activation values per id answer id
+                for i, e in enumerate(entities):
+                    if e in activations1:
+                        activations[e] += y[i]
 
 
 limit = None
