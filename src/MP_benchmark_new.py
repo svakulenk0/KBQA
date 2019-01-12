@@ -218,7 +218,10 @@ verbose = True
 ps, rs, fs = [], [], []
 
 with cursor:
-    for doc in cursor:
+    while True:
+        doc = next(cursor, None)
+        if not doc:
+            break
         print(doc['SerialNumber'])
 
         if verbose:
