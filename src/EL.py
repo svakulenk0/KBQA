@@ -14,7 +14,6 @@ Evaluate entity linking performance and store annotations
 dataset_name = 'lcquad'
 
 import os
-os.chdir('/home/zola/Projects/temp/KBQA/util')
 from setup import IndexSearch, Mongo_Connector, load_embeddings
 
 e_vectors = load_embeddings('fasttext_e_labels')
@@ -28,6 +27,7 @@ limit = None
 string_cutoff = 50  # maximum number of candidate entities per mention
 semantic_cutoff = 1000
 max_degree = 50000
+max_triples = 10000
 
 # path to KG relations
 from hdt import HDTDocument
@@ -78,7 +78,8 @@ def entity_linking(spans_field, save, show_errors=True, add_nieghbours=True, loo
                         print("KG lookup..")
                         kg = HDTDocument(hdt_path+hdt_file)
                         kg.configure_hops(1, [], namespace, True)
-                        entities, predicate_ids, adjacencies = kg.compute_hops(look_up_ids)
+                        # get a sample of the subgraph: the first <max_triples> only
+                        entities, predicate_ids, adjacencies = kg.compute_hops(look_up_ids, max_triples, 0)
                         kg.remove()
                         # look up labels
                         for e_id in entities:
