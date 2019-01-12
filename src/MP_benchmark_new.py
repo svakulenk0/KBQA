@@ -135,25 +135,20 @@ def generate_adj_sp(adjacencies, adj_shape, normalize=False, include_inverse=Fal
     return np.asarray(sp_adjacencies)
 
 
-max_matrix_size = 900000
-
+max_triples = 10000
 
 def hop(activations, constraints, top_predicates_ids, verbose=False):
     # extract the subgraph
     top_entities_ids = activations + constraints
     kg = HDTDocument(hdt_path+hdt_file)
     kg.configure_hops(1, [], namespace, True)
-    entities, predicate_ids, adjacencies = kg.compute_hops(top_entities_ids)
+    entities, predicate_ids, adjacencies = kg.compute_hops(top_entities_ids, max_triples, 0)
     kg.remove()
     
     if verbose:
         print("Subgraph extracted:")
         print("%d entities"%len(entities))
         print("%d predicates"%len(predicate_ids))
-
-    if len(entities) > max_matrix_size:
-        print("Skipping large subgraph.")
-        return [], []
     
     # index entity ids global -> local
     entities_dict = {k: v for v, k in enumerate(entities)}
