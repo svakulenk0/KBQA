@@ -211,14 +211,14 @@ def hop(activations, constraints, top_predicates_ids, verbose=False):
 limit = None
 cursor = mongo.get_sample(limit=limit)
 
-samples = [mongo.get_by_id("392")]  # look up sample by serial number
+#samples = [mongo.get_by_id("392")]  # look up sample by serial number
 verbose = True
 
 # hold average stats for the model performance over the samples
 ps, rs, fs = [], [], []
 
 with cursor:
-    for doc in samples:
+    for doc in cursor:
         print(doc['SerialNumber'])
 
         if verbose:
