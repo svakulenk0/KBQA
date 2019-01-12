@@ -133,7 +133,7 @@ def generate_adj_sp(adjacencies, adj_shape, normalize=False, include_inverse=Fal
     
     return np.asarray(sp_adjacencies)
 
-max_triples = 1000000
+max_triples = 500000
 from collections import defaultdict
 
 def hop(activations, constraints, top_predicates_ids, verbose=False):
