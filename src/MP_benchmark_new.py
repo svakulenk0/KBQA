@@ -9,7 +9,6 @@ Created on Dec 9, 2018
 
 Message Passing for KBQA
 '''
-
 # setup
 dataset_name = 'lcquad'
 kg_name = 'dbpedia201604'
@@ -134,86 +133,87 @@ def generate_adj_sp(adjacencies, adj_shape, normalize=False, include_inverse=Fal
     
     return np.asarray(sp_adjacencies)
 
-
-max_triples = 10000
+max_triples = 1000000
+from collections import defaultdict
 
 def hop(activations, constraints, top_predicates_ids, verbose=False):
-    # extract the subgraph
+    # extract the subgraph for the selected entities
     top_entities_ids = activations + constraints
+    
+    # get all the related predicates
     kg = HDTDocument(hdt_path+hdt_file)
     kg.configure_hops(1, [], namespace, True)
-    entities, predicate_ids, adjacencies = kg.compute_hops(top_entities_ids, max_triples, 0)
+    _, predicate_ids, _ = kg.compute_hops(top_entities_ids, 100000, 0)
     kg.remove()
-    
-    if verbose:
-        print("Subgraph extracted:")
-        print("%d entities"%len(entities))
-        print("%d predicates"%len(predicate_ids))
-    
-    # index entity ids global -> local
-    entities_dict = {k: v for v, k in enumerate(entities)}
-    adj_shape = (len(entities), len(entities))
-    # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
-    A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
-    
-    # activations of entities and predicates
-    e_ids = [entities_dict[entity_id] for entity_id in top_entities_ids if entity_id in entities_dict]
-    assert len(top_entities_ids) == len(e_ids)
-    p_ids = [predicate_ids.index(entity_id) for entity_id in top_predicates_ids if entity_id in predicate_ids]
-    # assert len(top_predicates_ids) == len(p_ids)
-    # missing entities due to incorrect unicode match
-    if p_ids:
-        # graph activation vectors
-        x = np.zeros(len(entities))
-        x[e_ids] = 1
-        p = np.zeros(len(predicate_ids))
-        p[p_ids] = 1
 
-        # slice A by the selected predicates and concatenate edge lists
-        y = (x@sp.hstack(A*p)).reshape([len(predicate_ids), len(entities)]).sum(0)
-
-        # check output size
-        assert y.shape[0] == len(entities)
-        
-        if constraints:
-            # normalize activations by checking the 'must' constraints: number of constraints * weights
-            y -= len(constraints) * 1
-
-        top = np.argwhere(y > 0).T.tolist()[0]
-        
-        # check activated entities
-        if len(top) > 0:
-            activations1 = np.asarray(entities)[top]
-            activations1 = [int(entity_id) for entity_id in activations1.tolist()]
-            # look up activated entities by ids
-            activations1_labels = []
-            for entity_id in activations1:
-                matches = e_index.look_up_by_id(entity_id)
-                for match in matches:
-                    activations1_labels.append(match['_source']['uri'])
-            
-            # show predicted answer
-            if verbose:
-                print("%d answers"%len(top))
-                print(activations1_labels[:5])
-            
-                # activation values
-                scores = y[top]
-                print(scores[:5])
-            
+    # select predicates (here from GS)
+    top_predicates_ids = top_predicates_ids
+    
+    # iteratively call the HDT API to retrieve all subgraph partitions
+    activations = defaultdict(int)
+    offset = 0
+    while True:
+        # get the subgraph for selected predicates only
+        kg = HDTDocument(hdt_path+hdt_file)
+        kg.configure_hops(1, top_predicates_ids, namespace, True)
+        entities, predicate_ids, adjacencies = kg.compute_hops(top_entities_ids, max_triples, offset)
+        kg.remove()
+    
+        if not entities:
+            # filter out the answers by min activation scores
+            if constraints:
+                # normalize activations by checking the 'must' constraints: number of constraints * weights
+                min_a = len(constraints) * 1
+                return [a_id for a_id, a_score in activations.items() if a_score > min_a]
             # return HDT ids of the activated entities
-            return list(set(activations1)), list(set(activations1_labels))
-    return [], []
+            return list(activations.keys())
+        
+        if verbose:
+            print("Subgraph extracted:")
+            print("%d entities"%len(entities))
+            print("%d predicates"%len(predicate_ids))
+            print("Loading adjacencies..")
+
+        offset += max_triples
+        # index entity ids global -> local
+        entities_dict = {k: v for v, k in enumerate(entities)}
+        adj_shape = (len(entities), len(entities))
+        # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
+        A = generate_adj_sp(adjacencies, adj_shape, include_inverse=True)
+
+        # activations of entities and predicates
+        e_ids = [entities_dict[entity_id] for entity_id in top_entities_ids if entity_id in entities_dict]
+    #     assert len(top_entities_ids) == len(e_ids)
+        p_ids = [predicate_ids.index(entity_id) for entity_id in top_predicates_ids if entity_id in predicate_ids]
+    #     assert len(top_predicates_ids) == len(p_ids)
+        if p_ids:
+            # graph activation vectors
+            x = np.zeros(len(entities))
+            x[e_ids] = 1
+            p = np.zeros(len(predicate_ids))
+            p[p_ids] = 1
+
+            # slice A by the selected predicates and concatenate edge lists
+            y = (x@sp.hstack(A*p)).reshape([len(predicate_ids), len(entities)]).sum(0)
+            # check output size
+            assert y.shape[0] == len(entities)
+            
+            # store the activation values per id answer id
+            for i, e in enumerate(entities):
+                activations[e] += y[i]
+
 
 limit = None
 cursor = mongo.get_sample(limit=limit)
-verbose = False
+
+samples = [mongo.get_by_id("392")]  # look up sample by serial number
+verbose = True
 
 # hold average stats for the model performance over the samples
 ps, rs, fs = [], [], []
 
 with cursor:
-    for doc in cursor:
+    for doc in samples:
         print(doc['SerialNumber'])
 
         if verbose:
@@ -226,26 +226,26 @@ with cursor:
 
         top_entities_ids1 = doc['1hop_ids'][0]
         top_predicates_ids1 = doc['1hop_ids'][1]
-        answers_ids, answers_uris = hop([top_entities_ids1[0]], top_entities_ids1[1:], top_predicates_ids1, verbose=verbose)
+        answers_ids = hop([top_entities_ids1[0]], top_entities_ids1[1:], top_predicates_ids1, verbose=verbose)
 
         _2hops = doc['2hop'] != [[], []]
         if _2hops:
             top_entities_ids2 = doc['2hop_ids'][0]
             top_predicates_ids2 = doc['2hop_ids'][1]
-            answers_ids, answers_uris = hop(answers_ids, top_entities_ids2, top_predicates_ids2, verbose=verbose)
+            answers_ids = hop(answers_ids, top_entities_ids2, top_predicates_ids2, verbose=verbose)
 
         # error estimation
         answers_ids = set(answers_ids)
         n_answers = len(answers_ids)
-        gs_answer_uris = set(doc['answers_ids'])
-        n_gs_answers = len(gs_answer_uris)
-        n_correct = len(answers_ids & gs_answer_uris)
+        gs_answer_ids = set(doc['answers_ids'])
+        n_gs_answers = len(gs_answer_ids)
+        n_correct = len(answers_ids & gs_answer_ids)
 
         if verbose:
             print("%d predicted answers:"%n_answers)
-            print(set(answers_uris))
+#             print(set(answers_uris)[:5])
             print("%d gs answers:"%n_gs_answers)
-            print(set(doc['answers']))
+#             print(set(doc['answers']))
             print(n_correct)
 
         try:
@@ -270,3 +270,4 @@ with cursor:
 
 print("\nFin. Results for %d questions:"%len(ps))
 print("P: %.2f R: %.2f F: %.2f"%(np.mean(ps), np.mean(rs), np.mean(fs)))
+
