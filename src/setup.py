@@ -102,7 +102,7 @@ class Mongo_Connector():
         '''
         Set limit to None to get all docs
         '''
-        cursor = self.col.find({'train': train}, no_cursor_timeout=True).batch_size(10)
+        cursor = self.col.find({'train': train}, no_cursor_timeout=True).batch_size(1)
         if limit:
             cursor = cursor.limit(limit)
         return cursor
