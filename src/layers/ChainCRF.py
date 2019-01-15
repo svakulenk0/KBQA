@@ -336,9 +336,9 @@ class ChainCRF(Layer):
 
     def call(self, x, mask=None):
         y_pred = viterbi_decode(x, self.U, self.b_start, self.b_end, mask)
-        nb_classes = self.input_spec[0].shape[2]
-        y_pred_one_hot = K.one_hot(y_pred, nb_classes)
-        return K.in_train_phase(x, y_pred_one_hot)
+        # nb_classes = self.input_spec[0].shape[2]
+        # y_pred_one_hot = K.one_hot(y_pred, nb_classes)
+        return y_pred
 
     def loss(self, y_true, y_pred):
         '''Linear Chain Conditional Random Field loss function.
