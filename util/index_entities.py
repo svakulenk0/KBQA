@@ -32,6 +32,8 @@ from elasticsearch import TransportError
 es = Elasticsearch()
 doc_type = 'terms'  # for mapping
 
+import re
+import string
 
 def parse_uri(entity_uri):
     entity_label = entity_uri.strip('/').split('/')[-1].strip('>')
