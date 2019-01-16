@@ -61,7 +61,7 @@ def uris_stream(index_name, file_path, ns_filter=None, doc_type='terms'):
             parse = line.split(';')
             entity_uri = ';'.join(parse[:-1])
             # skip malformed URIs
-            if entity_uri > 100:
+            if len(entity_uri) > 100:
                 continue
             entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
             label_words = parse_uri(entity_uri)
