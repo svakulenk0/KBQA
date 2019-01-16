@@ -13,6 +13,7 @@ To restart indexing:
 
 1. Delete previous index
 curl -X DELETE "localhost:9200/dbpedia201604e"
+curl -X DELETE "localhost:9200/dbpedia201604p"
 
 2. Put mapping (see mapping.json file)
 curl -X PUT "localhost:9200/dbpedia201604e" -H 'Content-Type: application/json' -d'
@@ -59,7 +60,9 @@ def uris_stream(index_name, file_path, ns_filter=None, doc_type='terms'):
             # line template http://creativecommons.org/ns#license;2
             parse = line.split(';')
             entity_uri = ';'.join(parse[:-1])
-
+            # skip malformed URIs
+            if entity_uri > 100:
+                continue
             entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
             label_words = parse_uri(entity_uri)
             count = parse[-1].strip()
