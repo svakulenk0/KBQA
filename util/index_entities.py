@@ -18,8 +18,9 @@ curl -X DELETE "localhost:9200/dbpedia201604e"
 curl -X PUT "localhost:9200/dbpedia201604e" -H 'Content-Type: application/json' -d'
 ...
 
-3. Run this script. Check progress via curl -XGET "localhost:9200/dbpedia201604e/_count"
-DBpedia201604 HDT contains 26,395,358 entities with the URIs starting http://dbpedia.org/
+3. Run this script. Check progress via
+curl -XGET "localhost:9200/dbpedia201604e/_count"
+DBpedia201604HDT contains 26,395,358 entities with the URIs starting http://dbpedia.org/
 
 '''
 
@@ -30,6 +31,23 @@ from elasticsearch import TransportError
 # setup
 es = Elasticsearch()
 doc_type = 'terms'  # for mapping
+
+
+def parse_uri(entity_uri):
+    entity_label = entity_uri.strip('/').split('/')[-1].strip('>')
+    entity_label = " ".join(re.sub('([a-z])([A-Z])', r'\1 \2', entity_label).split())
+    words = entity_label.split('_')
+    unique_words = []
+    for word in words:
+        # strip punctuation
+        word = "".join([c for c in word if c not in string.punctuation])
+        if word:
+            word = word.lower()
+            if word not in unique_words:
+                unique_words.append(word)
+    entity_label = " ".join(unique_words)
+    return entity_label
+
 
 # define streaming function
 def uris_stream(index_name, file_path, doc_type, ns_filter=None):
@@ -42,10 +60,11 @@ def uris_stream(index_name, file_path, doc_type, ns_filter=None):
             # line template http://creativecommons.org/ns#license;2
             parse = line.split(';')
             entity_uri = ';'.join(parse[:-1])
-            entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
 
+            entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
+            label_words = parse_uri(entity_uri)
             count = parse[-1].strip()
-            data_dict = {'uri': entity_uri, 'label': entity_label.replace('_', ' '),
+            data_dict = {'uri': entity_uri, 'label': label_words,
                          'count': count, "id": i+1, 'label_exact': entity_label}
 
             yield {"_index": index_name,
