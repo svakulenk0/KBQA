@@ -136,7 +136,7 @@ def generate_adj_sp(adjacencies, adj_shape, normalize=False, include_inverse=Fal
 max_triples = 500000
 from collections import defaultdict
 
-def hop(activations, constraints, top_predicates_ids, verbose=False):
+def hop(activations, constraints, top_predicates_ids, verbose=False, _bool_answer=False):
     # extract the subgraph for the selected entities
     top_entities_ids = activations + constraints
     
