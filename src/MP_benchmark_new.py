@@ -11,42 +11,10 @@ Message Passing for KBQA
 '''
 # setup
 dataset_name = 'lcquad'
-kg_name = 'dbpedia201604'
 
-# connect to MongoDB (27017 is the default port) to access the dataset
-# sudo service mongod start 
-from pymongo import MongoClient
-
-
-class Mongo_Connector():
-    '''
-    Wrapper class for some of the pymongo functions: http://api.mongodb.com/python/current/tutorial.html
-    '''
-
-    def __init__(self, db_name, col_name):
-        # spin up database
-        self.mongo_client = MongoClient()
-        self.db = self.mongo_client[db_name]
-        self.col = self.db[col_name]
-        
-    def get_sample(self, limit=100):
-        '''
-        Set limit to None to get all docs
-        '''
-        cursor = self.col.find({'question_type': {'$ne': 'ASK'}, 'train': True}, no_cursor_timeout=True).batch_size(1)
-        if limit:
-            cursor = cursor.limit(limit)
-        return cursor
-    
-    def get_by_id(self, id, limit=1):
-        '''
-        '''
-        cursor = self.col.find({'SerialNumber': id})
-        if limit:
-            cursor = cursor.limit(limit)
-        return cursor[0]
-
-
+import os
+os.chdir('/home/zola/Projects/temp/KBQA/util')
+from setup import Mongo_Connector
 mongo = Mongo_Connector('kbqa', dataset_name)
 
 # path to KG relations
@@ -55,50 +23,6 @@ hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_file = 'dbpedia2016-04en.hdt'
 namespace = "http://dbpedia.org/"
 
-# connect to entity catalog indexed with Lucene 
-from elasticsearch import Elasticsearch
-from urllib.parse import quote
-import string
-
-class IndexSearch:
-    
-    def __init__(self, index_name):
-        # set up ES connection
-        self.es = Elasticsearch()
-        self.index = index_name
-        self.type = 'terms'
-
-    def match_label(self, string, top=100):
-        return self.es.search(index=self.index,
-                              body={"query": {"multi_match": {"query": string,
-                                                              "operator": "and",
-                                                              "fields": ["label^10", "label.ngrams"],
-                                                              }}},
-                              size=top, doc_type=self.type)['hits']['hits']
-
-    def look_up_by_id(self, _id, top=1):
-        results = self.es.search(index=self.index,
-                              body={"query": {"term": {"id": _id}}},
-                              size=top, doc_type=self.type)['hits']['hits']
-        return results
-    
-    def look_up_by_uri(self, uri, top=10):
-#         results = self.es.search(index=self.index,
-#                               body={"query": {"term": {"uri": quote(uri, safe=string.punctuation)}}},
-#                               size=top, doc_type=self.type)['hits']['hits']
-#         if not results:
-        results = self.es.search(index=self.index,
-                          body={"query": {"term": {"uri": uri}}},
-                          size=top, doc_type=self.type)['hits']['hits']
-
-        return results
-
-
-e_index = IndexSearch('%se'%kg_name)
-p_index = IndexSearch('%sp'%kg_name)
-
-
-# hop hop
 
 import numpy as np
 import scipy.sparse as sp
@@ -136,7 +60,7 @@ def generate_adj_sp(adjacencies, adj_shape, normalize=False, include_inverse=Fal
 max_triples = 500000
 from collections import defaultdict
 
-def hop(activations, constraints, top_predicates_ids, verbose=False, _bool_answer=False):
+def hop(activations, constraints, predicates_ids, verbose=False, _bool_answer=False):
     # extract the subgraph for the selected entities
     top_entities_ids = activations + constraints
     
@@ -146,8 +70,8 @@ def hop(activations, constraints, top_predicates_ids, verbose=False, _bool_answe
     # _, predicate_ids, _ = kg.compute_hops(top_entities_ids, 100000, 0)
     # kg.remove()
 
-    # select predicates (here from GS)
-    # top_predicates_ids = top_predicates_ids
+    # exclude types predicate
+    top_predicates_ids = [_id for _id in predicates_ids if _id != 68655]
     
     # iteratively call the HDT API to retrieve all subgraph partitions
     activations = defaultdict(int)
@@ -164,6 +88,8 @@ def hop(activations, constraints, top_predicates_ids, verbose=False, _bool_answe
             if not _bool_answer and constraints:
                 # normalize activations by checking the 'must' constraints: number of constraints * weights
                 min_a = len(constraints) * 1
+                if predicates_ids != top_predicates_ids:
+                    min_a -= 1
             else:
                 min_a = 0
             # return HDT ids of the activated entities
@@ -290,4 +216,3 @@ with cursor:
 
 print("\nFin. Results for %d questions:"%len(ps))
 print("P: %.2f R: %.2f F: %.2f"%(np.mean(ps), np.mean(rs), np.mean(fs)))
-
