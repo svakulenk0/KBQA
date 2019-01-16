@@ -141,13 +141,13 @@ def hop(activations, constraints, top_predicates_ids, verbose=False):
     top_entities_ids = activations + constraints
     
     # get all the related predicates
-    kg = HDTDocument(hdt_path+hdt_file)
-    kg.configure_hops(1, [], namespace, True)
-    _, predicate_ids, _ = kg.compute_hops(top_entities_ids, 100000, 0)
-    kg.remove()
+    # kg = HDTDocument(hdt_path+hdt_file)
+    # kg.configure_hops(1, [], namespace, True)
+    # _, predicate_ids, _ = kg.compute_hops(top_entities_ids, 100000, 0)
+    # kg.remove()
 
     # select predicates (here from GS)
-    top_predicates_ids = top_predicates_ids
+    # top_predicates_ids = top_predicates_ids
     
     # iteratively call the HDT API to retrieve all subgraph partitions
     activations = defaultdict(int)
@@ -161,13 +161,14 @@ def hop(activations, constraints, top_predicates_ids, verbose=False):
     
         if not entities:
             # filter out the answers by min activation scores
-            if constraints:
+            if not _bool_answer and constraints:
                 # normalize activations by checking the 'must' constraints: number of constraints * weights
                 min_a = len(constraints) * 1
-                return [a_id for a_id, a_score in activations.items() if a_score > min_a]
+            else:
+                min_a = 0
             # return HDT ids of the activated entities
-            return list(activations.keys())
-        
+            return [a_id for a_id, a_score in activations.items() if a_score > min_a]
+
         if verbose:
             print("Subgraph extracted:")
             print("%d entities"%len(entities))
@@ -232,42 +233,53 @@ with cursor:
 
         assert doc['train'] == True
 
+         # check question type
+        _bool_answer = doc['question_type'] == 'ASK'
+
         top_entities_ids1 = doc['1hop_ids'][0]
         top_predicates_ids1 = doc['1hop_ids'][1]
-        answers_ids = hop([top_entities_ids1[0]], top_entities_ids1[1:], top_predicates_ids1, verbose=verbose)
+        answers_ids = hop([top_entities_ids1[0]], top_entities_ids1[1:], top_predicates_ids1, verbose, _bool_answer)
 
         _2hops = doc['2hop'] != [[], []]
         if _2hops:
             top_entities_ids2 = doc['2hop_ids'][0]
             top_predicates_ids2 = doc['2hop_ids'][1]
-            answers_ids = hop(answers_ids, top_entities_ids2, top_predicates_ids2, verbose=verbose)
+            answers_ids = hop(answers_ids, top_entities_ids2, top_predicates_ids2, verbose)
 
         # error estimation
-        answers_ids = set(answers_ids)
-        n_answers = len(answers_ids)
-        gs_answer_ids = set(doc['answers_ids'])
-        n_gs_answers = len(gs_answer_ids)
-        n_correct = len(answers_ids & gs_answer_ids)
+        if _bool_answer:
+            answer = all(x in answers_ids for x in doc["entity_ids"])
+            gs_answer = doc['bool_answer']
+            if answer == gs_answer:
+                p, r, f = 1, 1, 1
+            else:
+                p, r, f = 0, 0, 0
+        else:
+            answers_ids = set(answers_ids)
+            n_answers = len(answers_ids)
+            gs_answer_ids = set(doc['answers_ids'])
+            n_gs_answers = len(gs_answer_ids)
+            n_correct = len(answers_ids & gs_answer_ids)
 
-        if verbose:
-            print("%d predicted answers:"%n_answers)
-#             print(set(answers_uris)[:5])
-            print("%d gs answers:"%n_gs_answers)
-#             print(set(doc['answers']))
-            print(n_correct)
+            if verbose:
+                print("%d predicted answers:"%n_answers)
+    #             print(set(answers_uris)[:5])
+                print("%d gs answers:"%n_gs_answers)
+    #             print(set(doc['answers']))
+                print(n_correct)
 
-        try:
-            r = float(n_correct) / n_gs_answers
-        except ZeroDivisionError:\
-            print(doc['question'])
-        try:
-            p = float(n_correct) / n_answers
-        except ZeroDivisionError:
-            p = 0
-        try:
-            f = 2 * p * r / (p + r)
-        except ZeroDivisionError:
-            f = 0
+            try:
+                r = float(n_correct) / n_gs_answers
+            except ZeroDivisionError:\
+                print(doc['question'])
+            try:
+                p = float(n_correct) / n_answers
+            except ZeroDivisionError:
+                p = 0
+            try:
+                f = 2 * p * r / (p + r)
+            except ZeroDivisionError:
+                f = 0
         print("P: %.2f R: %.2f F: %.2f"%(p, r, f))
 
         # add stats
