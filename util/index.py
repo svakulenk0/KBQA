@@ -61,7 +61,7 @@ def uris_stream(index_name, file_path, ns_filter=None, doc_type='terms'):
             parse = line.split(';')
             entity_uri = ';'.join(parse[:-1])
             # skip malformed URIs
-            if len(entity_uri) > 100:
+            if len(entity_uri) > 50:
                 continue
             entity_label = entity_uri.strip('/').split('/')[-1].strip('>').lower()
             label_words = parse_uri(entity_uri)
@@ -80,7 +80,7 @@ def start_indexing(es, index_name, file_path, ns_filter):
     print("bulk indexing...")
     try:
         for ok, response in streaming_bulk(es, actions=uris_stream(index_name, file_path, ns_filter),
-                                           chunk_size=100000):
+                                           chunk_size=10000):
             if not ok:
                 # failure inserting
                 print (response)
