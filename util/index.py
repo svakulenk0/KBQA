@@ -49,7 +49,7 @@ def parse_uri(entity_uri):
 
 
 # define streaming function
-def uris_stream(index_name, file_path, doc_type='terms', ns_filter=None):
+def uris_stream(index_name, file_path, ns_filter=None, doc_type='terms'):
     with io.open(file_path, "r", encoding='utf-8') as infile:
         for i, line in enumerate(infile):
             # skip URIs if there is a filter set
@@ -72,11 +72,11 @@ def uris_stream(index_name, file_path, doc_type='terms', ns_filter=None):
                    }
 
 
-def start_indexing(es, index_name, file_path, doc_type, ns_filter):
+def start_indexing(es, index_name, file_path, ns_filter):
     # iterate through input file in batches via streaming bulk
     print("bulk indexing...")
     try:
-        for ok, response in streaming_bulk(es, actions=uris_stream(index_name, file_path, doc_type, ns_filter),
+        for ok, response in streaming_bulk(es, actions=uris_stream(index_name, file_path, ns_filter),
                                            chunk_size=100000):
             if not ok:
                 # failure inserting
@@ -92,7 +92,7 @@ def index_entities(es, KB):
     file_path = "../data/%s.txt" % file_name
     ns_filter = "http://dbpedia.org/"  # process only entities with URIs from the DBpedia namespace 
     index_name = '%se' % KB  # entities index
-    start_indexing(es, index_name, file_path, doc_type, ns_filter)
+    start_indexing(es, index_name, file_path, ns_filter)
 
 
 def index_predicates(es, KB):
@@ -100,7 +100,7 @@ def index_predicates(es, KB):
     file_path = "../data/%s.txt" % file_name
     ns_filter = None  # index all properties 
     index_name = '%sp' % KB   # predicates index
-    start_indexing(es, index_name, file_path, doc_type, ns_filter)
+    start_indexing(es, index_name, file_path, ns_filter)
 
 
 if __name__ == '__main__':
