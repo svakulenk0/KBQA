@@ -106,4 +106,5 @@ def index_predicates(es, KB):
 if __name__ == '__main__':
     KB = 'dbpedia201604'  # dbpedia201604 or wikidata201809
     es = Elasticsearch()
-    index_predicates(es, KB)
+    index_entities(es, KB)
+    #index_predicates(es, KB)
