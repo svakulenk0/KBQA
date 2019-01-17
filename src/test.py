@@ -245,7 +245,7 @@ gs = [False, False, False]
 # hold average stats for the model performance over the samples
 ps, rs, fs = [], [], []
 
-cursor = mongo.get_sample(train=True, limit=limit)
+cursor = mongo.get_sample(train=False, limit=limit)
 with cursor:
     print("Evaluating...")
     for doc in cursor:
