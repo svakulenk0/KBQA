@@ -27,7 +27,7 @@ class IndexSearch:
         return self.es.search(index=self.index,
                               body={"query": {"multi_match": {"query": string,
 #                                                               "operator": "and",
-                                                              "fields": ["label.label", "label.ngrams"],  # , "label.ngrams" ,"label.snowball^50",  "label.snowball^20", "label.shingles",
+                                                              "fields": ["label.snowball"],  # ["label.label", "label.ngrams"],  # , "label.ngrams" ,"label.snowball^50",  "label.snowball^20", "label.shingles",
                                                               }}},
                               size=top, doc_type=self.type)['hits']['hits']
 
@@ -97,6 +97,12 @@ class Mongo_Connector():
         
     def show_sample(self):
         pprint.pprint(self.col.find_one())
+
+    def get_all(self, limit=100):
+        cursor = self.col.find({}, no_cursor_timeout=True)
+        if limit:
+            cursor = cursor.limit(limit)
+        return cursor
         
     def get_sample(self, train=True, limit=100):
         '''
