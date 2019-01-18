@@ -1,3 +1,28 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+'''
+Created on Jan 18, 2018
+
+.. codeauthor: svitlana vakulenko
+    <svitlana.vakulenko@gmail.com>
+
+Index WikiData KG entities in ES
+
+To restart indexing:
+
+1. Delete previous index
+curl -X DELETE "localhost:9200/wikidata201809e"
+
+2. Put mapping (see mapping.json file)
+curl -X PUT "localhost:9200/wikidata201809e" -H 'Content-Type: application/json' -d'
+...
+
+3. Run this script. Check progress via
+curl -XGET "localhost:9200/wikidata201809e/_count"
+
+'''
+
 # index entities
 import io
 import string
@@ -26,8 +51,11 @@ def uris_stream(index_name, file_path, doc_type, ns_filter=None):
             parse = line.split(';')
             
             entity_label = parse[2].strip()
-            if not entity_label:
+            
+            # skip malformed URIs
+            if not entity_label or len(entity_label) > 150:
                 continue
+
             # label preprocessing: remove punctuation, duplicate words, lowercase
             words = entity_label.split(' ')
             unique_words = []
@@ -43,10 +71,10 @@ def uris_stream(index_name, file_path, doc_type, ns_filter=None):
             entity_uri = parse[0]
             count = parse[1]
             
-            wd_id = entity_uri.strip('/').split('/')[-1]
+            wd_id = entity_uri.strip('/').split('/')[-1]  # part of the WD URI
         
             data_dict = {'uri': entity_uri, 'label': entity_label,
-                         'count': count, "id": i+1, 'wd_id': wd_id}
+                         'count': count, "id": i+1, 'label_exact': wd_id}
             
             print(data_dict)
 
