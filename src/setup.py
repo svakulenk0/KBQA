@@ -31,6 +31,21 @@ class IndexSearch:
                                                               }}},
                               size=top, doc_type=self.type)['hits']['hits']
 
+    def label_scores(self, string, top=100):
+        matches = self.es.search(index=self.index,
+                              body={"query": {"multi_match": {"query": string,
+#                                                               "operator": "and",
+                                                              "fields": ["label.snowball"],  # ["label.label", "label.ngrams"],  # , "label.ngrams" ,"label.snowball^50",  "label.snowball^20", "label.shingles",
+                                                              }}},
+                              size=top, doc_type=self.type)['hits']
+        span_ids = {}
+        for match in matches['hits']:
+            _id = match['_source']['id']
+            score = match['_score'] / matches['max_score']
+            span_ids[_id] = score
+
+        return span_ids
+
     def look_up_by_uri(self, uri, top=1):
         uri = uri.replace("'", "")
         results = self.es.search(index=self.index,
@@ -58,14 +73,6 @@ class IndexSearch:
                                  body={"query": {"term": {"label_exact": _id}}},
                                  doc_type=self.type)['hits']['hits']
         return results
-
-    def get_by_id(self, _id, limit=1):
-        '''
-        '''
-        cursor = self.col.find({'SerialNumber': _id})
-        if limit:
-            cursor = cursor.limit(limit)
-        return cursor[0]
 
 
 # connect to MongoDB (27017 is the default port) to access the dataset
