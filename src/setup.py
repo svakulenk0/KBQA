@@ -31,7 +31,7 @@ class IndexSearch:
                                                               }}},
                               size=top, doc_type=self.type)['hits']['hits']
 
-    def label_scores(self, string, top=100):
+    def label_scores(self, string, top=100, verbose=False):
         matches = self.es.search(index=self.index,
                               body={"query": {"multi_match": {"query": string,
 #                                                               "operator": "and",
@@ -43,6 +43,8 @@ class IndexSearch:
             _id = match['_source']['id']
             score = match['_score'] / matches['max_score']
             span_ids[_id] = score
+            if verbose:
+              print({match['_source']['uri']: score})
 
         return span_ids
 
