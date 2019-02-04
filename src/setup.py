@@ -128,7 +128,7 @@ class Mongo_Connector():
         cursor = self.col.find({'SerialNumber': id})
         if limit:
             cursor = cursor.limit(limit)
-        return cursor[0]
+        return cursor
 
 
 # load pre-trained word embeddings for question semantic representation
