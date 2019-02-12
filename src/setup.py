@@ -35,7 +35,7 @@ class IndexSearch:
         matches = self.es.search(index=self.index,
                               body={"query": {"multi_match": {"query": string,
 #                                                               "operator": "and",
-                                                              "fields": ["label.ngrams", "label.snowball"],  # ["label.label", "label.ngrams"],  # , "label.ngrams" ,"label.snowball^50",  "label.snowball^20", "label.shingles",
+                                                              "fields": ["label.ngrams", "label.snowball^20"],  # ["label.label", "label.ngrams"],  # , "label.ngrams" ,"label.snowball^50",  "label.snowball^20", "label.shingles",
                                                               }}},
                               size=top, doc_type=self.type)['hits']
         span_ids = {}
