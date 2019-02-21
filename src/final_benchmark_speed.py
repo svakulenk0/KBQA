@@ -110,14 +110,14 @@ ep_model = build_ep_inference_model(ep_model_settings)
 ep_model.load_weights('model/'+modelname+'.h5', by_name=True)
 
 # functions for entity linking and relation detection
-def entity_linking(e_spans, verbose=False, cutoff=500, threshold=0): 
+def entity_linking(e_spans, cutoff=500, threshold=0): 
     guessed_ids = []
     for span in e_spans:
-        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3)
+        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=False, scale=0.3)
         guessed_ids.append(span_ids)
     return guessed_ids
 
-def relation_detection(p_spans, verbose=False, cutoff=500, threshold=0.0): 
+def relation_detection(p_spans, cutoff=500, threshold=0.0): 
     guessed_ids = []
     for span in p_spans:
         span_ids = {}
@@ -207,26 +207,17 @@ def hop(entities, constraints, top_predicates, max_triples=500000):
         kg.configure_hops(1, top_predicates_ids, namespace, True)
         entities, predicate_ids, adjacencies = kg.compute_hops(all_entities_ids, max_triples, offset)
         kg.remove()
-#         print(adjacencies)
-        # show subgraph entities
-#         print([e_index.look_up_by_id(e)[0]['_source']['uri'] for e in entities])
-        
+
         if not entities:
             answers = [{a_id: a_score} for a_id, a_score in activations.items()]
             return answers
 
-        # if verbose:
-            # print("Subgraph extracted:")
-            # print("%d entities"%len(entities))
-            # print("%d predicates"%len(predicate_ids))
-            # print("Loading adjacencies..")
 
         offset += max_triples
         # index entity ids global -> local
         entities_dict = {k: v for v, k in enumerate(entities)}
         # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
         A = generate_adj_sp(adjacencies, len(entities), include_inverse=True)
-#         print(predicate_ids)
         # activate entities -- build sparse matrix
         row, col, data = [], [], []
         for i, concept_ids in enumerate(top_entities):
@@ -355,12 +346,12 @@ with cursor:
         answers_ids = []
             
         # 1st hop
-        answers_ids1 = hop([], top_entities_ids1, top_predicates_ids1, verbose)
+        answers_ids1 = hop([], top_entities_ids1, top_predicates_ids1)
         answers1 = [{a_id: a_score} for activations in answers_ids1 for a_id, a_score in activations.items() if a_score > a_threshold]
         
         # 2nd hop
         if top_predicates_ids1 and top_predicates_ids2:
-            answers_ids = hop(answers1, [], top_predicates_ids2, verbose)
+            answers_ids = hop(answers1, [], top_predicates_ids2)
             answers = [{a_id: a_score} for activations in answers_ids for a_id, a_score in activations.items() if a_score > a_threshold]
         else:
             answers = answers1
