@@ -222,7 +222,7 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
             answers = [{a_id: a_score} for a_id, a_score in activations.items()]
             return answers
 
-        if verbose:
+        # if verbose:
             # print("Subgraph extracted:")
             # print("%d entities"%len(entities))
             # print("%d predicates"%len(predicate_ids))
