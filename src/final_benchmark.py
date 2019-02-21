@@ -136,8 +136,8 @@ def relation_detection(p_spans, verbose=False, cutoff=500, threshold=0.0):
                 span_ids[_id] = score
                 if verbose:
                     uri = match['_source']['uri']
-                    print(uri)
-                    print(score)
+                    # print(uri)
+                    # print(score)
         guessed_ids.append(span_ids)
     return guessed_ids
 
@@ -223,10 +223,10 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
             return answers
 
         if verbose:
-            print("Subgraph extracted:")
-            print("%d entities"%len(entities))
-            print("%d predicates"%len(predicate_ids))
-            print("Loading adjacencies..")
+            # print("Subgraph extracted:")
+            # print("%d entities"%len(entities))
+            # print("%d predicates"%len(predicate_ids))
+            # print("Loading adjacencies..")
 
         offset += max_triples
         # index entity ids global -> local
@@ -402,97 +402,99 @@ with cursor:
 
         answers_ids = [_id for a in answers for _id in a]
 
+        print(answers_ids)
+
         # error estimation
-        if p_qt != doc['question_type']:
-            nerrors += 1
-            print(doc['SerialNumber'], doc['question'])
-            print("%s instead of %s"%(p_qt, doc['question_type']))
-            # incorrect question type
-            qt_errors += 1
-            p, r = 0, 0
-        else:
-            all_entities_baskets = [set(e.keys()) for e in top_entities_ids1]
-            # ASK
-            if ask_question:
-                # make sure the output matches every input basket
-                answer = all(x & set(answers_ids) for x in all_entities_baskets)
-                # compare with GS answer
-                gs_answer = doc['bool_answer']
-                gs_answer_ids = []
-                if answer == gs_answer:
-                    p, r = 1, 1
-                else:
-                    p, r = 0, 0
-            else:
-                answers_ids = set(answers_ids)
-                n_answers = len(answers_ids)
-                # compare with GS answer
-                gs_answer_ids = set(doc['answers_ids'])
-                n_gs_answers = len(gs_answer_ids)
+#         if p_qt != doc['question_type']:
+#             nerrors += 1
+#             # print(doc['SerialNumber'], doc['question'])
+#             # print("%s instead of %s"%(p_qt, doc['question_type']))
+#             # incorrect question type
+#             qt_errors += 1
+#             p, r = 0, 0
+#         else:
+#             all_entities_baskets = [set(e.keys()) for e in top_entities_ids1]
+#             # ASK
+#             if ask_question:
+#                 # make sure the output matches every input basket
+#                 answer = all(x & set(answers_ids) for x in all_entities_baskets)
+#                 # compare with GS answer
+#                 gs_answer = doc['bool_answer']
+#                 gs_answer_ids = []
+#                 if answer == gs_answer:
+#                     p, r = 1, 1
+#                 else:
+#                     p, r = 0, 0
+#             else:
+#                 answers_ids = set(answers_ids)
+#                 n_answers = len(answers_ids)
+#                 # compare with GS answer
+#                 gs_answer_ids = set(doc['answers_ids'])
+#                 n_gs_answers = len(gs_answer_ids)
                 
-                # COUNT
-                if p_qt == 'COUNT':
-                    if n_answers == n_gs_answers:
-                        p, r = 1, 1
-                    else:
-                        p, r = 0, 0
+#                 # COUNT
+#                 if p_qt == 'COUNT':
+#                     if n_answers == n_gs_answers:
+#                         p, r = 1, 1
+#                     else:
+#                         p, r = 0, 0
 
-                # SELECT
-                else:
-                    n_correct = len(answers_ids & gs_answer_ids)
-                    try:
-                        r = float(n_correct) / n_gs_answers
-                    except ZeroDivisionError:\
-                        print(doc['question'])
-                    try:
-                        p = float(n_correct) / n_answers
-                    except ZeroDivisionError:
-                        p = 0
+#                 # SELECT
+#                 else:
+#                     n_correct = len(answers_ids & gs_answer_ids)
+#                     try:
+#                         r = float(n_correct) / n_gs_answers
+#                     except ZeroDivisionError:\
+#                         print(doc['question'])
+#                     try:
+#                         p = float(n_correct) / n_answers
+#                     except ZeroDivisionError:
+#                         p = 0
             
-            if p < 1.0 or r < 1.0: 
-#             if True:
-                nerrors += 1
-                if doc['SerialNumber'] not in errors_1+errors_e:
-                    if doc['SerialNumber'] not in errors_1:
-                        errors_ids.append(doc['SerialNumber'])
+#             if p < 1.0 or r < 1.0: 
+# #             if True:
+#                 nerrors += 1
+#                 if doc['SerialNumber'] not in errors_1+errors_e:
+#                     if doc['SerialNumber'] not in errors_1:
+#                         errors_ids.append(doc['SerialNumber'])
 
-                        # GS entities
-                        gs_classes_ids1 = [_id for _id in doc['1hop_ids'][1] if _id not in bl_p]
-                        gs_classes_ids2 = [_id for _id in doc['2hop_ids'][1] if _id not in bl_p]
+#                         # GS entities
+#                         gs_classes_ids1 = [_id for _id in doc['1hop_ids'][1] if _id not in bl_p]
+#                         gs_classes_ids2 = [_id for _id in doc['2hop_ids'][1] if _id not in bl_p]
                         
-                        gs_e_ids2 = [_id for _id in doc['1hop_ids'][0] if _id not in bl_p]
+#                         gs_e_ids2 = [_id for _id in doc['1hop_ids'][0] if _id not in bl_p]
 
 
-                        # check the number of detected concepts is correct
-            #             assert len(gs_top_entities_ids1) == len(all_entities_baskets)
-                        all_entities_ids = [_id for e in top_entities_ids1 for _id in e]
-                        if (gs_classes_ids1 or gs_classes_ids2) and not all_entities_ids:
-                            n_missing_spans += 1
-                        missed = False
-                        for e in gs_e_ids2:
-                            if e not in all_entities_ids:
-                                missed = True
-                                break
+#                         # check the number of detected concepts is correct
+#             #             assert len(gs_top_entities_ids1) == len(all_entities_baskets)
+#                         all_entities_ids = [_id for e in top_entities_ids1 for _id in e]
+#                         if (gs_classes_ids1 or gs_classes_ids2) and not all_entities_ids:
+#                             n_missing_spans += 1
+#                         missed = False
+#                         for e in gs_e_ids2:
+#                             if e not in all_entities_ids:
+#                                 missed = True
+#                                 break
 
-                        # find missing entity matches
-                        all_entities_ids = [_id for e in top_predicates_ids1+top_predicates_ids2 for _id in e]
-                        if (gs_classes_ids1 or gs_classes_ids2) and not all_entities_ids:
-                            n_missing_spans += 1
-                        missed = False
-                        for e in gs_classes_ids1+gs_classes_ids2:
-                            if e not in all_entities_ids:
-                                missed = True
-                                break
-                                e = p_index.look_up_by_id(e)
-                                if e:
-                                    print(doc['SerialNumber'], doc['question'])
-                                    print(doc['sparql_query'])
-                                    print("Missing predicate match: %s"%e[0]['_source']['uri'])
-                        if missed:
-                            n_missing_entities += 1
-#                         else:
-                        print(doc['SerialNumber'], doc['question'])
-                        print(doc['sparql_query'])
+#                         # find missing entity matches
+#                         all_entities_ids = [_id for e in top_predicates_ids1+top_predicates_ids2 for _id in e]
+#                         if (gs_classes_ids1 or gs_classes_ids2) and not all_entities_ids:
+#                             n_missing_spans += 1
+#                         missed = False
+#                         for e in gs_classes_ids1+gs_classes_ids2:
+#                             if e not in all_entities_ids:
+#                                 missed = True
+#                                 break
+#                                 e = p_index.look_up_by_id(e)
+#                                 if e:
+#                                     print(doc['SerialNumber'], doc['question'])
+#                                     print(doc['sparql_query'])
+#                                     print("Missing predicate match: %s"%e[0]['_source']['uri'])
+#                         if missed:
+#                             n_missing_entities += 1
+# #                         else:
+#                         print(doc['SerialNumber'], doc['question'])
+#                         print(doc['sparql_query'])
                         # show spans
 #                             print(p_spans1)
 #                             print(p_spans2)
@@ -512,16 +514,16 @@ with cursor:
 
 #                             # show errors            
 #                             print([{e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers for _id, score in answer.items() if _id not in gs_answer_ids if e_index.look_up_by_id(_id)])
-                        print('\n')
+                        # print('\n')
 
         # add stats
-        ps.append(p)
-        rs.append(r)
+#         ps.append(p)
+#         rs.append(r)
 
-print("\nFin. Results for %d questions:"%len(ps))
-print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
-print("Number of errors: %d"%nerrors)
-print(errors_ids)
-print("Number of questions with missing entity matches: %d"%n_missing_entities)
-print("Number of questions with incorrect question type detection: %d"%qt_errors)
-print("Number of questions with missing spans: %d"%n_missing_spans)
+# print("\nFin. Results for %d questions:"%len(ps))
+# print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
+# print("Number of errors: %d"%nerrors)
+# print(errors_ids)
+# print("Number of questions with missing entity matches: %d"%n_missing_entities)
+# print("Number of questions with incorrect question type detection: %d"%qt_errors)
+# print("Number of questions with missing spans: %d"%n_missing_spans)
