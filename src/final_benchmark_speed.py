@@ -20,7 +20,8 @@ mongo = Mongo_Connector('kbqa', dataset_name)
 
 # path to KG relations
 from hdt import HDTDocument
-hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
+# hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
+hdt_path = "/mnt/ssd/sv/"
 hdt_file = 'dbpedia2016-04en.hdt'
 namespace = "http://dbpedia.org/"
 
@@ -315,6 +316,7 @@ p_vectors = load_embeddings('fasttext_p_labels')
 bl_p = [68655]
 
 cursor = mongo.get_sample(train=False, limit=limit)
+
 with cursor:
     print("Evaluating...")
     for doc in cursor:
