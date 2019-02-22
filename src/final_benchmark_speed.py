@@ -182,7 +182,7 @@ def generate_adj_sp(adjacencies, n_entities, include_inverse):
 from sklearn.preprocessing import normalize, binarize
 
 
-def hop(entities, constraints, top_predicates, max_triples=500000):
+def hop(entities, constraints, top_predicates, max_triples=200000, max_degree=100000):
     '''
     Extract the subgraph for the selected entities
     ''' 
@@ -192,9 +192,19 @@ def hop(entities, constraints, top_predicates, max_triples=500000):
         n_constraints += 1
 
     top_entities = entities + constraints
-    all_entities_ids = [_id for e in top_entities for _id in e]
+#     all_entities_ids = [_id for e in top_entities for _id in e]
     top_predicates_ids = [_id for p in top_predicates for _id in p if _id]
-            
+
+    # skip heavy hitters
+    all_entities_ids = []
+    for e in top_entities:
+        for _id in e:
+            entity = e_index.look_up_by_id(_id)
+            if entity:
+                if int(entity[0]['_source']['count']) <= max_degree:
+                    all_entities_ids.append(_id)
+    if not all_entities_ids:
+        return []
 
     # iteratively call the HDT API to retrieve all subgraph partitions
     activations = defaultdict(int)
@@ -211,7 +221,6 @@ def hop(entities, constraints, top_predicates, max_triples=500000):
         if not entities:
             answers = [{a_id: a_score} for a_id, a_score in activations.items()]
             return answers
-
 
         offset += max_triples
         # index entity ids global -> local
