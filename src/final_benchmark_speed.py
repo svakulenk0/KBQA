@@ -182,6 +182,8 @@ def generate_adj_sp(adjacencies, n_entities, include_inverse):
 
 from sklearn.preprocessing import normalize, binarize
 
+kg = HDTDocument(hdt_path+hdt_file)
+
 
 def hop(entities, constraints, top_predicates, max_triples=200000, max_degree=100000):
     '''
@@ -213,11 +215,10 @@ def hop(entities, constraints, top_predicates, max_triples=200000, max_degree=10
 
     while True:
         # get the subgraph for selected predicates only
-        kg = HDTDocument(hdt_path+hdt_file)
 #         print(top_predicates_ids)
         kg.configure_hops(1, top_predicates_ids, namespace, True)
         entities, predicate_ids, adjacencies = kg.compute_hops(all_entities_ids, max_triples, offset)
-        kg.remove()
+        # kg.remove()
 
         if not entities:
             answers = [{a_id: a_score} for a_id, a_score in activations.items()]
