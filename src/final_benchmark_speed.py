@@ -23,7 +23,7 @@ from hdt import HDTDocument
 # hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_path = "/mnt/ssd/sv/"
 hdt_file = 'dbpedia2016-04en.hdt'
-namespace = "http://dbpedia.org/"
+namespace = "predef-dbpedia2016-04"  # "http://dbpedia.org/"
 
 from collections import defaultdict
 import numpy as np
