@@ -114,7 +114,7 @@ ep_model.load_weights('model/'+modelname+'.h5', by_name=True)
 def entity_linking(e_spans, cutoff=500, threshold=0): 
     guessed_ids = []
     for span in e_spans:
-        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=False, scale=0.3)
+        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=False, scale=0.3, max_degree=100000)
         guessed_ids.append(span_ids)
     return guessed_ids
 
