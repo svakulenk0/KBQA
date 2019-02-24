@@ -22,7 +22,7 @@ mongo = Mongo_Connector('kbqa', dataset_name)
 from hdt import HDTDocument
 hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_file = 'dbpedia2016-04en.hdt'
-namespace = "http://dbpedia.org/"  # "predef-dbpedia2016-04"
+namespace = "predef-dbpedia2016-04"  # "http://dbpedia.org/"
 
 from collections import defaultdict
 import numpy as np
@@ -188,8 +188,6 @@ def generate_adj_sp(adjacencies, n_entities, include_inverse):
 
 from sklearn.preprocessing import normalize, binarize
 
-kg = HDTDocument(hdt_path+hdt_file)
-
 
 def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000):
     '''
@@ -212,8 +210,10 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
     while True:
         # get the subgraph for selected predicates only
 #         print(top_predicates_ids)
+        kg = HDTDocument(hdt_path+hdt_file)
         kg.configure_hops(1, top_predicates_ids, namespace, True)
         entities, predicate_ids, adjacencies = kg.compute_hops(all_entities_ids, max_triples, offset)
+        kg.remove()
 #         print(adjacencies)
         # show subgraph entities
 #         print([e_index.look_up_by_id(e)[0]['_source']['uri'] for e in entities])
