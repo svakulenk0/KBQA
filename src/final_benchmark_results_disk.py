@@ -406,6 +406,8 @@ with cursor:
             answers = answers1
 
         answers_ids = [_id for a in answers for _id in a]
+        
+        ts.append(time.time() - start_one)
 
         # error estimation
         if p_qt != doc['question_type']:
@@ -522,7 +524,6 @@ with cursor:
         # add stats
         ps.append(p)
         rs.append(r)
-        ts.append(time.time() - start_one)
 
 # show basic stats
 min_len = min(ts)
