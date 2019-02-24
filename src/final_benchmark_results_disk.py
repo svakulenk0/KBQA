@@ -20,7 +20,8 @@ mongo = Mongo_Connector('kbqa', dataset_name)
 
 # path to KG relations
 from hdt import HDTDocument
-hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
+# hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
+hdt_path = "/mnt/ssd/sv/"
 hdt_file = 'dbpedia2016-04en.hdt'
 # namespace = "http://dbpedia.org/"
 namespace = "predef-dbpedia2016-04"
@@ -117,7 +118,7 @@ ep_model.load_weights('model/'+modelname+'.h5', by_name=True)
 def entity_linking(e_spans, verbose=False, cutoff=500, threshold=0): 
     guessed_ids = []
     for span in e_spans:
-        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3, max_degree=100000)
+        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3, max_degree=10000)
         guessed_ids.append(span_ids)
     return guessed_ids
 
