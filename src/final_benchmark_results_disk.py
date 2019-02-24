@@ -529,7 +529,7 @@ min_len = min(ts)
 mean_len = np.mean(ts)
 median_len = np.median(ts)
 max_len = max(ts)
-print("Min:%d Median:%d Mean:%d Max:%d"%(min_len, median_len, mean_len, max_len))
+print("Min:%.2f Median:%.2f Mean:%.2f Max:%.2f"%(min_len, median_len, mean_len, max_len))
 
 # print("--- %.2f seconds ---" % (float(time.time() - start)/999))
 print("\nFin. Results for %d questions:"%len(ps))
