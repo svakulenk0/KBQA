@@ -118,7 +118,7 @@ ep_model.load_weights('model/'+modelname+'.h5', by_name=True)
 def entity_linking(e_spans, verbose=False, cutoff=500, threshold=0): 
     guessed_ids = []
     for span in e_spans:
-        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3, max_degree=10000)
+        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3, max_degree=100000)
         guessed_ids.append(span_ids)
     return guessed_ids
 
@@ -312,7 +312,7 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
 from collections import Counter
 
 verbose = False
-limit = None
+limit = 10
 
 question_types = ['SELECT', 'ASK', 'COUNT']
 
@@ -327,7 +327,7 @@ errors_e = ['25', '56', '118', '126', '128', '134', '147', '162', '468', '475', 
 # type predicates
 bl_p = [68655]
 
-ps, rs = [], []
+ps, rs, ts = [], [], []
 nerrors = 0
 errors_ids = []
 n_missing_entities = 0
@@ -341,11 +341,13 @@ cursor = mongo.get_sample(train=False, limit=limit)
 with cursor:
     print("Evaluating...")
 
-    start = time.time()
+    # start = time.time()
     for doc in cursor:
         print(doc['SerialNumber'])
 #         if doc_id not in new_answers:
 #             continue
+        
+        start_one = time.time()
         q = doc['question']
                 
         # parse question into words and embed
@@ -520,8 +522,16 @@ with cursor:
         # add stats
         ps.append(p)
         rs.append(r)
+        ts.append(time.time() - start_one)
 
-print("--- %.2f seconds ---" % (float(time.time() - start)/999))
+# show basic stats
+min_len = min(n_distr)
+mean_len = np.mean(n_distr)
+median_len = np.median(n_distr)
+max_len = max(n_distr)
+print("Min:%d Median:%d Mean:%d Max:%d"%(min_len, median_len, mean_len, max_len))
+
+# print("--- %.2f seconds ---" % (float(time.time() - start)/999))
 print("\nFin. Results for %d questions:"%len(ps))
 print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
 print("Number of errors: %d"%nerrors)
