@@ -22,7 +22,7 @@ mongo = Mongo_Connector('kbqa', dataset_name)
 from hdt import HDTDocument
 hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_file = 'dbpedia2016-04en.hdt'
-namespace = "predef-dbpedia2016-04"  # "http://dbpedia.org/"
+namespace = "http://dbpedia.org/"  # "predef-dbpedia2016-04"
 
 from collections import defaultdict
 import numpy as np
