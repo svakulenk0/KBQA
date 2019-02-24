@@ -525,10 +525,10 @@ with cursor:
         ts.append(time.time() - start_one)
 
 # show basic stats
-min_len = min(n_distr)
-mean_len = np.mean(n_distr)
-median_len = np.median(n_distr)
-max_len = max(n_distr)
+min_len = min(ts)
+mean_len = np.mean(ts)
+median_len = np.median(ts)
+max_len = max(ts)
 print("Min:%d Median:%d Mean:%d Max:%d"%(min_len, median_len, mean_len, max_len))
 
 # print("--- %.2f seconds ---" % (float(time.time() - start)/999))
