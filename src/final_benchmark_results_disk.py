@@ -22,7 +22,8 @@ mongo = Mongo_Connector('kbqa', dataset_name)
 from hdt import HDTDocument
 hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
 hdt_file = 'dbpedia2016-04en.hdt'
-namespace = "http://dbpedia.org/"
+# namespace = "http://dbpedia.org/"
+namespace = "predef-dbpedia2016-04"
 
 import time
 from collections import defaultdict
