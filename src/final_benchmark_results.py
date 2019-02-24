@@ -339,8 +339,10 @@ cursor = mongo.get_sample(train=False, limit=limit)
 # cursor = mongo.get_by_id('63', limit=1)
 with cursor:
     print("Evaluating...")
+
+    start = time.time()
     for doc in cursor:
-        doc_id = doc['SerialNumber']
+        print(doc['SerialNumber'])
 #         if doc_id not in new_answers:
 #             continue
         q = doc['question']
@@ -452,47 +454,47 @@ with cursor:
             if p < 1.0 or r < 1.0: 
 #             if True:
                 nerrors += 1
-                if doc['SerialNumber'] not in errors_1+errors_e:
-                    if doc['SerialNumber'] not in errors_1:
-                        errors_ids.append(doc['SerialNumber'])
+#                 if doc['SerialNumber'] not in errors_1+errors_e:
+#                     if doc['SerialNumber'] not in errors_1:
+#                         errors_ids.append(doc['SerialNumber'])
 
-                        # GS entities
-                        gs_classes_ids1 = [_id for _id in doc['1hop_ids'][1] if _id not in bl_p]
-                        gs_classes_ids2 = [_id for _id in doc['2hop_ids'][1] if _id not in bl_p]
+#                         # GS entities
+#                         gs_classes_ids1 = [_id for _id in doc['1hop_ids'][1] if _id not in bl_p]
+#                         gs_classes_ids2 = [_id for _id in doc['2hop_ids'][1] if _id not in bl_p]
                         
-                        gs_e_ids2 = [_id for _id in doc['1hop_ids'][0] if _id not in bl_p]
+#                         gs_e_ids2 = [_id for _id in doc['1hop_ids'][0] if _id not in bl_p]
 
 
-                        # check the number of detected concepts is correct
-            #             assert len(gs_top_entities_ids1) == len(all_entities_baskets)
-                        all_entities_ids = [_id for e in top_entities_ids1 for _id in e]
-                        if (gs_classes_ids1 or gs_classes_ids2) and not all_entities_ids:
-                            n_missing_spans += 1
-                        missed = False
-                        for e in gs_e_ids2:
-                            if e not in all_entities_ids:
-                                missed = True
-                                break
+#                         # check the number of detected concepts is correct
+#             #             assert len(gs_top_entities_ids1) == len(all_entities_baskets)
+#                         all_entities_ids = [_id for e in top_entities_ids1 for _id in e]
+#                         if (gs_classes_ids1 or gs_classes_ids2) and not all_entities_ids:
+#                             n_missing_spans += 1
+#                         missed = False
+#                         for e in gs_e_ids2:
+#                             if e not in all_entities_ids:
+#                                 missed = True
+#                                 break
 
-                        # find missing entity matches
-                        all_entities_ids = [_id for e in top_predicates_ids1+top_predicates_ids2 for _id in e]
-                        if (gs_classes_ids1 or gs_classes_ids2) and not all_entities_ids:
-                            n_missing_spans += 1
-                        missed = False
-                        for e in gs_classes_ids1+gs_classes_ids2:
-                            if e not in all_entities_ids:
-                                missed = True
-                                break
-                                e = p_index.look_up_by_id(e)
-                                if e:
-                                    print(doc['SerialNumber'], doc['question'])
-                                    print(doc['sparql_query'])
-                                    print("Missing predicate match: %s"%e[0]['_source']['uri'])
-                        if missed:
-                            n_missing_entities += 1
-#                         else:
-                        print(doc['SerialNumber'], doc['question'])
-                        print(doc['sparql_query'])
+#                         # find missing entity matches
+#                         all_entities_ids = [_id for e in top_predicates_ids1+top_predicates_ids2 for _id in e]
+#                         if (gs_classes_ids1 or gs_classes_ids2) and not all_entities_ids:
+#                             n_missing_spans += 1
+#                         missed = False
+#                         for e in gs_classes_ids1+gs_classes_ids2:
+#                             if e not in all_entities_ids:
+#                                 missed = True
+#                                 break
+#                                 e = p_index.look_up_by_id(e)
+#                                 if e:
+#                                     print(doc['SerialNumber'], doc['question'])
+#                                     print(doc['sparql_query'])
+#                                     print("Missing predicate match: %s"%e[0]['_source']['uri'])
+#                         if missed:
+#                             n_missing_entities += 1
+# #                         else:
+#                         print(doc['SerialNumber'], doc['question'])
+#                         print(doc['sparql_query'])
                         # show spans
 #                             print(p_spans1)
 #                             print(p_spans2)
@@ -512,12 +514,13 @@ with cursor:
 
 #                             # show errors            
 #                             print([{e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers for _id, score in answer.items() if _id not in gs_answer_ids if e_index.look_up_by_id(_id)])
-                        print('\n')
+                        # print('\n')
 
         # add stats
         ps.append(p)
         rs.append(r)
 
+print("--- %.2f seconds ---" % (float(time.time() - start)/999))
 print("\nFin. Results for %d questions:"%len(ps))
 print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
 print("Number of errors: %d"%nerrors)
