@@ -42,7 +42,7 @@ class IndexSearch:
         for match in matches['hits']:
             _id = match['_source']['id']
             degree = int(match['_source']['count'])
-            if degree <= max_degree:
+            if max_degree and degree <= max_degree:
               score = match['_score'] / matches['max_score']
               if not threshold or score >= threshold:
                   if scale:
