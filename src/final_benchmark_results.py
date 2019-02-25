@@ -20,10 +20,13 @@ mongo = Mongo_Connector('kbqa', dataset_name)
 
 # path to KG relations
 from hdt import HDTDocument
-hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
+# hdt_path = "/home/zola/Projects/hdt-cpp-molecules/libhdt/data/"
+hdt_path = "/mnt/ssd/sv/"
 hdt_file = 'dbpedia2016-04en.hdt'
-namespace = "http://dbpedia.org/"  # "predef-dbpedia2016-04"
+# namespace = "http://dbpedia.org/"
+namespace = "predef-dbpedia2016-04"
 
+import time
 from collections import defaultdict
 import numpy as np
 import scipy.sparse as sp
@@ -115,7 +118,7 @@ ep_model.load_weights('model/'+modelname+'.h5', by_name=True)
 def entity_linking(e_spans, verbose=False, cutoff=500, threshold=0): 
     guessed_ids = []
     for span in e_spans:
-        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3, max_degree=100000)
+        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3, max_degree=50000)
         guessed_ids.append(span_ids)
     return guessed_ids
 
@@ -187,11 +190,13 @@ def generate_adj_sp(adjacencies, n_entities, include_inverse):
 
 
 from sklearn.preprocessing import normalize, binarize
+kg = HDTDocument(hdt_path+hdt_file)
 
 
-def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000):
+def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000, bl_p=[68655]):
     '''
     Extract the subgraph for the selected entities
+    bl_p  -- the list of predicates to ignore (e.g. type predicate is too expensive to expand)
     ''' 
 #     print(top_predicates)
     n_constraints = len(constraints)
@@ -200,8 +205,7 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
 
     top_entities = entities + constraints
     all_entities_ids = [_id for e in top_entities for _id in e]
-    top_predicates_ids = [_id for p in top_predicates for _id in p if _id]
-            
+    top_predicates_ids = [_id for p in top_predicates for _id in p if _id not in bl_p]
 
     # iteratively call the HDT API to retrieve all subgraph partitions
     activations = defaultdict(int)
@@ -210,10 +214,8 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
     while True:
         # get the subgraph for selected predicates only
 #         print(top_predicates_ids)
-        kg = HDTDocument(hdt_path+hdt_file)
         kg.configure_hops(1, top_predicates_ids, namespace, True)
         entities, predicate_ids, adjacencies = kg.compute_hops(all_entities_ids, max_triples, offset)
-        kg.remove()
 #         print(adjacencies)
         # show subgraph entities
 #         print([e_index.look_up_by_id(e)[0]['_source']['uri'] for e in entities])
@@ -324,9 +326,9 @@ errors_e = ['25', '56', '118', '126', '128', '134', '147', '162', '468', '475', 
 # class_constraints = True
 
 # type predicates
-bl_p = [68655]
+# bl_p = [68655]
 
-ps, rs = [], []
+ps, rs, ts = [], [], []
 nerrors = 0
 errors_ids = []
 n_missing_entities = 0
@@ -340,11 +342,13 @@ cursor = mongo.get_sample(train=False, limit=limit)
 with cursor:
     print("Evaluating...")
 
-    start = time.time()
+    # start = time.time()
     for doc in cursor:
         print(doc['SerialNumber'])
 #         if doc_id not in new_answers:
 #             continue
+        
+        start_one = time.time()
         q = doc['question']
                 
         # parse question into words and embed
@@ -403,12 +407,14 @@ with cursor:
             answers = answers1
 
         answers_ids = [_id for a in answers for _id in a]
+        
+        ts.append(time.time() - start_one)
 
         # error estimation
         if p_qt != doc['question_type']:
             nerrors += 1
-            print(doc['SerialNumber'], doc['question'])
-            print("%s instead of %s"%(p_qt, doc['question_type']))
+            # print(doc['SerialNumber'], doc['question'])
+            # print("%s instead of %s"%(p_qt, doc['question_type']))
             # incorrect question type
             qt_errors += 1
             p, r = 0, 0
@@ -520,7 +526,14 @@ with cursor:
         ps.append(p)
         rs.append(r)
 
-print("--- %.2f seconds ---" % (float(time.time() - start)/999))
+# show basic stats
+min_len = min(ts)
+mean_len = np.mean(ts)
+median_len = np.median(ts)
+max_len = max(ts)
+print("Min:%.2f Median:%.2f Mean:%.2f Max:%.2f"%(min_len, median_len, mean_len, max_len))
+
+# print("--- %.2f seconds ---" % (float(time.time() - start)/999))
 print("\nFin. Results for %d questions:"%len(ps))
 print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
 print("Number of errors: %d"%nerrors)
