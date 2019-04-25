@@ -16,7 +16,7 @@
 It is not trivial to set up the environment. You need to:
 
 1. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
-2. Index entities and predicates
+2. Index entities and predicates into ElasticSearch
 3. Download LC-QuAD dataset from http://lc-quad.sda.tech
 
 <!-- 1. Create virtual environment and install all dependencies
