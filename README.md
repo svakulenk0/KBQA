@@ -5,15 +5,21 @@
 * Python 3.6
 * Tensorflow
 * Keras
+* elasticsearch
 
-## Dataset
+## Datasets
 
-* [LCQUAD](http://lc-quad.sda.tech)
-
+* [LCQUAD](http://lc-quad.sda.tech) 5,000 pairs of questions and SPARQL queries
 
 ## Setup
 
-1. Create virtual environment and install all dependencies
+It is not trivial to set up the environment. You need to:
+
+1. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
+2. Index entities and predicates
+3. Download LC-QuAD dataset from http://lc-quad.sda.tech
+
+<!-- 1. Create virtual environment and install all dependencies
 
 '''
 conda create -n tf36 python=3.6 pip
@@ -34,7 +40,7 @@ rm wiki.en.zip
 
 3. Run MongoDB
 
-sudo service mongod start
+sudo service mongod start -->
 
 
 ## Run
