@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "2401",
+    "corrected_question": "Which royal people are buried in Rome?",
+    "intermediary_question": "Who are the <royalties> whose <location of burial> is <Rome>?",
+    "sparql_query": "SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/placeOfBurial> <http://dbpedia.org/resource/Rome>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Royalty>}",
+    "sparql_template_id": 301,
+    "answers": [
+      "http://dbpedia.org/resource/Augustus",
+      "http://dbpedia.org/resource/Britannicus",
+      "http://dbpedia.org/resource/Caligula",
+      "http://dbpedia.org/resource/Duchess_Charlotte_Frederica_of_Mecklenburg-Schwerin",
+      "http://dbpedia.org/resource/Pauline_Bonaparte",
+      "http://dbpedia.org/resource/Poppaea_Sabina",
+      "http://dbpedia.org/resource/Prince_Georg_of_Bavaria",
+      "http://dbpedia.org/resource/Tiberius",
+      "http://dbpedia.org/resource/Tiberius_Gracchus"
+    ],
+    "entities": [
+      "http://dbpedia.org/property/placeOfBurial",
+      "http://dbpedia.org/resource/Rome",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "http://dbpedia.org/ontology/Royalty"
+    ]
+  }
+]
