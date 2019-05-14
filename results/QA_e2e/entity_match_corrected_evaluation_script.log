@@ -1,0 +1,2277 @@
+134 In which time zone is Pong Pha?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Pong_Pha> <http://dbpedia.org/ontology/timeZone> ?uri } 
+['pong pha']
+[{'http://dbpedia.org/resource/Thailand': 1.0}]
+[{'http://dbpedia.org/resource/Time_in_Thailand': 1.0}]
+
+
+1839 Which driver had the pole position in 1994 Spanish Grand Prix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1994_Spanish_Grand_Prix> <http://dbpedia.org/ontology/poleDriver> ?uri } 
+['1994 spanish grand prix']
+[{'http://dbpedia.org/resource/Michael_Schumacher': 1.0}]
+[{'http://dbpedia.org/resource/Ayrton_Senna': 1.0}]
+
+
+2450 In which country is Sierra del Merendin?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sierra_del_Merendón> <http://dbpedia.org/ontology/country> ?uri  . }
+['sierra del merendin']
+[{'http://dbpedia.org/resource/Guatemala': 1.0}, {'http://dbpedia.org/resource/Honduras': 1.0}]
+[{'http://dbpedia.org/resource/Spain': 1.0}, {'http://dbpedia.org/resource/Mexico': 1.0}]
+
+
+3213 Give the name of the  managers of England national under-20 football team and England national under-21 football team?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/managerclubs> <http://dbpedia.org/resource/England_national_under-20_football_team> . ?uri <http://dbpedia.org/property/managerclubs> <http://dbpedia.org/resource/England_national_under-21_football_team> . }
+['england national under20 football team', 'england national under21 football team']
+[{'http://dbpedia.org/resource/Gareth_Southgate': 1.0}, {'http://dbpedia.org/resource/Peter_Taylor_(footballer,_born_1953)': 1.0}]
+[{'http://dbpedia.org/resource/Howard_Wilkinson': 1.0}]
+
+
+3237 What are the binomial authority of Menetries's warbler?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Menetries's_warbler> <http://dbpedia.org/ontology/binomialAuthority> ?uri } 
+['menetriess warbler']
+[{'http://dbpedia.org/resource/Azerbaijan': 1.0}, {'http://dbpedia.org/resource/Kura_River': 1.0}, {'http://dbpedia.org/resource/Salyana': 1.0}, {'http://dbpedia.org/resource/Transcaucasia': 1.0}, {'http://dbpedia.org/resource/Édouard_Ménétries': 1.0}]
+[{'http://dbpedia.org/resource/Alexander_Wilson': 1.0}]
+
+
+3302 Name  the Pole driver of 1994 Spanish Grand Prix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1994_Spanish_Grand_Prix> <http://dbpedia.org/property/poleDriver> ?uri } 
+['1994 spanish grand prix']
+[{'http://dbpedia.org/resource/Michael_Schumacher': 1.0}]
+[{'http://dbpedia.org/resource/Ayrton_Senna': 1.0}]
+
+
+4390 Where were sverre krogh sundbo and havard vad petersson born?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sverre_Krogh_Sundbø> <http://dbpedia.org/property/birthPlace> ?uri. <http://dbpedia.org/resource/Håvard_Vad_Petersson> <http://dbpedia.org/property/placeOfBirth> ?uri} 
+['petersson', 'sverre krogh sundbo']
+[{'http://dbpedia.org/resource/Oslo': 1.0}]
+[{'http://dbpedia.org/resource/Norway': 1.0}]
+
+
+4972 In which city did The Ultimate Fighter: Team Rousey vs. Team Tate take place ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Rousey_vs._Team_Tate> <http://dbpedia.org/property/city> ?uri } 
+['the ultimate fighter team rousey vs team tate']
+[{'http://dbpedia.org/resource/Las_Vegas_Valley': 1.0}, {'http://dbpedia.org/resource/Nevada': 1.0}]
+[{'http://dbpedia.org/resource/Las_Vegas': 1.0}]
+
+
+
+Fin. Results for 626 questions:
+P: 0.97 R: 1.00
+Number of errors: 57
+['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
+Number of questions with missing entity matches: 373
+Number of questions with incorrect question type detection: 0
+Number of questions with missing spans: 0
+
+http://dbpedia.org/resource/Pong_Pha
+1
+http://dbpedia.org/resource/Châu_Pha
+0.1552090795358464
+http://dbpedia.org/resource/Pha_Bong
+0.1552090795358464
+http://dbpedia.org/resource/Pha_Chuk
+0.1552090795358464
+http://dbpedia.org/resource/Pha_Lueat
+0.1552090795358464
+http://dbpedia.org/resource/Pha_Ngam
+0.1552090795358464
+http://dbpedia.org/resource/Huai_Pha
+0.1552090795358464
+http://dbpedia.org/resource/Mae_Pong
+0.14479092620294667
+http://dbpedia.org/resource/Pong_District
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Hai
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Ngam
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Noi
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Phrae
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Pueai
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Tam
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Tao
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Thung
+0.14479092620294667
+http://dbpedia.org/resource/Pong_Yaeng
+0.14479092620294667
+http://dbpedia.org/resource/San_Pong
+0.14479092620294667
+http://dbpedia.org/resource/Huai_Pong
+0.14479092620294667
+http://dbpedia.org/resource/Sop_Pong
+0.14479092620294667
+http://dbpedia.org/resource/Ko_Pha_Ngan
+0.13417538134280105
+http://dbpedia.org/resource/Pha_Khao_District
+0.13417538134280105
+http://dbpedia.org/resource/Pha_Lan_Gon
+0.13417538134280105
+http://dbpedia.org/resource/Tha_Pha,_Lampang
+0.13417538134280105
+http://dbpedia.org/resource/Tha_Pha_Pum
+0.13417538134280105
+http://dbpedia.org/resource/Kaoh_Pong_Satv
+0.12516908588677741
+http://dbpedia.org/resource/Ban_Pong,_Ngao
+0.12516908588677741
+http://dbpedia.org/resource/Ban_Pong,_Phrao
+0.12516908588677741
+http://dbpedia.org/resource/Ban_Pong_(commune)
+0.12516908588677741
+http://dbpedia.org/resource/Ban_Pong_District
+0.12516908588677741
+http://dbpedia.org/resource/Pong_Saen_Thong
+0.12516908588677741
+http://dbpedia.org/resource/Wang_Pong_District
+0.12516908588677741
+http://dbpedia.org/resource/Phu_Pha_Man_District
+0.11816222611609961
+http://dbpedia.org/resource/Thong_Pha_Phum_District
+0.11816222611609961
+http://dbpedia.org/resource/Tha_Pha,_Chiang_Mai
+0.11816222611609961
+http://dbpedia.org/resource/Tha_Wang_Pha_District
+0.11816222611609961
+/home/zola/anaconda3/envs/tf36/lib/python3.6/site-packages/scipy/sparse/compressed.py:746: SparseEfficiencyWarning: Changing the sparsity structure of a csr_matrix is expensive. lil_matrix is more efficient.
+  SparseEfficiencyWarning)
+134 In which time zone is Pong Pha?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Pong_Pha> <http://dbpedia.org/ontology/timeZone> ?uri } 
+['pong pha']
+[{'http://dbpedia.org/resource/Thailand': 1.0}]
+[{'http://dbpedia.org/resource/Time_in_Thailand': 1.0}]
+
+
+http://dbpedia.org/resource/1994_Spanish_Grand_Prix
+1
+http://dbpedia.org/resource/1994_Australian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Belgian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Brazilian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_British_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Canadian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_European_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_French_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_German_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Hungarian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Italian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Japanese_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Monaco_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Pacific_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Portuguese_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1989_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1990_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1991_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1992_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1993_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1970_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1971_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1972_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1973_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1974_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1975_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1976_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1977_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1978_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1935_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1979_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1980_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1981_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1967_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1968_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1969_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2002_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2003_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2004_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2005_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2006_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2010_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2013_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2014_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2012_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2009_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2007_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2008_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2011_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1995_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1996_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2015_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1951_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1997_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1998_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1999_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1986_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1987_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1988_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2000_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2001_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1954_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1994_San_Marino_Grand_Prix
+0.19772453832838047
+1839 Which driver had the pole position in 1994 Spanish Grand Prix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1994_Spanish_Grand_Prix> <http://dbpedia.org/ontology/poleDriver> ?uri } 
+['1994 spanish grand prix']
+[{'http://dbpedia.org/resource/Michael_Schumacher': 1.0}]
+[{'http://dbpedia.org/resource/Ayrton_Senna': 1.0}]
+
+
+http://dbpedia.org/resource/Sierra_del_Carmen
+0.2040263796840599
+http://dbpedia.org/resource/Sierra_del_Lacandón
+0.2040263796840599
+http://dbpedia.org/resource/Sierra_del_Merendón
+1
+http://dbpedia.org/resource/Sierra_del_Sueve
+0.2040263796840599
+http://dbpedia.org/resource/Sierra_del_Tigre
+0.2040263796840599
+http://dbpedia.org/resource/Sierra_Madre_del_Sur
+0.1796768549323938
+http://dbpedia.org/resource/Sierra_del_Lacandón__Sierra_del_Lacandón__1
+0.1796768549323938
+http://dbpedia.org/resource/Sierra_del_Sueve__Sierra_del_Sueve__1
+0.1796768549323938
+http://dbpedia.org/resource/Sierra_del_Escudo_de_Cabuérniga
+0.16051963657770904
+http://dbpedia.org/resource/Villanueva_del_Rebollar_de_la_Sierra
+0.14505393721701654
+http://dbpedia.org/resource/Güéjar_Sierra
+0.13284256969538036
+http://dbpedia.org/resource/Sierra,_Abangares
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Arana
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Carapé
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_College
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Colorada
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Island
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Leone
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Madrona
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Maestra
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Mixe
+0.13284256969538036
+http://dbpedia.org/resource/Sierra_Mojada
+0.13284256969538036
+2450 In which country is Sierra del Merendin?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sierra_del_Merendón> <http://dbpedia.org/ontology/country> ?uri  . }
+['sierra del merendin']
+[{'http://dbpedia.org/resource/Guatemala': 1.0}, {'http://dbpedia.org/resource/Honduras': 1.0}]
+[{'http://dbpedia.org/resource/Spain': 1.0}, {'http://dbpedia.org/resource/Mexico': 1.0}]
+
+
+http://dbpedia.org/resource/England_national_under-20_football_team
+1
+http://dbpedia.org/resource/China_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Cuba_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Croatia_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Curaçao_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Chile_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Colombia_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Guatemala_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Guyana_under-20_national_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Fiji_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/France_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Ghana_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Gambia_under-20_national_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Kuwait_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Libya_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Ecuador_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Egypt_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Denmark_under-20_national_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Brazil_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Bolivia_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Bermuda_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Nigeria_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Poland_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Portugal_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Panama_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Peru_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Qatar_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Qatar_under-20_national_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Rwanda_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Nepal_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Indonesia_under-20_national_football_team
+0.2336804922743967
+http://dbpedia.org/resource/India_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Honduras_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Japan_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Italy_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Iran_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Iraq_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Jamaica_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Jordan_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Eritrea_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Algeria_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Spain_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Serbia_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Syria_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Switzerland_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Suriname_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Morocco_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Myanmar_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Mexico_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Guadeloupe_under-20_national_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Afghanistan_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Argentina_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Turkey_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Thailand_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Yugoslavia_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Yemen_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Uzbekistan_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Uruguay_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/Venezuela_national_under-20_football_team
+0.2336804922743967
+http://dbpedia.org/resource/England_national_football_team
+0.2292339180768958
+http://dbpedia.org/resource/Costa_Rica_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/Germany_womens_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/El_Salvador_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/Dominican_Republic_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/New_Zealand_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/Paraguay_mens_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/Saudi_Arabia_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/North_Korea_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/Japan_womens_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/Ivory_Coast_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/South_Korea_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/South_Africa_national_under-20_football_team
+0.21116589420895301
+http://dbpedia.org/resource/England_national_football_B_team
+0.2047929410551398
+http://dbpedia.org/resource/England_national_football_C_team
+0.2047929410551398
+http://dbpedia.org/resource/England_national_under-16_football_team
+0.2047929410551398
+http://dbpedia.org/resource/England_national_under-17_football_team
+0.2047929410551398
+http://dbpedia.org/resource/England_national_under-18_football_team
+0.2047929410551398
+http://dbpedia.org/resource/England_national_under-19_football_team
+0.2047929410551398
+http://dbpedia.org/resource/England_national_under-21_football_team
+0.2047929410551398
+http://dbpedia.org/resource/England_womens_national_football_team
+0.2047929410551398
+http://dbpedia.org/resource/New_Zealand_womens_national_under-20_football_team
+0.19260851478778065
+http://dbpedia.org/resource/South_Korea_womens_national_under-20_football_team
+0.19260851478778065
+http://dbpedia.org/resource/Antigua_and_Barbuda_national_under-20_football_team
+0.19260851478778065
+http://dbpedia.org/resource/Trinidad_and_Tobago_national_under-20_football_team
+0.19260851478778065
+http://dbpedia.org/resource/United_Arab_Emirates_national_under-20_football_team
+0.19260851478778065
+http://dbpedia.org/resource/Australia_national_under-20_soccer_team
+0.19256636568779265
+http://dbpedia.org/resource/England_womens_national_under-19_football_team
+0.18506158624999616
+http://dbpedia.org/resource/England_womens_national_under-23_football_team
+0.18506158624999616
+http://dbpedia.org/resource/Englands_U-15_National_Team
+0.1832130290091094
+http://dbpedia.org/resource/Saint_Kitts_and_Nevis_under-20_national_football_team
+0.17704930902105415
+http://dbpedia.org/resource/Canada_mens_national_under-20_soccer_team
+0.17401302108186154
+http://dbpedia.org/resource/England_national_under-21_football_team
+1
+http://dbpedia.org/resource/England_national_football_team
+0.23436801699331078
+http://dbpedia.org/resource/Croatia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Cyprus_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Czechoslovakia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/France_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Greece_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Finland_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Germany_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Georgia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Kyrgyzstan_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Kyrgyzstan_under-21_national_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Kazakhstan_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Lithuania_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Latvia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Liechtenstein_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Macedonia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Malta_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Luxembourg_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Denmark_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Bulgaria_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Brunei_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Belarus_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Belgium_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Norway_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Netherlands_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Poland_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Portugal_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Philippines_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Scotland_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Romania_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Russia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Indonesia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Iceland_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Hungary_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Italy_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Israel_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Estonia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Spain_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Serbia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Switzerland_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Sweden_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Slovakia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Slovenia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Montenegro_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Montserrat_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Moldova_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Armenia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Andorra_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Austria_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Azerbaijan_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Albania_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Ukraine_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Turkey_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Turkmenistan_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Yugoslavia_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Wales_national_under-21_football_team
+0.2321951555372651
+http://dbpedia.org/resource/Czech_Republic_national_under-21_football_team
+0.20982367944994426
+http://dbpedia.org/resource/East_Germany_national_under-21_football_team
+0.20982367944994426
+http://dbpedia.org/resource/El_Salvador_national_under-21_football_team
+0.20982367944994426
+http://dbpedia.org/resource/Northern_Ireland_national_under-21_football_team
+0.20982367944994426
+http://dbpedia.org/resource/San_Marino_national_under-21_football_team
+0.20982367944994426
+http://dbpedia.org/resource/Soviet_Union_national_under-21_football_team
+0.20982367944994426
+http://dbpedia.org/resource/Turkey_womens_national_under-21_football_team
+0.20982367944994426
+http://dbpedia.org/resource/England_national_football_B_team
+0.2093796410757184
+http://dbpedia.org/resource/England_national_football_C_team
+0.2093796410757184
+http://dbpedia.org/resource/England_national_under-16_football_team
+0.2093796410757184
+http://dbpedia.org/resource/England_national_under-17_football_team
+0.2093796410757184
+http://dbpedia.org/resource/England_national_under-18_football_team
+0.2093796410757184
+http://dbpedia.org/resource/England_national_under-19_football_team
+0.2093796410757184
+http://dbpedia.org/resource/England_national_under-20_football_team
+0.2093796410757184
+http://dbpedia.org/resource/England_womens_national_football_team
+0.2093796410757184
+http://dbpedia.org/resource/Bosnia_and_Herzegovina_national_under-21_football_team
+0.191384239561932
+http://dbpedia.org/resource/Republic_of_Ireland_national_under-21_football_team
+0.191384239561932
+http://dbpedia.org/resource/England_womens_national_under-19_football_team
+0.1892063676916213
+http://dbpedia.org/resource/England_womens_national_under-23_football_team
+0.1892063676916213
+http://dbpedia.org/resource/Englands_U-15_National_Team
+0.18731640874278926
+3213 Give the name of the  managers of England national under-20 football team and England national under-21 football team?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/managerclubs> <http://dbpedia.org/resource/England_national_under-20_football_team> . ?uri <http://dbpedia.org/property/managerclubs> <http://dbpedia.org/resource/England_national_under-21_football_team> . }
+['england national under20 football team', 'england national under21 football team']
+[{'http://dbpedia.org/resource/Gareth_Southgate': 1.0}, {'http://dbpedia.org/resource/Peter_Taylor_(footballer,_born_1953)': 1.0}]
+[{'http://dbpedia.org/resource/Howard_Wilkinson': 1.0}]
+
+
+http://dbpedia.org/resource/Menetriess_warbler
+1
+http://dbpedia.org/resource/Cettis_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Cerulean_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Chestnut-crowned_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Chestnut-sided_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Chestnut-vented_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Crescent-chested_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Cricket_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Citrine_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Cinnamon-breasted_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Connecticut_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Cyprus_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Colima_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Garden_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Golden-bellied_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Golden-browed_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Golden-cheeked_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Golden-crowned_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Golden-winged_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Graces_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Green-crowned_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Green-tailed_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grauers_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grey-and-gold_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grey-capped_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grey-cheeked_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grey-crowned_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grey-headed_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grey-hooded_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grey-throated_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Grey_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Green_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Greenish_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Flame-throated_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Flavescent_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Hermit_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Knysna_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Kirtlands_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Kentucky_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Layards_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Lemon-rumped_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Magnolia_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Lanceolated_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Lucys_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Dartford_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Dusky_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Fan-tailed_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Bay-breasted_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Broad-billed_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Canada_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Buff-barred_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Buff-bellied_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Buff-rumped_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Buff-throated_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Bianchis_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Booted_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Barbuda_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Bachmans_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Balearic_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Bamboo_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Barratts_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Barred_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Black-and-white_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Black-cheeked_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Black-crested_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Black-faced_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Blackpoll_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Blunt-winged_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Blue-winged_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Pale-legged_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Palm_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Paddyfield_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Oriente_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Orange-crowned_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Oriole_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Neumanns_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Nashville_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Namaqua_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Prairie_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Plumbeous_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Pirre_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Pine_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Pink-headed_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Prothonotary_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Raddes_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Rands_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Savis_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Sedge_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Sardinian_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Red-faced_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Red-fronted_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Red-winged_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Red_warbler
+0.11424892713768553
+http://dbpedia.org/resource/River_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Riverbank_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Rodrigues_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Robertss_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Rxc3xbcppells_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Russet-crowned_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Rufous-capped_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Rufous-eared_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Rufous-faced_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Olive-capped_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Olive-tree_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Olive_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Icterine_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Hooded_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Blackburnian_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Speckled_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Spectacled_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Subalpine_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Sunda_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Sykess_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Smoky_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Socotra_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Seychelles_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Swainsons_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Sulphur-bellied_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Sulphur-breasted_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Moltonis_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Marsh_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Melodious_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Marmoras_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Mourning_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Moustached_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Ashy-throated_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Arrowhead_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Adelaides_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Alstrxc3xb6ms_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Arctic_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Aquatic_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Arabian_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Tennessee_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Thick-billed_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Three-banded_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Three-striped_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Townsends_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Tristrams_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Two-banded_warbler
+0.11424892713768553
+http://dbpedia.org/resource/Two-barred_warbler
+0.11424892713768553
+3237 What are the binomial authority of Menetries's warbler?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Menetries's_warbler> <http://dbpedia.org/ontology/binomialAuthority> ?uri } 
+['menetriess warbler']
+[{'http://dbpedia.org/resource/Azerbaijan': 1.0}, {'http://dbpedia.org/resource/Kura_River': 1.0}, {'http://dbpedia.org/resource/Salyana': 1.0}, {'http://dbpedia.org/resource/Transcaucasia': 1.0}, {'http://dbpedia.org/resource/Édouard_Ménétries': 1.0}]
+[{'http://dbpedia.org/resource/Alexander_Wilson': 1.0}]
+
+
+http://dbpedia.org/resource/1994_Spanish_Grand_Prix
+1
+http://dbpedia.org/resource/1994_Belgian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Brazilian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_British_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Canadian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_European_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_French_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_German_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Hungarian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Italian_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Japanese_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Monaco_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Pacific_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1994_Portuguese_Grand_Prix
+0.22132194158775106
+http://dbpedia.org/resource/1989_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1990_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1991_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1992_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1993_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1970_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1971_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1972_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1973_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1974_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1975_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1976_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1977_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1978_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1935_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1979_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1980_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1981_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1967_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1968_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1969_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2002_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2003_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2004_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2005_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2006_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2010_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2013_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2014_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2012_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2009_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2007_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2008_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2011_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1995_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1996_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2015_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1951_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1997_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1998_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1999_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1986_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1987_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1988_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2000_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/2001_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1954_Spanish_Grand_Prix
+0.22129397602189682
+http://dbpedia.org/resource/1994_San_Marino_Grand_Prix
+0.19772453832838047
+http://dbpedia.org/resource/1994_Australian_FAI_Indycar_Grand_Prix
+0.17867421623255908
+http://dbpedia.org/resource/Czechoslovakian_Grand_Prix
+0.161942972744738
+3302 Name  the Pole driver of 1994 Spanish Grand Prix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1994_Spanish_Grand_Prix> <http://dbpedia.org/property/poleDriver> ?uri } 
+['1994 spanish grand prix']
+[{'http://dbpedia.org/resource/Michael_Schumacher': 1.0}]
+[{'http://dbpedia.org/resource/Ayrton_Senna': 1.0}]
+
+
+http://dbpedia.org/resource/Sverre_Krogh_Sundbø
+1
+http://dbpedia.org/resource/Egil_Krogh
+0.10934732934833884
+http://dbpedia.org/resource/Jeff_Krogh
+0.10934732934833884
+http://dbpedia.org/resource/Søren_Krogh
+0.10934732934833884
+http://dbpedia.org/resource/Morten_Krogh
+0.10934732934833884
+http://dbpedia.org/resource/Andreas_Krogh
+0.10934732934833884
+http://dbpedia.org/resource/August_Krogh
+0.10934732934833884
+http://dbpedia.org/resource/Sverre_Andersen
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Bjørkkjær
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Brandhaug
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Diesen
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Farstad
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Fehn
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Fredheim
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Gillebo
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Gjørvad
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Granlund
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Kolterud
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Munck
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Petterssen
+0.10385697667358355
+http://dbpedia.org/resource/Sverre_Sears
+0.10385697667358355
+http://dbpedia.org/resource/Finn_Hågen_Krogh
+0.09452875178798906
+http://dbpedia.org/resource/Lars_Krogh_Gerson
+0.09452875178798906
+http://dbpedia.org/resource/Lars_Krogh_Jeppesen
+0.09452875178798906
+http://dbpedia.org/resource/Ove_Krogh_Rants
+0.09452875178798906
+http://dbpedia.org/resource/J._T._Krogh
+0.09452875178798906
+http://dbpedia.org/resource/Mathias_Bonsach_Krogh
+0.09452875178798906
+http://dbpedia.org/resource/Sverre_Andreas_Jakobsson
+0.0897824449012848
+http://dbpedia.org/resource/Sverre_Anker_Ousdal
+0.0897824449012848
+http://dbpedia.org/resource/Sverre_B._Hamre
+0.0897824449012848
+http://dbpedia.org/resource/Sverre_Dick_Henriksen
+0.0897824449012848
+http://dbpedia.org/resource/Sverre_Erik_Jebens
+0.0897824449012848
+http://dbpedia.org/resource/Sverre_Hansen_(footballer)
+0.0897824449012848
+http://dbpedia.org/resource/Sverre_Johan_Juvik
+0.0897824449012848
+http://dbpedia.org/resource/Sverre_Lunde_Pedersen
+0.0897824449012848
+http://dbpedia.org/resource/Bobbo_Petersson
+0.25297125896039424
+http://dbpedia.org/resource/Bo_Petersson
+0.25297125896039424
+http://dbpedia.org/resource/Ingvar_Petersson
+0.25297125896039424
+http://dbpedia.org/resource/Simon_Petersson
+0.25297125896039424
+http://dbpedia.org/resource/André_Petersson
+0.25297125896039424
+http://dbpedia.org/resource/Alexander_Petersson
+0.25297125896039424
+http://dbpedia.org/resource/Harald_G._Petersson
+0.2186889773508284
+http://dbpedia.org/resource/Håvard_Vad_Petersson
+1
+http://dbpedia.org/resource/Julie_Tavlo_Petersson
+0.2186889773508284
+http://dbpedia.org/resource/Peter_Pettersson
+0.12609019243365113
+http://dbpedia.org/resource/Siv_Pettersson
+0.1077503366634116
+http://dbpedia.org/resource/Tom_Pettersson
+0.1077503366634116
+http://dbpedia.org/resource/Emil_Pettersson
+0.10527006058809259
+http://dbpedia.org/resource/Bror_Pettersson
+0.10527006058809259
+http://dbpedia.org/resource/Sven_Pettersson
+0.10527006058809259
+http://dbpedia.org/resource/Adam_Pettersson
+0.10527006058809259
+http://dbpedia.org/resource/Gösta_Pettersson
+0.10175660876956674
+http://dbpedia.org/resource/Hanna_Pettersson
+0.10175660876956674
+http://dbpedia.org/resource/Carl_Axel_Pettersson
+0.10175660876956674
+http://dbpedia.org/resource/Sture_Pettersson
+0.10175660876956674
+http://dbpedia.org/resource/Arvid_Pettersson
+0.10175660876956674
+http://dbpedia.org/resource/Tomas_Pettersson
+0.10175660876956674
+http://dbpedia.org/resource/Tommy_Pettersson
+0.10175660876956674
+http://dbpedia.org/resource/Timmy_Pettersson
+0.10175660876956674
+http://dbpedia.org/resource/Petter_Pettersson
+0.10014667822163224
+http://dbpedia.org/resource/Ulf_Kristersson
+0.09786710954327746
+http://dbpedia.org/resource/Daniel_Pettersson
+0.09742127374626182
+http://dbpedia.org/resource/Bjarne_Pettersson
+0.09742127374626182
+http://dbpedia.org/resource/Ronney_Pettersson
+0.09742127374626182
+http://dbpedia.org/resource/Ronnie_Pettersson
+0.09742127374626182
+http://dbpedia.org/resource/Ronald_Pettersson
+0.09742127374626182
+http://dbpedia.org/resource/Jesper_Pettersson
+0.09742127374626182
+http://dbpedia.org/resource/Marcus_Pettersson
+0.09742127374626182
+http://dbpedia.org/resource/Martin_Pettersson
+0.09742127374626182
+http://dbpedia.org/resource/Fredrik_Pettersson
+0.09344025249038843
+http://dbpedia.org/resource/Hjalmar_Pettersson
+0.09344025249038843
+http://dbpedia.org/resource/Lennart_Pettersson
+0.09344025249038843
+http://dbpedia.org/resource/Lars_Pettersson_(ice_hockey)
+0.09344025249038843
+http://dbpedia.org/resource/Ann-Sofi_Pettersson
+0.09344025249038843
+http://dbpedia.org/resource/Johan_Pettersson_(athlete)
+0.09210169899354961
+http://dbpedia.org/resource/Erik_Pettersson_(cyclist)
+0.09156931718878615
+http://dbpedia.org/resource/Håkan_Pettersson_(ice_hockey)
+0.09156931718878615
+http://dbpedia.org/resource/Molly_Pettersson_Hammar
+0.09156931718878615
+http://dbpedia.org/resource/Christer_Pettersson
+0.09081025195752357
+http://dbpedia.org/resource/Jeanette_Pettersson
+0.08977183119384823
+http://dbpedia.org/resource/Birgitta_Pettersson
+0.08977183119384823
+4390 Where were sverre krogh sundbo and havard vad petersson born?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sverre_Krogh_Sundbø> <http://dbpedia.org/property/birthPlace> ?uri. <http://dbpedia.org/resource/Håvard_Vad_Petersson> <http://dbpedia.org/property/placeOfBirth> ?uri} 
+['petersson', 'sverre krogh sundbo']
+[{'http://dbpedia.org/resource/Oslo': 1.0}]
+[{'http://dbpedia.org/resource/Norway': 1.0}]
+
+
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Rousey_vs._Team_Tate
+1
+http://dbpedia.org/resource/Strikeforce:_Tate_vs._Rousey
+0.20366325638772106
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Bisping_vs._Team_Miller
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Carwin_vs._Team_Nelson
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Edgar_vs._Team_Penn
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_GSP_vs._Team_Koscheck
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Hughes_vs._Team_Serra
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Jones_vs._Team_Sonnen
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Liddell_vs._Team_Ortiz
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Nogueira_vs._Team_Mir
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Rampage_vs._Team_Forrest
+0.18688049070960047
+http://dbpedia.org/resource/The_Ultimate_Fighter:_American_Top_Team_vs._Blackzilians
+0.17178400293528598
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Lesnar_vs._Team_dos_Santos
+0.17178400293528598
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_McGregor_vs._Team_Faber
+0.17178400293528598
+http://dbpedia.org/resource/Strikeforce:_Rousey_vs._Kaufman
+0.13933155688396476
+http://dbpedia.org/resource/The_Ultimate_Fighter:_United_States_vs._United_Kingdom
+0.1348975002529368
+http://dbpedia.org/resource/The_Ultimate_Fighter_Nations:_Canada_vs._Australia
+0.1348975002529368
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Heavyweights
+0.1331524520242868
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Live
+0.1331524520242868
+http://dbpedia.org/resource/The_Ultimate_Fighter:_The_Smashes
+0.1331524520242868
+http://dbpedia.org/resource/The_Ultimate_Fighter_1
+0.1331524520242868
+http://dbpedia.org/resource/The_Ultimate_Fighter_2
+0.1331524520242868
+http://dbpedia.org/resource/The_Ultimate_Fighter_3
+0.1331524520242868
+http://dbpedia.org/resource/The_Ultimate_Fighter_4
+0.1331524520242868
+http://dbpedia.org/resource/The_Ultimate_Fighter_5
+0.1331524520242868
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Brazil_2
+0.11895569400375199
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Brazil_3
+0.11895569400375199
+http://dbpedia.org/resource/The_Ultimate_Fighter:_Latin_America_2
+0.10749458471432767
+4972 In which city did The Ultimate Fighter: Team Rousey vs. Team Tate take place ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Rousey_vs._Team_Tate> <http://dbpedia.org/property/city> ?uri } 
+['the ultimate fighter team rousey vs team tate']
+[{'http://dbpedia.org/resource/Las_Vegas_Valley': 1.0}, {'http://dbpedia.org/resource/Nevada': 1.0}]
+[{'http://dbpedia.org/resource/Las_Vegas': 1.0}]
+
+
+
+Fin. Results for 8 questions:
+P: 0.58 R: 1.00
+Number of errors: 8
+['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
+Number of questions with missing entity matches: 0
+Number of questions with incorrect question type detection: 0
+Number of questions with missing spans: 0
+
+25 Did Timm Gunn guest in Sunrise (HIMYM)?
+ASK WHERE { <http://dbpedia.org/resource/Sunrise_(How_I_Met_Your_Mother)> <http://dbpedia.org/property/guests> <http://dbpedia.org/resource/Tim_Gunn> }
+['timm gunn', 'sunrise']
+Missing entity match: http://dbpedia.org/resource/Sunrise_(How_I_Met_Your_Mother)
+[]
+[{'http://dbpedia.org/resource/Girls_Versus_Suits': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_Conan_episodes_(2010–11)': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_Late_Night_with_Conan_OBrien_episodes_(season_13)': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_Late_Night_with_Conan_OBrien_episodes_(season_14)': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_Late_Night_with_Jimmy_Fallon_episodes_(2009)': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_Late_Night_with_Jimmy_Fallon_episodes_(2013–14)': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_Late_Night_with_Seth_Meyers_episodes_(2015)': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_Lopez_Tonight_episodes': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_The_Late_Late_Show_with_Craig_Ferguson_episodes_(2008)': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_The_Late_Late_Show_with_Craig_Ferguson_episodes_(2009)': 0.577769232064581}, {'http://dbpedia.org/resource/List_of_The_Tonight_Show_Starring_Jimmy_Fallon_episodes_(2015)': 0.5388846160322904}, {'http://dbpedia.org/resource/List_of_The_Tonight_Show_with_Conan_OBrien_episodes': 0.5388846160322904}, {'http://dbpedia.org/resource/Sunrise_(How_I_Met_Your_Mother)': 0.5388846160322904}, {'http://dbpedia.org/resource/The_Broken_Code': 0.5388846160322904}, {'http://dbpedia.org/resource/The_End_of_the_Aisle': 0.5388846160322904}]
+
+
+56 Who started at the pole position in both 1997 canadian grand prix and the 94 spanish one?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1997_Canadian_Grand_Prix> <http://dbpedia.org/property/poleDriver> ?uri. <http://dbpedia.org/resource/1994_Spanish_Grand_Prix> <http://dbpedia.org/property/poleDriver> ?uri . }
+['1997 canadian grand prix', '94 spanish one']
+Missing entity match: http://dbpedia.org/resource/1994_Spanish_Grand_Prix
+[]
+[]
+
+
+118 who all have been a manager of english under twenty one football team?
+ SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/managerclubs> <http://dbpedia.org/resource/England_national_under-21_football_team> } 
+['twenty one']
+Missing entity match: http://dbpedia.org/resource/England_national_under-21_football_team
+[]
+[]
+
+
+126 Count all the different purposes followed by the different NGOs.
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/type> <http://dbpedia.org/resource/Non-governmental_organization> . ?x <http://dbpedia.org/property/purpose> ?uri  . }
+['ngos']
+Missing entity match: http://dbpedia.org/resource/Non-governmental_organization
+[]
+[]
+[]
+
+
+128 How many things are crossed over by bridges which can carry cars?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/carries> <http://dbpedia.org/resource/Motor_vehicle> . ?x <http://dbpedia.org/property/crosses> ?uri  . }
+['cars']
+Missing entity match: http://dbpedia.org/resource/Motor_vehicle
+[]
+[]
+[]
+
+
+134 In which time zone is Pong Pha?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Pong_Pha> <http://dbpedia.org/ontology/timeZone> ?uri } 
+['pong pha']
+[{'http://dbpedia.org/resource/Thailand': 1.0}]
+[{'http://dbpedia.org/resource/Time_in_Thailand': 1.0}]
+
+
+147 What system is both a platform where Nord runs and also distributed The beauty inside?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Nord_(video_game)> <http://dbpedia.org/ontology/computingPlatform> ?uri. <http://dbpedia.org/resource/The_Beauty_Inside> <http://dbpedia.org/ontology/distributor> ?uri . }
+['nord', 'the beauty inside']
+Missing entity match: http://dbpedia.org/resource/Nord_(video_game)
+[]
+[]
+
+
+162 Where was the narrator of Spain on the Road Again born?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Spain..._on_the_Road_Again> <http://dbpedia.org/ontology/narrator> ?x . ?x <http://dbpedia.org/property/birthPlace> ?uri  . }
+['spain']
+Missing entity match: http://dbpedia.org/resource/Spain..._on_the_Road_Again
+[]
+[]
+[]
+
+
+468 What is the largest city of the country which hosted the 1951 Asian Games?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1951_Asian_Games> <http://dbpedia.org/property/hostCity> ?x . ?x <http://dbpedia.org/ontology/largestCity> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Country>}
+['1951 asian games']
+[{'http://dbpedia.org/resource/India': 1.0}, {'http://dbpedia.org/resource/Indonesia': 1.0}, {'http://dbpedia.org/resource/China': 1.0}]
+[{'http://dbpedia.org/resource/Mumbai': 1.0}]
+[{'http://dbpedia.org/resource/Shanghai': 1.0}]
+
+
+475 Where do current famous NatGeo photographers live?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/knownFor> <http://dbpedia.org/resource/National_Geographic_(magazine)> . ?x <http://dbpedia.org/ontology/residence> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Photographer>}
+['current']
+Missing entity match: http://dbpedia.org/resource/National_Geographic_(magazine)
+[]
+[]
+[]
+
+
+489 Name the common university of the Cardinal and Jim Wylie?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Stanford_Cardinal> <http://dbpedia.org/ontology/university> ?uri. <http://dbpedia.org/resource/Jim_Wylie> <http://dbpedia.org/ontology/university> ?uri . }
+['jim wylie', 'cardinal']
+Missing entity match: http://dbpedia.org/resource/Stanford_Cardinal
+[]
+[]
+
+
+538 Which parties have their members live in the PM House, Colombo?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/residence> <http://dbpedia.org/resource/Prime_Minister's_House_(Colombo)> . ?uri <http://dbpedia.org/ontology/leader> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/PoliticalParty>}
+['colombo']
+Missing entity match: http://dbpedia.org/resource/Prime_Ministers_House_(Colombo)
+[]
+[]
+[]
+
+
+609 How many religions are practiced by diplomats?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/profession> <http://dbpedia.org/resource/Diplomacy> . ?x <http://dbpedia.org/property/religion> ?uri  . }
+['']
+Missing entity match: http://dbpedia.org/resource/Diplomacy
+[]
+[]
+[]
+
+
+624 Name the airlines which have a hub in airport in SF?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/cityServed> <http://dbpedia.org/resource/San_Francisco> . ?uri <http://dbpedia.org/property/hubs> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Airline>}
+['']
+Missing entity match: http://dbpedia.org/resource/San_Francisco
+[]
+[]
+[]
+
+
+636 Who is the prime minister of Michael Jeffery who is also the minister of Williuam Deane ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Michael_Jeffery> <http://dbpedia.org/property/primeminister> ?uri. <http://dbpedia.org/resource/William_Deane> <http://dbpedia.org/ontology/primeMinister> ?uri} 
+['', 'michael jeffery']
+Missing entity match: http://dbpedia.org/resource/William_Deane
+[]
+[]
+
+
+646 What is the military conflict whose commanders are John McEwen and Phm Vn ng?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/commander> <http://dbpedia.org/resource/John_McEwen> . ?uri <http://dbpedia.org/ontology/commander> <http://dbpedia.org/resource/Phạm_Văn_Đồng> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MilitaryConflict>}
+['john mcewen', '']
+Missing entity match: http://dbpedia.org/resource/Phạm_Văn_Đồng
+Missing entity match: http://dbpedia.org/resource/John_McEwen
+[]
+[]
+
+
+647 In which countries have models hanged themselves?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/deathCause> <http://dbpedia.org/resource/Suicide_by_hanging> . ?x <http://dbpedia.org/property/citizenship> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Model>}
+['']
+Missing entity match: http://dbpedia.org/resource/Suicide_by_hanging
+[]
+[]
+[]
+
+
+816 List presidents of the school whose one of the president is Charles. Prince of Wales ?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/president> <http://dbpedia.org/resource/Charles,_Prince_of_Wales> . ?x <http://dbpedia.org/property/president> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/School>}
+['']
+Missing entity match: http://dbpedia.org/resource/Charles,_Prince_of_Wales
+[]
+[]
+[]
+
+
+873 Which composer of Motorpsycho Nitemare has also composed The time are A-Changing ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Motorpsycho_Nitemare> <http://dbpedia.org/property/composer> ?uri. <http://dbpedia.org/resource/The_Times_They_Are_a-Changin'_(musical)> <http://dbpedia.org/ontology/musicBy> ?uri} 
+['motorpsycho nitemare', '']
+Missing entity match: http://dbpedia.org/resource/The_Times_They_Are_a-Changin_(musical)
+[]
+[]
+
+
+976 Which fields of the Paul Demiville is also the faith of Koay Teng Hai ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Paul_Demiéville> <http://dbpedia.org/property/fields> ?uri. <http://dbpedia.org/resource/Koay_Teng_Hai> <http://dbpedia.org/ontology/religion> ?uri} 
+['', 'koay teng hai']
+Missing entity match: http://dbpedia.org/resource/Paul_Demiéville
+[]
+[]
+
+
+981 Which leader of United States House of Representatives was the appinter of ohn Drayton ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/United_States_House_of_Representatives_elections,_1788_and_1789> <http://dbpedia.org/property/leader> ?uri. <http://dbpedia.org/resource/John_Drayton> <http://dbpedia.org/property/appointer> ?uri} 
+['drayton ohn', 'representatives united states']
+Missing entity match: http://dbpedia.org/resource/United_States_House_of_Representatives_elections,_1788_and_1789
+[]
+[]
+
+
+1063 What are the common houses of US Congress and the Kansas Legislature?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/United_States_Congress> <http://dbpedia.org/property/houses> ?uri. <http://dbpedia.org/resource/Kansas_Legislature> <http://dbpedia.org/ontology/house> ?uri} 
+['us congress', 'kansas legislature']
+Missing entity match: http://dbpedia.org/resource/United_States_Congress
+[]
+[]
+
+
+1078 Name the co-founder of the record labels which have one of the founder as Chris DuBois ?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/founder> <http://dbpedia.org/resource/Chris_DuBois> . ?x <http://dbpedia.org/property/founder> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/RecordLabel>}
+['chris dubois']
+Missing entity match: http://dbpedia.org/resource/Chris_DuBois
+[]
+[]
+[]
+
+
+1218 Name the fictional character whose relative are Duck family and Clan McDuck?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/relative> <http://dbpedia.org/resource/Duck_family_(Disney)> . ?uri <http://dbpedia.org/property/relatives> <http://dbpedia.org/resource/Clan_McDuck>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/FictionalCharacter>}
+['clan mcduck', 'duck family']
+Missing entity match: http://dbpedia.org/resource/Clan_McDuck
+[]
+[]
+
+
+1276 Which venue of indy PopCon is also the death palce of Louis Le Cocqq ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Indy_PopCon> <http://dbpedia.org/property/venue> ?uri. <http://dbpedia.org/resource/Louis_LeCocq> <http://dbpedia.org/property/placeOfDeath> ?uri} 
+['indy popcon', 'louis']
+Missing entity match: http://dbpedia.org/resource/Indy_PopCon
+Missing entity match: http://dbpedia.org/resource/Louis_LeCocq
+[]
+[]
+
+
+1292 What territory of Sino French War was the battle of Raoul Magrin-Vernerey fought ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sino-French_War> <http://dbpedia.org/ontology/territory> ?uri. <http://dbpedia.org/resource/Raoul_Magrin-Vernerey> <http://dbpedia.org/property/battles> ?uri} 
+['raoul magrinvernerey', 'french sino war']
+Missing entity match: http://dbpedia.org/resource/Sino-French_War
+[]
+[]
+
+
+1343 Name the common alma mater of the Henry Morton Dexter and Jack McGregor
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Henry_Morton_Dexter> <http://dbpedia.org/ontology/education> ?uri. <http://dbpedia.org/resource/Jack_McGregor> <http://dbpedia.org/ontology/education> ?uri . }
+['henry morton dexter', 'jack mcgregor']
+Missing entity match: http://dbpedia.org/resource/Jack_McGregor
+[]
+[]
+
+
+1446 Which team has had both Martin prochzka and garry unger as its players ?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Martin_Procházka> <http://dbpedia.org/ontology/formerTeam> ?uri. <http://dbpedia.org/resource/Garry_Unger> <http://dbpedia.org/ontology/formerTeam> ?uri . }
+['', 'garry unger']
+Missing entity match: http://dbpedia.org/resource/Martin_Procházka
+[]
+[]
+
+
+1529 Which models were featured in Playboy Playmates 1954?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/succeeded> <http://dbpedia.org/resource/List_of_Playboy_Playmates_of_1954>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/PlayboyPlaymate>}
+['1954']
+Missing entity match: http://dbpedia.org/resource/List_of_Playboy_Playmates_of_1954
+[]
+[]
+
+
+1636 Name the television show directed by Simon Fuller and judged by Jennifier Lopez ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/creator> <http://dbpedia.org/resource/Simon_Fuller> . ?uri <http://dbpedia.org/property/judges> <http://dbpedia.org/resource/Jennifer_Lopez>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+['simon fuller', '']
+Missing entity match: http://dbpedia.org/resource/Jennifer_Lopez
+[]
+[]
+
+
+1637 Give me some shows owned by BBC one and BBC hd?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/network> <http://dbpedia.org/resource/BBC_One> . ?uri <http://dbpedia.org/ontology/network> <http://dbpedia.org/resource/BBC_HD> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+['bbc hd', 'bbc one']
+[{'http://dbpedia.org/resource/After_Youve_Gone_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Apparitions_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Around_the_World_in_80_Days_(2009_TV_series)': 1.0}, {'http://dbpedia.org/resource/Ashes_to_Ashes_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Big_&_Small': 1.0}, {'http://dbpedia.org/resource/Britain_from_Above': 1.0}, {'http://dbpedia.org/resource/Doctor_Who': 1.0}, {'http://dbpedia.org/resource/Doctor_Who_(series_5)': 1.0}, {'http://dbpedia.org/resource/Doctor_Who_Confidential': 1.0}, {'http://dbpedia.org/resource/Doctors_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Friday_Night_with_Jonathan_Ross': 1.0}, {'http://dbpedia.org/resource/Hope_Springs_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Hotel_Babylon': 1.0}, {'http://dbpedia.org/resource/Hunter_(British_TV_series)': 1.0}, {'http://dbpedia.org/resource/In_with_the_Flynns': 1.0}, {'http://dbpedia.org/resource/Judge_John_Deed': 1.0}, {'http://dbpedia.org/resource/Land_Girls_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Lark_Rise_to_Candleford_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Last_of_the_Summer_Wine': 1.0}, {'http://dbpedia.org/resource/Luther_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Michael_McIntyres_Comedy_Roadshow': 1.0}, {'http://dbpedia.org/resource/Mistresses_(UK_TV_series)': 1.0}, {'http://dbpedia.org/resource/New_Year_Live': 1.0}, {'http://dbpedia.org/resource/Prisoners_Wives': 1.0}, {'http://dbpedia.org/resource/QI': 1.0}, {'http://dbpedia.org/resource/Rock_&_Chips': 1.0}, {'http://dbpedia.org/resource/Sorted_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Survivors_(2008_TV_series)': 1.0}, {'http://dbpedia.org/resource/The_Day_of_the_Triffids_(2009_TV_miniseries)': 1.0}, {'http://dbpedia.org/resource/The_No._1_Ladies_Detective_Agency_(TV_series)': 1.0}, {'http://dbpedia.org/resource/The_One_Show': 1.0}, {'http://dbpedia.org/resource/The_Sarah_Jane_Adventures': 1.0}, {'http://dbpedia.org/resource/Waterloo_Road_(TV_series)': 1.0}]
+[{'http://dbpedia.org/resource/999_(BBC_TV_series)': 1.0}, {'http://dbpedia.org/resource/A_Kick_Up_the_Eighties': 1.0}, {'http://dbpedia.org/resource/A_Perfect_State': 1.0}, {'http://dbpedia.org/resource/A_Prince_Among_Men': 1.0}, {'http://dbpedia.org/resource/Beast_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Bedtime_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Bellamys_Backyard_Safari': 1.0}, {'http://dbpedia.org/resource/Bitsa': 1.0}, {'http://dbpedia.org/resource/Blessed_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Blue_Peter': 1.0}, {'http://dbpedia.org/resource/Car_Booty': 1.0}, {'http://dbpedia.org/resource/Clarence_(1988_TV_series)': 1.0}, {'http://dbpedia.org/resource/Crown_Prosecutor_(UK_TV_series)': 1.0}, {'http://dbpedia.org/resource/Days_of_Hope': 1.0}, {'http://dbpedia.org/resource/Down_to_Earth_(1995_TV_series)': 1.0}, {'http://dbpedia.org/resource/Down_to_Earth_(2000_TV_series)': 1.0}, {'http://dbpedia.org/resource/Eureka_(UK_TV_series)': 1.0}, {'http://dbpedia.org/resource/Fingerbobs': 1.0}, {'http://dbpedia.org/resource/For_Richer...For_Poorer': 1.0}, {'http://dbpedia.org/resource/Hard_Sell_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Hard_Spell': 1.0}, {'http://dbpedia.org/resource/Harry_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Hells_Bells_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Jack_the_Ripper_(1973_TV_series)': 1.0}, {'http://dbpedia.org/resource/Jonny_Briggs': 1.0}, {'http://dbpedia.org/resource/Journeys_into_the_Ring_of_Fire': 1.0}, {'http://dbpedia.org/resource/Kiss_of_Death_(TV_drama)': 1.0}, {'http://dbpedia.org/resource/Life_Without_George': 1.0}, {'http://dbpedia.org/resource/Lost_Christmas': 1.0}, {'http://dbpedia.org/resource/Maisie_Raine': 1.0}, {'http://dbpedia.org/resource/Mary,_Mungo_and_Midge': 1.0}, {'http://dbpedia.org/resource/Mayo_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Men_of_the_World': 1.0}, {'http://dbpedia.org/resource/My_Dads_the_Prime_Minister': 1.0}, {'http://dbpedia.org/resource/NCS:_Manhunt': 1.0}, {'http://dbpedia.org/resource/Nelsons_Column_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Not_in_Front_of_the_Children_(TV_series)': 1.0}, {'http://dbpedia.org/resource/One_Man_and_His_Dog': 1.0}, {'http://dbpedia.org/resource/Paging_You': 1.0}, {'http://dbpedia.org/resource/Picture_Book_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Ragtime_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Reporters_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Rings_on_Their_Fingers': 1.0}, {'http://dbpedia.org/resource/Robot_Wars_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Room_on_the_Broom_(film)': 1.0}, {'http://dbpedia.org/resource/Should_I_Worry_About...%3F': 1.0}, {'http://dbpedia.org/resource/Sin_on_Saturday': 1.0}, {'http://dbpedia.org/resource/So_Haunt_Me': 1.0}, {'http://dbpedia.org/resource/Sunday_Morning_Live_(BBC_TV_programme)': 1.0}, {'http://dbpedia.org/resource/Sutherlands_Law': 1.0}, {'http://dbpedia.org/resource/Thats_Britain!': 1.0}, {'http://dbpedia.org/resource/Thats_Genius!': 1.0}, {'http://dbpedia.org/resource/The_607080_Show': 1.0}, {'http://dbpedia.org/resource/The_Afternoon_Play': 1.0}, {'http://dbpedia.org/resource/The_Bionic_Vet': 1.0}, {'http://dbpedia.org/resource/The_Biz_(TV_series)': 1.0}, {'http://dbpedia.org/resource/The_Chinese_Puzzle_(TV_series)': 1.0}, {'http://dbpedia.org/resource/The_Citadel_(1983_miniseries)': 1.0}, {'http://dbpedia.org/resource/The_Collectors_(TV_series)': 1.0}, {'http://dbpedia.org/resource/The_Fall_and_Rise_of_Reginald_Perrin': 1.0}, {'http://dbpedia.org/resource/The_Legend_of_Robin_Hood': 1.0}, {'http://dbpedia.org/resource/The_Magnificent_Evans': 1.0}, {'http://dbpedia.org/resource/The_Omid_Djalili_Show': 1.0}, {'http://dbpedia.org/resource/The_Real_Swiss_Family_Robinson': 1.0}, {'http://dbpedia.org/resource/The_Tales_of_Para_Handy': 1.0}, {'http://dbpedia.org/resource/The_Thick_of_It': 1.0}, {'http://dbpedia.org/resource/The_Tower:_A_Tale_of_Two_Cities': 1.0}, {'http://dbpedia.org/resource/True_Dare_Kiss': 1.0}, {'http://dbpedia.org/resource/Turn_Back_Time_–_The_High_Street': 1.0}, {'http://dbpedia.org/resource/Twenty_Twelve': 1.0}, {'http://dbpedia.org/resource/When_Will_I_Be_Famous%3F_(TV_series)': 1.0}, {'http://dbpedia.org/resource/Whizz_Whizz_Bang_Bang': 1.0}, {'http://dbpedia.org/resource/Wizbit': 1.0}, {'http://dbpedia.org/resource/World_Business_Report': 1.0}]
+
+
+1683 List all binomial authority of the insects whose one of the  binomial authority is douard Mntries?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/binomialAuthority> <http://dbpedia.org/resource/Édouard_Ménétries> . ?x <http://dbpedia.org/ontology/binomialAuthority> ?uri  . }
+['one']
+Missing entity match: http://dbpedia.org/resource/Édouard_Ménétries
+[]
+[]
+[]
+
+
+1697 How many religions are followed amongst the people who've worked in the Korean army?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/militaryBranch> <http://dbpedia.org/resource/Republic_of_Korea_Army> . ?x <http://dbpedia.org/ontology/religion> ?uri  . }
+['korean']
+Missing entity match: http://dbpedia.org/resource/Republic_of_Korea_Army
+[]
+[]
+[]
+
+
+1807 Does Ford own the Ford Kansas Assembly plant?
+ASK WHERE { <http://dbpedia.org/resource/Ford_Kansas_City_Assembly_Plant> <http://dbpedia.org/ontology/owningOrganisation> <http://dbpedia.org/resource/Ford_Motor_Company> }
+['assembly kansas plant ford', 'ford']
+Missing entity match: http://dbpedia.org/resource/Ford_Motor_Company
+[]
+[{'http://dbpedia.org/resource/Ford_Motor_Company': 0.6666666666666666}]
+
+
+1835 Which education center Sidney Catlin Partrodge attended which was also the alma mater of Lisa Brummel ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sidney_Catlin_Partridge> <http://dbpedia.org/property/education> ?uri. <http://dbpedia.org/resource/Lisa_Brummel> <http://dbpedia.org/ontology/almaMater> ?uri} 
+['', 'lisa brummel']
+Missing entity match: http://dbpedia.org/resource/Sidney_Catlin_Partridge
+[]
+[]
+
+
+1839 Which driver had the pole position in 1994 Spanish Grand Prix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1994_Spanish_Grand_Prix> <http://dbpedia.org/ontology/poleDriver> ?uri } 
+['1994 spanish grand prix']
+[{'http://dbpedia.org/resource/Michael_Schumacher': 1.0}]
+[{'http://dbpedia.org/resource/Ayrton_Senna': 1.0}]
+
+
+1932 List the driver of SA MArino Grand Prix is also the Pole driver of Canadian Grand Proix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1999_San_Marino_Grand_Prix> <http://dbpedia.org/property/firstDriver> ?uri. <http://dbpedia.org/resource/1997_Canadian_Grand_Prix> <http://dbpedia.org/property/poleDriver> ?uri} 
+['marino', 'canadian grand prix']
+Missing entity match: http://dbpedia.org/resource/1999_San_Marino_Grand_Prix
+[]
+[]
+
+
+1997 Who built the stadiums where 2014 FIFA under 17 woman's world cup took place?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/tenant> <http://dbpedia.org/resource/2014_FIFA_U-17_Women's_World_Cup> . ?x <http://dbpedia.org/ontology/builder> ?uri  . }
+['']
+Missing entity match: http://dbpedia.org/resource/2014_FIFA_U-17_Womens_World_Cup
+[]
+[]
+[]
+
+
+1998 Name the source of Raa ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Raša_(river)> <http://dbpedia.org/ontology/source> ?uri } 
+['']
+Missing entity match: http://dbpedia.org/resource/Raša_(river)
+[]
+[]
+
+
+2028 GetTV is owned by which organisation?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/GetTV> <http://dbpedia.org/ontology/parentOrganisation> ?uri } 
+['gettv']
+Missing entity match: http://dbpedia.org/resource/GetTV
+[]
+[]
+
+
+2057 What is the military unit whose command structures are United States Department of the Navy and United States Department of Defense?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/commandStructure> <http://dbpedia.org/resource/United_States_Department_of_the_Navy> . ?uri <http://dbpedia.org/ontology/commandStructure> <http://dbpedia.org/resource/United_States_Department_of_Defense> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MilitaryUnit>}
+['united states department of the navy', 'united states department of defense']
+[{'http://dbpedia.org/resource/United_States_Navy': 1.0}]
+[{'http://dbpedia.org/resource/United_States_Coast_Guard': 1.0}]
+
+
+2076 Count the number of religions followed by BJP members.
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/party> <http://dbpedia.org/resource/Bharatiya_Janata_Party> . ?x <http://dbpedia.org/ontology/religion> ?uri  . }
+['bjp']
+Missing entity match: http://dbpedia.org/resource/Bharatiya_Janata_Party
+[]
+[]
+[]
+
+
+2106 Which music band made Take Me There, and to which Tedd Riley was associated?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Teddy_Riley> <http://dbpedia.org/ontology/associatedBand> ?uri. <http://dbpedia.org/resource/Take_Me_There_(Blackstreet_&_Mýa_song)> <http://dbpedia.org/ontology/musicalBand> ?uri} 
+['take me there', 'riley tedd']
+Missing entity match: http://dbpedia.org/resource/Teddy_Riley
+[]
+[]
+
+
+2266 in which movies have momoki kochi acted
+ SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/starring> <http://dbpedia.org/resource/Momoko_Kōchi> } 
+['']
+Missing entity match: http://dbpedia.org/resource/Momoko_Kōchi
+[]
+[]
+
+
+2364 Who wrote the album coming right before Dead Man's Chest's OST?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/nextAlbum> <http://dbpedia.org/resource/Pirates_of_the_Caribbean:_Dead_Man's_Chest_(soundtrack)> . ?x <http://dbpedia.org/property/writer> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Album>}
+['']
+Missing entity match: http://dbpedia.org/resource/Pirates_of_the_Caribbean:_Dead_Mans_Chest_(soundtrack)
+[]
+[]
+[]
+
+
+2377 How many soccer manager have been in the Spain nation football team?
+SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/property/nationalteam> <http://dbpedia.org/resource/Spain_national_football_team>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/SoccerManager>}
+['spain']
+Missing entity match: http://dbpedia.org/resource/Spain_national_football_team
+[]
+[]
+
+
+2394 List the Sci-fi TV shows with theme music given by Ron Grainer?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/genre> <http://dbpedia.org/resource/Science_fiction> . ?uri <http://dbpedia.org/property/themeMusicComposer> <http://dbpedia.org/resource/Ron_Grainer>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+['', 'ron grainer']
+Missing entity match: http://dbpedia.org/resource/Science_fiction
+[]
+[]
+
+
+2450 In which country is Sierra del Merendin?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sierra_del_Merendón> <http://dbpedia.org/ontology/country> ?uri  . }
+['sierra del merendin']
+[{'http://dbpedia.org/resource/Guatemala': 1.0}, {'http://dbpedia.org/resource/Honduras': 1.0}]
+[{'http://dbpedia.org/resource/Spain': 1.0}, {'http://dbpedia.org/resource/Mexico': 1.0}]
+
+
+2473 To which uni. did  sidney c patridge and cyril hume both once went?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sidney_Catlin_Partridge> <http://dbpedia.org/property/education> ?uri. <http://dbpedia.org/resource/Cyril_Hume> <http://dbpedia.org/property/education> ?uri . }
+['', 'cyril hume']
+Missing entity match: http://dbpedia.org/resource/Sidney_Catlin_Partridge
+[]
+[]
+
+
+2503 name the region served by Jerusalem Institue of Justice which was also the conflict region in GazaIsrael ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Jerusalem_Institute_of_Justice> <http://dbpedia.org/ontology/service> ?uri. <http://dbpedia.org/resource/Gaza–Israel_conflict> <http://dbpedia.org/property/result> ?uri} 
+['', 'jerusalem']
+Missing entity match: http://dbpedia.org/resource/Gaza–Israel_conflict
+Missing entity match: http://dbpedia.org/resource/Jerusalem_Institute_of_Justice
+[]
+[]
+
+
+2505 What are the awards won by the person who wrote the screen play for Lost in Rio ?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/OSS_117:_Lost_in_Rio> <http://dbpedia.org/property/screenplay> ?x . ?x <http://dbpedia.org/property/awards> ?uri  . }
+['rio']
+Missing entity match: http://dbpedia.org/resource/OSS_117:_Lost_in_Rio
+[]
+[]
+[]
+
+
+2524 To which places do the flights go by airlines headquartered in the UK?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/headquarters> <http://dbpedia.org/resource/United_Kingdom> . ?x <http://dbpedia.org/property/destinations> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Airline>}
+['uk']
+Missing entity match: http://dbpedia.org/resource/United_Kingdom
+[]
+[]
+[]
+
+
+2564 Which battles were fought under the president when Chung Won Shik was the prime minister?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/primeminister> <http://dbpedia.org/resource/Chung_Won-shik> . ?x <http://dbpedia.org/property/battles> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/President>}
+['chung won shik']
+Missing entity match: http://dbpedia.org/resource/Chung_Won-shik
+[]
+[]
+[]
+
+
+2566 Which are the  automobile platform whose one of the automobile platform is Dodge ?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/automobilePlatform> <http://dbpedia.org/resource/Dodge> . ?x <http://dbpedia.org/ontology/automobilePlatform> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Automobile>}
+['dodge']
+[{'http://dbpedia.org/resource/Chiva_bus': 1.0}, {'http://dbpedia.org/resource/Chrysler_K_platform': 1.0}]
+[{'http://dbpedia.org/resource/Blue_Bird_Corporation': 1.0}, {'http://dbpedia.org/resource/Dodge': 1.0}, {'http://dbpedia.org/resource/Ford_Motor_Company': 1.0}]
+[{'http://dbpedia.org/resource/Chrysler_Executive': 1.0}, {'http://dbpedia.org/resource/Chrysler_TC_by_Maserati': 1.0}, {'http://dbpedia.org/resource/Dodge_400': 1.0}, {'http://dbpedia.org/resource/Dodge_600': 1.0}, {'http://dbpedia.org/resource/Dodge_Daytona': 1.0}, {'http://dbpedia.org/resource/Dodge_Shadow': 1.0}, {'http://dbpedia.org/resource/Plymouth_Caravelle': 1.0}, {'http://dbpedia.org/resource/Plymouth_Reliant': 1.0}, {'http://dbpedia.org/resource/Shelby_CSX': 1.0}, {'http://dbpedia.org/resource/Shelby_Lancer': 1.0}, {'http://dbpedia.org/resource/Chrysler_Fifth_Avenue__Second_generation__1': 1.0}, {'http://dbpedia.org/resource/Chrysler_Imperial__Seventh_Generation__1': 1.0}, {'http://dbpedia.org/resource/Chrysler_LeBaron__GTS/LeBaron__1': 1.0}, {'http://dbpedia.org/resource/Chrysler_LeBaron__Second_generation__1': 1.0}, {'http://dbpedia.org/resource/Chrysler_LeBaron__Third_generation_sedan__1': 1.0}, {'http://dbpedia.org/resource/Chrysler_Town_&_Country_(1941–1988)__Eighth_generation__1': 1.0}, {'http://dbpedia.org/resource/Dodge_Lancer__1985–1989__1': 1.0}, {'http://dbpedia.org/resource/Dodge_Magnum__Second_generation_Mexican_Dodge_Magnum_400/Magnum__1': 1.0}]
+
+
+2694 Which party won both the general electoin and the andhra pradesh election in 2004?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Indian_general_election,_2004_(Delhi)> <http://dbpedia.org/ontology/affiliation> ?uri. <http://dbpedia.org/resource/Indian_general_election,_2004_(Andhra_Pradesh)> <http://dbpedia.org/ontology/affiliation> ?uri . }
+['election pradesh general', 'election general']
+Missing entity match: http://dbpedia.org/resource/Indian_general_election,_2004_(Delhi)
+[]
+[{'http://dbpedia.org/resource/Conservative_Party_of_Cuba': 1.0}, {'http://dbpedia.org/resource/Liberal_Party_of_Cuba': 1.0}, {'http://dbpedia.org/resource/Partido_Auténtico': 1.0}, {'http://dbpedia.org/resource/Gibraltar_Socialist_Labour_Party': 1.0}, {'http://dbpedia.org/resource/Gibraltar_Social_Democrats': 1.0}]
+
+
+2704 What is the birthplace of Adugna Deyas and the place where Fiq is located?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Fiq,_Ethiopia> <http://dbpedia.org/ontology/country> ?uri. <http://dbpedia.org/resource/Adugna_Deyas> <http://dbpedia.org/property/birthPlace> ?uri . }
+['', 'adugna deyas']
+Missing entity match: http://dbpedia.org/resource/Fiq,_Ethiopia
+[]
+[]
+
+
+2731 What is the nickname of the home stadium of Angels Toru?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Angels_Toruń> <http://dbpedia.org/ontology/homeStadium> ?x . ?x <http://dbpedia.org/property/nickname> ?uri  . }
+['angels toru']
+Missing entity match: http://dbpedia.org/resource/Angels_Toruń
+[]
+[]
+[]
+
+
+2740 What is the political party of the person succeeded by A.K. Singh?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/successor> <http://dbpedia.org/resource/A._K._Singh> . ?x <http://dbpedia.org/property/party> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Person>}
+['ak singh']
+Missing entity match: http://dbpedia.org/resource/A._K._Singh
+[]
+[]
+[]
+
+
+2784 What are the nicknames given to the characters of The Wolves of the Mercy Falls?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/List_of_The_Wolves_of_Mercy_Falls_characters> <http://dbpedia.org/property/nickname> ?uri } 
+['falls']
+Missing entity match: http://dbpedia.org/resource/List_of_The_Wolves_of_Mercy_Falls_characters
+[]
+[]
+
+
+2807 Which awards have been given to scientists that graduated from NKU athens?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/National_and_Kapodistrian_University_of_Athens> . ?x <http://dbpedia.org/ontology/award> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Scientist>}
+['nku']
+Missing entity match: http://dbpedia.org/resource/National_and_Kapodistrian_University_of_Athens
+[]
+[]
+[]
+
+
+2870 what kind of things play on WBIG FM?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/WBIG-FM> <http://dbpedia.org/ontology/programmeFormat> ?uri } 
+['wbig fm']
+Missing entity match: http://dbpedia.org/resource/WBIG-FM
+[]
+[{'http://dbpedia.org/resource/Adult_contemporary_music': 1.0}]
+
+
+2892 In which city of Pittsburg Steelers was the Congress of Inductrial Organization founded ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Congress_of_Industrial_Organizations> <http://dbpedia.org/property/founded> ?uri. <http://dbpedia.org/resource/Pittsburgh_Steelers> <http://dbpedia.org/property/city> ?uri} 
+['pittsburg steelers', 'organization']
+Missing entity match: http://dbpedia.org/resource/Congress_of_Industrial_Organizations
+[]
+[]
+
+
+2912 How many movies have a screenplay located in the States?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/United_States> . ?uri <http://dbpedia.org/property/screenplay> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film>}
+['states']
+Missing entity match: http://dbpedia.org/resource/United_States
+[]
+[]
+[]
+
+
+2929 Where was the engineer born who manufactured EP R.E.P. 1?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Esnault-Pelterie_R.E.P._1> <http://dbpedia.org/property/manufacturer> ?x . ?x <http://dbpedia.org/ontology/birthPlace> ?uri  . }
+['1']
+Missing entity match: http://dbpedia.org/resource/Esnault-Pelterie_R.E.P._1
+[]
+[]
+[]
+
+
+2959 who owns the ship Victoria?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Victoria_(ship)> <http://dbpedia.org/ontology/owner> ?uri } 
+['victoria']
+Missing entity match: http://dbpedia.org/resource/Victoria_(ship)
+[]
+[]
+
+
+3000 How many TV shows' networks are headquarterd in NY?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/headquarters> <http://dbpedia.org/resource/New_York> . ?uri <http://dbpedia.org/property/network> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+['ny']
+Missing entity match: http://dbpedia.org/resource/New_York
+[]
+[]
+[]
+
+
+3058 Where did these popular aeroplanes - Focke Wulf 260 and Start+Flug H 101 originate?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Focke-Wulf_Fw_260> <http://dbpedia.org/property/nationalOrigin> ?uri. <http://dbpedia.org/resource/Start_+_Flug_H-101> <http://dbpedia.org/property/nationalOrigin> ?uri . }
+['', 'focke wulf 260']
+Missing entity match: http://dbpedia.org/resource/Start_+_Flug_H-101
+[]
+[]
+
+
+3070 Which universit's affiliation is with Kalpan, Inc. and has campus at Iowa ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/affiliations> <http://dbpedia.org/resource/Kaplan,_Inc.> . ?uri <http://dbpedia.org/ontology/campus> <http://dbpedia.org/resource/Iowa>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/University>}
+['', 'iowa']
+Missing entity match: http://dbpedia.org/resource/Kaplan,_Inc.
+[]
+[]
+
+
+3100 Which team did Wilfred McDonalds and Cam Plante play for?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Wilfred_McDonald> <http://dbpedia.org/property/playedFor> ?uri. <http://dbpedia.org/resource/Cam_Plante> <http://dbpedia.org/property/playedFor> ?uri . }
+['cam plante', 'wilfred mcdonald']
+Missing entity match: http://dbpedia.org/resource/Wilfred_McDonald
+[]
+[]
+
+
+3118 Who is the producer of album which has the song Money?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Money_(Pink_Floyd_song)> <http://dbpedia.org/property/album> ?x . ?x <http://dbpedia.org/property/producer> ?uri  . }
+['money']
+Missing entity match: http://dbpedia.org/resource/Money_(Pink_Floyd_song)
+[]
+[]
+[]
+
+
+3172 Which wars were fought when the commanders involved served under PM Choi Tu Son?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/primeminister> <http://dbpedia.org/resource/Choi_Tu-son> . ?uri <http://dbpedia.org/ontology/commander> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MilitaryConflict>}
+['choi tu son']
+Missing entity match: http://dbpedia.org/resource/Choi_Tu-son
+[]
+[]
+[]
+
+
+3206 What religions do diplomats typically follow?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/profession> <http://dbpedia.org/resource/Diplomacy> . ?x <http://dbpedia.org/property/religion> ?uri  . }
+['']
+Missing entity match: http://dbpedia.org/resource/Diplomacy
+[]
+[]
+[]
+
+
+3213 Give the name of the  managers of England national under-20 football team and England national under-21 football team?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/managerclubs> <http://dbpedia.org/resource/England_national_under-20_football_team> . ?uri <http://dbpedia.org/property/managerclubs> <http://dbpedia.org/resource/England_national_under-21_football_team> . }
+['england national under20 football team', 'england national under21 football team']
+[{'http://dbpedia.org/resource/Gareth_Southgate': 1.0}, {'http://dbpedia.org/resource/Peter_Taylor_(footballer,_born_1953)': 1.0}]
+[{'http://dbpedia.org/resource/Howard_Wilkinson': 1.0}]
+
+
+3237 What are the binomial authority of Menetries's warbler?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Menetries's_warbler> <http://dbpedia.org/ontology/binomialAuthority> ?uri } 
+['menetriess warbler']
+[{'http://dbpedia.org/resource/Azerbaijan': 1.0}, {'http://dbpedia.org/resource/Kura_River': 1.0}, {'http://dbpedia.org/resource/Salyana': 1.0}, {'http://dbpedia.org/resource/Transcaucasia': 1.0}, {'http://dbpedia.org/resource/Édouard_Ménétries': 1.0}]
+[{'http://dbpedia.org/resource/Alexander_Wilson': 1.0}]
+
+
+3302 Name  the Pole driver of 1994 Spanish Grand Prix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1994_Spanish_Grand_Prix> <http://dbpedia.org/property/poleDriver> ?uri } 
+['1994 spanish grand prix']
+[{'http://dbpedia.org/resource/Michael_Schumacher': 1.0}]
+[{'http://dbpedia.org/resource/Ayrton_Senna': 1.0}]
+
+
+3374 Count the total number of cast member of the television shows whose actress is Joey McIntyre?
+ SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/starring> <http://dbpedia.org/resource/Joey_McIntyre> . ?x <http://dbpedia.org/property/starring> ?uri }
+['joey mcintyre']
+Missing entity match: http://dbpedia.org/resource/Joey_McIntyre
+[]
+[]
+[]
+
+
+3386 does the US navy have the structure of command of us department of defence?
+ASK WHERE { <http://dbpedia.org/resource/United_States_Navy> <http://dbpedia.org/property/commandStructure> <http://dbpedia.org/resource/United_States_Department_of_Defense> }
+['department', 'navy']
+Missing entity match: http://dbpedia.org/resource/United_States_Navy
+Missing entity match: http://dbpedia.org/resource/United_States_Department_of_Defense
+[]
+[{'http://dbpedia.org/resource/Brazilian_Marine_Corps': 0.5421205044899227}, {'http://dbpedia.org/resource/Ministry_of_Defence_(Brazil)': 0.5421205044899227}, {'http://dbpedia.org/resource/Ministry_of_Defence_(Bulgaria)': 0.5421205044899227}, {'http://dbpedia.org/resource/Chola_military': 0.5421205044899227}, {'http://dbpedia.org/resource/Cypriot_National_Guard': 0.5421205044899227}, {'http://dbpedia.org/resource/Djibouti_Armed_Forces': 0.5421205044899227}, {'http://dbpedia.org/resource/Military_of_Ecuador': 0.5421205044899227}, {'http://dbpedia.org/resource/Ethiopian_National_Defense_Force': 0.5421205044899227}, {'http://dbpedia.org/resource/Ministry_of_Defense_(Ethiopia)': 0.5421205044899227}, {'http://dbpedia.org/resource/Bundeswehr': 0.5421205044899227}, {'http://dbpedia.org/resource/Military_of_Greece': 0.5421205044899227}, {'http://dbpedia.org/resource/IX_Corps_(Union_Army)': 0.5460987590336112}, {'http://dbpedia.org/resource/Jamaica_Station_(Royal_Navy)': 0.5421205044899227}, {'http://dbpedia.org/resource/Lebanese_Army_Naval_Academy': 0.5421205044899227}, {'http://dbpedia.org/resource/Lebanese_Armed_Forces': 0.5421205044899227}, {'http://dbpedia.org/resource/Maritime_Security_Agency': 0.5421205044899227}, {'http://dbpedia.org/resource/Namibian_Defence_Force': 0.5421205044899227}, {'http://dbpedia.org/resource/Naval_Strategic_Forces_Command_(Pakistan)': 0.5421205044899227}, {'http://dbpedia.org/resource/Navy_Saka': 0.5421205044899227}, {'http://dbpedia.org/resource/Egyptian_Navy': 0.5421205044899227}, {'http://dbpedia.org/resource/Nigerian_Armed_Forces': 0.5421205044899227}, {'http://dbpedia.org/resource/Nigerian_Ministry_of_Defence': 0.5421205044899227}, {'http://dbpedia.org/resource/North_America_and_West_Indies_Station': 0.5421205044899227}, {'http://dbpedia.org/resource/Pakistan_Naval_Air_Arm': 0.5421205044899227}, {'http://dbpedia.org/resource/Peruvian_Coast_Guard': 0.5421205044899227}, {'http://dbpedia.org/resource/Peruvian_Naval_Aviation': 0.5421205044899227}, {'http://dbpedia.org/resource/Armed_Forces_of_the_Philippines': 0.5421205044899227}, {'http://dbpedia.org/resource/Department_of_National_Defense_(Philippines)': 0.5421205044899227}, {'http://dbpedia.org/resource/Polish_Armed_Forces': 0.5421205044899227}, {'http://dbpedia.org/resource/Portuguese_Armed_Forces': 0.5421205044899227}, {'http://dbpedia.org/resource/Russian_Armed_Forces': 0.5421205044899227}]
+
+
+3395 Which fictional character sculpted by Josh Friedmann was portrayed in Terminator 3 ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/creator> <http://dbpedia.org/resource/Josh_Friedman> . ?uri <http://dbpedia.org/ontology/portrayer> <http://dbpedia.org/resource/Terminator_3:_Rise_of_the_Machines>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/FictionalCharacter>}
+['josh friedman', 'terminator']
+Missing entity match: http://dbpedia.org/resource/Terminator_3:_Rise_of_the_Machines
+[]
+[]
+
+
+3446 Which company founded by Fusajiro Yamauchi also provides services of Nintendo eShop ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/foundedBy> <http://dbpedia.org/resource/Fusajiro_Yamauchi> . ?uri <http://dbpedia.org/property/services> <http://dbpedia.org/resource/Nintendo_eShop>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Company>}
+['fusajiro yamauchi', 'nintendo eshop']
+Missing entity match: http://dbpedia.org/resource/Nintendo_eShop
+[]
+[]
+
+
+3462 What is the sea whose cities are Gdask and Oulu?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/cities> <http://dbpedia.org/resource/Gdańsk> . ?uri <http://dbpedia.org/property/cities> <http://dbpedia.org/resource/Oulu> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Sea>}
+['', 'oulu']
+Missing entity match: http://dbpedia.org/resource/Gdańsk
+[]
+[]
+
+
+3473 List few musical artist whose notable instruments are Ludwig Drums and  Remo?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/notableInstruments> <http://dbpedia.org/resource/Ludwig_Drums> . ?uri <http://dbpedia.org/ontology/instrument> <http://dbpedia.org/resource/Remo>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MusicalArtist>}
+['remo', 'ludwig drums']
+[{'http://dbpedia.org/resource/Alfredo_Hernández': 1.0}, {'http://dbpedia.org/resource/Karen_Carpenter': 1.0}, {'http://dbpedia.org/resource/Ringo_Starr': 1.0}]
+[{'http://dbpedia.org/resource/Aaron_Rossi': 1.0}, {'http://dbpedia.org/resource/Brent_Fitz': 1.0}, {'http://dbpedia.org/resource/Carter_Beauford': 1.0}, {'http://dbpedia.org/resource/Darrin_Pfeiffer': 1.0}, {'http://dbpedia.org/resource/Derek_Roddy': 1.0}, {'http://dbpedia.org/resource/Don_Henley': 1.0}, {'http://dbpedia.org/resource/Joey_Castillo': 1.0}, {'http://dbpedia.org/resource/Longineu_W._Parsons_III': 1.0}, {'http://dbpedia.org/resource/Neil_Peart': 1.0}, {'http://dbpedia.org/resource/Raimund_Marasigan': 1.0}, {'http://dbpedia.org/resource/Tico_Torres': 1.0}]
+
+
+3515 Name the loocation of Lekh Castle which is also the location of SamurAbsheron channel ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Lekh_Castle> <http://dbpedia.org/ontology/location> ?uri. <http://dbpedia.org/resource/Samur–Absheron_channel> <http://dbpedia.org/ontology/sourceCountry> ?uri} 
+['', 'lekh castle']
+Missing entity match: http://dbpedia.org/resource/Samur–Absheron_channel
+[]
+[]
+
+
+3518 Was True Grit a novel of the western genre?
+ASK WHERE { <http://dbpedia.org/resource/True_Grit_(novel)> <http://dbpedia.org/ontology/literaryGenre> <http://dbpedia.org/resource/Western_(genre)> }
+['true grit', 'western']
+Missing entity match: http://dbpedia.org/resource/Western_(genre)
+[]
+[{'http://dbpedia.org/resource/Santiago:_a_Myth_of_the_Far_Future': 0.5421205058449086}, {'http://dbpedia.org/resource/Memoir': 0.521746013477814}, {'http://dbpedia.org/resource/Western_(genre)': 0.6666666666666666}]
+
+
+3562 Name the Fox TV show judged by Rand Jackson ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/judges> <http://dbpedia.org/resource/Randy_Jackson> . ?uri <http://dbpedia.org/property/channel> <http://dbpedia.org/resource/Fox_Broadcasting_Company>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+['', 'jackson rand']
+Missing entity match: http://dbpedia.org/resource/Fox_Broadcasting_Company
+Missing entity match: http://dbpedia.org/resource/Randy_Jackson
+[]
+[]
+
+
+3578 What is the successor of PlayStation 4
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/successor> <http://dbpedia.org/resource/PlayStation_4>  . }
+['playstation 4']
+Missing entity match: http://dbpedia.org/resource/PlayStation_4
+[]
+[]
+
+
+3638 The president who was in office when Lee Hyun Jae was the PM followed which religion?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/primeminister> <http://dbpedia.org/resource/Lee_Hyun-jae> . ?x <http://dbpedia.org/ontology/religion> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/President>}
+['lee hyun jae']
+Missing entity match: http://dbpedia.org/resource/Lee_Hyun-jae
+[]
+[]
+[]
+
+
+3646 Which parent organization of GetTV is also the label of next thing ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Next_Thing> <http://dbpedia.org/ontology/recordLabel> ?uri. <http://dbpedia.org/resource/GetTV> <http://dbpedia.org/ontology/parentOrganisation> ?uri} 
+['next thing', 'gettv']
+Missing entity match: http://dbpedia.org/resource/GetTV
+[]
+[]
+
+
+3697 Does StandBy records distribute via Sony?
+ASK WHERE { <http://dbpedia.org/resource/StandBy_Records> <http://dbpedia.org/ontology/distributingLabel> <http://dbpedia.org/resource/Sony> }
+['sony', 'standby records']
+Missing entity match: http://dbpedia.org/resource/StandBy_Records
+[]
+[{'http://dbpedia.org/resource/13th_Planet_Records': 0.5421618728183116}, {'http://dbpedia.org/resource/Republic_Records': 0.5183722634502526}, {'http://dbpedia.org/resource/Ariola_Records': 0.5421618728183116}, {'http://dbpedia.org/resource/Cashville_Records': 0.5169310303990841}, {'http://dbpedia.org/resource/Naxos_Records': 0.5169170230770687}, {'http://dbpedia.org/resource/Chamillitary_Entertainment': 0.5169310303990841}, {'http://dbpedia.org/resource/Capitol_Music_Group': 0.5169170230770687}, {'http://dbpedia.org/resource/MGM_Distribution': 0.5169170230770687}, {'http://dbpedia.org/resource/BMG_Rights_Management': 0.5169170230770687}, {'http://dbpedia.org/resource/Interscope_Records': 0.5169170230770687}, {'http://dbpedia.org/resource/Polydor_Records': 0.5169170230770687}, {'http://dbpedia.org/resource/Chinga_Chang_Records': 0.55}, {'http://dbpedia.org/resource/EMI': 0.5169170230770687}, {'http://dbpedia.org/resource/Atlantic_Records': 0.5169170230770687}, {'http://dbpedia.org/resource/Southern_Records': 0.5169170230770687}, {'http://dbpedia.org/resource/MGM_Records': 0.5169170230770687}, {'http://dbpedia.org/resource/Word_Records': 0.5169170230770687}, {'http://dbpedia.org/resource/Drive-Thru_Records': 0.816931030399084}, {'http://dbpedia.org/resource/Ersguterjunge': 0.5421618728183116}, {'http://dbpedia.org/resource/Hansa_Records': 0.5421618728183116}, {'http://dbpedia.org/resource/Hello_Cleveland!': 0.55}, {'http://dbpedia.org/resource/Hippos_in_Tanks': 0.55}, {'http://dbpedia.org/resource/Lowercase_people_records': 0.5169170230770687}, {'http://dbpedia.org/resource/Music_for_a_Cause': 0.5921618728183117}, {'http://dbpedia.org/resource/Nude_Records': 0.55}, {'http://dbpedia.org/resource/StandBy_Records': 0.55}, {'http://dbpedia.org/resource/Super_Records': 0.5169310303990841}, {'http://dbpedia.org/resource/Swishahouse': 0.5169310303990841}, {'http://dbpedia.org/resource/Capitol_Records': 0.5183722634502526}, {'http://dbpedia.org/resource/Warner_Bros._Records': 0.5183722634502526}, {'http://dbpedia.org/resource/Universal_Motown_Republic_Group': 0.5169310303990841}, {'http://dbpedia.org/resource/Trojan_Records': 0.5169310303990841}]
+
+
+3953 Who composed the episode after which came Butter's Very own Episode?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/subsequentWork> <http://dbpedia.org/resource/Butters'_Very_Own_Episode> . ?x <http://dbpedia.org/ontology/musicComposer> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionEpisode>}
+['']
+Missing entity match: http://dbpedia.org/resource/Butters_Very_Own_Episode
+[]
+[]
+[]
+
+
+3954 What are some wars fought when Chung Il Kwon as the country's prime minister?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/primeminister> <http://dbpedia.org/resource/Chung_Il-kwon> . ?uri <http://dbpedia.org/ontology/commander> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MilitaryConflict>}
+['chung il kwon']
+Missing entity match: http://dbpedia.org/resource/Chung_Il-kwon
+[]
+[]
+[]
+
+
+3988 Count the writers whose work has been played in NY?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/place> <http://dbpedia.org/resource/New_York> . ?x <http://dbpedia.org/property/writer> ?uri  . }
+['ny']
+Missing entity match: http://dbpedia.org/resource/New_York
+[]
+[]
+[]
+
+
+3994 What are the airline hubs of Cascade Airways?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Union_of_Cambodian_Democrats> <http://dbpedia.org/ontology/ideology> ?uri } 
+['cascade airways']
+Missing entity match: http://dbpedia.org/resource/Union_of_Cambodian_Democrats
+[]
+[]
+
+
+4062 In how many states can one find Burr Tuss kind of bridges?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/style> <http://dbpedia.org/resource/Burr_Truss> . ?x <http://dbpedia.org/ontology/state> ?uri  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Region>}
+['']
+Missing entity match: http://dbpedia.org/resource/Burr_Truss
+[]
+[]
+[]
+
+
+4143 What have some US citizens died of?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/citizenship> <http://dbpedia.org/resource/United_States> . ?x <http://dbpedia.org/ontology/deathCause> ?uri  . }
+['us']
+Missing entity match: http://dbpedia.org/resource/United_States
+[]
+[]
+[]
+
+
+4262 Organization holding stocks of  Galician and German wikipedias?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Galician_Wikipedia> <http://dbpedia.org/property/owner> ?uri. <http://dbpedia.org/resource/German_Wikipedia> <http://dbpedia.org/ontology/owner> ?uri . }
+['', 'german wikipedia']
+[]
+[]
+
+
+4286 What are some products of the the company whose subsidiary is Sony Corp shareholders and subsidies?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/subsidiary> <http://dbpedia.org/resource/Sony_Corporation_shareholders_and_subsidiaries> . ?uri <http://dbpedia.org/ontology/manufacturer> ?x  . }
+['sony corp']
+Missing entity match: http://dbpedia.org/resource/Sony_Corporation_shareholders_and_subsidiaries
+[]
+[]
+[]
+
+
+4345 Name the river with Readin, Brekshire in its path and mouth place is Sothend-on-sea ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/city> <http://dbpedia.org/resource/Reading,_Berkshire> . ?uri <http://dbpedia.org/ontology/mouthPlace> <http://dbpedia.org/resource/Southend-on-Sea>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/River>}
+['']
+Missing entity match: http://dbpedia.org/resource/Reading,_Berkshire
+Missing entity match: http://dbpedia.org/resource/Southend-on-Sea
+[]
+[]
+
+
+4346 What award has been awarded to both Dion Beebe and Charles LeMaire?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Dion_Beebe> <http://dbpedia.org/ontology/award> ?uri. <http://dbpedia.org/resource/Charles_LeMaire> <http://dbpedia.org/property/awards> ?uri} 
+['charles lemaire', 'dion beebe']
+Missing entity match: http://dbpedia.org/resource/Charles_LeMaire
+[]
+[]
+
+
+4390 Where were sverre krogh sundbo and havard vad petersson born?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sverre_Krogh_Sundbø> <http://dbpedia.org/property/birthPlace> ?uri. <http://dbpedia.org/resource/Håvard_Vad_Petersson> <http://dbpedia.org/property/placeOfBirth> ?uri} 
+['petersson', 'sverre krogh sundbo']
+[{'http://dbpedia.org/resource/Oslo': 1.0}]
+[{'http://dbpedia.org/resource/Norway': 1.0}]
+
+
+4399 List the award which have been won by both Charles LeMaire and Nick Park ?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Charles_LeMaire> <http://dbpedia.org/ontology/award> ?uri. <http://dbpedia.org/resource/Nick_Park> <http://dbpedia.org/ontology/award> ?uri . }
+['charles lemaire', 'nick park']
+Missing entity match: http://dbpedia.org/resource/Charles_LeMaire
+[]
+[]
+
+
+4433 Name the team manger of Middlebrough F.C season 2006-07 ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/2006–07_Middlesbrough_F.C._season> <http://dbpedia.org/ontology/manager> ?uri } 
+['200607']
+Missing entity match: http://dbpedia.org/resource/2006–07_Middlesbrough_F.C._season
+[]
+[]
+
+
+4518 Count the tenants of MasterCard Centre?
+SELECT DISTINCT COUNT(?uri) WHERE { <http://dbpedia.org/resource/MasterCard_Centre> <http://dbpedia.org/property/tenants> ?uri  . }
+['mastercard centre']
+Missing entity match: http://dbpedia.org/resource/MasterCard_Centre
+[]
+[]
+
+
+4536 List sports managers who managed Middlesbrough F.C. and England national under-21 football team?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/managerClub> <http://dbpedia.org/resource/Middlesbrough_F.C.> . ?uri <http://dbpedia.org/property/managerclubs> <http://dbpedia.org/resource/England_national_under-21_football_team>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/SportsManager>}
+['middlesbrough fc', 'england national under21 football team']
+[{'http://dbpedia.org/resource/Gareth_Southgate': 1.0}]
+[{'http://dbpedia.org/resource/Steve_McClaren': 1.0}]
+
+
+4599 Name the route end of the North-South Transport Corridor and Mumbai Vadodara Expressway?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/North–South_Transport_Corridor> <http://dbpedia.org/ontology/routeEnd> ?uri. <http://dbpedia.org/resource/Mumbai_Vadodara_Expressway> <http://dbpedia.org/ontology/routeEnd> ?uri . }
+['', 'mumbai vadodara expressway']
+Missing entity match: http://dbpedia.org/resource/North–South_Transport_Corridor
+[]
+[]
+
+
+4601 Name the television show whose subsequent work is Crusade and Composer is Stewart Copeland?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/subsequentWork> <http://dbpedia.org/resource/Crusade_(TV_series)> . ?uri <http://dbpedia.org/property/composer> <http://dbpedia.org/resource/Stewart_Copeland>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+['crusade', 'stewart copeland']
+Missing entity match: http://dbpedia.org/resource/Crusade_(TV_series)
+[]
+[]
+
+
+4660 List the  outflow of Lake Uniamsi?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Lake_Uniamési> <http://dbpedia.org/ontology/outflow> ?uri } 
+['lake uniamsi']
+Missing entity match: http://dbpedia.org/resource/Lake_Uniamési
+[]
+[]
+
+
+4707 Name the nationalteam of Trn Vit Hng ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Trần_Việt_Hương> <http://dbpedia.org/property/nationalteam> ?uri } 
+['trn vit hng']
+Missing entity match: http://dbpedia.org/resource/Trần_Việt_Hương
+[]
+[]
+
+
+4821 What company is the one which wrote the google web toolkit and PlayN?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Google_Web_Toolkit> <http://dbpedia.org/ontology/author> ?uri. <http://dbpedia.org/resource/PlayN> <http://dbpedia.org/ontology/author> ?uri . }
+['google web toolkit', 'playn']
+Missing entity match: http://dbpedia.org/resource/PlayN
+[]
+[]
+
+
+4844 Did Stanlee write the Tales of Suspense?
+ASK WHERE { <http://dbpedia.org/resource/Tales_of_Suspense> <http://dbpedia.org/property/writers> <http://dbpedia.org/resource/Stan_Lee> }
+['', 'tales of suspense']
+Missing entity match: http://dbpedia.org/resource/Stan_Lee
+[]
+[{'http://dbpedia.org/resource/Larry_Lieber': 0.6666666666666666}, {'http://dbpedia.org/resource/Robert_Bernstein_(comics)': 0.6666666666666666}, {'http://dbpedia.org/resource/Stan_Lee': 0.6666666666666666}]
+
+
+4854 Which american football team is owned by Mark davis and is located in O.co Colliseum ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/owner> <http://dbpedia.org/resource/Mark_Davis_(American_football)> . ?uri <http://dbpedia.org/ontology/locationCity> <http://dbpedia.org/resource/O.co_Coliseum>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/AmericanFootballTeam>}
+['', 'mark davis']
+Missing entity match: http://dbpedia.org/resource/O.co_Coliseum
+[]
+[]
+
+
+4880 How many companies were started in the states?
+SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/foundationPlace> <http://dbpedia.org/resource/United_States>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Company>}
+['states']
+Missing entity match: http://dbpedia.org/resource/United_States
+[]
+[]
+
+
+4961 Whose relatives are Clan McDuck and Huey, Dewey, and Louie?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/relatives> <http://dbpedia.org/resource/Clan_McDuck> . ?uri <http://dbpedia.org/property/relatives> <http://dbpedia.org/resource/Huey,_Dewey,_and_Louie> . }
+['clan mcduck', 'huey dewey and louie']
+Missing entity match: http://dbpedia.org/resource/Clan_McDuck
+[]
+[]
+
+
+4972 In which city did The Ultimate Fighter: Team Rousey vs. Team Tate take place ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Rousey_vs._Team_Tate> <http://dbpedia.org/property/city> ?uri } 
+['the ultimate fighter team rousey vs team tate']
+[{'http://dbpedia.org/resource/Las_Vegas_Valley': 1.0}, {'http://dbpedia.org/resource/Nevada': 1.0}]
+[{'http://dbpedia.org/resource/Las_Vegas': 1.0}]
+
+
+Fin. Results for 999 questions:
+P: 0.85 R: 0.88
+Number of errors: 202
+['25', '56', '118', '126', '128', '134', '147', '162', '468', '475', '489', '538', '609', '624', '636', '646', '647', '816', '873', '976', '981', '1063', '1078', '1218', '1276', '1292', '1343', '1446', '1529', '1636', '1637', '1683', '1697', '1807', '1835', '1839', '1932', '1997', '1998', '2028', '2057', '2076', '2106', '2266', '2364', '2377', '2394', '2450', '2473', '2503', '2505', '2524', '2564', '2566', '2694', '2704', '2731', '2740', '2784', '2807', '2870', '2892', '2912', '2929', '2959', '3000', '3058', '3070', '3100', '3118', '3172', '3206', '3213', '3237', '3302', '3374', '3386', '3395', '3446', '3462', '3473', '3515', '3518', '3562', '3578', '3638', '3646', '3697', '3953', '3954', '3988', '3994', '4062', '4143', '4262', '4286', '4345', '4346', '4390', '4399', '4433', '4518', '4536', '4599', '4601', '4660', '4707', '4821', '4844', '4854', '4880', '4961', '4972']
+Number of questions with missing entity matches: 98
+Number of questions with incorrect question type detection: 0
+Number of questions with missing spans: 12

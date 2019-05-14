@@ -1,0 +1,376 @@
+191 Which researchers received fellowship from Royal Society?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/award> <http://dbpedia.org/resource/Royal_Society>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Scientist>}
+
+
+226 Name the common associate band of Blayse and Teddy Riley ?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Blayse> <http://dbpedia.org/ontology/associatedBand> ?uri. <http://dbpedia.org/resource/Teddy_Riley> <http://dbpedia.org/ontology/associatedBand> ?uri . }
+
+
+236 What is the leader name of the settlements whose governing body is Municipal council?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/governingBody> <http://dbpedia.org/resource/Municipal_council> . ?x <http://dbpedia.org/ontology/leaderName> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Settlement>}
+
+
+261 Give me a count of royalties buried in Rome ?
+SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/property/placeOfBurial> <http://dbpedia.org/resource/Rome>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Royalty>}
+
+
+336 Who is the artist of Sings Kristofferson and also performed Milk Cow Blues atleast once?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sings_Kristofferson> <http://dbpedia.org/property/artist> ?uri. <http://dbpedia.org/resource/Milk_Cow_Blues> <http://dbpedia.org/ontology/artist> ?uri . }
+
+
+471 Members of how many political parties have died in Delhi?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/placeOfDeath> <http://dbpedia.org/resource/Delhi> . ?x <http://dbpedia.org/property/party> ?uri  . }
+
+
+493 From how many different institutes have the members of Judge Advocate General's Corps graduated?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/militaryRank> <http://dbpedia.org/resource/Judge_Advocate_General's_Corps,_United_States_Army> . ?x <http://dbpedia.org/ontology/almaMater> ?uri  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/EducationalInstitution>}
+
+
+560 Who is the owner of Saumarez ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Saumarez_(horse)> <http://dbpedia.org/ontology/owner> ?uri } 
+
+
+700 Where was James H. Fields buried ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/James_H._Fields> <http://dbpedia.org/property/placeofburial> ?uri } 
+
+
+761 What is the total number of awards whose presenter's headquarters is Beverly Hills, California?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/headquarters> <http://dbpedia.org/resource/Beverly_Hills,_California> . ?uri <http://dbpedia.org/ontology/presenter> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Award>}
+
+
+771 How many kinds of games can be played on the Amiga?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/computingPlatform> <http://dbpedia.org/resource/Amiga> . ?x <http://dbpedia.org/property/genre> ?uri  . }
+
+
+847 What is the common battle fought by Stephen Urban and Ali Habib Mahmud ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Stephen_Urban> <http://dbpedia.org/ontology/battle> ?uri. <http://dbpedia.org/resource/Ali_Habib_Mahmud> <http://dbpedia.org/property/battles> ?uri} 
+
+
+871 Which political party of kumta had affiliation with Indian general election, 2004 (Andhra Pradesh) 
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Kumta> <http://dbpedia.org/property/governmentType> ?uri. <http://dbpedia.org/resource/Indian_general_election,_2004_(Andhra_Pradesh)> <http://dbpedia.org/ontology/affiliation> ?uri} 
+
+
+919 What is the number of occupation of the people who died in tampa bay, florida?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/deathPlace> <http://dbpedia.org/resource/Tampa,_Florida> . ?x <http://dbpedia.org/ontology/occupation> ?uri  . }
+
+
+925 Who all are known to play the Gibson Guitar Corporation?
+ SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/notableInstruments> <http://dbpedia.org/resource/Gibson_Guitar_Corporation> } 
+
+
+1061 How many different songwriters have had their songs recorded in London?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/recordedIn> <http://dbpedia.org/resource/London> . ?x <http://dbpedia.org/ontology/writer> ?uri  . }
+
+
+1119 Give me the total number of membership of the organisations which have memebers as  Azerbaijan?
+ SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/membership> <http://dbpedia.org/resource/Azerbaijan> . ?x <http://dbpedia.org/property/membership> ?uri }
+
+
+1137 For which games are Sam Loyd and Eric Schiller both famous?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Sam_Loyd> <http://dbpedia.org/ontology/knownFor> ?uri. <http://dbpedia.org/resource/Eric_Schiller> <http://dbpedia.org/ontology/knownFor> ?uri . }
+
+
+1151 Where does John A Danaher III work?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/John_A._Danaher_III> <http://dbpedia.org/property/office> ?uri } 
+
+
+1215 Which bacteria's taxonomic class is Bacilli?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/class> <http://dbpedia.org/resource/Bacilli>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Bacteria>}
+
+
+1244 Where did the 2015 MLS All-Star Game take place?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/2015_MLS_All-Star_Game> <http://dbpedia.org/property/city> ?uri } 
+
+
+1249 Name the directors of Lennon Legend: The Very Best of John Lennon (DVD) ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Lennon_Legend:_The_Very_Best_of_John_Lennon_(DVD)> <http://dbpedia.org/ontology/director> ?uri } 
+
+
+1397 Who is the maker of the engine of Ford F-Series first generation ?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Ford_F-Series_first_generation> <http://dbpedia.org/property/engine> ?x . ?x <http://dbpedia.org/ontology/manufacturer> ?uri  . }
+
+
+1708 What is the television show whose channel's parent organisation is Fox Sports?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/parentOrganisation> <http://dbpedia.org/resource/Fox_Sports_(United_States)> . ?uri <http://dbpedia.org/ontology/channel> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+
+1716 What are the players whose former teams are Carolina Panthers and Indianapolis Colts?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/formerTeam> <http://dbpedia.org/resource/Carolina_Panthers> . ?uri <http://dbpedia.org/ontology/formerTeam> <http://dbpedia.org/resource/Indianapolis_Colts> . }
+
+
+1758 What cities are near to Nihoa which is also known as Bird Island ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Nihoa> <http://dbpedia.org/property/nearestCity> ?uri } 
+
+
+1795 Name the parent company of  Ford Air Transport Service ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Ford_Air_Transport_Service> <http://dbpedia.org/ontology/parentCompany> ?uri } 
+
+
+1985 List the companies operating in Australia?
+ SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/regionServed> <http://dbpedia.org/resource/Australia> } 
+
+
+2036 Who composed the music for Tonight's the Night ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Tonight's_the_Night_(2003_musical)> <http://dbpedia.org/property/music> ?uri } 
+
+
+2117 Name the team which is owned by Dafenham wind turbines and stood first in 1967 mexican Grand Prix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1967_Mexican_Grand_Prix> <http://dbpedia.org/property/firstTeam> ?uri. <http://dbpedia.org/resource/Dagenham_wind_turbines> <http://dbpedia.org/property/owner> ?uri} 
+
+
+2144 Who edited Easy street ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Easy_Street_(film)> <http://dbpedia.org/ontology/editing> ?uri } 
+
+
+2161 List the people with Scientology as their religious belief?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/religion> <http://dbpedia.org/resource/Scientology>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Person>}
+
+
+2204 Where was the person born who died in Bryn Mawr Hospital?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/placeOfDeath> <http://dbpedia.org/resource/Bryn_Mawr_Hospital> . ?x <http://dbpedia.org/property/placeOfBirth> ?uri  . }
+
+
+2225 What place did Edwin Adams die at, which gave birth to William A Purtell?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Edwin_Adams_(politician)> <http://dbpedia.org/property/placeOfDeath> ?uri. <http://dbpedia.org/resource/William_A._Purtell> <http://dbpedia.org/ontology/birthPlace> ?uri . }
+
+
+2238 Count the water bodies that flow into the North Sea?
+SELECT DISTINCT COUNT(?uri) WHERE { <http://dbpedia.org/resource/North_Sea> <http://dbpedia.org/property/inflow> ?uri  . }
+
+
+2279 What are the television shows whose network's stockholder is Warner Bros. Television?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/owner> <http://dbpedia.org/resource/Warner_Bros._Television> . ?uri <http://dbpedia.org/ontology/network> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+
+2350 What is the organisation whose purposes are Environmentalism and Peace?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/purpose> <http://dbpedia.org/resource/Environmentalism> . ?uri <http://dbpedia.org/property/purpose> <http://dbpedia.org/resource/Peace> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Organisation>}
+
+
+2480 Name the appointer of William Clark ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/William_Clark> <http://dbpedia.org/property/appointer> ?uri } 
+
+
+2550 Name the artist who made Dream Dancing and is often associated with Joe Pass?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Joe_Pass> <http://dbpedia.org/ontology/associatedBand> ?uri. <http://dbpedia.org/resource/Dream_Dancing_(album)> <http://dbpedia.org/property/artist> ?uri . }
+
+
+2552 What is the relegious affiliations of Katyayana ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Katyayana_(Buddhist)> <http://dbpedia.org/property/religion> ?uri } 
+
+
+2691 Where is the headquarters of the public transit system which owns Target Field, a Metro Transit Station  ?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Target_Field_(Metro_Transit_station)> <http://dbpedia.org/ontology/owningOrganisation> ?x . ?x <http://dbpedia.org/property/headquarters> ?uri  . }
+
+
+2710 Count the total number of academic discipline of the journals whose one of the academic discipline is Neuroimaging ?
+ SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/academicDiscipline> <http://dbpedia.org/resource/Neuroimaging> . ?x <http://dbpedia.org/ontology/academicDiscipline> ?uri }
+
+
+2735 Name an American football player whose debuted in Chicago Bears and former team is 1998 Baltimore Ravens season?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/debutteam> <http://dbpedia.org/resource/Chicago_Bears> . ?uri <http://dbpedia.org/ontology/formerTeam> <http://dbpedia.org/resource/1998_Baltimore_Ravens_season>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/AmericanFootballPlayer>}
+
+
+2825 Who appointed both John Drayton and William Clark to their respective offices?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/John_Drayton> <http://dbpedia.org/property/appointer> ?uri. <http://dbpedia.org/resource/William_Clark> <http://dbpedia.org/property/appointer> ?uri . }
+
+
+2871 What is the serving railway line of Warwick railway station, Perth ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Warwick_railway_station,_Perth> <http://dbpedia.org/ontology/servingRailwayLine> ?uri } 
+
+
+2905 Georg Meissner was doctoral supervisor of which scientist ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/doctoralAdvisor> <http://dbpedia.org/resource/Georg_Meissner>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Scientist>}
+
+
+2976 Who is the founder of the trade union which affiliates Amalgamated Association of Iron and Steel Workers?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Amalgamated_Association_of_Iron_and_Steel_Workers> <http://dbpedia.org/ontology/affiliation> ?x . ?x <http://dbpedia.org/property/founded> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TradeUnion>}
+
+
+2977 What royalties's sepulchre is Mausoleum of Augustus?
+ SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/placeOfBurial> <http://dbpedia.org/resource/Mausoleum_of_Augustus> } 
+
+
+3031 Name the TV shows with network as NBC and company as Paramount Television ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/network> <http://dbpedia.org/resource/NBC> . ?uri <http://dbpedia.org/property/company> <http://dbpedia.org/resource/Paramount_Television>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+
+3093 Name the common editor of Easy Street (film) and Work (film)?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Easy_Street_(film)> <http://dbpedia.org/ontology/editing> ?uri. <http://dbpedia.org/resource/Work_(film)> <http://dbpedia.org/ontology/editing> ?uri . }
+
+
+3148 Who are the producers of Marie Sisters?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Marie_Sisters> <http://dbpedia.org/property/producer> ?uri } 
+
+
+3184 What are the musical performances whose label is Celluloid Records?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/label> <http://dbpedia.org/resource/Celluloid_Records>  . }
+
+
+3252 What is the alma mater of the scientists  known for  String theory?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/knownFor> <http://dbpedia.org/resource/String_theory> . ?x <http://dbpedia.org/property/almaMater> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Scientist>}
+
+
+3268 By what style was Providence Chapel, Charlwood made?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Providence_Chapel,_Charlwood> <http://dbpedia.org/property/style> ?uri } 
+
+
+3285 In which places do companies founded in Newcastle operate?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/foundationPlace> <http://dbpedia.org/resource/City_of_Newcastle> . ?x <http://dbpedia.org/ontology/regionServed> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Company>}
+
+
+3303 Who was the First Driver of 1999 San Marino Grand Prix ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1999_San_Marino_Grand_Prix> <http://dbpedia.org/property/firstDriver> ?uri } 
+
+
+3349 From where does the river Upper Neretva start flowing?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Upper_Neretva> <http://dbpedia.org/ontology/riverMouth> ?uri } 
+
+
+3390 What is the route end of Birmingham and Oxford Junction Railway ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Birmingham_and_Oxford_Junction_Railway> <http://dbpedia.org/ontology/routeEnd> ?uri } 
+
+
+3477 Who are the astronauts associated with NASA?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/type> <http://dbpedia.org/resource/NASA>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Astronaut>}
+
+
+3573 Whihc uni did Joshua A. Siegel attend ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Joshua_A._Siegel> <http://dbpedia.org/property/education> ?uri } 
+
+
+3597 Who directed The Haunted House ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/The_Haunted_House_(1929_film)> <http://dbpedia.org/ontology/director> ?uri } 
+
+
+3601 what awards have been given to A. Peter Dewey?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/A._Peter_Dewey> <http://dbpedia.org/ontology/award> ?uri } 
+
+
+3676 List the names of the soccer club seasons whose division is 2012 Campeonato Brasileiro Srie A.
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/league> <http://dbpedia.org/resource/2012_Campeonato_Brasileiro_Série_A> . ?x <http://dbpedia.org/property/name> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/SoccerClubSeason>}
+
+
+3747 Josef Bhler belongs to which political party?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Josef_Bühler> <http://dbpedia.org/ontology/occupation> ?uri } 
+
+
+3773 List all the schools of the rugby player whose went to school named Pietermaritzburg ?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/school> <http://dbpedia.org/resource/Pietermaritzburg> . ?x <http://dbpedia.org/property/school> ?uri  . }
+
+
+3819 How many politicians live in India?
+SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/residence> <http://dbpedia.org/resource/India>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/OfficeHolder>}
+
+
+3875  Giuseppe Bertello and Pietro Parolin are leaders of which place ?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/leader> <http://dbpedia.org/resource/Giuseppe_Bertello> . ?uri <http://dbpedia.org/ontology/leader> <http://dbpedia.org/resource/Pietro_Parolin> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Place>}
+
+
+3901 Who is the writer of mark twain Tonight ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Mark_Twain_Tonight> <http://dbpedia.org/property/writer> ?uri } 
+
+
+3992 Give me the home town of all musical artists who uses Guitar as instrument ?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/instrument> <http://dbpedia.org/resource/Guitar> . ?x <http://dbpedia.org/ontology/hometown> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MusicalArtist>}
+
+
+4108 List all the awards won by the artist who has won SIGGRAPH ?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/award> <http://dbpedia.org/resource/SIGGRAPH> . ?x <http://dbpedia.org/ontology/award> ?uri  . }
+
+
+4118 Name the common home port of the Trishna (yacht) and INS Viraat (R22)?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Trishna_(yacht)> <http://dbpedia.org/ontology/homeport> ?uri. <http://dbpedia.org/resource/INS_Viraat_(R22)> <http://dbpedia.org/ontology/homeport> ?uri . }
+
+
+4187 To which educational institute does Cornell University Press belong to?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Cornell_University_Press> <http://dbpedia.org/ontology/parentCompany> ?uri } 
+
+
+4333 Cologny and Lancy are the neighboring municipalities of which place ?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/neighboringMunicipalities> <http://dbpedia.org/resource/Cologny> . ?uri <http://dbpedia.org/property/neighboringMunicipalities> <http://dbpedia.org/resource/Lancy> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Place>}
+
+
+4364 In which countries is coconut used as a food ingredient?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/ingredient> <http://dbpedia.org/resource/Coconut> . ?x <http://dbpedia.org/property/country> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Food>}
+
+
+4367 What is the river whose source is Lake Ontario?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/source> <http://dbpedia.org/resource/Lake_Ontario>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/River>}
+
+
+4395 What are the musicals whose musicians worked under Sony Music Entertainment?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/label> <http://dbpedia.org/resource/Sony_Music_Entertainment> . ?uri <http://dbpedia.org/property/music> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Musical>}
+
+
+4414 Which scientist was advised by John Robert Woodyard?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/doctoralAdvisor> <http://dbpedia.org/resource/John_Robert_Woodyard>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Scientist>}
+
+
+4475 What is the total number of software whose programming language is C++ and operating system is Microsoft Windows?
+ SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/programmingLanguage> <http://dbpedia.org/resource/C++> . ?uri <http://dbpedia.org/ontology/operatingSystem> <http://dbpedia.org/resource/Microsoft_Windows> } 
+
+
+4494 Who was member of boards at Royal Society and Trinity House?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/board> <http://dbpedia.org/resource/Royal_Society> . ?uri <http://dbpedia.org/ontology/board> <http://dbpedia.org/resource/Trinity_House> . }
+
+
+4499 Which series was written by Eric Jendresen and John Orloff?
+SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/writer> <http://dbpedia.org/resource/Erik_Jendresen> . ?uri <http://dbpedia.org/property/writer> <http://dbpedia.org/resource/John_Orloff> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+
+4500 Count the number of musical work which were sold by Sony Music?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/label> <http://dbpedia.org/resource/Sony_Music_Entertainment> . ?uri <http://dbpedia.org/property/music> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MusicalWork>}
+
+
+4619 How many movies are distributed by Cinema International Corporation?
+SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/distributor> <http://dbpedia.org/resource/Cinema_International_Corporation>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film>}
+
+
+4659 Is Latin the official language of Sovereign Military Order of Malta?
+ASK WHERE { <http://dbpedia.org/resource/Sovereign_Military_Order_of_Malta> <http://dbpedia.org/ontology/officialLanguage> <http://dbpedia.org/resource/Latin> }
+
+
+4666 Which shows are from a company whose subsidiary is Viacom Productions?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/subsidiary> <http://dbpedia.org/resource/Viacom_Productions> . ?uri <http://dbpedia.org/property/company> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+
+4672 Count the total number  of hometown of the gymnasts whose one of the hometown in Russia ?
+ SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/hometown> <http://dbpedia.org/resource/Russia> . ?x <http://dbpedia.org/property/hometown> ?uri }
+
+
+4737 Who is the child of John Tyler, Sr.?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/John_Tyler,_Sr.> <http://dbpedia.org/ontology/child> ?uri } 
+
+
+4745 What is the launch site of the Juno I which was also the ground of 2016 Fort Lauderdale Strikers season ?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Juno_I> <http://dbpedia.org/ontology/launchSite> ?uri. <http://dbpedia.org/resource/2016_Fort_Lauderdale_Strikers_season> <http://dbpedia.org/ontology/ground> ?uri} 
+
+
+4807 Which footballers did their high school in west Sacramento california? 
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/highSchool> <http://dbpedia.org/resource/West_Sacramento,_California>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/AmericanFootballPlayer>}
+
+
+4829 which movies have been published by Cinema International Corporation?
+ SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/distributor> <http://dbpedia.org/resource/Cinema_International_Corporation> } 
+
+
+4883 List the television shows one of whose distributor's divisions is Warner Bros. Animation.
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/divisions> <http://dbpedia.org/resource/Warner_Bros._Animation> . ?uri <http://dbpedia.org/property/distributor> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+
+4928 Where did the members of judge advocate general corps study?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/militaryRank> <http://dbpedia.org/resource/Judge_Advocate_General's_Corps,_United_States_Army> . ?x <http://dbpedia.org/ontology/almaMater> ?uri  . }
+
+
+4954 Which is the common past team of the Charlie Justice (American football player) and Bobby Hoppe ?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Charlie_Justice_(American_football_player)> <http://dbpedia.org/property/pastteams> ?uri. <http://dbpedia.org/resource/Bobby_Hoppe> <http://dbpedia.org/property/pastteams> ?uri . }
+
+
+
+Fin. Results for 999 questions:
+P: 0.64 R: 0.74
+Number of errors: 461
+['4', '35', '99', '144', '161', '191', '202', '224', '226', '233', '236', '242', '261', '286', '336', '346', '358', '376', '389', '405', '418', '471', '493', '537', '560', '604', '639', '674', '676', '699', '700', '729', '761', '763', '767', '771', '815', '824', '847', '871', '895', '919', '925', '955', '957', '988', '992', '1013', '1017', '1061', '1067', '1108', '1119', '1137', '1151', '1157', '1168', '1203', '1215', '1244', '1249', '1277', '1301', '1313', '1319', '1385', '1395', '1397', '1494', '1528', '1575', '1598', '1605', '1664', '1674', '1708', '1716', '1725', '1758', '1795', '1825', '1828', '1849', '1880', '1907', '1909', '1956', '1960', '1971', '1976', '1977', '1985', '2036', '2040', '2050', '2117', '2129', '2137', '2142', '2144', '2151', '2159', '2161', '2166', '2189', '2204', '2220', '2225', '2238', '2244', '2263', '2279', '2287', '2328', '2350', '2392', '2428', '2480', '2483', '2486', '2509', '2538', '2550', '2552', '2561', '2594', '2596', '2614', '2622', '2626', '2627', '2638', '2661', '2675', '2691', '2696', '2710', '2734', '2735', '2746', '2748', '2757', '2798', '2812', '2817', '2825', '2840', '2862', '2871', '2889', '2905', '2913', '2920', '2924', '2932', '2934', '2936', '2951', '2976', '2977', '3010', '3031', '3073', '3088', '3093', '3109', '3121', '3123', '3147', '3148', '3158', '3176', '3184', '3192', '3209', '3252', '3268', '3273', '3285', '3294', '3303', '3328', '3349', '3390', '3437', '3447', '3475', '3477', '3573', '3580', '3583', '3597', '3601', '3644', '3676', '3710', '3736', '3744', '3747', '3773', '3778', '3819', '3852', '3875', '3878', '3885', '3891', '3901', '3992', '4019', '4022', '4028', '4043', '4058', '4108', '4118', '4144', '4147', '4157', '4179', '4187', '4189', '4192', '4200', '4250', '4277', '4299', '4333', '4364', '4365', '4367', '4368', '4380', '4381', '4395', '4414', '4427', '4449', '4475', '4494', '4499', '4500', '4515', '4537', '4549', '4570', '4580', '4584', '4619', '4643', '4659', '4666', '4672', '4728', '4736', '4737', '4738', '4743', '4745', '4788', '4796', '4799', '4807', '4819', '4829', '4858', '4883', '4904', '4928', '4939', '4951', '4954', '4993']
+Number of questions with missing entity matches: 181
+Number of questions with incorrect question type detection: 0
+Number of questions with missing spans: 58

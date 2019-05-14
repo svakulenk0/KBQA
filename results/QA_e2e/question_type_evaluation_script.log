@@ -1,0 +1,23 @@
+155 Raymond Johansen is the mayor of what city?
+ASK instead of SELECT
+919 What is the number of occupation of the people who died in tampa bay, florida?
+SELECT instead of COUNT
+2262 Did Umkhonto we Sizwe had Nelson Mandela as a commander?
+SELECT instead of ASK
+3386 does the US navy have the structure of command of us department of defence?
+SELECT instead of ASK
+3573 Whihc uni did Joshua A. Siegel attend ?
+ASK instead of SELECT
+3877 How did the child of Stevens T. Mason die?
+COUNT instead of SELECT
+4277 Is Baker's Dozen Donuts in the coffee industry?
+COUNT instead of ASK
+4912 Giorgos Kaminis is the mayor of what?
+ASK instead of SELECT
+
+Fin. Results for 999 questions:
+P: 0.96 R: 0.98
+Number of errors: 99
+[]
+Number of questions with missing entity matches: 0
+Number of questions with incorrect question type detection: 8
