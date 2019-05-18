@@ -329,8 +329,8 @@ errors_e = ['25', '56', '118', '126', '128', '134', '147', '162', '468', '475', 
 # bl_p = [68655]
 
 ps, rs, ts = [], [], []
-# size of the subgraph
-es, ps = [], []
+# collect subgraph sizes
+nes, nps, nas = [], [], []
 
 nerrors = 0
 errors_ids = []
@@ -396,7 +396,7 @@ with cursor:
             
         # 1st hop
         answers_ids1 = hop([], top_entities_ids1, top_predicates_ids1, verbose)
-
+        ne = len(top_entities_ids1)
 #         if classes1:
 #             answers_ids1 = filter_answer_by_class(classes1, answers_ids1)
         answers1 = [{a_id: a_score} for activations in answers_ids1 for a_id, a_score in activations.items() if a_score > a_threshold]
@@ -404,6 +404,7 @@ with cursor:
         # 2nd hop
         if top_predicates_ids1 and top_predicates_ids2:
             answers_ids = hop(answers1, [], top_predicates_ids2, verbose)
+            ne += len(answers1)
 #             if classes2:
 #                 answers_ids = filter_answer_by_class(classes2, answers_ids)
             answers = [{a_id: a_score} for activations in answers_ids for a_id, a_score in activations.items() if a_score > a_threshold]
@@ -412,8 +413,8 @@ with cursor:
 
         answers_ids = [_id for a in answers for _id in a]
         
-        es.append(len(top_entities_ids1)+len(answers1))
-        ps.append(len(top_predicates_ids1)+len(top_predicates_ids2))
+        nes.append(ne)
+        nps.append(len(top_predicates_ids1)+len(top_predicates_ids2))
         ts.append(time.time() - start_one)
 
         # error estimation
@@ -543,10 +544,10 @@ print(es)
 print(ps)
 
 # print("--- %.2f seconds ---" % (float(time.time() - start)/999))
-print("\nFin. Results for %d questions:"%len(ps))
-print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
-print("Number of errors: %d"%nerrors)
-print(errors_ids)
-print("Number of questions with missing entity matches: %d"%n_missing_entities)
-print("Number of questions with incorrect question type detection: %d"%qt_errors)
-print("Number of questions with missing spans: %d"%n_missing_spans)
+# print("\nFin. Results for %d questions:"%len(ps))
+# print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
+# print("Number of errors: %d"%nerrors)
+# print(errors_ids)
+# print("Number of questions with missing entity matches: %d"%n_missing_entities)
+# print("Number of questions with incorrect question type detection: %d"%qt_errors)
+# print("Number of questions with missing spans: %d"%n_missing_spans)
