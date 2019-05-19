@@ -400,7 +400,7 @@ with cursor:
             
         # 1st hop
         answers_ids1, na = hop([], top_entities_ids1, top_predicates_ids1, verbose)
-        ne = len(top_entities_ids1)
+        ne = len(e_spans1)
 #         if classes1:
 #             answers_ids1 = filter_answer_by_class(classes1, answers_ids1)
         answers1 = [{a_id: a_score} for activations in answers_ids1 for a_id, a_score in activations.items() if a_score > a_threshold]
@@ -408,7 +408,7 @@ with cursor:
         # 2nd hop
         if top_predicates_ids1 and top_predicates_ids2:
             answers_ids, na2 = hop(answers1, [], top_predicates_ids2, verbose)
-            ne += len(answers1)
+            # ne += len(answers1)
             na += na2
 #             if classes2:
 #                 answers_ids = filter_answer_by_class(classes2, answers_ids)
@@ -419,7 +419,7 @@ with cursor:
         answers_ids = [_id for a in answers for _id in a]
         
         nes.append(ne)
-        nps.append(len(top_predicates_ids1)+len(top_predicates_ids2))
+        nps.append(len(p_spans1)+len(p_spans2))
         nas.append(na)
 
         ts.append(time.time() - start_one)
