@@ -344,7 +344,7 @@ n_missing_spans = 0
 new_answers = ['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
 
 cursor = mongo.get_sample(train=False, limit=limit)
-cursor = mongo.get_by_id('35', limit=1)
+# cursor = mongo.get_by_id('35', limit=1)
 with cursor:
     print("Evaluating...")
 
