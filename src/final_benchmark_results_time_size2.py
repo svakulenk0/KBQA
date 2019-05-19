@@ -226,10 +226,10 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
             return answers, na
 
         # if verbose:
-        print("Subgraph extracted:")
-        print("%d entities"%len(entities))
-        print("%d predicates"%len(predicate_ids))
-        print("Loading adjacencies..")
+        # print("Subgraph extracted:")
+        # print("%d entities"%len(entities))
+        # print("%d predicates"%len(predicate_ids))
+        # print("Loading adjacencies..")
 
         offset += max_triples
         # index entity ids global -> local
