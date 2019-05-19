@@ -325,7 +325,7 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
 from collections import Counter
 
 verbose = False
-limit = 2
+limit = 5
 
 question_types = ['SELECT', 'ASK', 'COUNT']
 
