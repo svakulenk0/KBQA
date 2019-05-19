@@ -32,2006 +32,5778 @@ Non-trainable params: 0
 _________________________________________________________________
 Evaluating...
 4
-1.1685385704040527
+Subgraph extracted:
+15384 entities
+208 predicates
+Loading adjacencies..
+1.192272424697876
 5
-0.7537040710449219
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+0.7790243625640869
 6
-1.260934829711914
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+1.3322579860687256
 10
-0.9531853199005127
+Subgraph extracted:
+2 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+6 entities
+7 predicates
+Loading adjacencies..
+0.9924521446228027
 17
-0.8626463413238525
+Subgraph extracted:
+125 entities
+12 predicates
+Loading adjacencies..
+0.8873691558837891
 25
-0.6633052825927734
+Subgraph extracted:
+233 entities
+19 predicates
+Loading adjacencies..
+0.6347677707672119
 35
-0.009652376174926758
+0.009458303451538086
 56
-0.3612186908721924
+Subgraph extracted:
+2368 entities
+48 predicates
+Loading adjacencies..
+0.3706045150756836
 63
-0.5462884902954102
+Subgraph extracted:
+20580 entities
+284 predicates
+Loading adjacencies..
+0.5412688255310059
 65
-1.4381446838378906
+Subgraph extracted:
+9 entities
+2 predicates
+Loading adjacencies..
+1.3828155994415283
 67
-0.6116979122161865
+0.654881477355957
 78
-0.21170973777770996
+Subgraph extracted:
+266 entities
+18 predicates
+Loading adjacencies..
+0.21506881713867188
 95
-0.7613270282745361
+Subgraph extracted:
+2647 entities
+19 predicates
+Loading adjacencies..
+0.7604649066925049
 99
-0.6998295783996582
+Subgraph extracted:
+6 entities
+1 predicates
+Loading adjacencies..
+0.7345325946807861
 115
-1.000669240951538
+Subgraph extracted:
+59 entities
+6 predicates
+Loading adjacencies..
+Subgraph extracted:
+745 entities
+8 predicates
+Loading adjacencies..
+1.0016863346099854
 117
-0.6651544570922852
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+0.6900639533996582
 118
-0.6426210403442383
+0.632976770401001
 120
-1.3932807445526123
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+1.3221912384033203
 126
-0.030313730239868164
+Subgraph extracted:
+136 entities
+8 predicates
+Loading adjacencies..
+0.030173540115356445
 127
-1.4036660194396973
+Subgraph extracted:
+74 entities
+11 predicates
+Loading adjacencies..
+1.4195311069488525
 128
-0.6760587692260742
+0.6895537376403809
 131
-1.5100598335266113
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+1.5205612182617188
 134
-0.676591157913208
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.6741056442260742
 138
-0.4665107727050781
+Subgraph extracted:
+19343 entities
+350 predicates
+Loading adjacencies..
+0.48010706901550293
 144
-0.480057954788208
+Subgraph extracted:
+31 entities
+8 predicates
+Loading adjacencies..
+0.25261926651000977
 147
-1.2664813995361328
+Subgraph extracted:
+16 entities
+5 predicates
+Loading adjacencies..
+1.3267502784729004
 148
-0.8535640239715576
+Subgraph extracted:
+29 entities
+14 predicates
+Loading adjacencies..
+0.8512058258056641
 155
-0.7661426067352295
+0.7524402141571045
 161
-0.6904044151306152
+0.6380913257598877
 162
-1.4460971355438232
+Subgraph extracted:
+12 entities
+9 predicates
+Loading adjacencies..
+1.423121452331543
 190
-1.7350614070892334
+Subgraph extracted:
+15 entities
+10 predicates
+Loading adjacencies..
+1.7467916011810303
 191
-0.48502159118652344
+Subgraph extracted:
+24030 entities
+138 predicates
+Loading adjacencies..
+0.4886784553527832
 194
-0.8058884143829346
+Subgraph extracted:
+10 entities
+6 predicates
+Loading adjacencies..
+0.7948682308197021
 198
-0.3024916648864746
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+0.27501416206359863
 201
-0.9522359371185303
+Subgraph extracted:
+507 entities
+35 predicates
+Loading adjacencies..
+0.8713557720184326
 202
-0.7202775478363037
+0.42486047744750977
 203
-1.3640391826629639
+Subgraph extracted:
+6 entities
+10 predicates
+Loading adjacencies..
+1.4027836322784424
 207
-0.9788007736206055
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.9811394214630127
 224
-0.4037292003631592
+Subgraph extracted:
+267 entities
+27 predicates
+Loading adjacencies..
+0.40907812118530273
 225
-0.7846732139587402
+Subgraph extracted:
+206 entities
+35 predicates
+Loading adjacencies..
+0.7729880809783936
 226
-0.8616864681243896
+Subgraph extracted:
+41 entities
+3 predicates
+Loading adjacencies..
+0.8934876918792725
 233
-0.9718782901763916
+Subgraph extracted:
+12644 entities
+147 predicates
+Loading adjacencies..
+1.0039279460906982
 236
-1.6455118656158447
+Subgraph extracted:
+513 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+1406 entities
+10 predicates
+Loading adjacencies..
+1.6657354831695557
 242
-1.4848816394805908
+Subgraph extracted:
+13 entities
+11 predicates
+Loading adjacencies..
+1.4481072425842285
 243
-1.8112783432006836
+Subgraph extracted:
+15547 entities
+276 predicates
+Loading adjacencies..
+1.8182222843170166
 250
-0.7216992378234863
+Subgraph extracted:
+186 entities
+22 predicates
+Loading adjacencies..
+0.7421905994415283
 254
-1.5471746921539307
+Subgraph extracted:
+9 entities
+5 predicates
+Loading adjacencies..
+1.6246042251586914
 256
-0.8086371421813965
+Subgraph extracted:
+286 entities
+24 predicates
+Loading adjacencies..
+0.8357131481170654
 261
-2.1710212230682373
+Subgraph extracted:
+2783 entities
+31 predicates
+Loading adjacencies..
+Subgraph extracted:
+172 entities
+12 predicates
+Loading adjacencies..
+2.2048938274383545
 263
-0.8206863403320312
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.81117844581604
 281
-0.7681529521942139
+Subgraph extracted:
+105 entities
+6 predicates
+Loading adjacencies..
+0.7925360202789307
 285
-0.929584264755249
+Subgraph extracted:
+25 entities
+13 predicates
+Loading adjacencies..
+0.9260201454162598
 286
-1.3014395236968994
+1.345266580581665
 302
-0.0771934986114502
+Subgraph extracted:
+130 entities
+12 predicates
+Loading adjacencies..
+0.07613873481750488
 303
-0.7838747501373291
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.7835347652435303
 321
-0.9999339580535889
+Subgraph extracted:
+1087 entities
+13 predicates
+Loading adjacencies..
+1.002335786819458
 327
-1.6491355895996094
+Subgraph extracted:
+1160 entities
+9 predicates
+Loading adjacencies..
+1.6838374137878418
 336
-1.0465223789215088
+Subgraph extracted:
+16 entities
+11 predicates
+Loading adjacencies..
+1.0491960048675537
 338
-1.5491504669189453
+Subgraph extracted:
+314 entities
+7 predicates
+Loading adjacencies..
+Subgraph extracted:
+3749 entities
+3 predicates
+Loading adjacencies..
+1.541445016860962
 342
-0.8225016593933105
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+0.8298764228820801
 346
-0.18606138229370117
+Subgraph extracted:
+749 entities
+65 predicates
+Loading adjacencies..
+0.1895921230316162
 358
-0.00960850715637207
+0.009529590606689453
 363
-0.636415958404541
+Subgraph extracted:
+396 entities
+11 predicates
+Loading adjacencies..
+0.620835542678833
 365
-1.685452938079834
+Subgraph extracted:
+19 entities
+6 predicates
+Loading adjacencies..
+1.72648024559021
 376
-1.5464832782745361
+Subgraph extracted:
+57 entities
+10 predicates
+Loading adjacencies..
+Subgraph extracted:
+5529 entities
+40 predicates
+Loading adjacencies..
+1.6291112899780273
 380
-0.7514228820800781
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.7438175678253174
 385
-0.9592325687408447
+Subgraph extracted:
+6 entities
+3 predicates
+Loading adjacencies..
+0.9442176818847656
 386
-1.0915472507476807
+Subgraph extracted:
+9 entities
+2 predicates
+Loading adjacencies..
+1.0866742134094238
 389
-0.25015735626220703
+0.263718843460083
 392
-0.3242928981781006
+Subgraph extracted:
+251 entities
+16 predicates
+Loading adjacencies..
+0.3314635753631592
 396
-0.3782670497894287
+Subgraph extracted:
+3108 entities
+103 predicates
+Loading adjacencies..
+0.3736238479614258
 405
-1.5108375549316406
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+1.5201208591461182
 413
-0.6803650856018066
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.6855552196502686
 418
-0.6403477191925049
+0.6634223461151123
 420
-0.6740777492523193
+Subgraph extracted:
+4 entities
+1 predicates
+Loading adjacencies..
+0.6905350685119629
 429
-0.47208428382873535
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+21 entities
+7 predicates
+Loading adjacencies..
+0.5381572246551514
 456
-0.6750388145446777
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+0.7617127895355225
 467
-0.5114247798919678
+Subgraph extracted:
+13385 entities
+52 predicates
+Loading adjacencies..
+0.5169830322265625
 468
-0.3504302501678467
+Subgraph extracted:
+674 entities
+17 predicates
+Loading adjacencies..
+0.3833024501800537
 471
-0.29057884216308594
+Subgraph extracted:
+1433 entities
+18 predicates
+Loading adjacencies..
+0.30866551399230957
 475
-0.2072737216949463
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+0.20787262916564941
 478
-0.8254730701446533
+Subgraph extracted:
+29611 entities
+379 predicates
+Loading adjacencies..
+0.8419909477233887
 489
-0.7977416515350342
+Subgraph extracted:
+27 entities
+10 predicates
+Loading adjacencies..
+0.8060791492462158
 493
-0.42771434783935547
+Subgraph extracted:
+1140 entities
+41 predicates
+Loading adjacencies..
+0.42476367950439453
 500
-0.840700626373291
+Subgraph extracted:
+894 entities
+8 predicates
+Loading adjacencies..
+0.8751006126403809
 503
-0.2454531192779541
+Subgraph extracted:
+2 entities
+3 predicates
+Loading adjacencies..
+0.25801706314086914
 505
-0.6632370948791504
+Subgraph extracted:
+7 entities
+3 predicates
+Loading adjacencies..
+0.6596744060516357
 511
-0.5686883926391602
+Subgraph extracted:
+8382 entities
+259 predicates
+Loading adjacencies..
+0.5667502880096436
 513
-0.39454054832458496
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.3900868892669678
 524
-0.7006316184997559
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.7503652572631836
 525
-1.6478829383850098
+Subgraph extracted:
+43 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+78 entities
+7 predicates
+Loading adjacencies..
+1.6023736000061035
 526
-0.7921152114868164
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.7711038589477539
 537
-1.4954917430877686
+Subgraph extracted:
+14 entities
+1 predicates
+Loading adjacencies..
+1.4812514781951904
 538
-0.009250402450561523
+0.009071111679077148
 540
-1.8522803783416748
+Subgraph extracted:
+93 entities
+20 predicates
+Loading adjacencies..
+1.8799777030944824
 560
-0.7138504981994629
+Subgraph extracted:
+12 entities
+6 predicates
+Loading adjacencies..
+0.707122802734375
 563
-0.6771855354309082
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+0.6623129844665527
 564
-1.4432053565979004
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+1.4617316722869873
 570
-1.7971508502960205
+Subgraph extracted:
+13 entities
+6 predicates
+Loading adjacencies..
+1.7867398262023926
 575
-0.08918333053588867
+Subgraph extracted:
+2414 entities
+45 predicates
+Loading adjacencies..
+0.08900904655456543
 581
-0.3371880054473877
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+0.3310821056365967
 596
-1.4724512100219727
+Subgraph extracted:
+25 entities
+11 predicates
+Loading adjacencies..
+Subgraph extracted:
+29 entities
+6 predicates
+Loading adjacencies..
+1.4219601154327393
 601
-1.5821375846862793
+Subgraph extracted:
+105 entities
+3 predicates
+Loading adjacencies..
+1.5707805156707764
 604
-1.515429973602295
+Subgraph extracted:
+36 entities
+9 predicates
+Loading adjacencies..
+Subgraph extracted:
+88 entities
+14 predicates
+Loading adjacencies..
+1.5643970966339111
 607
-0.8226139545440674
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.8222458362579346
 609
-0.2365727424621582
+0.26445698738098145
 617
-0.2989463806152344
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.29396629333496094
 624
-0.0956428050994873
+Subgraph extracted:
+4103 entities
+140 predicates
+Loading adjacencies..
+0.09736394882202148
 636
-1.5717558860778809
+Subgraph extracted:
+65 entities
+24 predicates
+Loading adjacencies..
+1.5748870372772217
 639
-0.22857427597045898
+0.2328803539276123
 646
-0.2646350860595703
+0.29554009437561035
 647
-0.009049415588378906
+0.009466409683227539
 660
-1.1827690601348877
+Subgraph extracted:
+195 entities
+15 predicates
+Loading adjacencies..
+1.1831576824188232
 662
-1.6830828189849854
+Subgraph extracted:
+125 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+189 entities
+7 predicates
+Loading adjacencies..
+1.7302863597869873
 664
-0.39685702323913574
+Subgraph extracted:
+37 entities
+12 predicates
+Loading adjacencies..
+0.43517303466796875
 667
-0.7427310943603516
+Subgraph extracted:
+6 entities
+6 predicates
+Loading adjacencies..
+0.7333207130432129
 668
-1.253443717956543
+Subgraph extracted:
+16 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+26 entities
+3 predicates
+Loading adjacencies..
+1.241450309753418
 672
-0.9656767845153809
+Subgraph extracted:
+1200 entities
+32 predicates
+Loading adjacencies..
+1.0380771160125732
 674
-0.24803709983825684
+0.24569129943847656
 676
-0.8103647232055664
+Subgraph extracted:
+24 entities
+8 predicates
+Loading adjacencies..
+0.8107800483703613
 689
-1.0937855243682861
+Subgraph extracted:
+66 entities
+6 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+1.104731559753418
 699
-0.008761405944824219
+0.008810758590698242
 700
-0.7258350849151611
+Subgraph extracted:
+269 entities
+15 predicates
+Loading adjacencies..
+0.8292768001556396
 710
-0.4492154121398926
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.4539601802825928
 714
-1.4694530963897705
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+1.4339244365692139
 717
-0.773428201675415
+Subgraph extracted:
+263 entities
+33 predicates
+Loading adjacencies..
+0.7904014587402344
 718
-0.36763978004455566
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.3699181079864502
 723
-0.1216428279876709
+Subgraph extracted:
+905 entities
+25 predicates
+Loading adjacencies..
+0.1213521957397461
 724
-0.28601789474487305
+Subgraph extracted:
+10 entities
+2 predicates
+Loading adjacencies..
+0.3053243160247803
 729
-0.7773056030273438
+Subgraph extracted:
+6 entities
+3 predicates
+Loading adjacencies..
+0.781609058380127
 733
-0.714266300201416
+Subgraph extracted:
+50 entities
+5 predicates
+Loading adjacencies..
+0.732595682144165
 741
-0.015298128128051758
+Subgraph extracted:
+37 entities
+14 predicates
+Loading adjacencies..
+0.01581549644470215
 754
-1.5912501811981201
+Subgraph extracted:
+7 entities
+7 predicates
+Loading adjacencies..
+1.5824131965637207
 761
-1.4056038856506348
+Subgraph extracted:
+215 entities
+14 predicates
+Loading adjacencies..
+Subgraph extracted:
+39 entities
+7 predicates
+Loading adjacencies..
+1.4431452751159668
 763
-0.5319316387176514
+Subgraph extracted:
+22327 entities
+114 predicates
+Loading adjacencies..
+0.5470373630523682
 767
-0.08964967727661133
+Subgraph extracted:
+244 entities
+26 predicates
+Loading adjacencies..
+0.08849191665649414
 769
-0.47522854804992676
+Subgraph extracted:
+57 entities
+13 predicates
+Loading adjacencies..
+0.4848814010620117
 770
-1.5023093223571777
+Subgraph extracted:
+35 entities
+5 predicates
+Loading adjacencies..
+1.515084981918335
 771
-0.16428303718566895
+Subgraph extracted:
+5611 entities
+169 predicates
+Loading adjacencies..
+0.16730022430419922
 776
-0.4315314292907715
+Subgraph extracted:
+13 entities
+6 predicates
+Loading adjacencies..
+0.4624488353729248
 785
-0.6820166110992432
+0.7075331211090088
 794
-0.06749606132507324
+Subgraph extracted:
+146 entities
+32 predicates
+Loading adjacencies..
+0.06704068183898926
 798
-1.0211033821105957
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+0.993166446685791
 805
-0.720320463180542
+Subgraph extracted:
+9 entities
+3 predicates
+Loading adjacencies..
+0.7498481273651123
 815
-0.642951488494873
+0.6355247497558594
 816
-1.046895980834961
+Subgraph extracted:
+19 entities
+8 predicates
+Loading adjacencies..
+Subgraph extracted:
+109 entities
+10 predicates
+Loading adjacencies..
+1.099588394165039
 824
-0.8737640380859375
+Subgraph extracted:
+9 entities
+4 predicates
+Loading adjacencies..
+0.8828215599060059
 826
-0.30335378646850586
+Subgraph extracted:
+3194 entities
+106 predicates
+Loading adjacencies..
+0.3057272434234619
 828
-0.3467373847961426
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.37061381340026855
 831
-1.2538492679595947
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+1.2627854347229004
 847
-0.37479615211486816
+Subgraph extracted:
+6 entities
+2 predicates
+Loading adjacencies..
+0.3681068420410156
 849
-0.8466582298278809
+0.8289632797241211
 852
-1.0865168571472168
+Subgraph extracted:
+156 entities
+3 predicates
+Loading adjacencies..
+1.0363843441009521
 854
-0.7122523784637451
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.687830924987793
 855
-1.4116947650909424
+Subgraph extracted:
+22 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+9 entities
+4 predicates
+Loading adjacencies..
+1.411738395690918
 861
-0.8015429973602295
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.8057239055633545
 864
-1.5206570625305176
+Subgraph extracted:
+17 entities
+13 predicates
+Loading adjacencies..
+1.5358455181121826
 871
-1.134948968887329
+Subgraph extracted:
+25 entities
+4 predicates
+Loading adjacencies..
+1.138704776763916
 873
-0.7890238761901855
+Subgraph extracted:
+3 entities
+8 predicates
+Loading adjacencies..
+0.829420804977417
 876
-0.6971473693847656
+Subgraph extracted:
+15 entities
+3 predicates
+Loading adjacencies..
+0.7459607124328613
 877
-0.7375674247741699
+Subgraph extracted:
+10678 entities
+102 predicates
+Loading adjacencies..
+0.7433755397796631
 879
-1.1851072311401367
+Subgraph extracted:
+218 entities
+13 predicates
+Loading adjacencies..
+1.2067508697509766
 895
-1.4035212993621826
+Subgraph extracted:
+6 entities
+4 predicates
+Loading adjacencies..
+1.419910192489624
 896
-0.7560110092163086
+0.7566137313842773
 900
-0.3610231876373291
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.3931865692138672
 902
-1.0490963459014893
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+1.0614354610443115
 919
-1.131230115890503
+Subgraph extracted:
+693 entities
+13 predicates
+Loading adjacencies..
+Subgraph extracted:
+831 entities
+25 predicates
+Loading adjacencies..
+1.1659681797027588
 920
-0.30922794342041016
+Subgraph extracted:
+2735 entities
+64 predicates
+Loading adjacencies..
+0.3503835201263428
 923
-0.7374715805053711
+Subgraph extracted:
+6 entities
+1 predicates
+Loading adjacencies..
+0.7389793395996094
 925
-0.10995316505432129
+Subgraph extracted:
+1022 entities
+38 predicates
+Loading adjacencies..
+0.11171317100524902
 929
-0.3276844024658203
+Subgraph extracted:
+23 entities
+5 predicates
+Loading adjacencies..
+0.7019593715667725
 937
-0.7304811477661133
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.7295079231262207
 939
-1.703131914138794
+Subgraph extracted:
+29 entities
+5 predicates
+Loading adjacencies..
+1.7622382640838623
 951
-0.7666678428649902
+Subgraph extracted:
+288 entities
+27 predicates
+Loading adjacencies..
+1.1878104209899902
 952
-1.2879717350006104
+Subgraph extracted:
+1532 entities
+16 predicates
+Loading adjacencies..
+Subgraph extracted:
+402 entities
+16 predicates
+Loading adjacencies..
+1.340757131576538
 954
-0.4318673610687256
+Subgraph extracted:
+6 entities
+5 predicates
+Loading adjacencies..
+0.4117550849914551
 955
-0.22729778289794922
+0.24860262870788574
 957
-0.01263427734375
+0.013912200927734375
 960
-1.3871142864227295
+1.3792872428894043
 967
-1.1438484191894531
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+1.1351981163024902
 972
-1.4049949645996094
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+8 entities
+5 predicates
+Loading adjacencies..
+1.3712773323059082
 976
-1.4736828804016113
+Subgraph extracted:
+33 entities
+13 predicates
+Loading adjacencies..
+1.4397516250610352
 981
-0.6344130039215088
+Subgraph extracted:
+129 entities
+12 predicates
+Loading adjacencies..
+0.6465921401977539
 985
-0.7131719589233398
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.7291173934936523
 988
-0.7428014278411865
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.7410852909088135
 990
-1.043186902999878
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+1912 entities
+24 predicates
+Loading adjacencies..
+1.065398931503296
 992
-0.00866389274597168
+0.00862884521484375
 993
-1.3977203369140625
+Subgraph extracted:
+3 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+1.3542122840881348
 996
-0.8881716728210449
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+0.8816354274749756
 1003
-0.7507762908935547
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.7785673141479492
 1013
-0.6319065093994141
+0.6536898612976074
 1016
-1.100503921508789
+Subgraph extracted:
+6 entities
+3 predicates
+Loading adjacencies..
+1.0669689178466797
 1017
-1.5909810066223145
+Subgraph extracted:
+1676 entities
+31 predicates
+Loading adjacencies..
+1.5946784019470215
 1022
-0.3086559772491455
+Subgraph extracted:
+4938 entities
+45 predicates
+Loading adjacencies..
+0.2999858856201172
 1029
-1.4294233322143555
+Subgraph extracted:
+358 entities
+24 predicates
+Loading adjacencies..
+Subgraph extracted:
+1913 entities
+33 predicates
+Loading adjacencies..
+1.4850051403045654
 1046
-1.6500818729400635
+Subgraph extracted:
+6 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+93 entities
+5 predicates
+Loading adjacencies..
+1.6839568614959717
 1060
-0.8110942840576172
+Subgraph extracted:
+7 entities
+2 predicates
+Loading adjacencies..
+0.8412938117980957
 1061
-1.4577572345733643
+Subgraph extracted:
+95 entities
+9 predicates
+Loading adjacencies..
+Subgraph extracted:
+219 entities
+18 predicates
+Loading adjacencies..
+1.5027222633361816
 1063
-0.7317616939544678
+0.7546474933624268
 1064
-1.490309476852417
+Subgraph extracted:
+6 entities
+9 predicates
+Loading adjacencies..
+1.4687604904174805
 1066
-0.4817843437194824
+Subgraph extracted:
+155 entities
+7 predicates
+Loading adjacencies..
+0.4950850009918213
 1067
-0.8907339572906494
+0.9034483432769775
 1070
-0.5981576442718506
+Subgraph extracted:
+1593 entities
+24 predicates
+Loading adjacencies..
+0.5872147083282471
 1077
-1.1815710067749023
+Subgraph extracted:
+44 entities
+12 predicates
+Loading adjacencies..
+1.1340935230255127
 1078
-4.399980306625366
+Subgraph extracted:
+122 entities
+12 predicates
+Loading adjacencies..
+Subgraph extracted:
+82090 entities
+40 predicates
+Loading adjacencies..
+4.4044671058654785
 1082
-1.4537458419799805
+Subgraph extracted:
+21 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+107 entities
+4 predicates
+Loading adjacencies..
+1.4776606559753418
 1083
-1.0307791233062744
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+0.9974660873413086
 1087
-1.4337823390960693
+Subgraph extracted:
+30 entities
+6 predicates
+Loading adjacencies..
+Subgraph extracted:
+242 entities
+13 predicates
+Loading adjacencies..
+1.483243465423584
 1108
-0.009318828582763672
+0.009705543518066406
 1119
-1.1746578216552734
+Subgraph extracted:
+17867 entities
+263 predicates
+Loading adjacencies..
+1.1557199954986572
 1121
-0.9596986770629883
+Subgraph extracted:
+118 entities
+16 predicates
+Loading adjacencies..
+0.9176077842712402
 1123
-0.7908947467803955
+Subgraph extracted:
+10 entities
+4 predicates
+Loading adjacencies..
+0.7770161628723145
 1137
-0.2697122097015381
+Subgraph extracted:
+261 entities
+20 predicates
+Loading adjacencies..
+0.2724575996398926
 1140
-1.278576135635376
+Subgraph extracted:
+145 entities
+17 predicates
+Loading adjacencies..
+1.2894694805145264
 1142
-0.2805042266845703
+Subgraph extracted:
+7 entities
+6 predicates
+Loading adjacencies..
+0.295346736907959
 1146
-0.7100710868835449
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+0.7007317543029785
 1148
-0.8637516498565674
+Subgraph extracted:
+29 entities
+4 predicates
+Loading adjacencies..
+0.8699884414672852
 1149
-1.5551426410675049
+Subgraph extracted:
+252 entities
+6 predicates
+Loading adjacencies..
+1.5770189762115479
 1151
-0.21152162551879883
+Subgraph extracted:
+4526 entities
+215 predicates
+Loading adjacencies..
+0.2160937786102295
 1155
-0.43593311309814453
+Subgraph extracted:
+5 entities
+6 predicates
+Loading adjacencies..
+0.4584231376647949
 1156
-0.8129551410675049
+0.8382894992828369
 1157
-0.7721660137176514
+Subgraph extracted:
+76 entities
+18 predicates
+Loading adjacencies..
+0.7460744380950928
 1161
-0.7814886569976807
+Subgraph extracted:
+50 entities
+9 predicates
+Loading adjacencies..
+0.7179372310638428
 1167
-0.04891657829284668
+Subgraph extracted:
+459 entities
+15 predicates
+Loading adjacencies..
+0.050163984298706055
 1168
-0.010404825210571289
+0.010239601135253906
 1170
-1.0458855628967285
+Subgraph extracted:
+29 entities
+6 predicates
+Loading adjacencies..
+Subgraph extracted:
+40 entities
+7 predicates
+Loading adjacencies..
+1.0428361892700195
 1185
-0.5434505939483643
+Subgraph extracted:
+21 entities
+6 predicates
+Loading adjacencies..
+Subgraph extracted:
+20 entities
+4 predicates
+Loading adjacencies..
+0.49661755561828613
 1192
-0.20599770545959473
+Subgraph extracted:
+2550 entities
+134 predicates
+Loading adjacencies..
+0.20485401153564453
 1203
-0.009526968002319336
+0.009520769119262695
 1204
-0.36737799644470215
+Subgraph extracted:
+14952 entities
+334 predicates
+Loading adjacencies..
+0.3772275447845459
 1206
-0.8432145118713379
+Subgraph extracted:
+7 entities
+3 predicates
+Loading adjacencies..
+0.8176066875457764
 1215
-0.9002010822296143
+Subgraph extracted:
+377 entities
+4 predicates
+Loading adjacencies..
+0.897075891494751
 1218
-0.34755444526672363
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.34557342529296875
 1219
-0.38675785064697266
+Subgraph extracted:
+170 entities
+8 predicates
+Loading adjacencies..
+0.3783531188964844
 1244
-0.05925130844116211
+Subgraph extracted:
+691 entities
+33 predicates
+Loading adjacencies..
+0.059606313705444336
 1249
-0.8202078342437744
+Subgraph extracted:
+7 entities
+2 predicates
+Loading adjacencies..
+0.7913296222686768
 1251
-0.8404529094696045
+Subgraph extracted:
+2437 entities
+76 predicates
+Loading adjacencies..
+0.8406968116760254
 1253
-0.5292515754699707
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+0.514545202255249
 1255
-1.1695430278778076
+Subgraph extracted:
+2570 entities
+46 predicates
+Loading adjacencies..
+1.1835198402404785
 1257
-0.3130011558532715
+Subgraph extracted:
+12 entities
+9 predicates
+Loading adjacencies..
+0.3075449466705322
 1268
-1.1169500350952148
+Subgraph extracted:
+41 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+87 entities
+7 predicates
+Loading adjacencies..
+2.033906936645508
 1276
-0.927715539932251
+0.9038457870483398
 1277
-0.513427734375
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.5175695419311523
 1283
-1.2205116748809814
+Subgraph extracted:
+13 entities
+3 predicates
+Loading adjacencies..
+1.211165189743042
 1292
-1.0756988525390625
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+1.1131885051727295
 1297
-0.5369563102722168
+Subgraph extracted:
+33 entities
+2 predicates
+Loading adjacencies..
+0.5221047401428223
 1301
-0.7486333847045898
+0.7703306674957275
 1307
-1.2763352394104004
+Subgraph extracted:
+8 entities
+6 predicates
+Loading adjacencies..
+1.2978880405426025
 1313
-0.009455442428588867
+0.008966207504272461
 1315
-0.6365094184875488
+Subgraph extracted:
+266 entities
+6 predicates
+Loading adjacencies..
+Subgraph extracted:
+1790 entities
+8 predicates
+Loading adjacencies..
+0.6356632709503174
 1319
-0.2916884422302246
+Subgraph extracted:
+33 entities
+11 predicates
+Loading adjacencies..
+0.29520368576049805
 1325
-0.9796879291534424
+Subgraph extracted:
+319 entities
+7 predicates
+Loading adjacencies..
+Subgraph extracted:
+218 entities
+8 predicates
+Loading adjacencies..
+0.967919111251831
 1330
-0.09654569625854492
+Subgraph extracted:
+45 entities
+24 predicates
+Loading adjacencies..
+0.09841585159301758
 1332
-0.4356813430786133
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.42551183700561523
 1333
-0.5276684761047363
+Subgraph extracted:
+227 entities
+24 predicates
+Loading adjacencies..
+0.5147659778594971
 1343
-0.5364665985107422
+0.5303943157196045
 1349
-0.17421412467956543
+Subgraph extracted:
+4210 entities
+81 predicates
+Loading adjacencies..
+0.17309236526489258
 1354
-1.3952229022979736
+Subgraph extracted:
+14 entities
+8 predicates
+Loading adjacencies..
+1.4201855659484863
 1359
-1.2911369800567627
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+1.3292176723480225
 1364
-0.511955738067627
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+0.5974428653717041
 1366
-0.7283802032470703
+Subgraph extracted:
+1018 entities
+29 predicates
+Loading adjacencies..
+0.758380651473999
 1370
-0.8074800968170166
+Subgraph extracted:
+182 entities
+11 predicates
+Loading adjacencies..
+0.8081405162811279
 1384
-1.5724444389343262
+Subgraph extracted:
+128 entities
+18 predicates
+Loading adjacencies..
+1.5851390361785889
 1385
-0.6898536682128906
+0.6815438270568848
 1389
-0.9247775077819824
+1.019235372543335
 1395
-0.315504789352417
+Subgraph extracted:
+1040 entities
+83 predicates
+Loading adjacencies..
+0.3071870803833008
 1397
-1.9251470565795898
+Subgraph extracted:
+259 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+32 entities
+5 predicates
+Loading adjacencies..
+1.941194772720337
 1410
-0.9419214725494385
+Subgraph extracted:
+32 entities
+5 predicates
+Loading adjacencies..
+0.9606173038482666
 1446
-0.42888617515563965
+Subgraph extracted:
+182 entities
+8 predicates
+Loading adjacencies..
+0.43964219093322754
 1461
-0.6581380367279053
+Subgraph extracted:
+28 entities
+6 predicates
+Loading adjacencies..
+0.67018723487854
 1471
-0.6130013465881348
+Subgraph extracted:
+17923 entities
+274 predicates
+Loading adjacencies..
+0.6174185276031494
 1479
-0.3937263488769531
+Subgraph extracted:
+11 entities
+7 predicates
+Loading adjacencies..
+0.37719154357910156
 1485
-1.3765392303466797
+1.3737621307373047
 1493
-0.7905027866363525
+Subgraph extracted:
+65 entities
+6 predicates
+Loading adjacencies..
+0.8105180263519287
 1494
-0.43938779830932617
+Subgraph extracted:
+6 entities
+5 predicates
+Loading adjacencies..
+0.42241501808166504
 1496
-1.6014759540557861
+Subgraph extracted:
+54 entities
+10 predicates
+Loading adjacencies..
+1.6142165660858154
 1501
-0.6424722671508789
+Subgraph extracted:
+134 entities
+17 predicates
+Loading adjacencies..
+0.6815073490142822
 1517
-2.28594708442688
+Subgraph extracted:
+66549 entities
+479 predicates
+Loading adjacencies..
+2.25714111328125
 1528
-2.038541555404663
+Subgraph extracted:
+312 entities
+16 predicates
+Loading adjacencies..
+2.036229133605957
 1529
-0.18957281112670898
+Subgraph extracted:
+816 entities
+9 predicates
+Loading adjacencies..
+0.19028878211975098
 1530
-0.7416324615478516
+Subgraph extracted:
+14 entities
+3 predicates
+Loading adjacencies..
+0.7661962509155273
 1532
-0.7836260795593262
+Subgraph extracted:
+9 entities
+3 predicates
+Loading adjacencies..
+0.7756252288818359
 1541
-1.5485000610351562
+Subgraph extracted:
+73 entities
+13 predicates
+Loading adjacencies..
+1.5979132652282715
 1543
-0.9764547348022461
+Subgraph extracted:
+27 entities
+13 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.9487130641937256
 1569
-1.0808608531951904
+Subgraph extracted:
+10 entities
+7 predicates
+Loading adjacencies..
+1.1200826168060303
 1571
-0.6888575553894043
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.730139970779419
 1572
-0.1652202606201172
+Subgraph extracted:
+45 entities
+18 predicates
+Loading adjacencies..
+0.1664905548095703
 1574
-0.8804869651794434
+Subgraph extracted:
+3 entities
+3 predicates
+Loading adjacencies..
+0.8917958736419678
 1575
-0.05294013023376465
+Subgraph extracted:
+103 entities
+14 predicates
+Loading adjacencies..
+0.05358481407165527
 1582
-0.16539263725280762
+Subgraph extracted:
+1502 entities
+65 predicates
+Loading adjacencies..
+0.16411995887756348
 1586
-1.8881182670593262
+Subgraph extracted:
+17 entities
+13 predicates
+Loading adjacencies..
+Subgraph extracted:
+34304 entities
+33 predicates
+Loading adjacencies..
+1.8879098892211914
 1598
-0.9123170375823975
+0.9008195400238037
 1604
-0.9340193271636963
+Subgraph extracted:
+36 entities
+4 predicates
+Loading adjacencies..
+0.9262745380401611
 1605
-1.0902049541473389
+1.0921297073364258
 1606
-1.2020306587219238
+Subgraph extracted:
+336 entities
+15 predicates
+Loading adjacencies..
+1.1935138702392578
 1620
-0.3426797389984131
+Subgraph extracted:
+16286 entities
+191 predicates
+Loading adjacencies..
+0.34459877014160156
 1626
-2.0502824783325195
+Subgraph extracted:
+2725 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+2862 entities
+6 predicates
+Loading adjacencies..
+2.057507038116455
 1632
-0.2716212272644043
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.25939106941223145
 1634
-0.8507223129272461
+Subgraph extracted:
+42 entities
+9 predicates
+Loading adjacencies..
+0.882744312286377
 1636
-1.0704405307769775
+Subgraph extracted:
+95 entities
+14 predicates
+Loading adjacencies..
+1.0736656188964844
 1637
-0.6707303524017334
+Subgraph extracted:
+26 entities
+9 predicates
+Loading adjacencies..
+0.6707558631896973
 1640
-0.9044523239135742
+Subgraph extracted:
+5 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+87 entities
+7 predicates
+Loading adjacencies..
+0.9513959884643555
 1646
-1.6485888957977295
+Subgraph extracted:
+4 entities
+6 predicates
+Loading adjacencies..
+1.778395414352417
 1647
-0.531214714050293
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.5515651702880859
 1649
-1.0325953960418701
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+1.0204617977142334
 1664
-0.36656832695007324
+Subgraph extracted:
+845 entities
+66 predicates
+Loading adjacencies..
+0.36014389991760254
 1665
-0.3845086097717285
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.39572739601135254
 1669
-1.6284236907958984
+Subgraph extracted:
+37808 entities
+381 predicates
+Loading adjacencies..
+1.6323819160461426
 1674
-1.2477045059204102
+Subgraph extracted:
+280 entities
+31 predicates
+Loading adjacencies..
+1.2475106716156006
 1679
-1.1958184242248535
+Subgraph extracted:
+413 entities
+9 predicates
+Loading adjacencies..
+Subgraph extracted:
+212 entities
+12 predicates
+Loading adjacencies..
+1.198685884475708
 1680
-1.0082142353057861
+1.008035659790039
 1681
-0.7833590507507324
+Subgraph extracted:
+12 entities
+2 predicates
+Loading adjacencies..
+0.7672162055969238
 1683
-0.361086368560791
+0.33861398696899414
 1686
-0.34051990509033203
+Subgraph extracted:
+13 entities
+5 predicates
+Loading adjacencies..
+0.31427764892578125
 1687
-0.653881311416626
+0.6541857719421387
 1688
-0.9971017837524414
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+1743 entities
+4 predicates
+Loading adjacencies..
+1.037407636642456
 1694
-1.1733813285827637
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+1.1792657375335693
 1697
-0.32117748260498047
+Subgraph extracted:
+827 entities
+47 predicates
+Loading adjacencies..
+0.34125423431396484
 1702
-1.5389699935913086
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+1.5903191566467285
 1708
-1.4293835163116455
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+649 entities
+11 predicates
+Loading adjacencies..
+1.4585368633270264
 1716
-1.252912998199463
+Subgraph extracted:
+1440 entities
+7 predicates
+Loading adjacencies..
+1.2229816913604736
 1720
-0.6229486465454102
+Subgraph extracted:
+11 entities
+4 predicates
+Loading adjacencies..
+0.6090381145477295
 1723
-1.0815722942352295
+Subgraph extracted:
+3 entities
+3 predicates
+Loading adjacencies..
+1.0518763065338135
 1725
-0.31874608993530273
+Subgraph extracted:
+12385 entities
+345 predicates
+Loading adjacencies..
+0.3203136920928955
 1734
-0.8144056797027588
+Subgraph extracted:
+25 entities
+3 predicates
+Loading adjacencies..
+0.8453223705291748
 1735
-0.8656902313232422
+Subgraph extracted:
+8 entities
+8 predicates
+Loading adjacencies..
+0.8489968776702881
 1754
-0.3205544948577881
+Subgraph extracted:
+23 entities
+6 predicates
+Loading adjacencies..
+0.2989003658294678
 1758
-0.805959939956665
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+0.8273203372955322
 1760
-0.2721526622772217
+Subgraph extracted:
+281 entities
+33 predicates
+Loading adjacencies..
+0.27588868141174316
 1762
-0.7542293071746826
+0.781334638595581
 1793
-0.825237512588501
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.825181245803833
 1795
-0.9765489101409912
+Subgraph extracted:
+7 entities
+1 predicates
+Loading adjacencies..
+0.9951634407043457
 1803
-0.3179817199707031
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.26768946647644043
 1807
-0.701113224029541
+Subgraph extracted:
+753 entities
+5 predicates
+Loading adjacencies..
+0.6887204647064209
 1811
-1.4877393245697021
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+1.4426724910736084
 1817
-0.5394370555877686
+Subgraph extracted:
+96 entities
+11 predicates
+Loading adjacencies..
+0.5772688388824463
 1820
-1.1762480735778809
+Subgraph extracted:
+7 entities
+6 predicates
+Loading adjacencies..
+1.1948349475860596
 1824
-1.267568826675415
+Subgraph extracted:
+1665 entities
+19 predicates
+Loading adjacencies..
+Subgraph extracted:
+599 entities
+25 predicates
+Loading adjacencies..
+1.2950325012207031
 1825
-0.07584452629089355
+Subgraph extracted:
+632 entities
+33 predicates
+Loading adjacencies..
+0.0767059326171875
 1828
-1.1941423416137695
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+1.1464481353759766
 1829
-0.8814990520477295
+Subgraph extracted:
+32 entities
+9 predicates
+Loading adjacencies..
+0.9159190654754639
 1835
-1.0610547065734863
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+1.0595684051513672
 1839
-1.5361285209655762
+1.5634377002716064
 1842
-0.25939321517944336
+Subgraph extracted:
+112 entities
+21 predicates
+Loading adjacencies..
+0.2680490016937256
 1844
-0.7190084457397461
+Subgraph extracted:
+4 entities
+1 predicates
+Loading adjacencies..
+0.7414920330047607
 1849
-0.3824937343597412
+0.44711756706237793
 1853
-0.680983304977417
+Subgraph extracted:
+7 entities
+5 predicates
+Loading adjacencies..
+0.7393217086791992
 1854
-0.14913225173950195
+Subgraph extracted:
+2373 entities
+83 predicates
+Loading adjacencies..
+0.14833331108093262
 1855
-0.6524155139923096
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+221 entities
+7 predicates
+Loading adjacencies..
+0.719867467880249
 1857
-1.0707952976226807
+Subgraph extracted:
+8 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+32 entities
+11 predicates
+Loading adjacencies..
+1.0465240478515625
 1858
-0.3562958240509033
+Subgraph extracted:
+14149 entities
+258 predicates
+Loading adjacencies..
+0.35929298400878906
 1864
-1.1050796508789062
+Subgraph extracted:
+46 entities
+12 predicates
+Loading adjacencies..
+1.1176600456237793
 1866
-0.6707296371459961
+0.6623327732086182
 1880
-0.29572057723999023
+Subgraph extracted:
+35 entities
+6 predicates
+Loading adjacencies..
+0.2658874988555908
 1888
-0.781578779220581
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.8083286285400391
 1896
-1.5692658424377441
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+6 predicates
+Loading adjacencies..
+1.509700059890747
 1900
-0.4301297664642334
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.42821455001831055
 1907
-0.2909200191497803
+Subgraph extracted:
+312 entities
+16 predicates
+Loading adjacencies..
+0.29077935218811035
 1909
-1.1319324970245361
+Subgraph extracted:
+5 entities
+6 predicates
+Loading adjacencies..
+1.1588914394378662
 1918
-0.2131352424621582
+0.24615764617919922
 1931
-0.9922897815704346
+Subgraph extracted:
+13 entities
+9 predicates
+Loading adjacencies..
+1.0413708686828613
 1932
-1.4279260635375977
+Subgraph extracted:
+74 entities
+20 predicates
+Loading adjacencies..
+1.4086241722106934
 1945
-0.13105297088623047
+Subgraph extracted:
+67 entities
+16 predicates
+Loading adjacencies..
+0.12642693519592285
 1956
-1.375089406967163
+1.3853485584259033
 1959
-0.42594408988952637
+Subgraph extracted:
+25 entities
+6 predicates
+Loading adjacencies..
+0.43019962310791016
 1960
-0.6900560855865479
+0.6965725421905518
 1969
-0.2924990653991699
+Subgraph extracted:
+343 entities
+8 predicates
+Loading adjacencies..
+0.27315282821655273
 1970
-0.2033219337463379
+Subgraph extracted:
+82 entities
+25 predicates
+Loading adjacencies..
+0.20689105987548828
 1971
-0.3022177219390869
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.3097083568572998
 1976
-0.7343218326568604
+0.7062244415283203
 1977
-0.6958785057067871
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.7331178188323975
 1982
-0.8738043308258057
+Subgraph extracted:
+44 entities
+5 predicates
+Loading adjacencies..
+0.8630943298339844
 1983
-0.6814217567443848
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.7125396728515625
 1985
-0.8179395198822021
+Subgraph extracted:
+99 entities
+5 predicates
+Loading adjacencies..
+0.836817741394043
 1987
-0.7760913372039795
+Subgraph extracted:
+5 entities
+5 predicates
+Loading adjacencies..
+0.7730846405029297
 1991
-0.2981719970703125
+Subgraph extracted:
+1130 entities
+18 predicates
+Loading adjacencies..
+0.27176856994628906
 1995
-0.2914292812347412
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.25963640213012695
 1997
-0.4643576145172119
+0.423795223236084
 1998
-0.23015904426574707
+Subgraph extracted:
+119 entities
+1 predicates
+Loading adjacencies..
+0.22975659370422363
 1999
-1.1004784107208252
+Subgraph extracted:
+10 entities
+7 predicates
+Loading adjacencies..
+Subgraph extracted:
+13961 entities
+22 predicates
+Loading adjacencies..
+1.0884625911712646
 2001
-0.8918797969818115
+Subgraph extracted:
+12 entities
+3 predicates
+Loading adjacencies..
+0.8969218730926514
 2018
-0.35097217559814453
+Subgraph extracted:
+51 entities
+8 predicates
+Loading adjacencies..
+0.38570237159729004
 2027
-0.4335331916809082
+Subgraph extracted:
+95 entities
+5 predicates
+Loading adjacencies..
+0.46689844131469727
 2028
-0.009628057479858398
+0.009349346160888672
 2036
-1.0868146419525146
+Subgraph extracted:
+55 entities
+15 predicates
+Loading adjacencies..
+Subgraph extracted:
+666 entities
+16 predicates
+Loading adjacencies..
+1.1498782634735107
 2039
-0.36269688606262207
+Subgraph extracted:
+109 entities
+2 predicates
+Loading adjacencies..
+0.35698986053466797
 2040
-1.195631504058838
+Subgraph extracted:
+14307 entities
+456 predicates
+Loading adjacencies..
+1.2072389125823975
 2042
-0.8255655765533447
+Subgraph extracted:
+20 entities
+7 predicates
+Loading adjacencies..
+0.8124299049377441
 2048
-0.34633803367614746
+Subgraph extracted:
+2223 entities
+66 predicates
+Loading adjacencies..
+0.34218597412109375
 2049
-0.3984196186065674
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.36660027503967285
 2050
-0.6971876621246338
+Subgraph extracted:
+432 entities
+15 predicates
+Loading adjacencies..
+0.7028114795684814
 2056
-1.4471898078918457
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+1.4366683959960938
 2057
-2.0604400634765625
+Subgraph extracted:
+56 entities
+3 predicates
+Loading adjacencies..
+2.0756618976593018
 2061
-0.9665453433990479
+Subgraph extracted:
+17 entities
+4 predicates
+Loading adjacencies..
+0.9765198230743408
 2062
-0.38166093826293945
+Subgraph extracted:
+6 entities
+4 predicates
+Loading adjacencies..
+0.3700423240661621
 2063
-1.4242019653320312
+Subgraph extracted:
+6 entities
+7 predicates
+Loading adjacencies..
+1.4329028129577637
 2066
-1.1682476997375488
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+1.1783690452575684
 2071
-0.5064404010772705
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.5318920612335205
 2076
-0.2351369857788086
+Subgraph extracted:
+12 entities
+2 predicates
+Loading adjacencies..
+0.23636460304260254
 2080
-0.3506441116333008
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.33368730545043945
 2082
-0.4944171905517578
+Subgraph extracted:
+11 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+42 entities
+2 predicates
+Loading adjacencies..
+0.5013120174407959
 2083
-1.3460395336151123
+Subgraph extracted:
+6 entities
+6 predicates
+Loading adjacencies..
+Subgraph extracted:
+6 entities
+4 predicates
+Loading adjacencies..
+1.3555850982666016
 2106
-1.1522586345672607
+Subgraph extracted:
+115 entities
+4 predicates
+Loading adjacencies..
+1.17494797706604
 2117
-0.9809479713439941
+0.977468729019165
 2123
-0.4147346019744873
+Subgraph extracted:
+3618 entities
+26 predicates
+Loading adjacencies..
+0.3609910011291504
 2126
-0.7903094291687012
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.7790672779083252
 2129
-0.696760892868042
+0.6824884414672852
 2137
-1.3708209991455078
+1.295597791671753
 2142
-0.9825031757354736
+Subgraph extracted:
+417 entities
+23 predicates
+Loading adjacencies..
+0.9661009311676025
 2144
-0.7449133396148682
+Subgraph extracted:
+6 entities
+4 predicates
+Loading adjacencies..
+0.7281568050384521
 2151
-0.22339916229248047
+0.22092080116271973
 2152
-0.30646371841430664
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.30132341384887695
 2153
-0.6793465614318848
+Subgraph extracted:
+388 entities
+10 predicates
+Loading adjacencies..
+0.6843433380126953
 2157
-0.7075562477111816
+Subgraph extracted:
+20 entities
+1 predicates
+Loading adjacencies..
+0.6980276107788086
 2159
-0.24583053588867188
+0.22497892379760742
 2161
-0.8226027488708496
+Subgraph extracted:
+44 entities
+4 predicates
+Loading adjacencies..
+0.822490930557251
 2162
-1.0183250904083252
+Subgraph extracted:
+7 entities
+5 predicates
+Loading adjacencies..
+0.9838197231292725
 2166
-0.2784922122955322
+Subgraph extracted:
+6744 entities
+181 predicates
+Loading adjacencies..
+0.2858717441558838
 2181
-1.3935596942901611
+Subgraph extracted:
+22 entities
+9 predicates
+Loading adjacencies..
+1.3890414237976074
 2189
-0.1115570068359375
+Subgraph extracted:
+11 entities
+2 predicates
+Loading adjacencies..
+0.11057710647583008
 2191
-0.32182955741882324
+0.3198246955871582
 2193
-0.49575090408325195
+Subgraph extracted:
+13 entities
+6 predicates
+Loading adjacencies..
+0.49048757553100586
 2194
-0.682631254196167
+Subgraph extracted:
+207 entities
+3 predicates
+Loading adjacencies..
+0.7170259952545166
 2201
-0.4532015323638916
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.4249093532562256
 2204
-0.29840946197509766
+Subgraph extracted:
+120 entities
+9 predicates
+Loading adjacencies..
+0.3012516498565674
 2205
-0.71598219871521
+Subgraph extracted:
+15 entities
+2 predicates
+Loading adjacencies..
+0.7209477424621582
 2206
-0.7100036144256592
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.7372934818267822
 2215
-0.3541266918182373
+Subgraph extracted:
+14005 entities
+73 predicates
+Loading adjacencies..
+0.3620285987854004
 2220
-0.011275529861450195
+0.011021137237548828
 2225
-1.123016357421875
+Subgraph extracted:
+305 entities
+24 predicates
+Loading adjacencies..
+1.147334098815918
 2238
-0.21866130828857422
+Subgraph extracted:
+8043 entities
+151 predicates
+Loading adjacencies..
+0.22207403182983398
 2244
-1.5660946369171143
+Subgraph extracted:
+13 entities
+4 predicates
+Loading adjacencies..
+1.5497221946716309
 2256
-1.1225690841674805
+Subgraph extracted:
+57 entities
+14 predicates
+Loading adjacencies..
+1.1831588745117188
 2262
-0.47366952896118164
+Subgraph extracted:
+21 entities
+6 predicates
+Loading adjacencies..
+0.48593902587890625
 2263
-0.7536327838897705
+Subgraph extracted:
+2 entities
+3 predicates
+Loading adjacencies..
+0.7420334815979004
 2266
-0.10866451263427734
+Subgraph extracted:
+3007 entities
+102 predicates
+Loading adjacencies..
+0.11037325859069824
 2279
-0.9518835544586182
+Subgraph extracted:
+17 entities
+4 predicates
+Loading adjacencies..
+0.984398365020752
 2287
-0.5094096660614014
+0.5445802211761475
 2292
-0.7725248336791992
+Subgraph extracted:
+8 entities
+2 predicates
+Loading adjacencies..
+0.7907087802886963
 2295
-0.7924454212188721
+Subgraph extracted:
+9 entities
+6 predicates
+Loading adjacencies..
+0.7951343059539795
 2297
-1.4648618698120117
+Subgraph extracted:
+22 entities
+8 predicates
+Loading adjacencies..
+1.5110974311828613
 2301
-0.3740501403808594
+Subgraph extracted:
+27 entities
+9 predicates
+Loading adjacencies..
+0.42195940017700195
 2325
-0.8486871719360352
+Subgraph extracted:
+69 entities
+8 predicates
+Loading adjacencies..
+0.8500106334686279
 2327
-0.33628416061401367
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.3666419982910156
 2328
-0.9109346866607666
+0.9159307479858398
 2333
-1.714890956878662
+Subgraph extracted:
+256 entities
+3 predicates
+Loading adjacencies..
+1.74479079246521
 2337
-0.9881861209869385
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.9576454162597656
 2344
-1.128624677658081
+Subgraph extracted:
+52 entities
+6 predicates
+Loading adjacencies..
+Subgraph extracted:
+11410 entities
+29 predicates
+Loading adjacencies..
+1.1701912879943848
 2350
-0.9594061374664307
+Subgraph extracted:
+35 entities
+5 predicates
+Loading adjacencies..
+0.9645974636077881
 2361
-2.24316143989563
+Subgraph extracted:
+24 entities
+9 predicates
+Loading adjacencies..
+2.2849223613739014
 2363
-1.065345287322998
+Subgraph extracted:
+13 entities
+4 predicates
+Loading adjacencies..
+1.0681962966918945
 2364
-1.2106709480285645
+1.2232575416564941
 2369
-0.4545605182647705
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.46031641960144043
 2372
-1.421872615814209
+Subgraph extracted:
+9 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+31 entities
+15 predicates
+Loading adjacencies..
+1.4610910415649414
 2377
-1.073157548904419
+Subgraph extracted:
+11097 entities
+98 predicates
+Loading adjacencies..
+1.1321897506713867
 2386
-0.5888423919677734
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+0.6022593975067139
 2387
-0.4749276638031006
+Subgraph extracted:
+18 entities
+8 predicates
+Loading adjacencies..
+0.4808945655822754
 2392
-1.5035712718963623
+Subgraph extracted:
+13 entities
+4 predicates
+Loading adjacencies..
+1.5053784847259521
 2394
-0.8198118209838867
+Subgraph extracted:
+32 entities
+6 predicates
+Loading adjacencies..
+0.8194055557250977
 2395
-0.9930603504180908
+Subgraph extracted:
+13 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+612 entities
+12 predicates
+Loading adjacencies..
+1.05063796043396
 2398
-0.009119749069213867
+0.009108304977416992
 2428
-0.6609306335449219
+0.6925294399261475
 2434
-0.33081841468811035
+Subgraph extracted:
+47 entities
+19 predicates
+Loading adjacencies..
+0.33178281784057617
 2436
-0.10633158683776855
+Subgraph extracted:
+377 entities
+35 predicates
+Loading adjacencies..
+0.10629796981811523
 2444
-0.9261763095855713
+Subgraph extracted:
+19 entities
+11 predicates
+Loading adjacencies..
+Subgraph extracted:
+21 entities
+5 predicates
+Loading adjacencies..
+0.9235737323760986
 2445
-0.4152562618255615
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.39838290214538574
 2450
-0.27608537673950195
+Subgraph extracted:
+28 entities
+5 predicates
+Loading adjacencies..
+0.2943885326385498
 2455
-0.5422444343566895
+Subgraph extracted:
+220 entities
+12 predicates
+Loading adjacencies..
+Subgraph extracted:
+39 entities
+5 predicates
+Loading adjacencies..
+0.5542953014373779
 2456
-0.7042815685272217
+Subgraph extracted:
+4 entities
+6 predicates
+Loading adjacencies..
+0.6785581111907959
 2473
-0.1381847858428955
+Subgraph extracted:
+541 entities
+51 predicates
+Loading adjacencies..
+0.1391301155090332
 2480
-0.8054816722869873
+Subgraph extracted:
+42 entities
+10 predicates
+Loading adjacencies..
+0.7921528816223145
 2483
-0.7304425239562988
+Subgraph extracted:
+18 entities
+4 predicates
+Loading adjacencies..
+0.7119441032409668
 2486
-0.6840672492980957
+0.7035117149353027
 2490
-1.4649488925933838
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+1.4598867893218994
 2492
-1.2668087482452393
+1.3485283851623535
 2503
-1.6751861572265625
+Subgraph extracted:
+67 entities
+12 predicates
+Loading adjacencies..
+1.7006494998931885
 2505
-0.4730072021484375
+Subgraph extracted:
+5302 entities
+258 predicates
+Loading adjacencies..
+0.5596082210540771
 2509
-0.752906322479248
+Subgraph extracted:
+36 entities
+7 predicates
+Loading adjacencies..
+0.7506859302520752
 2512
-1.515446424484253
+Subgraph extracted:
+5 entities
+5 predicates
+Loading adjacencies..
+1.5468430519104004
 2524
-0.12276911735534668
+Subgraph extracted:
+5906 entities
+139 predicates
+Loading adjacencies..
+0.12428140640258789
 2525
-0.27614903450012207
+Subgraph extracted:
+12 entities
+6 predicates
+Loading adjacencies..
+0.25532078742980957
 2538
-1.323180913925171
+1.7456378936767578
 2540
-0.6766655445098877
+Subgraph extracted:
+160 entities
+26 predicates
+Loading adjacencies..
+Subgraph extracted:
+357 entities
+6 predicates
+Loading adjacencies..
+0.7492761611938477
 2547
-1.6752240657806396
+1.6338860988616943
 2550
-0.4149353504180908
+Subgraph extracted:
+82 entities
+6 predicates
+Loading adjacencies..
+0.4329226016998291
 2552
-0.6328737735748291
+0.2852628231048584
 2557
-0.9042003154754639
+Subgraph extracted:
+29464 entities
+270 predicates
+Loading adjacencies..
+0.9039039611816406
 2558
-0.7143993377685547
+Subgraph extracted:
+8 entities
+9 predicates
+Loading adjacencies..
+0.7074322700500488
 2559
-1.152177333831787
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+1.1474206447601318
 2561
-0.43671584129333496
+0.49257707595825195
 2564
-0.47883057594299316
+0.5632290840148926
 2566
-0.25476741790771484
+Subgraph extracted:
+190 entities
+9 predicates
+Loading adjacencies..
+0.28025317192077637
 2569
-0.26203131675720215
+Subgraph extracted:
+7 entities
+5 predicates
+Loading adjacencies..
+0.2613832950592041
 2591
-0.7857038974761963
+0.7892894744873047
 2594
-0.30606603622436523
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+0.30477094650268555
 2596
-0.2177290916442871
+Subgraph extracted:
+5915 entities
+218 predicates
+Loading adjacencies..
+0.2194669246673584
 2598
-1.0567164421081543
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+1.0281975269317627
 2609
-0.2128136157989502
+0.23337435722351074
 2613
-0.008982658386230469
+0.009097814559936523
 2614
-0.008562564849853516
+0.008570194244384766
 2617
-0.9124560356140137
+0.9078125953674316
 2622
-0.010202884674072266
+0.010370731353759766
 2626
-1.437323808670044
+Subgraph extracted:
+112 entities
+11 predicates
+Loading adjacencies..
+1.4701015949249268
 2627
-0.9052109718322754
+0.8859500885009766
 2636
-0.27359485626220703
+Subgraph extracted:
+85 entities
+10 predicates
+Loading adjacencies..
+0.2795717716217041
 2638
-1.1739511489868164
+Subgraph extracted:
+86 entities
+5 predicates
+Loading adjacencies..
+1.1948506832122803
 2646
-0.4242129325866699
+Subgraph extracted:
+13 entities
+6 predicates
+Loading adjacencies..
+0.4280376434326172
 2661
-0.6249425411224365
+Subgraph extracted:
+101 entities
+8 predicates
+Loading adjacencies..
+0.6442618370056152
 2675
-0.670778751373291
+0.675689697265625
 2676
-0.9833457469940186
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+0.9956035614013672
 2688
-0.2776472568511963
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.2575817108154297
 2691
-1.4451472759246826
+1.414365530014038
 2694
-0.4370396137237549
+Subgraph extracted:
+8 entities
+5 predicates
+Loading adjacencies..
+0.44330716133117676
 2696
-0.01004648208618164
+0.010243415832519531
 2702
-0.23046493530273438
+Subgraph extracted:
+6493 entities
+99 predicates
+Loading adjacencies..
+0.2292029857635498
 2704
-0.5289576053619385
+Subgraph extracted:
+8 entities
+8 predicates
+Loading adjacencies..
+0.4688572883605957
 2709
-1.3778560161590576
+Subgraph extracted:
+38 entities
+8 predicates
+Loading adjacencies..
+1.4148433208465576
 2710
-0.9855058193206787
+Subgraph extracted:
+8 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+12 entities
+2 predicates
+Loading adjacencies..
+0.9950542449951172
 2713
-0.376021146774292
+0.353212833404541
 2714
-1.1482410430908203
+Subgraph extracted:
+3 entities
+3 predicates
+Loading adjacencies..
+1.1337854862213135
 2718
-1.0448932647705078
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+1.0638360977172852
 2725
-0.7569527626037598
+Subgraph extracted:
+48 entities
+7 predicates
+Loading adjacencies..
+0.7712056636810303
 2730
-0.29590916633605957
+0.32398414611816406
 2731
-0.5241780281066895
+0.5134162902832031
 2732
-0.32314515113830566
+Subgraph extracted:
+1494 entities
+87 predicates
+Loading adjacencies..
+0.3139078617095947
 2734
-0.5454936027526855
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.45203495025634766
 2735
-1.7278494834899902
+Subgraph extracted:
+1955 entities
+13 predicates
+Loading adjacencies..
+1.7035317420959473
 2736
-0.29732632637023926
+0.2744448184967041
 2739
-0.8493123054504395
+Subgraph extracted:
+260 entities
+4 predicates
+Loading adjacencies..
+0.8253331184387207
 2740
-0.9889175891876221
+Subgraph extracted:
+19 entities
+7 predicates
+Loading adjacencies..
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.9849357604980469
 2745
-0.9364454746246338
+Subgraph extracted:
+14663 entities
+132 predicates
+Loading adjacencies..
+0.9186604022979736
 2746
-0.46845459938049316
+Subgraph extracted:
+1215 entities
+9 predicates
+Loading adjacencies..
+0.4763774871826172
 2748
-0.010476350784301758
+0.010532379150390625
 2757
-0.10462522506713867
+Subgraph extracted:
+1069 entities
+29 predicates
+Loading adjacencies..
+0.10253500938415527
 2763
-0.5569837093353271
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+0.5935497283935547
 2767
-0.08302450180053711
+Subgraph extracted:
+48 entities
+17 predicates
+Loading adjacencies..
+0.08290576934814453
 2774
-0.98651123046875
+Subgraph extracted:
+10 entities
+6 predicates
+Loading adjacencies..
+1.0338141918182373
 2775
-0.8291969299316406
+Subgraph extracted:
+456 entities
+3 predicates
+Loading adjacencies..
+0.8194565773010254
 2778
-0.4395160675048828
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+0.43393731117248535
 2780
-0.43723464012145996
+Subgraph extracted:
+4 entities
+3 predicates
+Loading adjacencies..
+0.41126346588134766
 2783
-0.9845952987670898
+Subgraph extracted:
+7 entities
+6 predicates
+Loading adjacencies..
+0.9790623188018799
 2784
-0.7150535583496094
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.6785545349121094
 2787
-0.3382539749145508
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.34751415252685547
 2791
-0.4204988479614258
+Subgraph extracted:
+9803 entities
+34 predicates
+Loading adjacencies..
+0.4243319034576416
 2798
-1.6800289154052734
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+1.6874139308929443
 2807
-0.5434036254882812
+0.5778155326843262
 2809
-0.3989298343658447
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.41481757164001465
 2812
-0.7033977508544922
+Subgraph extracted:
+31 entities
+13 predicates
+Loading adjacencies..
+0.7207169532775879
 2815
-0.2680013179779053
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.276348352432251
 2817
-0.8113536834716797
+Subgraph extracted:
+6 entities
+4 predicates
+Loading adjacencies..
+0.7828640937805176
 2825
-1.1463983058929443
+Subgraph extracted:
+737 entities
+19 predicates
+Loading adjacencies..
+1.1620149612426758
 2832
-0.5240521430969238
+Subgraph extracted:
+16 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+48 entities
+3 predicates
+Loading adjacencies..
+0.5193185806274414
 2833
-0.2308335304260254
+0.22367048263549805
 2839
-0.27576780319213867
+Subgraph extracted:
+51 entities
+9 predicates
+Loading adjacencies..
+0.30343008041381836
 2840
-0.2186269760131836
+0.21518516540527344
 2850
-0.9697399139404297
+0.9946696758270264
 2854
-0.37032294273376465
+Subgraph extracted:
+129 entities
+13 predicates
+Loading adjacencies..
+0.34581565856933594
 2862
-0.25031375885009766
+Subgraph extracted:
+4 entities
+1 predicates
+Loading adjacencies..
+0.2569108009338379
 2870
-0.00993800163269043
+0.010010480880737305
 2871
-1.288306474685669
+Subgraph extracted:
+9 entities
+1 predicates
+Loading adjacencies..
+1.3117797374725342
 2872
-0.45621633529663086
+0.46764421463012695
 2873
-0.7118537425994873
+Subgraph extracted:
+4 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+9 entities
+2 predicates
+Loading adjacencies..
+0.7078511714935303
 2879
-0.5814692974090576
+Subgraph extracted:
+92 entities
+17 predicates
+Loading adjacencies..
+0.5652866363525391
 2889
-0.3152740001678467
+Subgraph extracted:
+4 entities
+5 predicates
+Loading adjacencies..
+0.31371498107910156
 2892
-0.6717467308044434
+0.6137542724609375
 2897
-0.7600154876708984
+Subgraph extracted:
+6 entities
+2 predicates
+Loading adjacencies..
+0.755516529083252
 2899
-1.0489859580993652
+Subgraph extracted:
+80 entities
+13 predicates
+Loading adjacencies..
+Subgraph extracted:
+7 entities
+3 predicates
+Loading adjacencies..
+1.034857988357544
 2902
-0.7156543731689453
+Subgraph extracted:
+160 entities
+19 predicates
+Loading adjacencies..
+0.7134923934936523
 2905
-0.9171559810638428
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.9280109405517578
 2912
-0.8884990215301514
+Subgraph extracted:
+23970 entities
+240 predicates
+Loading adjacencies..
+0.9070196151733398
 2913
-0.7124357223510742
+0.7139277458190918
 2915
-0.8060534000396729
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.7635948657989502
 2920
-0.027122974395751953
+0.01297450065612793
 2924
-0.9282863140106201
+Subgraph extracted:
+8 entities
+5 predicates
+Loading adjacencies..
+0.9496781826019287
 2929
-0.7212996482849121
+Subgraph extracted:
+6 entities
+6 predicates
+Loading adjacencies..
+0.7466206550598145
 2932
-1.0845985412597656
+Subgraph extracted:
+20 entities
+5 predicates
+Loading adjacencies..
+1.1619551181793213
 2934
-0.21500182151794434
+0.22028183937072754
 2936
-0.9543154239654541
+Subgraph extracted:
+1037 entities
+25 predicates
+Loading adjacencies..
+0.9466431140899658
 2939
-0.1565561294555664
+Subgraph extracted:
+2370 entities
+80 predicates
+Loading adjacencies..
+0.1547679901123047
 2948
-1.5791375637054443
+Subgraph extracted:
+129 entities
+23 predicates
+Loading adjacencies..
+1.5974247455596924
 2951
-0.25411248207092285
+Subgraph extracted:
+8281 entities
+255 predicates
+Loading adjacencies..
+0.25897216796875
 2957
-3.713799238204956
+Subgraph extracted:
+74 entities
+11 predicates
+Loading adjacencies..
+Subgraph extracted:
+77945 entities
+20 predicates
+Loading adjacencies..
+3.83304500579834
 2959
-0.9940168857574463
+Subgraph extracted:
+148 entities
+11 predicates
+Loading adjacencies..
+0.9572262763977051
 2960
-0.9482672214508057
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+0.9750516414642334
 2962
-0.380382776260376
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.3813488483428955
 2966
-0.7059171199798584
+0.701209306716919
 2968
-0.28873658180236816
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+0.2764434814453125
 2976
-1.246100902557373
+Subgraph extracted:
+1579 entities
+40 predicates
+Loading adjacencies..
+1.244168758392334
 2977
-0.7220091819763184
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.7456145286560059
 2983
-0.20727849006652832
+Subgraph extracted:
+516 entities
+47 predicates
+Loading adjacencies..
+0.21447229385375977
 2994
-0.3259255886077881
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.34386229515075684
 3000
-0.016283273696899414
+0.01614212989807129
 3006
-0.3825831413269043
+Subgraph extracted:
+1191 entities
+55 predicates
+Loading adjacencies..
+0.3858973979949951
 3010
-0.6220619678497314
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.6179161071777344
 3017
-1.0204663276672363
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+35 entities
+10 predicates
+Loading adjacencies..
+1.0116510391235352
 3020
-0.292621374130249
+0.2897939682006836
 3031
-1.251194715499878
+Subgraph extracted:
+3990 entities
+47 predicates
+Loading adjacencies..
+1.2348639965057373
 3032
-0.9804117679595947
+Subgraph extracted:
+61 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+92 entities
+5 predicates
+Loading adjacencies..
+0.9649314880371094
 3038
-1.4433002471923828
+1.4343225955963135
 3052
-1.247028112411499
+Subgraph extracted:
+29 entities
+5 predicates
+Loading adjacencies..
+1.250823736190796
 3055
-0.3581829071044922
+Subgraph extracted:
+2 entities
+4 predicates
+Loading adjacencies..
+0.33609676361083984
 3057
-0.6266753673553467
+Subgraph extracted:
+9 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+31 entities
+4 predicates
+Loading adjacencies..
+0.6038799285888672
 3058
-0.043761491775512695
+Subgraph extracted:
+31 entities
+2 predicates
+Loading adjacencies..
+0.04402899742126465
 3060
-1.1182177066802979
+Subgraph extracted:
+11 entities
+3 predicates
+Loading adjacencies..
+1.1568894386291504
 3061
-0.7684171199798584
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.815950870513916
 3068
-0.4868466854095459
+Subgraph extracted:
+19195 entities
+104 predicates
+Loading adjacencies..
+0.4840540885925293
 3069
-1.5342323780059814
+Subgraph extracted:
+10 entities
+8 predicates
+Loading adjacencies..
+1.4905376434326172
 3070
-0.5491316318511963
+Subgraph extracted:
+90 entities
+10 predicates
+Loading adjacencies..
+0.5422899723052979
 3073
-1.2102580070495605
+Subgraph extracted:
+14 entities
+2 predicates
+Loading adjacencies..
+1.2400245666503906
 3074
-0.246901273727417
+Subgraph extracted:
+6792 entities
+198 predicates
+Loading adjacencies..
+0.25194239616394043
 3087
-0.7277772426605225
+Subgraph extracted:
+6 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+12 entities
+5 predicates
+Loading adjacencies..
+0.692122220993042
 3088
-0.2516665458679199
+Subgraph extracted:
+81 entities
+13 predicates
+Loading adjacencies..
+0.2885580062866211
 3091
-0.598236083984375
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+2819 entities
+20 predicates
+Loading adjacencies..
+0.5675325393676758
 3093
-1.020789384841919
+Subgraph extracted:
+40 entities
+8 predicates
+Loading adjacencies..
+0.9990911483764648
 3100
-0.4857828617095947
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.4519510269165039
 3105
-1.015122890472412
+Subgraph extracted:
+31226 entities
+541 predicates
+Loading adjacencies..
+1.0061769485473633
 3109
-0.7126364707946777
+Subgraph extracted:
+25 entities
+10 predicates
+Loading adjacencies..
+0.7033202648162842
 3111
-0.17030596733093262
+Subgraph extracted:
+2558 entities
+134 predicates
+Loading adjacencies..
+0.17075705528259277
 3118
-0.22338509559631348
+0.23464298248291016
 3119
-1.7207763195037842
+Subgraph extracted:
+39 entities
+5 predicates
+Loading adjacencies..
+1.783191442489624
 3121
-0.2422962188720703
+Subgraph extracted:
+32 entities
+8 predicates
+Loading adjacencies..
+0.24726486206054688
 3123
-0.35033082962036133
+Subgraph extracted:
+15849 entities
+206 predicates
+Loading adjacencies..
+0.35561585426330566
 3125
-0.7927243709564209
+Subgraph extracted:
+48 entities
+7 predicates
+Loading adjacencies..
+0.8134489059448242
 3137
-0.5257041454315186
+Subgraph extracted:
+7 entities
+3 predicates
+Loading adjacencies..
+0.5472180843353271
 3141
-0.8254451751708984
+Subgraph extracted:
+99 entities
+12 predicates
+Loading adjacencies..
+0.7595775127410889
 3142
-0.28887224197387695
+0.3033432960510254
 3147
-0.34754323959350586
+Subgraph extracted:
+79 entities
+13 predicates
+Loading adjacencies..
+0.3785867691040039
 3148
-0.9372692108154297
+Subgraph extracted:
+14 entities
+2 predicates
+Loading adjacencies..
+0.9097738265991211
 3153
-0.3438427448272705
+Subgraph extracted:
+47 entities
+4 predicates
+Loading adjacencies..
+0.3360788822174072
 3158
-0.7564172744750977
+Subgraph extracted:
+13 entities
+5 predicates
+Loading adjacencies..
+0.7719001770019531
 3171
-0.4994509220123291
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.5279080867767334
 3172
-0.307966947555542
+0.3038516044616699
 3176
-0.09943914413452148
+Subgraph extracted:
+639 entities
+30 predicates
+Loading adjacencies..
+0.10044050216674805
 3178
-0.09469103813171387
+Subgraph extracted:
+400 entities
+11 predicates
+Loading adjacencies..
+0.09541797637939453
 3184
-0.7656669616699219
+Subgraph extracted:
+41 entities
+3 predicates
+Loading adjacencies..
+0.7513630390167236
 3192
-0.7372574806213379
+Subgraph extracted:
+3 entities
+3 predicates
+Loading adjacencies..
+0.7441952228546143
 3203
-0.32205796241760254
+Subgraph extracted:
+604 entities
+33 predicates
+Loading adjacencies..
+0.323183536529541
 3206
-0.2148451805114746
+0.21423101425170898
 3209
-0.3563041687011719
+Subgraph extracted:
+33 entities
+4 predicates
+Loading adjacencies..
+0.3545267581939697
 3213
-1.6624116897583008
+Subgraph extracted:
+125 entities
+9 predicates
+Loading adjacencies..
+1.6662859916687012
 3216
-0.880946159362793
+0.8949747085571289
 3220
-1.2450401782989502
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+1.3002715110778809
 3223
-0.5870356559753418
+Subgraph extracted:
+233 entities
+15 predicates
+Loading adjacencies..
+0.5908634662628174
 3229
-0.33112430572509766
+0.3208019733428955
 3235
-0.5186004638671875
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+0.5116174221038818
 3237
-0.45052194595336914
+0.42558979988098145
 3243
-1.0041697025299072
+Subgraph extracted:
+195 entities
+4 predicates
+Loading adjacencies..
+1.0305368900299072
 3247
-0.6768360137939453
+Subgraph extracted:
+14 entities
+10 predicates
+Loading adjacencies..
+0.7107338905334473
 3252
-0.7606978416442871
+Subgraph extracted:
+52 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+116 entities
+7 predicates
+Loading adjacencies..
+0.7460904121398926
 3256
-0.5415992736816406
+Subgraph extracted:
+37 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+17 entities
+5 predicates
+Loading adjacencies..
+0.5116593837738037
 3262
-0.299821138381958
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.30317258834838867
 3267
-0.25795531272888184
+0.2222599983215332
 3268
-0.8199281692504883
+Subgraph extracted:
+6 entities
+2 predicates
+Loading adjacencies..
+0.8257324695587158
 3273
-0.7832162380218506
+Subgraph extracted:
+2 entities
+3 predicates
+Loading adjacencies..
+0.7844531536102295
 3279
-0.704728364944458
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.6982235908508301
 3282
-0.3255000114440918
+Subgraph extracted:
+1394 entities
+43 predicates
+Loading adjacencies..
+0.3593883514404297
 3284
-0.6545267105102539
+Subgraph extracted:
+26052 entities
+324 predicates
+Loading adjacencies..
+0.6605889797210693
 3285
-0.31023168563842773
+Subgraph extracted:
+702 entities
+13 predicates
+Loading adjacencies..
+0.34596729278564453
 3288
-0.5428779125213623
+Subgraph extracted:
+969 entities
+29 predicates
+Loading adjacencies..
+0.5315637588500977
 3294
-0.009465217590332031
+0.00928950309753418
 3295
-0.49898338317871094
+Subgraph extracted:
+14 entities
+11 predicates
+Loading adjacencies..
+0.5187578201293945
 3302
-0.46039700508117676
+Subgraph extracted:
+167 entities
+16 predicates
+Loading adjacencies..
+0.47914814949035645
 3303
-0.5030460357666016
+Subgraph extracted:
+71 entities
+16 predicates
+Loading adjacencies..
+0.4952976703643799
 3305
-0.9103047847747803
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.9017972946166992
 3315
-0.6636624336242676
+Subgraph extracted:
+73 entities
+12 predicates
+Loading adjacencies..
+0.6284854412078857
 3325
-0.2244572639465332
+Subgraph extracted:
+156 entities
+22 predicates
+Loading adjacencies..
+0.2218313217163086
 3326
-0.2988095283508301
+Subgraph extracted:
+685 entities
+39 predicates
+Loading adjacencies..
+0.2929403781890869
 3328
-0.2569296360015869
+0.22182655334472656
 3331
-0.3558814525604248
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.32648539543151855
 3343
-0.34131956100463867
+Subgraph extracted:
+3 entities
+3 predicates
+Loading adjacencies..
+0.31516480445861816
 3344
-0.31325554847717285
+Subgraph extracted:
+47 entities
+6 predicates
+Loading adjacencies..
+0.3097267150878906
 3346
-0.7759196758270264
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.806246280670166
 3349
-0.18184590339660645
+Subgraph extracted:
+532 entities
+39 predicates
+Loading adjacencies..
+0.17838835716247559
 3355
-0.8199594020843506
+Subgraph extracted:
+8 entities
+8 predicates
+Loading adjacencies..
+0.8319661617279053
 3357
-0.1682572364807129
+Subgraph extracted:
+272 entities
+21 predicates
+Loading adjacencies..
+0.17313551902770996
 3368
-1.1226787567138672
+Subgraph extracted:
+5 entities
+6 predicates
+Loading adjacencies..
+1.167931318283081
 3369
-0.2853233814239502
+Subgraph extracted:
+202 entities
+5 predicates
+Loading adjacencies..
+0.2912909984588623
 3370
-0.8531408309936523
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.8269538879394531
 3374
-1.3669829368591309
+1.407339334487915
 3375
-1.0501041412353516
+Subgraph extracted:
+22 entities
+10 predicates
+Loading adjacencies..
+1.0563666820526123
 3377
-1.0685186386108398
+Subgraph extracted:
+6 entities
+8 predicates
+Loading adjacencies..
+1.055462121963501
 3386
-1.6251821517944336
+Subgraph extracted:
+58 entities
+11 predicates
+Loading adjacencies..
+1.6199672222137451
 3390
-0.7433457374572754
+Subgraph extracted:
+126 entities
+22 predicates
+Loading adjacencies..
+0.7595181465148926
 3392
-0.4430844783782959
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+0.46315550804138184
 3395
-1.6118946075439453
+Subgraph extracted:
+36 entities
+8 predicates
+Loading adjacencies..
+1.600407361984253
 3398
-0.5810704231262207
+Subgraph extracted:
+158 entities
+28 predicates
+Loading adjacencies..
+0.6130876541137695
 3418
-0.6130683422088623
+Subgraph extracted:
+6 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+12 entities
+5 predicates
+Loading adjacencies..
+0.6036574840545654
 3420
-0.3582608699798584
+Subgraph extracted:
+15 entities
+6 predicates
+Loading adjacencies..
+0.3594539165496826
 3421
-0.7536780834197998
+0.7122995853424072
 3422
-1.2770545482635498
+Subgraph extracted:
+22 entities
+6 predicates
+Loading adjacencies..
+1.2504158020019531
 3433
-1.4513003826141357
+Subgraph extracted:
+8 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+1.4321086406707764
 3437
-0.010172843933105469
+0.010372400283813477
 3441
-1.232893943786621
+Subgraph extracted:
+7 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+50 entities
+6 predicates
+Loading adjacencies..
+1.2475297451019287
 3445
-0.6788885593414307
+Subgraph extracted:
+258 entities
+5 predicates
+Loading adjacencies..
+0.6817595958709717
 3446
-0.6201798915863037
+Subgraph extracted:
+8 entities
+2 predicates
+Loading adjacencies..
+0.6729841232299805
 3447
-1.040966510772705
+1.038172960281372
 3449
-0.6622169017791748
+Subgraph extracted:
+95 entities
+16 predicates
+Loading adjacencies..
+0.6280052661895752
 3450
-0.09270048141479492
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+0.09330129623413086
 3458
-0.5079090595245361
+Subgraph extracted:
+10808 entities
+256 predicates
+Loading adjacencies..
+0.48825860023498535
 3462
-0.24941086769104004
+0.23890399932861328
 3466
-0.24535369873046875
+Subgraph extracted:
+4117 entities
+61 predicates
+Loading adjacencies..
+0.24425983428955078
 3473
-0.7805624008178711
+Subgraph extracted:
+60 entities
+5 predicates
+Loading adjacencies..
+0.7142524719238281
 3475
-0.9451553821563721
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.9028911590576172
 3477
-0.2610955238342285
+Subgraph extracted:
+900 entities
+11 predicates
+Loading adjacencies..
+0.25273942947387695
 3487
-0.5418174266815186
+Subgraph extracted:
+27236 entities
+158 predicates
+Loading adjacencies..
+0.5349016189575195
 3491
-0.23400068283081055
+Subgraph extracted:
+19 entities
+4 predicates
+Loading adjacencies..
+0.27893757820129395
 3496
-1.2105696201324463
+Subgraph extracted:
+31324 entities
+538 predicates
+Loading adjacencies..
+1.1955327987670898
 3499
-1.0142734050750732
+Subgraph extracted:
+13 entities
+10 predicates
+Loading adjacencies..
+Subgraph extracted:
+6 entities
+3 predicates
+Loading adjacencies..
+1.0223093032836914
 3503
-1.623563528060913
+Subgraph extracted:
+8 entities
+2 predicates
+Loading adjacencies..
+1.5782856941223145
 3507
-0.6467239856719971
+Subgraph extracted:
+108 entities
+7 predicates
+Loading adjacencies..
+Subgraph extracted:
+176 entities
+10 predicates
+Loading adjacencies..
+0.6371927261352539
 3508
-0.4439384937286377
+Subgraph extracted:
+350 entities
+52 predicates
+Loading adjacencies..
+0.47362279891967773
 3511
-0.04355931282043457
+Subgraph extracted:
+32 entities
+13 predicates
+Loading adjacencies..
+0.0423121452331543
 3513
-0.7408530712127686
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.707916259765625
 3515
-1.1329021453857422
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+1.1335456371307373
 3518
-0.8614482879638672
+Subgraph extracted:
+278 entities
+18 predicates
+Loading adjacencies..
+0.8758416175842285
 3523
-0.2940480709075928
+Subgraph extracted:
+30 entities
+5 predicates
+Loading adjacencies..
+0.2659294605255127
 3531
-0.3148643970489502
+Subgraph extracted:
+8 entities
+4 predicates
+Loading adjacencies..
+0.2884852886199951
 3532
-0.8088483810424805
+Subgraph extracted:
+22 entities
+7 predicates
+Loading adjacencies..
+0.8061213493347168
 3534
-0.31551027297973633
+Subgraph extracted:
+38 entities
+8 predicates
+Loading adjacencies..
+0.33255600929260254
 3547
-0.34207940101623535
+Subgraph extracted:
+10 entities
+5 predicates
+Loading adjacencies..
+0.3024463653564453
 3557
-0.31659626960754395
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.28751659393310547
 3562
-0.22246336936950684
+0.21511530876159668
 3573
-0.36679577827453613
+Subgraph extracted:
+14016 entities
+366 predicates
+Loading adjacencies..
+0.36818575859069824
 3578
-0.6877288818359375
+0.6683523654937744
 3580
-0.2390146255493164
+0.21549630165100098
 3582
-0.496640682220459
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.5017015933990479
 3583
-0.35942816734313965
+Subgraph extracted:
+12 entities
+5 predicates
+Loading adjacencies..
+0.3291006088256836
 3585
-0.4093191623687744
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.39118170738220215
 3597
-0.8739032745361328
+Subgraph extracted:
+89 entities
+10 predicates
+Loading adjacencies..
+0.8618097305297852
 3598
-0.2794215679168701
+Subgraph extracted:
+68 entities
+15 predicates
+Loading adjacencies..
+0.2752344608306885
 3601
-0.44167160987854004
+Subgraph extracted:
+5156 entities
+198 predicates
+Loading adjacencies..
+0.4137589931488037
 3603
-0.2935166358947754
+Subgraph extracted:
+6 entities
+5 predicates
+Loading adjacencies..
+0.319990873336792
 3628
-0.6034832000732422
+Subgraph extracted:
+46 entities
+19 predicates
+Loading adjacencies..
+0.594444751739502
 3637
-0.06283044815063477
+Subgraph extracted:
+313 entities
+26 predicates
+Loading adjacencies..
+0.06192922592163086
 3638
-0.2211616039276123
+0.21048545837402344
 3644
-0.6517047882080078
+Subgraph extracted:
+8032 entities
+195 predicates
+Loading adjacencies..
+0.6338174343109131
 3645
-0.3579587936401367
+Subgraph extracted:
+674 entities
+13 predicates
+Loading adjacencies..
+0.34270668029785156
 3646
-0.3571650981903076
+Subgraph extracted:
+21 entities
+8 predicates
+Loading adjacencies..
+0.33625245094299316
 3673
-0.7466976642608643
+Subgraph extracted:
+28 entities
+7 predicates
+Loading adjacencies..
+0.7607367038726807
 3676
-0.5511703491210938
+Subgraph extracted:
+250 entities
+10 predicates
+Loading adjacencies..
+0.5497705936431885
 3678
-0.7092764377593994
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.7308049201965332
 3688
-0.9605116844177246
+Subgraph extracted:
+19 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+160 entities
+6 predicates
+Loading adjacencies..
+0.9603240489959717
 3697
-0.890507698059082
+0.9032139778137207
 3702
-0.8456037044525146
+Subgraph extracted:
+192 entities
+11 predicates
+Loading adjacencies..
+0.8747725486755371
 3710
-0.4717409610748291
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.48516106605529785
 3714
-1.3086414337158203
+Subgraph extracted:
+17 entities
+4 predicates
+Loading adjacencies..
+1.3117942810058594
 3720
-0.49015116691589355
+Subgraph extracted:
+2238 entities
+29 predicates
+Loading adjacencies..
+0.48692822456359863
 3724
-0.7248921394348145
+Subgraph extracted:
+10 entities
+3 predicates
+Loading adjacencies..
+0.7273838520050049
 3731
-0.799668550491333
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.8299901485443115
 3736
-0.6390130519866943
+0.642505407333374
 3737
-0.40665698051452637
+Subgraph extracted:
+26 entities
+9 predicates
+Loading adjacencies..
+0.4096086025238037
 3738
-1.0072901248931885
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+70 entities
+7 predicates
+Loading adjacencies..
+1.0416529178619385
 3744
-0.23667550086975098
+Subgraph extracted:
+19 entities
+7 predicates
+Loading adjacencies..
+0.237839937210083
 3745
-0.3290867805480957
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+0.31528139114379883
 3747
-0.28726983070373535
+Subgraph extracted:
+8 entities
+2 predicates
+Loading adjacencies..
+0.3140144348144531
 3749
-0.24633526802062988
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.27468037605285645
 3757
-0.7356529235839844
+Subgraph extracted:
+759 entities
+4 predicates
+Loading adjacencies..
+0.7033205032348633
 3763
-0.10396218299865723
+Subgraph extracted:
+96 entities
+21 predicates
+Loading adjacencies..
+0.10323190689086914
 3764
-0.4596691131591797
+Subgraph extracted:
+15 entities
+9 predicates
+Loading adjacencies..
+0.44560670852661133
 3767
-1.3541536331176758
+Subgraph extracted:
+35429 entities
+55 predicates
+Loading adjacencies..
+1.4038770198822021
 3770
-0.3885328769683838
+Subgraph extracted:
+3 entities
+6 predicates
+Loading adjacencies..
+0.40483999252319336
 3773
-0.852428674697876
+Subgraph extracted:
+9 entities
+3 predicates
+Loading adjacencies..
+0.8596937656402588
 3776
-0.8776521682739258
+Subgraph extracted:
+651 entities
+14 predicates
+Loading adjacencies..
+0.8268401622772217
 3778
-1.031933307647705
+Subgraph extracted:
+96 entities
+7 predicates
+Loading adjacencies..
+1.0174462795257568
 3792
-0.7165961265563965
+Subgraph extracted:
+27082 entities
+277 predicates
+Loading adjacencies..
+0.6743886470794678
 3798
-0.3080179691314697
+Subgraph extracted:
+109 entities
+23 predicates
+Loading adjacencies..
+0.2855641841888428
 3799
-0.8968188762664795
+Subgraph extracted:
+14 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+54 entities
+5 predicates
+Loading adjacencies..
+0.8722083568572998
 3813
-0.31906652450561523
+Subgraph extracted:
+1400 entities
+23 predicates
+Loading adjacencies..
+0.31325626373291016
 3819
-0.22665834426879883
+Subgraph extracted:
+7750 entities
+240 predicates
+Loading adjacencies..
+0.22709894180297852
 3824
-0.9494338035583496
+Subgraph extracted:
+31 entities
+3 predicates
+Loading adjacencies..
+Subgraph extracted:
+27 entities
+8 predicates
+Loading adjacencies..
+0.9581584930419922
 3841
-0.7646293640136719
+Subgraph extracted:
+156 entities
+20 predicates
+Loading adjacencies..
+0.7672126293182373
 3844
-1.053391456604004
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+1.057626724243164
 3848
-1.085033655166626
+Subgraph extracted:
+18 entities
+7 predicates
+Loading adjacencies..
+1.1124746799468994
 3851
-0.22540926933288574
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+0.26027870178222656
 3852
-1.0418002605438232
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+1.014430046081543
 3855
-0.7872107028961182
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.7978804111480713
 3864
-0.21860861778259277
+0.2237858772277832
 3875
-0.5111117362976074
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+0.4803292751312256
 3877
-0.37967586517333984
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.41056180000305176
 3878
-0.23070430755615234
+0.2136826515197754
 3885
-1.3174426555633545
+1.2927615642547607
 3891
-0.40590715408325195
+Subgraph extracted:
+1429 entities
+80 predicates
+Loading adjacencies..
+0.4275343418121338
 3901
-0.8055994510650635
+Subgraph extracted:
+69 entities
+7 predicates
+Loading adjacencies..
+0.7946453094482422
 3914
-0.5188987255096436
+Subgraph extracted:
+709 entities
+52 predicates
+Loading adjacencies..
+0.5318026542663574
 3924
-0.33676719665527344
+Subgraph extracted:
+19 entities
+10 predicates
+Loading adjacencies..
+0.32054567337036133
 3926
-0.18415164947509766
+Subgraph extracted:
+2486 entities
+132 predicates
+Loading adjacencies..
+0.18112397193908691
 3944
-1.0558195114135742
+1.0520434379577637
 3953
-0.42464232444763184
+Subgraph extracted:
+11596 entities
+107 predicates
+Loading adjacencies..
+0.4454929828643799
 3954
-0.04619765281677246
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+0.045979976654052734
 3963
-0.840362548828125
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.8464889526367188
 3970
-1.0178508758544922
+Subgraph extracted:
+10 entities
+5 predicates
+Loading adjacencies..
+1.0468530654907227
 3975
-0.3781461715698242
+Subgraph extracted:
+18 entities
+7 predicates
+Loading adjacencies..
+0.35886549949645996
 3982
-0.09252738952636719
+Subgraph extracted:
+1382 entities
+73 predicates
+Loading adjacencies..
+0.09346389770507812
 3988
-0.657130241394043
+Subgraph extracted:
+53 entities
+3 predicates
+Loading adjacencies..
+0.6591427326202393
 3992
-2.200394630432129
+Subgraph extracted:
+63703 entities
+201 predicates
+Loading adjacencies..
+2.254192352294922
 3994
-0.29581689834594727
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.30155372619628906
 4001
-0.6526744365692139
+Subgraph extracted:
+11 entities
+5 predicates
+Loading adjacencies..
+0.669431209564209
 4008
-0.27123045921325684
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.28287720680236816
 4015
-0.37088727951049805
+Subgraph extracted:
+10 entities
+9 predicates
+Loading adjacencies..
+0.3697178363800049
 4019
-0.23412632942199707
+0.25089526176452637
 4022
-0.15038061141967773
+Subgraph extracted:
+1133 entities
+31 predicates
+Loading adjacencies..
+0.15750360488891602
 4028
-0.23413467407226562
+0.2541055679321289
 4030
-0.8552577495574951
+Subgraph extracted:
+41 entities
+12 predicates
+Loading adjacencies..
+0.8640451431274414
 4034
-1.2338173389434814
+Subgraph extracted:
+15704 entities
+242 predicates
+Loading adjacencies..
+1.2431607246398926
 4043
-0.2731335163116455
+Subgraph extracted:
+1089 entities
+68 predicates
+Loading adjacencies..
+0.2749342918395996
 4046
-0.26625609397888184
+Subgraph extracted:
+57 entities
+5 predicates
+Loading adjacencies..
+0.24678850173950195
 4058
-0.8117215633392334
+0.7997372150421143
 4062
-0.1821739673614502
+Subgraph extracted:
+6400 entities
+245 predicates
+Loading adjacencies..
+0.18509578704833984
 4068
-0.3170468807220459
+Subgraph extracted:
+2751 entities
+87 predicates
+Loading adjacencies..
+0.3227043151855469
 4071
-0.38010549545288086
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.3840816020965576
 4080
-1.1143195629119873
+Subgraph extracted:
+6 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+1.084564447402954
 4091
-0.335996150970459
+Subgraph extracted:
+215 entities
+11 predicates
+Loading adjacencies..
+0.33214664459228516
 4098
-0.7480602264404297
+0.7505817413330078
 4103
-0.373767614364624
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.36249256134033203
 4107
-13.971698760986328
+Subgraph extracted:
+92 entities
+14 predicates
+Loading adjacencies..
+Subgraph extracted:
+212578 entities
+75 predicates
+Loading adjacencies..
+13.833370685577393
 4108
-0.2872653007507324
+Subgraph extracted:
+415 entities
+11 predicates
+Loading adjacencies..
+0.2999749183654785
 4116
-0.36797165870666504
+Subgraph extracted:
+122 entities
+12 predicates
+Loading adjacencies..
+0.3811657428741455
 4118
-0.8000683784484863
+Subgraph extracted:
+8 entities
+4 predicates
+Loading adjacencies..
+0.8024740219116211
 4124
-0.9315824508666992
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+33 entities
+7 predicates
+Loading adjacencies..
+0.9631555080413818
 4125
-1.2588660717010498
+Subgraph extracted:
+1736 entities
+9 predicates
+Loading adjacencies..
+Subgraph extracted:
+1260 entities
+8 predicates
+Loading adjacencies..
+1.3168816566467285
 4132
-1.3050909042358398
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+1.335038423538208
 4133
-0.6115319728851318
+Subgraph extracted:
+22 entities
+8 predicates
+Loading adjacencies..
+0.6086583137512207
 4135
-0.5605099201202393
+Subgraph extracted:
+130 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+28 entities
+6 predicates
+Loading adjacencies..
+0.6255464553833008
 4137
-0.997685432434082
+1.0270295143127441
 4139
-0.008978605270385742
+0.009281396865844727
 4143
-0.00882863998413086
+0.008763551712036133
 4144
-0.21069574356079102
+0.24818181991577148
 4147
-0.08445143699645996
+Subgraph extracted:
+72 entities
+25 predicates
+Loading adjacencies..
+0.0841977596282959
 4150
-0.5707900524139404
+Subgraph extracted:
+68 entities
+24 predicates
+Loading adjacencies..
+0.6197166442871094
 4157
-0.6812937259674072
+Subgraph extracted:
+55 entities
+3 predicates
+Loading adjacencies..
+0.6909580230712891
 4159
-0.6237471103668213
+Subgraph extracted:
+6 entities
+6 predicates
+Loading adjacencies..
+0.6708924770355225
 4161
-0.9540586471557617
+Subgraph extracted:
+64 entities
+16 predicates
+Loading adjacencies..
+0.9494996070861816
 4165
-0.20433807373046875
+Subgraph extracted:
+239 entities
+15 predicates
+Loading adjacencies..
+0.20698881149291992
 4168
-0.5112342834472656
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.503427267074585
 4171
-0.8134682178497314
+Subgraph extracted:
+26 entities
+3 predicates
+Loading adjacencies..
+0.8171494007110596
 4172
-0.009552240371704102
+0.009935379028320312
 4176
-0.354478120803833
+Subgraph extracted:
+527 entities
+33 predicates
+Loading adjacencies..
+0.3589668273925781
 4179
-0.23482823371887207
+0.2580599784851074
 4186
-0.6063408851623535
+Subgraph extracted:
+21 entities
+6 predicates
+Loading adjacencies..
+0.609910249710083
 4187
-0.49880242347717285
+Subgraph extracted:
+8763 entities
+97 predicates
+Loading adjacencies..
+0.5141689777374268
 4189
-0.6965432167053223
+Subgraph extracted:
+3742 entities
+43 predicates
+Loading adjacencies..
+0.6938831806182861
 4192
-0.2688019275665283
+Subgraph extracted:
+25 entities
+12 predicates
+Loading adjacencies..
+0.2452678680419922
 4200
-0.805091142654419
+Subgraph extracted:
+31131 entities
+406 predicates
+Loading adjacencies..
+0.7894971370697021
 4203
-1.1949217319488525
+Subgraph extracted:
+29 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+38 entities
+7 predicates
+Loading adjacencies..
+1.1873807907104492
 4207
-0.5571720600128174
+Subgraph extracted:
+15 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+88 entities
+13 predicates
+Loading adjacencies..
+0.561185359954834
 4209
-0.7307698726654053
+Subgraph extracted:
+726 entities
+59 predicates
+Loading adjacencies..
+0.7404117584228516
 4219
-0.44019579887390137
+Subgraph extracted:
+28 entities
+3 predicates
+Loading adjacencies..
+0.5165965557098389
 4250
-0.21245670318603516
+0.2456951141357422
 4262
-0.7894587516784668
+0.8058178424835205
 4269
-0.5261082649230957
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.516615629196167
 4277
-0.06919407844543457
+Subgraph extracted:
+38 entities
+12 predicates
+Loading adjacencies..
+0.0692906379699707
 4283
-0.23918771743774414
+Subgraph extracted:
+185 entities
+40 predicates
+Loading adjacencies..
+0.2379915714263916
 4286
-0.7039666175842285
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+70 entities
+11 predicates
+Loading adjacencies..
+0.734342098236084
 4298
-0.49010157585144043
+Subgraph extracted:
+15 entities
+7 predicates
+Loading adjacencies..
+0.5321426391601562
 4299
-0.31436657905578613
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+0.31833624839782715
 4301
-0.41573166847229004
+Subgraph extracted:
+85 entities
+11 predicates
+Loading adjacencies..
+0.42041683197021484
 4313
-0.6077604293823242
+Subgraph extracted:
+87 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+146 entities
+4 predicates
+Loading adjacencies..
+0.6053800582885742
 4331
-0.9095864295959473
+Subgraph extracted:
+557 entities
+11 predicates
+Loading adjacencies..
+0.9025170803070068
 4333
-0.326509952545166
+Subgraph extracted:
+13 entities
+2 predicates
+Loading adjacencies..
+0.33785104751586914
 4339
-0.3360025882720947
+Subgraph extracted:
+16286 entities
+191 predicates
+Loading adjacencies..
+0.3425893783569336
 4342
-0.295490026473999
+Subgraph extracted:
+11 entities
+5 predicates
+Loading adjacencies..
+0.30666661262512207
 4345
-0.5911667346954346
+Subgraph extracted:
+930 entities
+52 predicates
+Loading adjacencies..
+0.5940830707550049
 4346
-1.1198666095733643
+Subgraph extracted:
+6 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+57 entities
+5 predicates
+Loading adjacencies..
+1.1764659881591797
 4352
-0.961611270904541
+0.9622316360473633
 4356
-1.0124003887176514
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+1.017685890197754
 4361
-0.33371949195861816
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.3554847240447998
 4364
-0.2669837474822998
+Subgraph extracted:
+201 entities
+4 predicates
+Loading adjacencies..
+0.29401540756225586
 4365
-0.22483134269714355
+0.23610687255859375
 4367
-0.3434617519378662
+Subgraph extracted:
+366 entities
+10 predicates
+Loading adjacencies..
+0.344118595123291
 4368
-0.6733121871948242
+0.6908273696899414
 4371
-0.3175032138824463
+Subgraph extracted:
+40 entities
+7 predicates
+Loading adjacencies..
+0.3010854721069336
 4373
-0.42284655570983887
+Subgraph extracted:
+6 entities
+3 predicates
+Loading adjacencies..
+0.41225361824035645
 4380
-0.010031700134277344
+0.009812593460083008
 4381
-0.23270273208618164
+0.21895980834960938
 4384
-0.7311913967132568
+Subgraph extracted:
+5 entities
+4 predicates
+Loading adjacencies..
+0.7420852184295654
 4390
-0.2700533866882324
+Subgraph extracted:
+214 entities
+20 predicates
+Loading adjacencies..
+0.26070570945739746
 4395
-1.1689565181732178
+Subgraph extracted:
+12941 entities
+101 predicates
+Loading adjacencies..
+1.1987791061401367
 4399
-0.48536038398742676
+Subgraph extracted:
+4 entities
+2 predicates
+Loading adjacencies..
+0.4973721504211426
 4414
-0.7830193042755127
+Subgraph extracted:
+16 entities
+2 predicates
+Loading adjacencies..
+0.8078558444976807
 4418
-0.07399821281433105
+Subgraph extracted:
+961 entities
+50 predicates
+Loading adjacencies..
+0.07485032081604004
 4427
-0.7230246067047119
+Subgraph extracted:
+86 entities
+6 predicates
+Loading adjacencies..
+0.732353687286377
 4430
-0.5067183971405029
+Subgraph extracted:
+6 entities
+3 predicates
+Loading adjacencies..
+0.5288636684417725
 4433
-0.9047677516937256
+Subgraph extracted:
+12 entities
+5 predicates
+Loading adjacencies..
+0.9368376731872559
 4434
-0.7704963684082031
+Subgraph extracted:
+6 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.7937066555023193
 4449
-0.014190912246704102
+0.014243364334106445
 4453
-0.1822645664215088
+Subgraph extracted:
+3356 entities
+69 predicates
+Loading adjacencies..
+0.18337225914001465
 4465
-0.5277647972106934
+Subgraph extracted:
+6 entities
+5 predicates
+Loading adjacencies..
+Subgraph extracted:
+20 entities
+6 predicates
+Loading adjacencies..
+0.5766456127166748
 4466
-0.5024926662445068
+Subgraph extracted:
+72 entities
+14 predicates
+Loading adjacencies..
+0.545961856842041
 4470
-0.36553168296813965
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+0.3934156894683838
 4475
-0.5823385715484619
+Subgraph extracted:
+4183 entities
+17 predicates
+Loading adjacencies..
+0.6136729717254639
 4482
-1.045680046081543
+Subgraph extracted:
+13 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+86 entities
+11 predicates
+Loading adjacencies..
+1.0973820686340332
 4486
-0.4637629985809326
+Subgraph extracted:
+13 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+17 entities
+7 predicates
+Loading adjacencies..
+0.5013175010681152
 4487
-0.8975851535797119
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.8527262210845947
 4489
-0.2542724609375
+Subgraph extracted:
+9737 entities
+190 predicates
+Loading adjacencies..
+0.25750017166137695
 4492
-0.44226741790771484
+0.479874849319458
 4493
-0.4844644069671631
+Subgraph extracted:
+3 entities
+3 predicates
+Loading adjacencies..
+0.5556795597076416
 4494
-0.7034683227539062
+Subgraph extracted:
+27193 entities
+166 predicates
+Loading adjacencies..
+0.7126507759094238
 4496
-1.0874965190887451
+Subgraph extracted:
+18 entities
+4 predicates
+Loading adjacencies..
+1.102660894393921
 4497
-1.0581891536712646
+1.0742790699005127
 4499
-0.4306824207305908
+Subgraph extracted:
+29 entities
+15 predicates
+Loading adjacencies..
+0.44173526763916016
 4500
-0.954012393951416
+Subgraph extracted:
+3 entities
+2 predicates
+Loading adjacencies..
+1.0193495750427246
 4509
-0.5510153770446777
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+10 entities
+2 predicates
+Loading adjacencies..
+0.5372223854064941
 4515
-0.332211971282959
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.36237573623657227
 4517
-0.6097598075866699
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.5820794105529785
 4518
-0.5166506767272949
+0.5110678672790527
 4522
-0.6500780582427979
+Subgraph extracted:
+9 entities
+4 predicates
+Loading adjacencies..
+Subgraph extracted:
+22 entities
+4 predicates
+Loading adjacencies..
+0.5977983474731445
 4532
-0.16630887985229492
+Subgraph extracted:
+4431 entities
+148 predicates
+Loading adjacencies..
+0.1689167022705078
 4536
-0.3420999050140381
+0.31998658180236816
 4537
-0.28330302238464355
+Subgraph extracted:
+13 entities
+8 predicates
+Loading adjacencies..
+0.31035423278808594
 4544
-0.3244149684906006
+Subgraph extracted:
+1686 entities
+83 predicates
+Loading adjacencies..
+0.2969174385070801
 4549
-0.6811134815216064
+0.7094941139221191
 4552
-0.5939040184020996
+Subgraph extracted:
+100 entities
+10 predicates
+Loading adjacencies..
+0.5967388153076172
 4556
-0.7712948322296143
+Subgraph extracted:
+25 entities
+12 predicates
+Loading adjacencies..
+0.7908532619476318
 4559
-0.3572394847869873
+Subgraph extracted:
+103 entities
+2 predicates
+Loading adjacencies..
+0.3790585994720459
 4565
-0.463655948638916
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+3 entities
+4 predicates
+Loading adjacencies..
+0.5318281650543213
 4566
-0.546088695526123
+Subgraph extracted:
+54 entities
+14 predicates
+Loading adjacencies..
+0.6229653358459473
 4568
-0.33696532249450684
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.3785085678100586
 4570
-0.5072555541992188
+0.42953991889953613
 4572
-0.30478930473327637
+Subgraph extracted:
+107 entities
+18 predicates
+Loading adjacencies..
+0.31056976318359375
 4580
-0.20307517051696777
+Subgraph extracted:
+199 entities
+19 predicates
+Loading adjacencies..
+0.20050692558288574
 4584
-0.008856773376464844
+0.008867740631103516
 4587
-1.0716161727905273
+Subgraph extracted:
+6 entities
+6 predicates
+Loading adjacencies..
+1.0535862445831299
 4592
-0.7151095867156982
+0.7349491119384766
 4593
-0.9763936996459961
+Subgraph extracted:
+142 entities
+8 predicates
+Loading adjacencies..
+0.9843168258666992
 4599
-0.7071778774261475
+Subgraph extracted:
+14 entities
+7 predicates
+Loading adjacencies..
+0.6940598487854004
 4601
-0.7472941875457764
+Subgraph extracted:
+173 entities
+23 predicates
+Loading adjacencies..
+0.7687053680419922
 4613
-0.7830803394317627
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.8090169429779053
 4619
-1.1023623943328857
+Subgraph extracted:
+26 entities
+2 predicates
+Loading adjacencies..
+1.1413600444793701
 4635
-0.1476120948791504
+Subgraph extracted:
+4981 entities
+234 predicates
+Loading adjacencies..
+0.14778709411621094
 4637
-0.19367504119873047
+Subgraph extracted:
+1816 entities
+86 predicates
+Loading adjacencies..
+0.1935136318206787
 4640
-0.28833961486816406
+Subgraph extracted:
+8 entities
+4 predicates
+Loading adjacencies..
+0.3283426761627197
 4643
-0.009468793869018555
+0.00948023796081543
 4656
-0.7104263305664062
+Subgraph extracted:
+90 entities
+8 predicates
+Loading adjacencies..
+0.7146930694580078
 4659
-0.6229333877563477
+Subgraph extracted:
+354 entities
+11 predicates
+Loading adjacencies..
+0.6530439853668213
 4660
-0.7281320095062256
+Subgraph extracted:
+69 entities
+10 predicates
+Loading adjacencies..
+0.7473773956298828
 4666
-0.5806102752685547
+Subgraph extracted:
+146 entities
+15 predicates
+Loading adjacencies..
+0.5801877975463867
 4669
-0.34590601921081543
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.3392617702484131
 4672
-0.7751946449279785
+Subgraph extracted:
+167 entities
+10 predicates
+Loading adjacencies..
+Subgraph extracted:
+9882 entities
+43 predicates
+Loading adjacencies..
+0.7225601673126221
 4683
-0.3055582046508789
+Subgraph extracted:
+2783 entities
+31 predicates
+Loading adjacencies..
+0.329620361328125
 4703
-0.31485462188720703
+Subgraph extracted:
+1218 entities
+20 predicates
+Loading adjacencies..
+0.3200089931488037
 4707
-0.6325607299804688
+0.6534478664398193
 4724
-0.44838786125183105
+Subgraph extracted:
+1982 entities
+56 predicates
+Loading adjacencies..
+0.4508829116821289
 4726
-1.2929720878601074
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+1.2849693298339844
 4728
-0.649233341217041
+0.6580023765563965
 4729
-0.14203834533691406
+Subgraph extracted:
+7776 entities
+116 predicates
+Loading adjacencies..
+0.14574551582336426
 4732
-1.1190030574798584
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+1.1498088836669922
 4736
-0.6925013065338135
+Subgraph extracted:
+198 entities
+23 predicates
+Loading adjacencies..
+0.6976833343505859
 4737
-0.2870900630950928
+Subgraph extracted:
+11 entities
+6 predicates
+Loading adjacencies..
+0.3184621334075928
 4738
-0.9991345405578613
+Subgraph extracted:
+106 entities
+10 predicates
+Loading adjacencies..
+Subgraph extracted:
+1645 entities
+21 predicates
+Loading adjacencies..
+1.0052685737609863
 4739
-0.8278040885925293
+Subgraph extracted:
+33 entities
+18 predicates
+Loading adjacencies..
+0.9300405979156494
 4743
-0.4148976802825928
+Subgraph extracted:
+15 entities
+3 predicates
+Loading adjacencies..
+0.39549803733825684
 4745
-1.313835620880127
+Subgraph extracted:
+111 entities
+12 predicates
+Loading adjacencies..
+1.2767858505249023
 4780
-1.164759635925293
+1.1458008289337158
 4781
-0.7504222393035889
+Subgraph extracted:
+39 entities
+5 predicates
+Loading adjacencies..
+0.7197165489196777
 4785
-0.6590797901153564
+Subgraph extracted:
+6 entities
+4 predicates
+Loading adjacencies..
+0.5752155780792236
 4788
-0.22981572151184082
+0.21893644332885742
 4796
-0.6671414375305176
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+0.6730897426605225
 4799
-0.07234978675842285
+Subgraph extracted:
+314 entities
+31 predicates
+Loading adjacencies..
+0.07323431968688965
 4807
-1.1517174243927002
+Subgraph extracted:
+7509 entities
+163 predicates
+Loading adjacencies..
+1.1831090450286865
 4808
-0.6113483905792236
+Subgraph extracted:
+5 entities
+2 predicates
+Loading adjacencies..
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.6137235164642334
 4819
-0.634904146194458
+0.631566047668457
 4821
-0.059821128845214844
+Subgraph extracted:
+205 entities
+19 predicates
+Loading adjacencies..
+0.05974006652832031
 4824
-0.3039393424987793
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.30042028427124023
 4829
-1.1097214221954346
+1.1464333534240723
 4837
-0.2751779556274414
+Subgraph extracted:
+9688 entities
+226 predicates
+Loading adjacencies..
+0.27825188636779785
 4844
-0.30504941940307617
+Subgraph extracted:
+8846 entities
+166 predicates
+Loading adjacencies..
+0.30736351013183594
 4845
-0.5517477989196777
+Subgraph extracted:
+9351 entities
+205 predicates
+Loading adjacencies..
+0.5118720531463623
 4851
-0.29420971870422363
+Subgraph extracted:
+175 entities
+3 predicates
+Loading adjacencies..
+0.3117055892944336
 4853
-0.41423559188842773
+Subgraph extracted:
+3057 entities
+94 predicates
+Loading adjacencies..
+0.4076206684112549
 4854
-0.7447128295898438
+Subgraph extracted:
+9 entities
+3 predicates
+Loading adjacencies..
+0.7418289184570312
 4858
-0.25890302658081055
+0.23644113540649414
 4860
-0.4924488067626953
+Subgraph extracted:
+2 entities
+1 predicates
+Loading adjacencies..
+0.4817311763763428
 4865
-0.30231785774230957
+Subgraph extracted:
+35 entities
+5 predicates
+Loading adjacencies..
+0.26714086532592773
 4870
-0.23587584495544434
+Subgraph extracted:
+2 entities
+2 predicates
+Loading adjacencies..
+0.2313070297241211
 4876
-0.38634705543518066
+Subgraph extracted:
+21 entities
+3 predicates
+Loading adjacencies..
+0.39093971252441406
 4880
-0.00904393196105957
+0.008945703506469727
 4883
-1.1146206855773926
+Subgraph extracted:
+11 entities
+3 predicates
+Loading adjacencies..
+1.1677675247192383
 4888
-0.7065823078155518
+Subgraph extracted:
+3 entities
+1 predicates
+Loading adjacencies..
+0.7277014255523682
 4892
-0.751826286315918
+Subgraph extracted:
+17 entities
+9 predicates
+Loading adjacencies..
+0.7739603519439697
 4897
-0.5274081230163574
+Subgraph extracted:
+18 entities
+10 predicates
+Loading adjacencies..
+0.5121967792510986
 4904
-0.2504696846008301
+0.22182917594909668
 4912
-0.34238672256469727
+Subgraph extracted:
+4 entities
+4 predicates
+Loading adjacencies..
+0.3606579303741455
 4913
-0.7600176334381104
+Subgraph extracted:
+4 entities
+5 predicates
+Loading adjacencies..
+0.765268087387085
 4928
-0.3426191806793213
+Subgraph extracted:
+1140 entities
+41 predicates
+Loading adjacencies..
+0.35166478157043457
 4935
-0.5783877372741699
+Subgraph extracted:
+10605 entities
+255 predicates
+Loading adjacencies..
+0.525702953338623
 4939
-0.685795783996582
+Subgraph extracted:
+7 entities
+6 predicates
+Loading adjacencies..
+0.6759941577911377
 4947
-0.6849894523620605
+Subgraph extracted:
+9 entities
+3 predicates
+Loading adjacencies..
+0.6722366809844971
 4948
-0.8191888332366943
+Subgraph extracted:
+25 entities
+7 predicates
+Loading adjacencies..
+0.8062717914581299
 4950
-0.3689148426055908
+Subgraph extracted:
+41 entities
+3 predicates
+Loading adjacencies..
+0.42701268196105957
 4951
-0.26874327659606934
+Subgraph extracted:
+226 entities
+12 predicates
+Loading adjacencies..
+0.2715721130371094
 4954
-1.4507966041564941
+Subgraph extracted:
+8 entities
+2 predicates
+Loading adjacencies..
+1.4501821994781494
 4956
-1.0055999755859375
+1.0152175426483154
 4961
-0.30452632904052734
+Subgraph extracted:
+5 entities
+3 predicates
+Loading adjacencies..
+0.3260011672973633
 4972
-0.009511470794677734
+0.009608983993530273
 4981
-0.31366777420043945
+Subgraph extracted:
+10 entities
+2 predicates
+Loading adjacencies..
+0.286928653717041
 4986
-0.7005829811096191
+0.7355616092681885
 4987
-0.6926472187042236
+Subgraph extracted:
+3 entities
+3 predicates
+Loading adjacencies..
+0.7015414237976074
 4993
-0.7502708435058594
+0.7634367942810059
 4995
-0.5133876800537109
-Min:0.01 Median:0.67 Mean:0.71 Max:13.97
+Subgraph extracted:
+7 entities
+1 predicates
+Loading adjacencies..
+Subgraph extracted:
+198 entities
+10 predicates
+Loading adjacencies..
+0.5233073234558105
+Min:0.01 Median:0.68 Mean:0.72 Max:13.83
 ['4', '5', '6', '10', '17', '25', '35', '56', '63', '65', '67', '78', '95', '99', '115', '117', '118', '120', '126', '127', '128', '131', '134', '138', '144', '147', '148', '155', '161', '162', '190', '191', '194', '198', '201', '202', '203', '207', '224', '225', '226', '233', '236', '242', '243', '250', '254', '256', '261', '263', '281', '285', '286', '302', '303', '321', '327', '336', '338', '342', '346', '358', '363', '365', '376', '380', '385', '386', '389', '392', '396', '405', '413', '418', '420', '429', '456', '467', '468', '471', '475', '478', '489', '493', '500', '503', '505', '511', '513', '524', '525', '526', '537', '538', '540', '560', '563', '564', '570', '575', '581', '596', '601', '604', '607', '609', '617', '624', '636', '639', '646', '647', '660', '662', '664', '667', '668', '672', '674', '676', '689', '699', '700', '710', '714', '717', '718', '723', '724', '729', '733', '741', '754', '761', '763', '767', '769', '770', '771', '776', '785', '794', '798', '805', '815', '816', '824', '826', '828', '831', '847', '849', '852', '854', '855', '861', '864', '871', '873', '876', '877', '879', '895', '896', '900', '902', '919', '920', '923', '925', '929', '937', '939', '951', '952', '954', '955', '957', '960', '967', '972', '976', '981', '985', '988', '990', '992', '993', '996', '1003', '1013', '1016', '1017', '1022', '1029', '1046', '1060', '1061', '1063', '1064', '1066', '1067', '1070', '1077', '1078', '1082', '1083', '1087', '1108', '1119', '1121', '1123', '1137', '1140', '1142', '1146', '1148', '1149', '1151', '1155', '1156', '1157', '1161', '1167', '1168', '1170', '1185', '1192', '1203', '1204', '1206', '1215', '1218', '1219', '1244', '1249', '1251', '1253', '1255', '1257', '1268', '1276', '1277', '1283', '1292', '1297', '1301', '1307', '1313', '1315', '1319', '1325', '1330', '1332', '1333', '1343', '1349', '1354', '1359', '1364', '1366', '1370', '1384', '1385', '1389', '1395', '1397', '1410', '1446', '1461', '1471', '1479', '1485', '1493', '1494', '1496', '1501', '1517', '1528', '1529', '1530', '1532', '1541', '1543', '1569', '1571', '1572', '1574', '1575', '1582', '1586', '1598', '1604', '1605', '1606', '1620', '1626', '1632', '1634', '1636', '1637', '1640', '1646', '1647', '1649', '1664', '1665', '1669', '1674', '1679', '1680', '1681', '1683', '1686', '1687', '1688', '1694', '1697', '1702', '1708', '1716', '1720', '1723', '1725', '1734', '1735', '1754', '1758', '1760', '1762', '1793', '1795', '1803', '1807', '1811', '1817', '1820', '1824', '1825', '1828', '1829', '1835', '1839', '1842', '1844', '1849', '1853', '1854', '1855', '1857', '1858', '1864', '1866', '1880', '1888', '1896', '1900', '1907', '1909', '1918', '1931', '1932', '1945', '1956', '1959', '1960', '1969', '1970', '1971', '1976', '1977', '1982', '1983', '1985', '1987', '1991', '1995', '1997', '1998', '1999', '2001', '2018', '2027', '2028', '2036', '2039', '2040', '2042', '2048', '2049', '2050', '2056', '2057', '2061', '2062', '2063', '2066', '2071', '2076', '2080', '2082', '2083', '2106', '2117', '2123', '2126', '2129', '2137', '2142', '2144', '2151', '2152', '2153', '2157', '2159', '2161', '2162', '2166', '2181', '2189', '2191', '2193', '2194', '2201', '2204', '2205', '2206', '2215', '2220', '2225', '2238', '2244', '2256', '2262', '2263', '2266', '2279', '2287', '2292', '2295', '2297', '2301', '2325', '2327', '2328', '2333', '2337', '2344', '2350', '2361', '2363', '2364', '2369', '2372', '2377', '2386', '2387', '2392', '2394', '2395', '2398', '2428', '2434', '2436', '2444', '2445', '2450', '2455', '2456', '2473', '2480', '2483', '2486', '2490', '2492', '2503', '2505', '2509', '2512', '2524', '2525', '2538', '2540', '2547', '2550', '2552', '2557', '2558', '2559', '2561', '2564', '2566', '2569', '2591', '2594', '2596', '2598', '2609', '2613', '2614', '2617', '2622', '2626', '2627', '2636', '2638', '2646', '2661', '2675', '2676', '2688', '2691', '2694', '2696', '2702', '2704', '2709', '2710', '2713', '2714', '2718', '2725', '2730', '2731', '2732', '2734', '2735', '2736', '2739', '2740', '2745', '2746', '2748', '2757', '2763', '2767', '2774', '2775', '2778', '2780', '2783', '2784', '2787', '2791', '2798', '2807', '2809', '2812', '2815', '2817', '2825', '2832', '2833', '2839', '2840', '2850', '2854', '2862', '2870', '2871', '2872', '2873', '2879', '2889', '2892', '2897', '2899', '2902', '2905', '2912', '2913', '2915', '2920', '2924', '2929', '2932', '2934', '2936', '2939', '2948', '2951', '2957', '2959', '2960', '2962', '2966', '2968', '2976', '2977', '2983', '2994', '3000', '3006', '3010', '3017', '3020', '3031', '3032', '3038', '3052', '3055', '3057', '3058', '3060', '3061', '3068', '3069', '3070', '3073', '3074', '3087', '3088', '3091', '3093', '3100', '3105', '3109', '3111', '3118', '3119', '3121', '3123', '3125', '3137', '3141', '3142', '3147', '3148', '3153', '3158', '3171', '3172', '3176', '3178', '3184', '3192', '3203', '3206', '3209', '3213', '3216', '3220', '3223', '3229', '3235', '3237', '3243', '3247', '3252', '3256', '3262', '3267', '3268', '3273', '3279', '3282', '3284', '3285', '3288', '3294', '3295', '3302', '3303', '3305', '3315', '3325', '3326', '3328', '3331', '3343', '3344', '3346', '3349', '3355', '3357', '3368', '3369', '3370', '3374', '3375', '3377', '3386', '3390', '3392', '3395', '3398', '3418', '3420', '3421', '3422', '3433', '3437', '3441', '3445', '3446', '3447', '3449', '3450', '3458', '3462', '3466', '3473', '3475', '3477', '3487', '3491', '3496', '3499', '3503', '3507', '3508', '3511', '3513', '3515', '3518', '3523', '3531', '3532', '3534', '3547', '3557', '3562', '3573', '3578', '3580', '3582', '3583', '3585', '3597', '3598', '3601', '3603', '3628', '3637', '3638', '3644', '3645', '3646', '3673', '3676', '3678', '3688', '3697', '3702', '3710', '3714', '3720', '3724', '3731', '3736', '3737', '3738', '3744', '3745', '3747', '3749', '3757', '3763', '3764', '3767', '3770', '3773', '3776', '3778', '3792', '3798', '3799', '3813', '3819', '3824', '3841', '3844', '3848', '3851', '3852', '3855', '3864', '3875', '3877', '3878', '3885', '3891', '3901', '3914', '3924', '3926', '3944', '3953', '3954', '3963', '3970', '3975', '3982', '3988', '3992', '3994', '4001', '4008', '4015', '4019', '4022', '4028', '4030', '4034', '4043', '4046', '4058', '4062', '4068', '4071', '4080', '4091', '4098', '4103', '4107', '4108', '4116', '4118', '4124', '4125', '4132', '4133', '4135', '4137', '4139', '4143', '4144', '4147', '4150', '4157', '4159', '4161', '4165', '4168', '4171', '4172', '4176', '4179', '4186', '4187', '4189', '4192', '4200', '4203', '4207', '4209', '4219', '4250', '4262', '4269', '4277', '4283', '4286', '4298', '4299', '4301', '4313', '4331', '4333', '4339', '4342', '4345', '4346', '4352', '4356', '4361', '4364', '4365', '4367', '4368', '4371', '4373', '4380', '4381', '4384', '4390', '4395', '4399', '4414', '4418', '4427', '4430', '4433', '4434', '4449', '4453', '4465', '4466', '4470', '4475', '4482', '4486', '4487', '4489', '4492', '4493', '4494', '4496', '4497', '4499', '4500', '4509', '4515', '4517', '4518', '4522', '4532', '4536', '4537', '4544', '4549', '4552', '4556', '4559', '4565', '4566', '4568', '4570', '4572', '4580', '4584', '4587', '4592', '4593', '4599', '4601', '4613', '4619', '4635', '4637', '4640', '4643', '4656', '4659', '4660', '4666', '4669', '4672', '4683', '4703', '4707', '4724', '4726', '4728', '4729', '4732', '4736', '4737', '4738', '4739', '4743', '4745', '4780', '4781', '4785', '4788', '4796', '4799', '4807', '4808', '4819', '4821', '4824', '4829', '4837', '4844', '4845', '4851', '4853', '4854', '4858', '4860', '4865', '4870', '4876', '4880', '4883', '4888', '4892', '4897', '4904', '4912', '4913', '4928', '4935', '4939', '4947', '4948', '4950', '4951', '4954', '4956', '4961', '4972', '4981', '4986', '4987', '4993', '4995']
-[1.1685376167297363, 0.7537031173706055, 1.2609341144561768, 0.9531846046447754, 0.8626453876495361, 0.6633048057556152, 0.009651660919189453, 0.3612179756164551, 0.5462870597839355, 1.4381439685821533, 0.6116976737976074, 0.21170926094055176, 0.7613263130187988, 0.6998291015625, 1.0006687641143799, 0.665153980255127, 0.6426205635070801, 1.393280267715454, 0.03031325340270996, 1.403665542602539, 0.676058292388916, 1.5100593566894531, 0.6765906810760498, 0.4665098190307617, 0.4800574779510498, 1.2664806842803955, 0.8535633087158203, 0.7661418914794922, 0.690403938293457, 1.446096420288086, 1.735060691833496, 0.4850199222564697, 0.8058879375457764, 0.3024907112121582, 0.9522347450256348, 0.7202768325805664, 1.3640387058258057, 0.9788000583648682, 0.4037284851074219, 0.784672737121582, 0.8616859912872314, 0.971876859664917, 1.6455109119415283, 1.4848811626434326, 1.8112773895263672, 0.721698522567749, 1.5471739768981934, 0.8086361885070801, 2.171020746231079, 0.8206853866577148, 0.7681524753570557, 0.9295837879180908, 1.3014390468597412, 0.07719302177429199, 0.7838740348815918, 0.9999330043792725, 1.649134874343872, 1.0465214252471924, 1.549149751663208, 0.8225009441375732, 0.18606066703796387, 0.009607553482055664, 0.6364152431488037, 1.6854526996612549, 1.5464820861816406, 0.7514224052429199, 0.9592320919036865, 1.0915467739105225, 0.2501566410064697, 0.3242924213409424, 0.3782665729522705, 1.5108368396759033, 0.680363655090332, 0.6403474807739258, 0.6740767955780029, 0.47208356857299805, 0.6750383377075195, 0.5114240646362305, 0.35042905807495117, 0.29057812690734863, 0.20727276802062988, 0.8254716396331787, 0.7977406978607178, 0.42771363258361816, 0.8407001495361328, 0.2454524040222168, 0.6632366180419922, 0.5686872005462646, 0.39453697204589844, 0.7006311416625977, 1.6478815078735352, 0.7921147346496582, 1.4954912662506104, 0.009249448776245117, 1.8522796630859375, 0.7138500213623047, 0.67718505859375, 1.4432048797607422, 1.7971503734588623, 0.08918285369873047, 0.3371875286102295, 1.4724507331848145, 1.582137107849121, 1.5154292583465576, 0.8226132392883301, 0.2365725040435791, 0.29894542694091797, 0.0956418514251709, 1.5717554092407227, 0.22857403755187988, 0.2646346092224121, 0.009048700332641602, 1.1827681064605713, 1.6830823421478271, 0.39685606956481934, 0.7427303791046143, 1.2534430027008057, 0.9656763076782227, 0.24803638458251953, 0.8103642463684082, 1.0937848091125488, 0.008760929107666016, 0.7258343696594238, 0.4492146968841553, 1.469451904296875, 0.7734274864196777, 0.36763834953308105, 0.1216423511505127, 0.28601717948913574, 0.7773046493530273, 0.7142658233642578, 0.015297412872314453, 1.591249704360962, 1.4056031703948975, 0.5319304466247559, 0.08964896202087402, 0.47522783279418945, 1.5023088455200195, 0.16428208351135254, 0.4315309524536133, 0.682016134262085, 0.06749582290649414, 1.0211029052734375, 0.7203199863433838, 0.6429510116577148, 1.0468955039978027, 0.8737633228302002, 0.30335283279418945, 0.34673619270324707, 1.2538485527038574, 0.37479519844055176, 0.8466577529907227, 1.0865163803100586, 0.7122519016265869, 1.4116942882537842, 0.801541805267334, 1.5206565856933594, 1.13494873046875, 0.7890231609344482, 0.6971466541290283, 0.7375664710998535, 1.1851067543029785, 1.4035208225250244, 0.7560105323791504, 0.3610227108001709, 1.049095630645752, 1.1312289237976074, 0.30922746658325195, 0.7374703884124756, 0.10995221138000488, 0.3276839256286621, 0.7304806709289551, 1.7031314373016357, 0.7666668891906738, 1.287970781326294, 0.4318668842315674, 0.22729706764221191, 0.012633562088012695, 1.3871138095855713, 1.1438474655151367, 1.4049944877624512, 1.4736824035644531, 0.6344122886657715, 0.7131714820861816, 0.7428009510040283, 1.0431859493255615, 0.008663177490234375, 1.397719383239746, 0.8881711959838867, 0.7507758140563965, 0.6319057941436768, 1.1005032062530518, 1.5909802913665771, 0.3086552619934082, 1.429422378540039, 1.6500813961029053, 0.8110930919647217, 1.4577560424804688, 0.7317609786987305, 1.4903090000152588, 0.4817836284637451, 0.890733003616333, 0.5981569290161133, 1.1815705299377441, 4.3999786376953125, 1.453744888305664, 1.030778408050537, 1.4337809085845947, 0.009317636489868164, 1.174656867980957, 0.959697961807251, 0.7908940315246582, 0.2697117328643799, 1.2785754203796387, 0.280503511428833, 0.7100703716278076, 0.8637511730194092, 1.5551419258117676, 0.21152067184448242, 0.43593263626098633, 0.8129541873931885, 0.772165060043335, 0.7814879417419434, 0.04891610145568848, 0.010403633117675781, 1.045884132385254, 0.543450117111206, 0.20599722862243652, 0.00952601432800293, 0.36737704277038574, 0.8432137966156006, 0.900200366973877, 0.34755396842956543, 0.38675689697265625, 0.059250593185424805, 0.8202073574066162, 0.8404521942138672, 0.5292510986328125, 1.1695420742034912, 0.3130002021789551, 1.1169488430023193, 0.9277150630950928, 0.5134270191192627, 1.220510721206665, 1.0756981372833252, 0.5369558334350586, 0.7486321926116943, 1.2763347625732422, 0.009454011917114258, 0.6365087032318115, 0.2916879653930664, 0.9796864986419678, 0.09654521942138672, 0.435680627822876, 0.5276679992675781, 0.536466121673584, 0.17421364784240723, 1.3952219486236572, 1.2911365032196045, 0.5119552612304688, 0.7283792495727539, 0.8074793815612793, 1.572443962097168, 0.6898529529571533, 0.9247770309448242, 0.3155040740966797, 1.9251465797424316, 0.9419209957122803, 0.42888498306274414, 0.6581363677978516, 0.6130001544952393, 0.3937258720397949, 1.3765385150909424, 0.7905023097991943, 0.43938708305358887, 1.601475477218628, 0.6424715518951416, 2.2859458923339844, 2.038540840148926, 0.18957185745239258, 0.7416317462921143, 0.783625602722168, 1.548499584197998, 0.9764542579650879, 1.080859899520874, 0.688856840133667, 0.16522002220153809, 0.8804857730865479, 0.052939653396606445, 0.1653916835784912, 1.8881173133850098, 0.9123165607452393, 0.9340188503265381, 1.0902044773101807, 1.2020299434661865, 0.3426787853240967, 2.050281286239624, 0.271620512008667, 0.8507215976715088, 1.0704398155212402, 0.6707296371459961, 0.904451847076416, 1.6485881805419922, 0.5312142372131348, 1.032594919204712, 0.36656785011291504, 0.3845081329345703, 1.6284217834472656, 1.2477037906646729, 1.195817232131958, 1.008213758468628, 0.7833585739135742, 0.3610856533050537, 0.3405189514160156, 0.6538808345794678, 0.9971010684967041, 1.1733808517456055, 0.32117700576782227, 1.5389692783355713, 1.4293828010559082, 1.2529125213623047, 0.622948169708252, 1.0815718173980713, 0.31874537467956543, 0.8144047260284424, 0.865689754486084, 0.3205540180206299, 0.8059592247009277, 0.2721521854400635, 0.7542283535003662, 0.8252367973327637, 0.9765481948852539, 0.3179810047149658, 0.7011122703552246, 1.487738847732544, 0.5394363403320312, 1.1762475967407227, 1.2675678730010986, 0.07584404945373535, 1.1941416263580322, 0.8814983367919922, 1.0610542297363281, 1.536128044128418, 0.25939226150512695, 0.7190077304840088, 0.382493257522583, 0.6809825897216797, 0.14913153648376465, 0.6524145603179932, 1.0707948207855225, 0.3562946319580078, 1.1050786972045898, 0.6707289218902588, 0.29571986198425293, 0.7815773487091064, 1.569265365600586, 0.4301290512084961, 0.29091954231262207, 1.131932020187378, 0.2131345272064209, 0.9922893047332764, 1.4279251098632812, 0.13105249404907227, 1.3750884532928467, 0.42594361305236816, 0.6900553703308105, 0.2924983501434326, 0.2033214569091797, 0.3022167682647705, 0.7343213558197021, 0.6958777904510498, 0.8738036155700684, 0.6814212799072266, 0.817939043045044, 0.7760908603668213, 0.2981715202331543, 0.2914285659790039, 0.4643571376800537, 0.23015856742858887, 1.1004772186279297, 0.8918790817260742, 0.3509712219238281, 0.4335324764251709, 0.009627342224121094, 1.0868134498596191, 0.36269617080688477, 1.1956307888031006, 0.8255648612976074, 0.34633755683898926, 0.398418664932251, 0.6971869468688965, 1.4471895694732666, 2.060438632965088, 0.9665448665618896, 0.38166046142578125, 1.424201488494873, 1.1682472229003906, 0.5064396858215332, 0.2351365089416504, 0.3506431579589844, 0.4944167137145996, 1.346039056777954, 1.1522581577301025, 0.9809474945068359, 0.41473388671875, 0.7903075218200684, 0.6967604160308838, 1.3708205223083496, 0.9825024604797363, 0.74491286277771, 0.22339868545532227, 0.30646300315856934, 0.6793456077575684, 0.7075555324554443, 0.24583029747009277, 0.8226022720336914, 1.018324375152588, 0.2784912586212158, 1.393559217453003, 0.1115562915802002, 0.32182908058166504, 0.49575018882751465, 0.6826305389404297, 0.4532005786895752, 0.29840874671936035, 0.7159817218780518, 0.710003137588501, 0.3541254997253418, 0.011274576187133789, 1.1230154037475586, 0.2186601161956787, 1.566093921661377, 1.1225686073303223, 0.47366905212402344, 0.7536320686340332, 0.10866379737854004, 0.9518826007843018, 0.5094089508056641, 0.7725241184234619, 0.7924447059631348, 1.4648613929748535, 0.37404894828796387, 0.8486864566802979, 0.33628368377685547, 0.9109342098236084, 1.7148902416229248, 0.9881856441497803, 1.1286237239837646, 0.9594056606292725, 2.2431604862213135, 1.0653445720672607, 1.2106704711914062, 0.4545600414276123, 1.4218721389770508, 1.0731570720672607, 0.5888416767120361, 0.4749264717102051, 1.503570795059204, 0.8198113441467285, 0.9930596351623535, 0.009118795394897461, 0.6609301567077637, 0.33081674575805664, 0.10633087158203125, 0.9261758327484131, 0.4152557849884033, 0.27608489990234375, 0.542243480682373, 0.7042808532714844, 0.1381843090057373, 0.8054811954498291, 0.7304418087005615, 0.6840665340423584, 1.4649484157562256, 1.2668077945709229, 1.6751856803894043, 0.4730064868927002, 0.7529056072235107, 1.5154457092285156, 0.12276840209960938, 0.27614808082580566, 1.3231799602508545, 0.6766648292541504, 1.6752235889434814, 0.4149343967437744, 0.6328730583190918, 0.9041988849639893, 0.7143988609313965, 1.1521766185760498, 0.43671536445617676, 0.47883009910583496, 0.25476694107055664, 0.26203083992004395, 0.785703182220459, 0.30606508255004883, 0.2177276611328125, 1.056715965270996, 0.212813138961792, 0.008981943130493164, 0.008561849594116211, 0.9124555587768555, 0.010201692581176758, 1.4373233318328857, 0.9052107334136963, 0.27359437942504883, 1.1739506721496582, 0.4242124557495117, 0.6249418258666992, 0.6707782745361328, 0.9833450317382812, 0.277646541595459, 1.4451467990875244, 0.4370386600494385, 0.010045766830444336, 0.23046422004699707, 0.5289566516876221, 1.3778553009033203, 0.9855046272277832, 0.3760199546813965, 1.148240566253662, 1.0448925495147705, 0.7569520473480225, 0.29590868949890137, 0.5241773128509521, 0.32314443588256836, 0.5454928874969482, 1.7278475761413574, 0.29732584953308105, 0.849311351776123, 0.9889171123504639, 0.9364442825317383, 0.46845364570617676, 0.010475635528564453, 0.10462450981140137, 0.556983232498169, 0.0830240249633789, 0.9865105152130127, 0.8291959762573242, 0.4395155906677246, 0.43723368644714355, 0.9845941066741943, 0.7150530815124512, 0.3382532596588135, 0.4204981327056885, 1.6800284385681152, 0.5434026718139648, 0.3989293575286865, 0.703397274017334, 0.26800060272216797, 0.8113529682159424, 1.146397590637207, 0.5240516662597656, 0.2308330535888672, 0.27576684951782227, 0.2186260223388672, 0.9697394371032715, 0.37032246589660645, 0.25031328201293945, 0.009937286376953125, 1.2883059978485107, 0.45621585845947266, 0.7118532657623291, 0.5814688205718994, 0.3152737617492676, 0.6717464923858643, 0.7600147724151611, 1.048985481262207, 0.7156538963317871, 0.9171550273895264, 0.8884978294372559, 0.712435245513916, 0.8060519695281982, 0.02712225914001465, 0.9282855987548828, 0.7212989330291748, 1.0845980644226074, 0.21500158309936523, 0.9543144702911377, 0.1565554141998291, 1.579136610031128, 0.25411176681518555, 3.7137982845306396, 0.9940164089202881, 0.9482667446136475, 0.38038206100463867, 0.7059166431427002, 0.28873610496520996, 1.2461001873016357, 0.722008228302002, 0.20727801322937012, 0.3259251117706299, 0.016282320022583008, 0.3825826644897461, 0.6220614910125732, 1.020465612411499, 0.2926208972930908, 1.2511937618255615, 0.9804115295410156, 1.44329833984375, 1.2470276355743408, 0.358182430267334, 0.6266748905181885, 0.04376077651977539, 1.1182172298431396, 0.7684164047241211, 0.4868457317352295, 1.534231185913086, 0.549130916595459, 1.2102575302124023, 0.2469005584716797, 0.7277767658233643, 0.2516658306121826, 0.5982351303100586, 1.0207889080047607, 0.4857823848724365, 1.0151212215423584, 0.7126355171203613, 0.1703050136566162, 0.22338461875915527, 1.7207756042480469, 0.2422957420349121, 0.350330114364624, 0.7927234172821045, 0.5257036685943604, 0.825444221496582, 0.28887176513671875, 0.34754228591918945, 0.9372687339782715, 0.3438422679901123, 0.7564165592193604, 0.4994504451751709, 0.3079662322998047, 0.09943866729736328, 0.09469056129455566, 0.7656664848327637, 0.7372567653656006, 0.32205724716186523, 0.2148444652557373, 0.35630345344543457, 1.6624112129211426, 0.8809456825256348, 1.245039701461792, 0.5870351791381836, 0.33112382888793945, 0.5185995101928711, 0.45052123069763184, 1.00416898727417, 0.676835298538208, 0.7606968879699707, 0.5415987968444824, 0.2998201847076416, 0.25795483589172363, 0.8199272155761719, 0.7832157611846924, 0.7047274112701416, 0.3254992961883545, 0.6545252799987793, 0.3102302551269531, 0.542877197265625, 0.009464263916015625, 0.49898242950439453, 0.46039652824401855, 0.5030455589294434, 0.910304069519043, 0.6636617183685303, 0.224456787109375, 0.2988088130950928, 0.2569286823272705, 0.3558809757232666, 0.34131908416748047, 0.31325507164001465, 0.7759191989898682, 0.18184518814086914, 0.8199589252471924, 0.1682567596435547, 1.122678279876709, 0.2853224277496338, 0.8531403541564941, 1.3669824600219727, 1.0501024723052979, 1.0685181617736816, 1.6251816749572754, 0.7433450222015381, 0.4430832862854004, 1.611893892288208, 0.5810697078704834, 0.6130678653717041, 0.3582596778869629, 0.7536776065826416, 1.2770538330078125, 1.4512991905212402, 0.010172128677368164, 1.2328932285308838, 0.6788880825042725, 0.6201789379119873, 1.0409660339355469, 0.6622164249420166, 0.09270000457763672, 0.5079081058502197, 0.24940991401672363, 0.24535298347473145, 0.7805616855621338, 0.9451549053192139, 0.2610950469970703, 0.5418167114257812, 0.23400020599365234, 1.2105679512023926, 1.014272928237915, 1.6235630512237549, 0.6467227935791016, 0.4439380168914795, 0.043558597564697266, 0.7408525943756104, 1.1329014301300049, 0.8614473342895508, 0.29404711723327637, 0.3148636817932129, 0.8088476657867432, 0.3155093193054199, 0.34207892417907715, 0.31659555435180664, 0.22246289253234863, 0.3667948246002197, 0.6877281665802002, 0.2390141487121582, 0.4966402053833008, 0.35942745208740234, 0.4093186855316162, 0.8739027976989746, 0.2794210910797119, 0.44167089462280273, 0.2935161590576172, 0.6034824848175049, 0.06282997131347656, 0.2211611270904541, 0.6517040729522705, 0.3579578399658203, 0.3571643829345703, 0.746697187423706, 0.5511691570281982, 0.7092759609222412, 0.9605112075805664, 0.8905072212219238, 0.84560227394104, 0.4717400074005127, 1.308640956878662, 0.49015045166015625, 0.724891185760498, 0.7996675968170166, 0.639012336730957, 0.40665650367736816, 1.0072894096374512, 0.23667502403259277, 0.3290863037109375, 0.28726911544799805, 0.24633455276489258, 0.7356524467468262, 0.10396170616149902, 0.4596686363220215, 1.3541526794433594, 0.3885321617126465, 0.8524279594421387, 0.8776514530181885, 1.0319328308105469, 0.7165946960449219, 0.3080170154571533, 0.8968181610107422, 0.31906604766845703, 0.22665739059448242, 0.9494326114654541, 0.7646288871765137, 1.053389549255371, 1.0850331783294678, 0.22540903091430664, 1.041799545288086, 0.7872099876403809, 0.21860766410827637, 0.5111112594604492, 0.37967538833618164, 0.23070383071899414, 1.3174419403076172, 0.40590643882751465, 0.8055987358093262, 0.5188982486724854, 0.33676648139953613, 0.18415117263793945, 1.055819034576416, 0.42464113235473633, 0.04619717597961426, 0.8403618335723877, 1.0178501605987549, 0.378145694732666, 0.09252643585205078, 0.6571292877197266, 2.2003936767578125, 0.29581618309020996, 0.6526739597320557, 0.27122998237609863, 0.37088680267333984, 0.23412585258483887, 0.15037965774536133, 0.23413419723510742, 0.8552570343017578, 1.233816146850586, 0.2731328010559082, 0.26625561714172363, 0.8117208480834961, 0.1821727752685547, 0.3170456886291504, 0.38010478019714355, 1.11431884765625, 0.3359956741333008, 0.7480592727661133, 0.3737668991088867, 13.971697330474854, 0.287264347076416, 0.36797070503234863, 0.8000671863555908, 0.9315812587738037, 1.2588648796081543, 1.3050897121429443, 0.6115312576293945, 0.5605084896087646, 0.9976847171783447, 0.008977651596069336, 0.00882720947265625, 0.2106950283050537, 0.08445096015930176, 0.570789098739624, 0.6812930107116699, 0.6237466335296631, 0.9540576934814453, 0.20433735847473145, 0.5112335681915283, 0.8134670257568359, 0.009551048278808594, 0.3544776439666748, 0.23482775688171387, 0.6063404083251953, 0.49880099296569824, 0.6965417861938477, 0.268801212310791, 0.8050901889801025, 1.1949207782745361, 0.5571713447570801, 0.7307689189910889, 0.44019508361816406, 0.21245574951171875, 0.7894577980041504, 0.5261075496673584, 0.06919336318969727, 0.23918652534484863, 0.7039659023284912, 0.490100622177124, 0.31436610221862793, 0.41573095321655273, 0.6077592372894287, 0.9095852375030518, 0.3265094757080078, 0.3360016345977783, 0.2954890727996826, 0.59116530418396, 1.1198654174804688, 0.9616103172302246, 1.0123999118804932, 0.33371877670288086, 0.2669830322265625, 0.22483062744140625, 0.3434610366821289, 0.673311710357666, 0.317502498626709, 0.42284584045410156, 0.010030746459960938, 0.23270201683044434, 0.7311899662017822, 0.2700526714324951, 1.1689555644989014, 0.48535919189453125, 0.7830183506011963, 0.07399725914001465, 0.7230236530303955, 0.5067176818847656, 0.9047670364379883, 0.7704956531524658, 0.014189958572387695, 0.18226361274719238, 0.527764081954956, 0.5024919509887695, 0.36553120613098145, 0.5823373794555664, 1.0456795692443848, 0.4637622833251953, 0.8975846767425537, 0.2542717456817627, 0.44226670265197754, 0.4844634532928467, 0.7034671306610107, 1.0874958038330078, 1.0581879615783691, 0.4306817054748535, 0.9540112018585205, 0.5510149002075195, 0.3322110176086426, 0.6097593307495117, 0.5166494846343994, 0.6500775814056396, 0.16630792617797852, 0.3420989513397217, 0.28330254554748535, 0.3244140148162842, 0.6811130046844482, 0.593902587890625, 0.771294355392456, 0.3572390079498291, 0.4636554718017578, 0.5460877418518066, 0.33696460723876953, 0.5072546005249023, 0.30478882789611816, 0.20307445526123047, 0.008855342864990234, 1.0716156959533691, 0.71510910987854, 0.9763927459716797, 0.707176923751831, 0.74729323387146, 0.7830796241760254, 1.1023619174957275, 0.14761066436767578, 0.19367432594299316, 0.28833866119384766, 0.009467601776123047, 0.710425615310669, 0.6229321956634521, 0.7281308174133301, 0.5806095600128174, 0.3459053039550781, 0.775193452835083, 0.3055565357208252, 0.3148539066314697, 0.6325602531433105, 0.44838690757751465, 1.2929713726043701, 0.6492323875427246, 0.14203691482543945, 1.119002342224121, 0.6924998760223389, 0.28708934783935547, 0.9991335868835449, 0.827803373336792, 0.41489672660827637, 1.3138344287872314, 1.1647591590881348, 0.7504212856292725, 0.6590793132781982, 0.22981524467468262, 0.6671404838562012, 0.07234859466552734, 1.1517162322998047, 0.6113476753234863, 0.6349036693572998, 0.05982017517089844, 0.3039388656616211, 1.1097209453582764, 0.2751767635345459, 0.30504846572875977, 0.5517468452453613, 0.2942085266113281, 0.41423487663269043, 0.7447123527526855, 0.25890254974365234, 0.492448091506958, 0.30231738090515137, 0.23587489128112793, 0.38634657859802246, 0.009042978286743164, 1.114619255065918, 0.7065813541412354, 0.7518253326416016, 0.527407169342041, 0.2504692077636719, 0.34238624572753906, 0.7600171566009521, 0.3426179885864258, 0.5783867835998535, 0.6857943534851074, 0.6849887371063232, 0.8191876411437988, 0.3689141273498535, 0.26874256134033203, 1.4507949352264404, 1.0055994987487793, 0.30452585220336914, 0.00951075553894043, 0.31366705894470215, 0.7005825042724609, 0.6926465034484863, 0.7502703666687012, 0.5133864879608154]
-[1, 1, 1, 2, 2, 1, 0, 1, 2, 2, 0, 1, 1, 1, 59, 1, 0, 5, 1, 2, 0, 2, 1, 1, 1, 1, 2, 1, 0, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 1, 498, 1, 1, 1, 2, 2, 2760, 2, 1, 1, 0, 1, 1, 1, 2, 2, 256, 1, 1, 0, 2, 2, 57, 1, 1, 1, 0, 1, 1, 2, 1, 0, 1, 3, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 1, 2, 1, 1, 31, 1, 1, 0, 2, 1, 1, 2, 2, 1, 1, 24, 2, 30, 1, 0, 1, 1, 2, 0, 1, 0, 2, 125, 2, 1, 16, 1, 1, 1, 62, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 209, 1, 1, 1, 2, 1, 2, 0, 1, 1, 1, 0, 16, 1, 1, 1, 2, 2, 1, 1, 1, 18, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 690, 1, 2, 1, 1, 1, 2, 1, 1445, 1, 0, 0, 1, 3, 3, 2, 1, 1, 1, 5, 0, 3, 1, 1, 0, 2, 2, 1, 357, 6, 1, 76, 1, 2, 1, 1, 1, 2, 80, 21, 2, 27, 0, 1, 2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 0, 27, 16, 2, 0, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 1, 41, 1, 1, 1, 2, 1, 1, 2, 0, 266, 1, 307, 1, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 1, 1, 1, 258, 32, 2, 1, 1, 1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 2, 23, 2, 1, 1, 1, 1, 1, 15, 1, 1, 2, 2, 1, 2723, 1, 2, 2, 1, 5, 2, 1, 2, 2, 1, 1, 2, 406, 1, 1, 1, 1, 0, 5, 1, 1, 2, 5, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1605, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 6, 3, 3, 0, 1, 1, 2, 1, 1, 1, 0, 2, 2, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 9, 2, 2, 2, 0, 43, 1, 2, 3, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 10, 7, 2, 2, 1, 2, 0, 0, 2, 1, 0, 1, 1, 1, 0, 1, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 3, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 0, 1, 2, 30, 2, 2, 2, 1, 2, 8, 1, 2, 2, 2, 1, 12, 0, 0, 1, 1, 19, 1, 1, 210, 2, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 157, 1, 2, 1, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 2, 0, 2, 0, 1, 2, 2, 1, 1, 2, 1, 1, 1, 0, 1, 2, 2, 8, 1, 2, 2, 1, 1, 1, 1, 3, 2, 1, 1, 15, 1, 2, 0, 1, 2, 1, 1, 2, 2, 1, 2, 3, 1, 1, 2, 1, 1, 1, 1, 1, 2, 16, 0, 1, 0, 1, 1, 1, 0, 1, 1, 4, 2, 1, 1, 1, 80, 1, 2, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 2, 1, 53, 1, 2, 1, 1, 1, 2, 1, 1, 1, 0, 2, 1, 4, 1, 2, 61, 1, 2, 1, 9, 1, 1, 1, 2, 2, 2, 1, 1, 6, 1, 2, 2, 2, 2, 1, 2, 0, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 2, 2, 1, 1, 1, 2, 2, 39, 35, 1, 0, 1, 1, 2, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2, 2, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 2, 2, 1, 2, 2, 6, 2, 1, 2, 8, 0, 6, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 13, 2, 108, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 0, 2, 1, 0, 3, 1, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 2, 2, 1, 1, 19, 1, 2, 1, 1, 1, 1, 1, 0, 1, 5, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 13, 1, 1, 31, 1, 2, 1, 1, 1, 1, 0, 2, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 1, 0, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 6, 1, 1, 1, 60, 1, 1, 2, 3, 1730, 2, 2, 128, 2, 0, 0, 0, 1, 2, 1, 2, 1, 1, 1, 1, 0, 1, 0, 1, 1, 2, 1, 1, 28, 15, 1, 1, 0, 1, 1, 1, 2, 5, 2, 1, 1, 85, 1, 2, 1, 1, 3, 7, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 2, 2, 1, 2, 1, 1, 1, 1, 1, 6, 0, 2, 6, 1, 1, 2, 12, 12, 1, 1, 1, 1, 2, 2, 1, 2, 3, 2, 1, 1, 1, 9, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 1, 0, 1, 1, 0, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 0, 2, 3, 1, 1, 1, 123, 1, 1, 0, 1, 2, 0, 1, 2, 1, 1, 105, 2, 1, 2, 1, 2, 1, 0, 1, 1, 1, 5, 0, 1, 1, 1, 1, 2, 1, 1, 2, 1, 0, 1, 1, 1, 1, 0, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 0, 1, 1, 2, 1, 7]
+[1.1922717094421387, 0.7790236473083496, 1.3322575092315674, 0.9924514293670654, 0.8873686790466309, 0.6347675323486328, 0.009457826614379883, 0.3706035614013672, 0.5412673950195312, 1.3828151226043701, 0.6548812389373779, 0.21506834030151367, 0.7604641914367676, 0.7345321178436279, 1.001685619354248, 0.6900634765625, 0.6329760551452637, 1.3221909999847412, 0.03017282485961914, 1.4195303916931152, 0.6895532608032227, 1.5205607414245605, 0.6741054058074951, 0.4801063537597656, 0.25261855125427246, 1.3267498016357422, 0.8512053489685059, 0.7524399757385254, 0.6380910873413086, 1.4231209754943848, 1.746790885925293, 0.4886772632598877, 0.794867753982544, 0.27501368522644043, 0.8713552951812744, 0.42485976219177246, 1.4027831554412842, 0.9811389446258545, 0.40907764434814453, 0.7729878425598145, 0.8934872150421143, 1.0039267539978027, 1.6657345294952393, 1.4481065273284912, 1.818221092224121, 0.7421901226043701, 1.624603271484375, 0.8357126712799072, 2.204892873764038, 0.8111779689788818, 0.7925355434417725, 0.9260196685791016, 1.345266342163086, 0.07613825798034668, 0.783534049987793, 1.0023353099822998, 1.6838371753692627, 1.0491952896118164, 1.5414438247680664, 0.8298759460449219, 0.1895918846130371, 0.00952911376953125, 0.6208353042602539, 1.7264797687530518, 1.6291096210479736, 0.7438170909881592, 0.9442169666290283, 1.0866734981536865, 0.2637183666229248, 0.331463098526001, 0.3736233711242676, 1.52012038230896, 0.6855547428131104, 0.663421630859375, 0.6905345916748047, 0.5381569862365723, 0.7617123126983643, 0.5169816017150879, 0.3833019733428955, 0.30866479873657227, 0.2078721523284912, 0.8419897556304932, 0.8060784339904785, 0.4247629642486572, 0.8751003742218018, 0.25801634788513184, 0.6596741676330566, 0.5667498111724854, 0.39008307456970215, 0.7503647804260254, 1.6023728847503662, 0.7711029052734375, 1.4812510013580322, 0.009070634841918945, 1.8799769878387451, 0.7071223258972168, 0.6623125076293945, 1.461731195449829, 1.7867393493652344, 0.08900809288024902, 0.3310816287994385, 1.421959638595581, 1.5707802772521973, 1.5643963813781738, 0.8222448825836182, 0.26445651054382324, 0.29396533966064453, 0.09736347198486328, 1.5748865604400635, 0.2328801155090332, 0.29553961753845215, 0.009465932846069336, 1.183157205581665, 1.730285882949829, 0.43517231941223145, 0.7333202362060547, 1.2414495944976807, 1.038076639175415, 0.24569058418273926, 0.810779333114624, 1.1047303676605225, 0.008810281753540039, 0.8292763233184814, 0.45395970344543457, 1.4339237213134766, 0.7904007434844971, 0.3699166774749756, 0.12135171890258789, 0.30532383918762207, 0.7816083431243896, 0.7325952053070068, 0.015815019607543945, 1.5824127197265625, 1.4431443214416504, 0.5470361709594727, 0.08849143981933594, 0.4848809242248535, 1.5150845050811768, 0.16729950904846191, 0.4624483585357666, 0.7075326442718506, 0.06703996658325195, 0.9931659698486328, 0.7498476505279541, 0.6355245113372803, 1.0995879173278809, 0.8828210830688477, 0.3057265281677246, 0.37061285972595215, 1.2627849578857422, 0.3681063652038574, 0.8289623260498047, 1.0363836288452148, 0.6878306865692139, 1.4117376804351807, 0.8057229518890381, 1.5358450412750244, 1.138704538345337, 0.8294205665588379, 0.7459604740142822, 0.7433748245239258, 1.2067503929138184, 1.4199097156524658, 0.7566132545471191, 0.3931856155395508, 1.0614352226257324, 1.1659672260284424, 0.35038304328918457, 0.7389791011810303, 0.11171269416809082, 0.7019591331481934, 0.7295074462890625, 1.762237548828125, 1.1878094673156738, 1.3407561779022217, 0.4117546081542969, 0.24860239028930664, 0.013911008834838867, 1.3792870044708252, 1.135197639465332, 1.37127685546875, 1.439751148223877, 0.6465914249420166, 0.7291169166564941, 0.7410848140716553, 1.0653979778289795, 0.008628129959106445, 1.3542115688323975, 0.8816349506378174, 0.778566837310791, 0.6536893844604492, 1.0669684410095215, 1.594677448272705, 0.2999851703643799, 1.485004186630249, 1.6839561462402344, 0.8412933349609375, 1.5027213096618652, 0.7546472549438477, 1.4687600135803223, 0.4950845241546631, 0.9034473896026611, 0.5872139930725098, 1.1340930461883545, 4.404465436935425, 1.4776601791381836, 0.9974656105041504, 1.4832427501678467, 0.009704828262329102, 1.15571928024292, 0.917607307434082, 0.7770156860351562, 0.2724568843841553, 1.289468765258789, 0.2953462600708008, 0.7007310390472412, 0.869987964630127, 1.5770184993743896, 0.2160930633544922, 0.4584226608276367, 0.8382890224456787, 0.7460737228393555, 0.7179362773895264, 0.05016350746154785, 0.010238885879516602, 1.0428352355957031, 0.49661684036254883, 0.20485329627990723, 0.009520292282104492, 0.3772265911102295, 0.8176062107086182, 0.8970756530761719, 0.34557294845581055, 0.37835240364074707, 0.059606075286865234, 0.7913291454315186, 0.8406963348388672, 0.5145447254180908, 1.1835193634033203, 0.307544469833374, 2.033905506134033, 0.9038453102111816, 0.5175693035125732, 1.2111644744873047, 1.1131880283355713, 0.5221042633056641, 0.7703299522399902, 1.2978875637054443, 0.008965492248535156, 0.6356627941131592, 0.29520320892333984, 0.9679181575775146, 0.09841537475585938, 0.42551112174987793, 0.514765739440918, 0.5303938388824463, 0.17309141159057617, 1.420184850692749, 1.3292171955108643, 0.5974421501159668, 0.7583801746368408, 0.8081400394439697, 1.5851385593414307, 0.6815431118011475, 1.0192351341247559, 0.3071866035461426, 1.9411942958831787, 0.9606165885925293, 0.43964171409606934, 0.6701858043670654, 0.6174173355102539, 0.37719106674194336, 1.3737614154815674, 0.8105175495147705, 0.42241430282592773, 1.6142158508300781, 0.6815071105957031, 2.2571396827697754, 2.0362281799316406, 0.19028830528259277, 0.7661957740783691, 0.7756247520446777, 1.5979130268096924, 0.9487125873565674, 1.120082139968872, 0.7301394939422607, 0.1664903163909912, 0.8917953968048096, 0.05358433723449707, 0.16411924362182617, 1.8879082202911377, 0.9008190631866455, 0.926274299621582, 1.0921292304992676, 1.1935131549835205, 0.34459781646728516, 2.0575063228607178, 0.25939059257507324, 0.8827435970306396, 1.0736651420593262, 0.6707553863525391, 0.9513957500457764, 1.7783949375152588, 0.5515646934509277, 1.0204613208770752, 0.36014342308044434, 0.39572644233703613, 1.6323812007904053, 1.2475101947784424, 1.1986849308013916, 1.0080349445343018, 0.7672157287597656, 0.33861351013183594, 0.31427741050720215, 0.6541852951049805, 1.0374071598052979, 1.1792652606964111, 0.34125351905822754, 1.5903186798095703, 1.45853590965271, 1.2229809761047363, 0.6090378761291504, 1.0518755912780762, 0.3203125, 0.8453214168548584, 0.8489964008331299, 0.29889988899230957, 0.827319860458374, 0.27588844299316406, 0.7813341617584229, 0.8251807689666748, 0.9951627254486084, 0.26768922805786133, 0.6887199878692627, 1.4426720142364502, 0.5772683620452881, 1.1948347091674805, 1.2950313091278076, 0.0767052173614502, 1.1464476585388184, 0.9159185886383057, 1.0595676898956299, 1.5634372234344482, 0.2680482864379883, 0.7414913177490234, 0.4471170902252197, 0.739321231842041, 0.1483325958251953, 0.7198669910430908, 1.0465235710144043, 0.35929155349731445, 1.117659568786621, 0.66233229637146, 0.2658867835998535, 0.8083274364471436, 1.5096993446350098, 0.42821407318115234, 0.29077887535095215, 1.158890962600708, 0.24615716934204102, 1.0413703918457031, 1.4086239337921143, 0.12642645835876465, 1.385347843170166, 0.43019914627075195, 0.6965713500976562, 0.27315187454223633, 0.20689058303833008, 0.3097078800201416, 0.706223726272583, 0.7331173419952393, 0.8630938529968262, 0.7125391960144043, 0.8368172645568848, 0.7730844020843506, 0.27176761627197266, 0.25963568687438965, 0.4237945079803467, 0.22975587844848633, 1.0884613990783691, 0.896920919418335, 0.38570189476013184, 0.46689772605895996, 0.009348630905151367, 1.1498773097991943, 0.35698914527893066, 1.2072381973266602, 0.8124291896820068, 0.34218549728393555, 0.36659955978393555, 0.7028107643127441, 1.4366679191589355, 2.0756611824035645, 0.9765191078186035, 0.3700418472290039, 1.4329023361206055, 1.1783688068389893, 0.5318915843963623, 0.23636412620544434, 0.33368682861328125, 0.5013115406036377, 1.3555846214294434, 1.1749475002288818, 0.9774684906005859, 0.3609902858734131, 0.7790660858154297, 0.682488203048706, 1.2955973148345947, 0.9661004543304443, 0.728156328201294, 0.22092032432556152, 0.30132269859313965, 0.684342622756958, 0.6980271339416504, 0.22497868537902832, 0.8224899768829346, 0.9838192462921143, 0.2858710289001465, 1.3890409469604492, 0.11057686805725098, 0.3198239803314209, 0.49048709869384766, 0.7170252799987793, 0.4249088764190674, 0.3012514114379883, 0.720947265625, 0.737293004989624, 0.362027645111084, 0.01101994514465332, 1.1473338603973389, 0.22207331657409668, 1.5497214794158936, 1.1831583976745605, 0.48593831062316895, 0.7420330047607422, 0.11037278175354004, 0.9843974113464355, 0.5445795059204102, 0.7907083034515381, 0.7951335906982422, 1.511096715927124, 0.42195892333984375, 0.8500101566314697, 0.3666412830352783, 0.9159300327301025, 1.7447903156280518, 0.9576449394226074, 1.1701903343200684, 0.9645969867706299, 2.284921884536743, 1.0681960582733154, 1.2232568264007568, 0.4603159427642822, 1.4610905647277832, 1.1321885585784912, 0.6022589206695557, 0.4808943271636963, 1.505378007888794, 0.8194050788879395, 1.0506372451782227, 0.009107351303100586, 0.6925292015075684, 0.33178138732910156, 0.10629701614379883, 0.9235732555389404, 0.39838171005249023, 0.2943882942199707, 0.5542941093444824, 0.6785576343536377, 0.139129638671875, 0.792151927947998, 0.7119436264038086, 0.7035109996795654, 1.4598865509033203, 1.3485276699066162, 1.7006490230560303, 0.5596072673797607, 0.750685453414917, 1.5468425750732422, 0.12428092956542969, 0.25531983375549316, 1.7456371784210205, 0.7492752075195312, 1.633885383605957, 0.4329221248626709, 0.2852623462677002, 0.9039027690887451, 0.7074317932128906, 1.1474201679229736, 0.49257683753967285, 0.5632286071777344, 0.28025293350219727, 0.2613828182220459, 0.7892889976501465, 0.30477046966552734, 0.2194657325744629, 1.0281970500946045, 0.23337364196777344, 0.009097099304199219, 0.008569478988647461, 0.9078121185302734, 0.010370016098022461, 1.4701008796691895, 0.8859496116638184, 0.279571533203125, 1.194850206375122, 0.4280369281768799, 0.644261360168457, 0.6756892204284668, 0.9956028461456299, 0.2575812339782715, 1.4143648147583008, 0.44330668449401855, 0.010242462158203125, 0.2292020320892334, 0.4688565731048584, 1.4148428440093994, 0.995053768157959, 0.3532123565673828, 1.1337847709655762, 1.063835620880127, 0.7712051868438721, 0.32398343086242676, 0.5134155750274658, 0.3139073848724365, 0.45203447341918945, 1.70353102684021, 0.2744443416595459, 0.8253324031829834, 0.9849355220794678, 0.9186596870422363, 0.4763767719268799, 0.01053166389465332, 0.10253453254699707, 0.5935487747192383, 0.08290529251098633, 1.033813714981079, 0.8194561004638672, 0.43393683433532715, 0.41126275062561035, 0.9790613651275635, 0.6785538196563721, 0.34751367568969727, 0.4243311882019043, 1.6874134540557861, 0.5778145790100098, 0.41481685638427734, 0.7207164764404297, 0.27634763717651367, 0.7828633785247803, 1.1620142459869385, 0.5193181037902832, 0.22367024421691895, 0.30342936515808105, 0.21518492698669434, 0.9946691989898682, 0.34581518173217773, 0.2569098472595215, 0.010010004043579102, 1.311779260635376, 0.46764373779296875, 0.7078506946563721, 0.56528639793396, 0.31371402740478516, 0.6137537956237793, 0.7555160522460938, 1.0348575115203857, 0.7134919166564941, 0.9280102252960205, 0.9070186614990234, 0.7139270305633545, 0.7635939121246338, 0.012973785400390625, 0.9496774673461914, 0.7466201782226562, 1.1619548797607422, 0.22028136253356934, 0.9466426372528076, 0.15476751327514648, 1.5974242687225342, 0.2589712142944336, 3.8330435752868652, 0.9572257995605469, 0.9750509262084961, 0.3813481330871582, 0.7012088298797607, 0.2764432430267334, 1.2441682815551758, 0.7456142902374268, 0.21447157859802246, 0.34386181831359863, 0.016141653060913086, 0.3858969211578369, 0.6179158687591553, 1.011650562286377, 0.2897932529449463, 1.23486328125, 0.9649312496185303, 1.4343211650848389, 1.2508232593536377, 0.33609628677368164, 0.603879451751709, 0.044028282165527344, 1.1568889617919922, 0.8159496784210205, 0.4840528964996338, 1.490537166595459, 0.5422890186309814, 1.2400240898132324, 0.251941442489624, 0.6921217441558838, 0.2885575294494629, 0.5675320625305176, 0.9990906715393066, 0.4519505500793457, 1.0061757564544678, 0.7033200263977051, 0.17075657844543457, 0.23464250564575195, 1.7831907272338867, 0.24726438522338867, 0.35561490058898926, 0.8134486675262451, 0.5472173690795898, 0.7595770359039307, 0.3033428192138672, 0.3785862922668457, 0.9097733497619629, 0.3360786437988281, 0.7718997001647949, 0.5279076099395752, 0.3038511276245117, 0.10044002532958984, 0.09541749954223633, 0.7513625621795654, 0.744194507598877, 0.3231828212738037, 0.21423077583312988, 0.3545265197753906, 1.6662852764129639, 0.8949739933013916, 1.3002710342407227, 0.5908629894256592, 0.3208014965057373, 0.5116169452667236, 0.42558932304382324, 1.0305366516113281, 0.71073317527771, 0.7460896968841553, 0.5116586685180664, 0.30317211151123047, 0.222259521484375, 0.8257317543029785, 0.7844524383544922, 0.6982228755950928, 0.3593878746032715, 0.6605875492095947, 0.345966100692749, 0.5315635204315186, 0.009288549423217773, 0.5187571048736572, 0.47914743423461914, 0.4952971935272217, 0.901796817779541, 0.6284852027893066, 0.2218308448791504, 0.2929399013519287, 0.22182607650756836, 0.32648468017578125, 0.31516408920288086, 0.3097262382507324, 0.8062455654144287, 0.17838811874389648, 0.831965446472168, 0.17313504219055176, 1.1679308414459229, 0.2912905216217041, 0.8269529342651367, 1.4073388576507568, 1.0563650131225586, 1.0554616451263428, 1.6199665069580078, 0.7595171928405762, 0.46315503120422363, 1.6004068851470947, 0.6130871772766113, 0.6036570072174072, 0.3594534397125244, 0.712299108505249, 1.250415325164795, 1.4321081638336182, 0.010371685028076172, 1.2475292682647705, 0.6817591190338135, 0.6729838848114014, 1.0381724834442139, 0.6280045509338379, 0.09330058097839355, 0.48825788497924805, 0.23890328407287598, 0.24425911903381348, 0.7142517566680908, 0.9028904438018799, 0.25273895263671875, 0.5349006652832031, 0.27893710136413574, 1.1955313682556152, 1.0223088264465332, 1.5782852172851562, 0.6371922492980957, 0.47362208366394043, 0.042311668395996094, 0.7079157829284668, 1.133544921875, 0.8758411407470703, 0.2659292221069336, 0.2884848117828369, 0.8061206340789795, 0.33255529403686523, 0.302445650100708, 0.28751611709594727, 0.21511483192443848, 0.36818504333496094, 0.6683518886566162, 0.21549558639526367, 0.5017011165618896, 0.3291001319885254, 0.39118099212646484, 0.861809253692627, 0.2752339839935303, 0.4137582778930664, 0.3199903964996338, 0.5944442749023438, 0.061928510665893555, 0.21048474311828613, 0.6338167190551758, 0.34270620346069336, 0.33625173568725586, 0.7607362270355225, 0.5497696399688721, 0.730804443359375, 0.9603235721588135, 0.9032132625579834, 0.8747720718383789, 0.48516058921813965, 1.3117938041687012, 0.48692774772644043, 0.7273831367492676, 0.8299896717071533, 0.6425049304962158, 0.4096083641052246, 1.0416524410247803, 0.2378392219543457, 0.3152809143066406, 0.3140137195587158, 0.27467989921569824, 0.7033200263977051, 0.10323143005371094, 0.4456062316894531, 1.4038758277893066, 0.40483927726745605, 0.8596932888031006, 0.8268396854400635, 1.0174455642700195, 0.6743874549865723, 0.28556346893310547, 0.8722081184387207, 0.31325554847717285, 0.2270982265472412, 0.9581570625305176, 0.7672121524810791, 1.0576252937316895, 1.1124742031097412, 0.26027822494506836, 1.0144295692443848, 0.7978799343109131, 0.2237856388092041, 0.4803285598754883, 0.41056108474731445, 0.2136824131011963, 1.2927608489990234, 0.4275341033935547, 0.7946450710296631, 0.5318019390106201, 0.3205451965332031, 0.1811232566833496, 1.0520429611206055, 0.4454922676086426, 0.04597926139831543, 0.8464884757995605, 1.0468525886535645, 0.35886526107788086, 0.09346318244934082, 0.659142255783081, 2.2541911602020264, 0.30155324935913086, 0.6694304943084717, 0.28287649154663086, 0.3697173595428467, 0.25089478492736816, 0.1575031280517578, 0.2541050910949707, 0.8640446662902832, 1.243159532546997, 0.2749333381652832, 0.24678802490234375, 0.7997360229492188, 0.18509507179260254, 0.32270359992980957, 0.3840808868408203, 1.084563970565796, 0.33214616775512695, 0.7505812644958496, 0.36249208450317383, 13.833369493484497, 0.2999739646911621, 0.3811652660369873, 0.8024735450744629, 0.9631547927856445, 1.316880464553833, 1.3350377082824707, 0.6086578369140625, 0.6255457401275635, 1.0270287990570068, 0.009280204772949219, 0.008761882781982422, 0.24818158149719238, 0.0841972827911377, 0.6197159290313721, 0.6909573078155518, 0.6708917617797852, 0.9494988918304443, 0.20698833465576172, 0.5034267902374268, 0.8171489238739014, 0.009934186935424805, 0.3589663505554199, 0.2580597400665283, 0.6099097728729248, 0.5141682624816895, 0.6938817501068115, 0.24526739120483398, 0.7894959449768066, 1.187380075454712, 0.5611846446990967, 0.740410566329956, 0.5165956020355225, 0.24569463729858398, 0.8058173656463623, 0.5166149139404297, 0.0692901611328125, 0.2379908561706543, 0.7343416213989258, 0.5321424007415771, 0.31833553314208984, 0.42041635513305664, 0.6053793430328369, 0.9025161266326904, 0.33785080909729004, 0.3425881862640381, 0.30666589736938477, 0.5940818786621094, 1.1764652729034424, 0.9622311592102051, 1.0176854133605957, 0.3554842472076416, 0.29401469230651855, 0.23610615730285645, 0.3441176414489746, 0.6908268928527832, 0.3010849952697754, 0.41225314140319824, 0.009811639785766602, 0.21895956993103027, 0.7420840263366699, 0.26070523262023926, 1.198777675628662, 0.4973716735839844, 0.8078556060791016, 0.07484984397888184, 0.7323524951934814, 0.5288631916046143, 0.9368371963500977, 0.7937064170837402, 0.014242172241210938, 0.18337130546569824, 0.5766451358795166, 0.5459613800048828, 0.3934152126312256, 0.6136720180511475, 1.097381591796875, 0.501317024230957, 0.8527257442474365, 0.25749921798706055, 0.4798743724822998, 0.5556790828704834, 0.7126500606536865, 1.1026601791381836, 1.0742778778076172, 0.44173479080200195, 1.019348382949829, 0.5372216701507568, 0.36237525939941406, 0.5820786952972412, 0.5110673904418945, 0.5977978706359863, 0.1689157485961914, 0.31998586654663086, 0.31035375595092773, 0.2969167232513428, 0.7094929218292236, 0.5967376232147217, 0.7908527851104736, 0.3790581226348877, 0.5318276882171631, 0.6229648590087891, 0.3785080909729004, 0.42953944206237793, 0.31056904792785645, 0.20050644874572754, 0.00886678695678711, 1.0535860061645508, 0.7349486351013184, 0.9843165874481201, 0.6940593719482422, 0.7687044143676758, 0.809016227722168, 1.141359567642212, 0.14778590202331543, 0.1935126781463623, 0.3283421993255615, 0.009479045867919922, 0.7146925926208496, 0.6530427932739258, 0.7473759651184082, 0.5801870822906494, 0.3392610549926758, 0.7225592136383057, 0.3296186923980713, 0.3200082778930664, 0.6534473896026611, 0.4508819580078125, 1.284968614578247, 0.6580014228820801, 0.14574480056762695, 1.149808645248413, 0.6976823806762695, 0.31846165657043457, 1.005267858505249, 0.9300401210784912, 0.3954966068267822, 1.2767853736877441, 1.1458001136779785, 0.7197160720825195, 0.5752148628234863, 0.21893596649169922, 0.6730892658233643, 0.07323384284973145, 1.183107852935791, 0.6137228012084961, 0.6315655708312988, 0.05973958969116211, 0.30041980743408203, 1.146432876586914, 0.27825117111206055, 0.30736207962036133, 0.5118708610534668, 0.3117048740386963, 0.4076197147369385, 0.741828203201294, 0.23644018173217773, 0.48173069953918457, 0.26714015007019043, 0.2313065528869629, 0.39093923568725586, 0.00894474983215332, 1.167766809463501, 0.7277007102966309, 0.7739596366882324, 0.5121960639953613, 0.22182846069335938, 0.3606572151184082, 0.7652671337127686, 0.35166406631469727, 0.5257022380828857, 0.6759932041168213, 0.6722362041473389, 0.8062713146209717, 0.42701172828674316, 0.27157115936279297, 1.4501802921295166, 1.0152170658111572, 0.3260006904602051, 0.009607791900634766, 0.2869279384613037, 0.7355611324310303, 0.7015409469604492, 0.7634363174438477, 0.5233068466186523]
+[1, 1, 1, 1, 2, 1, 0, 1, 2, 2, 0, 1, 1, 1, 1, 1, 0, 1, 1, 2, 0, 2, 1, 1, 1, 1, 2, 1, 0, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 1, 0, 1, 1, 1, 2, 2, 1, 1, 1, 0, 2, 2, 1, 1, 1, 1, 0, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 0, 2, 1, 1, 2, 2, 1, 1, 1, 2, 2, 1, 0, 1, 1, 2, 0, 1, 0, 2, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 0, 1, 1, 1, 0, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 0, 0, 1, 2, 1, 2, 1, 1, 1, 1, 0, 1, 1, 1, 0, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 0, 1, 2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 0, 1, 1, 2, 0, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 3, 3, 0, 1, 1, 1, 1, 1, 1, 0, 2, 2, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 2, 2, 0, 1, 1, 2, 3, 1, 1, 1, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 1, 2, 0, 0, 2, 1, 0, 1, 1, 1, 0, 1, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 3, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 0, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2, 2, 2, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 2, 0, 2, 0, 1, 2, 2, 1, 1, 1, 1, 1, 1, 0, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 0, 1, 2, 1, 1, 2, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 0, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 0, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 0, 1, 1, 2, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2, 2, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1, 0, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 0, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 1, 0, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 1, 2, 0, 0, 0, 1, 2, 1, 2, 1, 1, 1, 1, 0, 1, 0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 3, 2, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 0, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 0, 2, 3, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2, 1, 1, 2, 1, 0, 1, 1, 1, 1, 0, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 0, 1, 1, 2, 1, 1]
 [1, 1, 2, 2, 1, 1, 0, 0, 0, 2, 1, 0, 1, 1, 2, 1, 1, 2, 0, 2, 1, 2, 1, 0, 1, 2, 1, 1, 1, 2, 2, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 1, 1, 2, 0, 1, 1, 2, 1, 2, 1, 0, 0, 2, 2, 2, 1, 1, 1, 1, 0, 0, 2, 1, 1, 1, 2, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 3, 1, 2, 0, 2, 1, 1, 2, 2, 0, 1, 2, 3, 2, 1, 1, 1, 0, 2, 1, 1, 0, 2, 2, 1, 1, 2, 1, 1, 1, 2, 0, 1, 1, 2, 1, 1, 0, 1, 1, 1, 0, 2, 2, 0, 0, 1, 2, 0, 1, 1, 0, 1, 1, 1, 2, 1, 0, 1, 2, 1, 1, 1, 1, 2, 1, 2, 2, 1, 1, 0, 2, 2, 1, 1, 1, 2, 1, 1, 0, 1, 1, 2, 1, 2, 1, 1, 0, 2, 2, 2, 2, 1, 1, 1, 2, 0, 2, 1, 1, 1, 2, 2, 0, 2, 2, 1, 2, 1, 2, 1, 1, 0, 2, 2, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 1, 1, 2, 0, 1, 1, 1, 2, 0, 0, 2, 2, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 2, 1, 2, 0, 2, 0, 2, 0, 1, 1, 1, 0, 2, 2, 2, 1, 1, 2, 1, 2, 0, 2, 2, 1, 1, 1, 1, 2, 1, 1, 2, 2, 0, 3, 0, 1, 1, 2, 2, 2, 1, 0, 1, 0, 0, 2, 1, 1, 1, 2, 0, 2, 1, 2, 2, 1, 2, 2, 1, 2, 0, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 2, 2, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 0, 2, 1, 2, 2, 1, 1, 1, 2, 0, 2, 2, 0, 2, 1, 1, 1, 2, 1, 1, 2, 1, 2, 2, 0, 2, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 0, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2, 0, 2, 2, 1, 1, 0, 1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2, 2, 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 1, 2, 0, 1, 0, 0, 2, 1, 1, 2, 2, 0, 1, 1, 1, 2, 2, 2, 1, 1, 2, 0, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 0, 2, 1, 0, 0, 1, 0, 2, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 0, 0, 2, 2, 2, 1, 2, 2, 1, 1, 2, 1, 2, 2, 1, 1, 2, 1, 1, 0, 0, 2, 0, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 0, 1, 1, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 0, 2, 1, 2, 1, 0, 0, 2, 0, 2, 2, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1, 1, 0, 2, 2, 2, 0, 2, 1, 2, 1, 1, 0, 1, 0, 1, 2, 0, 0, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 2, 1, 1, 1, 2, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 2, 1, 1, 2, 1, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 0, 2, 1, 2, 2, 2, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 2, 2, 2, 1, 0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 0, 1, 0, 1, 0, 1, 1, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 1, 0, 0, 1, 0, 1, 1, 2, 2, 0, 1, 1, 0, 0, 1, 2, 0, 2, 1, 0, 2, 2, 1, 2, 1, 1, 1, 0, 0, 2, 1, 1, 1, 2, 1, 1, 0, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 1, 1, 1, 0, 1, 2, 1, 2, 0, 0, 2, 1, 1, 2, 2, 2, 1, 0, 1, 2, 0, 2, 2, 1, 2, 2, 1, 2, 1, 2, 0, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 0, 0, 0, 2, 1, 1, 1, 2, 1, 1, 0, 0, 1, 0, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 2, 1, 1, 2, 3, 1, 2, 2, 1, 2, 1, 1, 0, 1, 2, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 1, 1, 1, 1, 0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2]
-[23506, 4, 2, 16, 236, 319, 0, 12821, 34260, 8, 0, 399, 4052, 4, 1453, 8, 0, 13, 150, 103, 0, 5, 2, 25500, 40, 10, 38, 0, 0, 20, 19, 33558, 17, 6, 947, 0, 11, 2, 417, 322, 127, 18336, 3521, 33, 27043, 255, 11, 313, 4707, 4, 116, 40, 0, 158, 2, 1779, 2075, 33, 4121, 4, 1196, 0, 419, 28, 10692, 1, 7, 13, 0, 290, 8469, 1, 2, 0, 3, 31, 7, 17978, 1296, 2428, 5, 49897, 29, 1711, 1052, 3, 7, 12933, 1, 1, 149, 1, 13, 0, 188, 13, 10, 4, 15, 2787, 5, 75, 66, 160, 3, 0, 2, 5592, 83, 0, 0, 0, 245, 342, 46, 6, 55, 1945, 0, 19, 76, 0, 479, 2, 4, 402, 1, 1296, 9, 3, 90, 65, 13, 359, 40648, 343, 105, 47, 13541, 24, 0, 201, 4, 12, 0, 170, 8, 5487, 6, 3, 10, 0, 287, 2, 30, 1, 27, 30, 8, 14, 14416, 247, 6, 0, 2, 4, 2280, 5062, 5, 1374, 37, 1, 47, 443, 3144, 7, 0, 0, 0, 4, 14, 26, 133, 2, 2, 2575, 0, 8, 6, 1, 0, 4, 2787, 5730, 2779, 107, 12, 529, 0, 11, 233, 0, 3220, 49, 165478, 334, 6, 448, 0, 57053, 169, 9, 373, 224, 13, 5, 47, 502, 7355, 7, 0, 155, 56, 549, 0, 95, 35, 4473, 0, 27885, 8, 718, 4, 233, 1245, 7, 3849, 5, 3561, 12, 178, 0, 4, 20, 2, 60, 0, 13, 0, 7719, 49, 904, 75, 2, 394, 0, 10086, 17, 8, 6, 1577, 254, 180, 0, 0, 1708, 268, 59, 164, 35, 31100, 19, 0, 110, 9, 88, 255, 114311, 281, 1552, 22, 9, 140, 47, 10, 2, 79, 3, 132, 2189, 50422, 0, 35, 0, 609, 33064, 10870, 1, 41, 118, 37, 143, 9, 1, 7, 1153, 2, 56267, 393, 701, 0, 17, 0, 14, 0, 1746, 1, 1059, 3, 706, 1502, 11, 3, 24391, 26, 12, 41, 3, 409, 0, 2, 5, 2, 806, 3, 103, 9, 3145, 837, 4, 46, 6, 0, 160, 3, 0, 6, 3702, 344, 72, 20444, 49, 0, 54, 3, 8, 2, 393, 8, 0, 18, 351, 106, 0, 26, 0, 389, 137, 3, 0, 3, 68, 2, 154, 7, 1889, 2, 0, 108, 16519, 11, 72, 121, 0, 1571, 200, 24136, 19, 3703, 4, 749, 5, 93, 30, 12, 11, 2, 1, 21, 1, 86, 26, 112, 0, 4094, 4, 0, 0, 616, 5, 0, 2, 681, 19, 0, 69, 7, 10262, 29, 12, 0, 16, 407, 2, 198, 9, 2, 32247, 0, 446, 10097, 16, 116, 32, 3, 4164, 21, 0, 14, 10, 18, 44, 118, 3, 0, 278, 8, 22089, 30, 29, 20, 0, 1, 55, 25807, 5, 17, 12, 60, 1081, 0, 0, 68, 569, 65, 2, 31, 403, 6, 808, 59, 48, 0, 6, 0, 85, 8764, 36, 7, 8690, 15, 0, 575, 0, 105, 0, 44254, 13, 1, 0, 0, 193, 8, 0, 3, 10947, 5, 0, 0, 0, 0, 0, 191, 0, 127, 141, 26, 153, 0, 6, 2, 0, 7, 0, 16386, 10, 68, 32, 0, 4, 8, 61, 0, 0, 2531, 4, 2033, 0, 465, 24, 21873, 1209, 0, 1185, 7, 67, 24, 455, 8, 4, 9, 4, 2, 21425, 4, 0, 4, 51, 4, 8, 737, 93, 0, 88, 0, 0, 195, 3, 0, 7, 0, 21, 95, 5, 0, 20, 147, 256, 4, 31933, 0, 2, 0, 10, 6, 35, 0, 1174, 3708, 151, 15617, 189072, 152, 6, 4, 0, 5, 2019, 2, 818, 2, 0, 1660, 6, 67, 0, 7393, 321, 0, 46, 4, 77, 34, 17, 1, 36793, 15, 104, 14, 11204, 27, 89, 4980, 45, 1, 53643, 37, 5729, 0, 53, 42, 21196, 61, 5, 137, 0, 76, 17, 57, 19, 2, 0, 874, 466, 64, 3, 1118, 0, 38, 217, 0, 3, 431, 0, 4, 0, 211, 29, 245, 75, 2, 0, 6, 3, 2, 1849, 42641, 957, 1158, 0, 38, 806, 296, 2, 150, 251, 1080, 0, 3, 3, 52, 2, 814, 15, 421, 6, 221, 1, 0, 30, 13, 55, 140, 5, 32, 177, 30, 18, 0, 38, 10, 0, 71, 179, 12, 0, 187, 6, 17035, 0, 9871, 91, 4, 1095, 43459, 42, 53801, 32, 9, 822, 663, 42, 1, 7, 516, 48, 8, 31, 69, 16, 4, 0, 24424, 0, 0, 10, 16, 2, 153, 110, 8303, 5, 56, 398, 0, 11610, 1127, 26, 44, 660, 3, 260, 0, 317, 2, 17, 2673, 9, 2, 0, 35, 116, 21, 8, 7, 4, 1464, 145, 19, 41740, 7, 9, 1039, 116, 62152, 129, 81, 2396, 13916, 73, 212, 8, 19, 5, 8, 2, 0, 8, 3, 0, 0, 1974, 129, 988, 24, 4563, 0, 13429, 5, 4, 15, 37, 2370, 45, 115459, 3, 13, 1, 16, 0, 1523, 0, 78, 37187, 1613, 113, 0, 10083, 4648, 2, 7, 254, 0, 6, 289900, 467, 285, 11, 46, 6160, 4, 24, 227, 0, 0, 0, 0, 143, 109, 108, 8, 104, 270, 3, 26, 0, 953, 0, 32, 11236, 6537, 53, 49430, 112, 184, 1101, 19, 0, 0, 1, 59, 322, 123, 15, 4, 105, 398, 907, 46, 33064, 12, 1409, 78, 0, 3, 2, 259, 0, 340, 0, 38, 5, 0, 0, 5, 322, 25182, 6, 13, 1391, 95, 7, 10, 8, 0, 4080, 40, 102, 5, 7383, 162, 52, 2, 19180, 0, 3, 37489, 20, 0, 39, 2, 20, 1, 1, 0, 47, 7665, 0, 14, 3557, 0, 118, 39, 141, 5, 86, 2, 0, 134, 271, 0, 10, 0, 257, 23, 266, 2, 47, 8353, 3036, 13, 0, 187, 456, 89, 282, 2, 20397, 4434, 2151, 0, 2547, 1, 0, 11978, 4, 258, 13, 2871, 56, 13, 216, 0, 63, 12, 0, 4, 416, 11818, 9, 0, 277, 2, 0, 22008, 14142, 20963, 283, 4836, 5, 0, 1, 51, 2, 19, 0, 12, 2, 25, 32, 0, 4, 5, 1711, 30601, 15, 15, 35, 48, 221, 6, 0, 12, 0, 18, 0, 3, 0, 377]
+[23506, 4, 2, 16, 236, 319, 0, 12821, 34265, 8, 0, 399, 4052, 4, 1453, 8, 0, 13, 150, 103, 0, 5, 2, 25500, 40, 10, 38, 0, 0, 20, 19, 33558, 17, 6, 947, 0, 11, 2, 417, 322, 127, 18336, 3521, 33, 27043, 255, 11, 313, 4707, 4, 116, 40, 0, 158, 2, 1779, 2075, 33, 4121, 4, 1196, 0, 419, 28, 10692, 1, 7, 13, 0, 290, 8469, 1, 2, 0, 3, 31, 7, 17978, 1296, 2428, 5, 49897, 29, 1711, 1052, 3, 7, 12939, 1, 1, 149, 1, 13, 0, 188, 13, 10, 4, 15, 2787, 5, 75, 66, 160, 3, 0, 2, 5592, 83, 0, 0, 0, 245, 342, 46, 6, 55, 1945, 0, 19, 76, 0, 479, 2, 4, 402, 1, 1296, 9, 3, 90, 65, 13, 359, 40648, 343, 105, 47, 13541, 24, 0, 201, 4, 12, 0, 170, 8, 5487, 6, 3, 10, 0, 287, 2, 30, 1, 27, 30, 8, 14, 14416, 247, 6, 0, 2, 4, 2280, 5062, 5, 1374, 37, 1, 47, 443, 3144, 7, 0, 0, 0, 4, 14, 26, 133, 2, 2, 2575, 0, 8, 6, 1, 0, 4, 2787, 5730, 2779, 107, 12, 529, 0, 11, 233, 0, 3220, 49, 165478, 334, 6, 448, 0, 57053, 169, 9, 373, 224, 13, 5, 47, 502, 7355, 7, 0, 155, 56, 549, 0, 95, 35, 4473, 0, 27885, 8, 718, 4, 233, 1245, 7, 3849, 5, 3561, 12, 178, 0, 4, 20, 2, 60, 0, 13, 0, 7719, 49, 904, 75, 2, 394, 0, 10086, 17, 8, 6, 1577, 254, 180, 0, 0, 1708, 268, 59, 164, 35, 31100, 19, 0, 110, 9, 88, 255, 114311, 281, 1552, 22, 9, 140, 47, 10, 2, 79, 3, 132, 2189, 50422, 0, 35, 0, 609, 33064, 10870, 1, 41, 118, 37, 143, 9, 1, 7, 1153, 2, 56267, 393, 701, 0, 17, 0, 14, 0, 1746, 1, 1059, 3, 706, 1502, 11, 3, 24391, 26, 12, 41, 3, 409, 0, 2, 5, 2, 806, 3, 103, 9, 3145, 837, 4, 46, 6, 0, 160, 3, 0, 6, 3702, 344, 72, 20444, 49, 0, 54, 3, 8, 2, 393, 8, 0, 18, 351, 106, 0, 26, 0, 389, 137, 3, 0, 3, 68, 2, 154, 7, 1889, 2, 0, 108, 16519, 11, 72, 121, 0, 1571, 200, 24136, 19, 3703, 4, 749, 5, 93, 30, 12, 11, 2, 1, 21, 1, 86, 26, 112, 0, 4094, 4, 0, 0, 616, 5, 0, 2, 681, 19, 0, 69, 7, 10262, 29, 12, 0, 16, 407, 2, 198, 9, 2, 32247, 0, 446, 10097, 16, 116, 32, 3, 4164, 21, 0, 14, 10, 18, 44, 118, 3, 0, 278, 8, 22089, 30, 29, 20, 0, 1, 55, 25807, 5, 17, 12, 60, 1081, 0, 0, 68, 569, 65, 2, 31, 403, 6, 808, 59, 48, 0, 6, 0, 85, 8764, 36, 7, 8690, 15, 0, 575, 0, 105, 0, 44254, 13, 1, 0, 0, 193, 8, 0, 3, 10947, 5, 0, 0, 0, 0, 0, 191, 0, 127, 141, 26, 153, 0, 6, 2, 0, 7, 0, 16386, 10, 68, 32, 0, 4, 8, 61, 0, 0, 2531, 4, 2033, 0, 465, 24, 21873, 1209, 0, 1185, 7, 67, 24, 455, 8, 4, 9, 4, 2, 21425, 4, 0, 4, 51, 4, 8, 737, 93, 0, 88, 0, 0, 195, 3, 0, 7, 0, 21, 95, 5, 0, 20, 147, 256, 4, 31933, 0, 2, 0, 10, 6, 35, 0, 1174, 3708, 151, 15617, 189072, 152, 6, 4, 0, 5, 2019, 2, 818, 2, 0, 1660, 6, 67, 0, 7393, 321, 0, 46, 4, 77, 34, 17, 1, 36793, 15, 104, 14, 11204, 27, 89, 4980, 45, 1, 53643, 37, 5729, 0, 53, 42, 21196, 61, 5, 137, 0, 76, 17, 57, 19, 2, 0, 874, 466, 64, 3, 1118, 0, 38, 217, 0, 3, 431, 0, 4, 0, 211, 29, 245, 75, 2, 0, 6, 3, 2, 1849, 42641, 957, 1158, 0, 38, 806, 296, 2, 150, 251, 1080, 0, 3, 3, 52, 2, 814, 15, 421, 6, 221, 1, 0, 30, 13, 55, 140, 5, 32, 177, 30, 18, 0, 38, 10, 0, 71, 179, 12, 0, 187, 6, 17035, 0, 9871, 91, 4, 1095, 43459, 42, 53801, 32, 9, 822, 663, 42, 1, 7, 516, 48, 8, 31, 69, 16, 4, 0, 24424, 0, 0, 10, 16, 2, 153, 110, 8303, 5, 56, 398, 0, 11610, 1127, 26, 44, 660, 3, 260, 0, 317, 2, 17, 2673, 9, 2, 0, 35, 116, 21, 8, 7, 4, 1464, 145, 19, 41740, 7, 9, 1039, 116, 62152, 129, 81, 2396, 13916, 73, 212, 8, 19, 5, 8, 2, 0, 8, 3, 0, 0, 1974, 129, 988, 24, 4563, 0, 13429, 5, 4, 15, 37, 2370, 45, 115459, 3, 13, 1, 16, 0, 1523, 0, 78, 37187, 1613, 113, 0, 10083, 4648, 2, 7, 254, 0, 6, 289900, 467, 285, 11, 46, 6160, 4, 24, 227, 0, 0, 0, 0, 143, 109, 108, 8, 104, 270, 3, 26, 0, 953, 0, 32, 11236, 6537, 53, 49430, 112, 184, 1101, 19, 0, 0, 1, 59, 322, 123, 15, 4, 105, 398, 907, 46, 33064, 12, 1409, 78, 0, 3, 2, 259, 0, 340, 0, 38, 5, 0, 0, 5, 322, 25182, 6, 13, 1391, 95, 7, 10, 8, 0, 4080, 40, 102, 5, 7383, 162, 52, 2, 19180, 0, 3, 37489, 20, 0, 39, 2, 20, 1, 1, 0, 47, 7665, 0, 14, 3557, 0, 118, 39, 141, 5, 86, 2, 0, 134, 271, 0, 10, 0, 257, 23, 266, 2, 47, 8353, 3036, 13, 0, 187, 456, 89, 282, 2, 20397, 4434, 2151, 0, 2547, 1, 0, 11978, 4, 258, 13, 2871, 56, 13, 216, 0, 63, 12, 0, 4, 416, 11818, 9, 0, 277, 2, 0, 22008, 14143, 20963, 283, 4836, 5, 0, 1, 51, 2, 19, 0, 12, 2, 25, 32, 0, 4, 5, 1711, 30601, 15, 15, 35, 48, 221, 6, 0, 12, 0, 18, 0, 3, 0, 377]
