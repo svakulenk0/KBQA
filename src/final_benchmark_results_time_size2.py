@@ -226,10 +226,10 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
             return answers, na
 
         # if verbose:
-        # print("Subgraph extracted:")
-        # print("%d entities"%len(entities))
-        # print("%d predicates"%len(predicate_ids))
-        # print("Loading adjacencies..")
+        print("Subgraph extracted:")
+        print("%d entities"%len(entities))
+        print("%d predicates"%len(predicate_ids))
+        print("Loading adjacencies..")
 
         offset += max_triples
         # index entity ids global -> local
@@ -344,7 +344,7 @@ n_missing_spans = 0
 new_answers = ['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
 
 cursor = mongo.get_sample(train=False, limit=limit)
-# cursor = mongo.get_by_id('4107', limit=1)
+cursor = mongo.get_by_id('35', limit=1)
 with cursor:
     print("Evaluating...")
 
