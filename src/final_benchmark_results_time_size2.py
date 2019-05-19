@@ -329,6 +329,7 @@ errors_e = ['25', '56', '118', '126', '128', '134', '147', '162', '468', '475', 
 # type predicates
 # bl_p = [68655]
 
+ns = []
 ps, rs, ts = [], [], []
 # collect subgraph sizes
 nes, nps, nas = [], [], []
@@ -349,6 +350,7 @@ with cursor:
     # start = time.time()
     for doc in cursor:
         print(doc['SerialNumber'])
+        ns.append(doc['SerialNumber'])
 #         if doc_id not in new_answers:
 #             continue
         
@@ -428,6 +430,7 @@ mean_len = np.mean(ts)
 median_len = np.median(ts)
 max_len = max(ts)
 print("Min:%.2f Median:%.2f Mean:%.2f Max:%.2f"%(min_len, median_len, mean_len, max_len))
+print(ns)
 print(ts)
 print(nes)
 print(nps)
