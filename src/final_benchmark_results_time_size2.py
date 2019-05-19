@@ -216,7 +216,7 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
 #         print(top_predicates_ids)
         kg.configure_hops(1, top_predicates_ids, namespace, True)
         entities, predicate_ids, adjacencies = kg.compute_hops(all_entities_ids, max_triples, offset)
-        na += len(entities)
+        na += np.sum([len(a) for a in adjacencies])
 #         print(adjacencies)
         # show subgraph entities
 #         print([e_index.look_up_by_id(e)[0]['_source']['uri'] for e in entities])
@@ -236,7 +236,8 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
         entities_dict = {k: v for v, k in enumerate(entities)}
         # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
         A = generate_adj_sp(adjacencies, len(entities), include_inverse=True)
-        print(A.size)
+        # print(A.size)
+
         # activate entities -- build sparse matrix
         row, col, data = [], [], []
         for i, concept_ids in enumerate(top_entities):
