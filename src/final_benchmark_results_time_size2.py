@@ -216,7 +216,7 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
 #         print(top_predicates_ids)
         kg.configure_hops(1, top_predicates_ids, namespace, True)
         entities, predicate_ids, adjacencies = kg.compute_hops(all_entities_ids, max_triples, offset)
-        na += np.sum([len(a) for a in adjacencies])
+        na += sum([len(a) for a in adjacencies])
 #         print(adjacencies)
         # show subgraph entities
 #         print([e_index.look_up_by_id(e)[0]['_source']['uri'] for e in entities])
@@ -344,7 +344,7 @@ n_missing_spans = 0
 new_answers = ['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
 
 cursor = mongo.get_sample(train=False, limit=limit)
-cursor = mongo.get_by_id('4107', limit=1)
+# cursor = mongo.get_by_id('4107', limit=1)
 with cursor:
     print("Evaluating...")
 
