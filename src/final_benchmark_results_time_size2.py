@@ -313,7 +313,7 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
 from collections import Counter
 
 verbose = False
-limit = None
+limit = 5
 
 question_types = ['SELECT', 'ASK', 'COUNT']
 
@@ -545,6 +545,7 @@ print("Min:%.2f Median:%.2f Mean:%.2f Max:%.2f"%(min_len, median_len, mean_len, 
 print(ts)
 print(nes)
 print(nps)
+print(nas)
 
 # print("--- %.2f seconds ---" % (float(time.time() - start)/999))
 # print("\nFin. Results for %d questions:"%len(ps))
