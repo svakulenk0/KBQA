@@ -210,19 +210,20 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
     # iteratively call the HDT API to retrieve all subgraph partitions
     activations = defaultdict(int)
     offset = 0
-
+    na = 0
     while True:
         # get the subgraph for selected predicates only
 #         print(top_predicates_ids)
         kg.configure_hops(1, top_predicates_ids, namespace, True)
         entities, predicate_ids, adjacencies = kg.compute_hops(all_entities_ids, max_triples, offset)
+        na += len(adjacencies)
 #         print(adjacencies)
         # show subgraph entities
 #         print([e_index.look_up_by_id(e)[0]['_source']['uri'] for e in entities])
         
         if not entities:
             answers = [{a_id: a_score} for a_id, a_score in activations.items()]
-            return answers, len(adjacencies)
+            return answers, na
 
         if verbose:
             print("Subgraph extracted:")
