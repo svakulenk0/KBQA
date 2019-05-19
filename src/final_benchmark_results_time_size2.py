@@ -198,7 +198,7 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
     Extract the subgraph for the selected entities
     bl_p  -- the list of predicates to ignore (e.g. type predicate is too expensive to expand)
     ''' 
-#     print(top_predicates)
+    print(top_predicates)
     n_constraints = len(constraints)
     if entities:
         n_constraints += 1
@@ -225,11 +225,11 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
             answers = [{a_id: a_score} for a_id, a_score in activations.items()]
             return answers, na
 
-        if verbose:
-            print("Subgraph extracted:")
-            print("%d entities"%len(entities))
-            print("%d predicates"%len(predicate_ids))
-            print("Loading adjacencies..")
+        # if verbose:
+        print("Subgraph extracted:")
+        print("%d entities"%len(entities))
+        print("%d predicates"%len(predicate_ids))
+        print("Loading adjacencies..")
 
         offset += max_triples
         # index entity ids global -> local
@@ -343,7 +343,7 @@ n_missing_spans = 0
 new_answers = ['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
 
 cursor = mongo.get_sample(train=False, limit=limit)
-# cursor = mongo.get_by_id('63', limit=1)
+cursor = mongo.get_by_id('4107', limit=1)
 with cursor:
     print("Evaluating...")
 
