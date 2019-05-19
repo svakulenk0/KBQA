@@ -7,8 +7,7 @@ Created on Feb 20, 2018
 .. codeauthor: svitlana vakulenko
     <svitlana.vakulenko@gmail.com>
 
-Final evaluation script for comparison with the benchmark.
-Measure time vs size per hop.
+Final evaluation script for comparison with the benchmark
 '''
 
 # setup
@@ -193,18 +192,12 @@ def generate_adj_sp(adjacencies, n_entities, include_inverse):
 from sklearn.preprocessing import normalize, binarize
 kg = HDTDocument(hdt_path+hdt_file)
 
-ps, rs, ts = [], [], []
-# collect subgraph sizes
-nes, nps, nas = [], [], []
-
 
 def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000, bl_p=[68655]):
     '''
     Extract the subgraph for the selected entities
     bl_p  -- the list of predicates to ignore (e.g. type predicate is too expensive to expand)
     ''' 
-    start_one = time.time()
-
 #     print(top_predicates)
     n_constraints = len(constraints)
     if entities:
@@ -229,17 +222,13 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
         
         if not entities:
             answers = [{a_id: a_score} for a_id, a_score in activations.items()]
-            return answers
+            return answers, len(adjacencies)
 
-        # if verbose:
-        #     print("Subgraph extracted:")
-        #     print("%d entities"%len(entities))
-        #     print("%d predicates"%len(predicate_ids))
-        #     print("Loading adjacencies..")
-
-        nes.append(len(entities))
-        nps.append(len(predicate_ids))
-        nas.append(len(adjacencies))
+        if verbose:
+            print("Subgraph extracted:")
+            print("%d entities"%len(entities))
+            print("%d predicates"%len(predicate_ids))
+            print("Loading adjacencies..")
 
         offset += max_triples
         # index entity ids global -> local
@@ -319,13 +308,12 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
                 for i, e in enumerate(entities):
                     if e in activations1:
                         activations[e] += y[i]
-    ts.append(time.time() - start_one)
 
 # hold average stats for the model performance over the samples
 from collections import Counter
 
 verbose = False
-limit = 5
+limit = None
 
 question_types = ['SELECT', 'ASK', 'COUNT']
 
@@ -339,6 +327,10 @@ errors_e = ['25', '56', '118', '126', '128', '134', '147', '162', '468', '475', 
 
 # type predicates
 # bl_p = [68655]
+
+ps, rs, ts = [], [], []
+# collect subgraph sizes
+nes, nps, nas = [], [], []
 
 nerrors = 0
 errors_ids = []
@@ -359,6 +351,7 @@ with cursor:
 #         if doc_id not in new_answers:
 #             continue
         
+        start_one = time.time()
         q = doc['question']
                 
         # parse question into words and embed
@@ -402,14 +395,17 @@ with cursor:
         answers_ids = []
             
         # 1st hop
-        answers_ids1 = hop([], top_entities_ids1, top_predicates_ids1, verbose)
+        answers_ids1, na = hop([], top_entities_ids1, top_predicates_ids1, verbose)
+        ne = len(top_entities_ids1)
 #         if classes1:
 #             answers_ids1 = filter_answer_by_class(classes1, answers_ids1)
         answers1 = [{a_id: a_score} for activations in answers_ids1 for a_id, a_score in activations.items() if a_score > a_threshold]
         
         # 2nd hop
         if top_predicates_ids1 and top_predicates_ids2:
-            answers_ids = hop(answers1, [], top_predicates_ids2, verbose)
+            answers_ids, na2 = hop(answers1, [], top_predicates_ids2, verbose)
+            ne += len(answers1)
+            na += na2
 #             if classes2:
 #                 answers_ids = filter_answer_by_class(classes2, answers_ids)
             answers = [{a_id: a_score} for activations in answers_ids for a_id, a_score in activations.items() if a_score > a_threshold]
@@ -417,6 +413,12 @@ with cursor:
             answers = answers1
 
         answers_ids = [_id for a in answers for _id in a]
+        
+        nes.append(ne)
+        nps.append(len(top_predicates_ids1)+len(top_predicates_ids2))
+        nas.append(na)
+
+        ts.append(time.time() - start_one)
 
         # error estimation
         if p_qt != doc['question_type']:
