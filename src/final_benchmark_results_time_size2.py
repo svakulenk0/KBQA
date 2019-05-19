@@ -226,17 +226,17 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
             return answers, na
 
         # if verbose:
-        # print("Subgraph extracted:")
-        # print("%d entities"%len(entities))
-        # print("%d predicates"%len(predicate_ids))
-        # print("Loading adjacencies..")
+        print("Subgraph extracted:")
+        print("%d entities"%len(entities))
+        print("%d predicates"%len(predicate_ids))
+        print("Loading adjacencies..")
 
         offset += max_triples
         # index entity ids global -> local
         entities_dict = {k: v for v, k in enumerate(entities)}
         # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
         A = generate_adj_sp(adjacencies, len(entities), include_inverse=True)
-#         print(predicate_ids)
+        print(A.size)
         # activate entities -- build sparse matrix
         row, col, data = [], [], []
         for i, concept_ids in enumerate(top_entities):
@@ -343,7 +343,7 @@ n_missing_spans = 0
 new_answers = ['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
 
 cursor = mongo.get_sample(train=False, limit=limit)
-# cursor = mongo.get_by_id('4107', limit=1)
+cursor = mongo.get_by_id('4107', limit=1)
 with cursor:
     print("Evaluating...")
 
