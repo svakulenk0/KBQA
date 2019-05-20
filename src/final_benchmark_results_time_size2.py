@@ -328,7 +328,7 @@ errors_e = ['25', '56', '118', '126', '128', '134', '147', '162', '468', '475', 
 # class_constraints = True
 
 # type predicates
-# bl_p = [68655]
+bl_p = [68655]
 
 ns = []
 ps, rs, ts = [], [], []
