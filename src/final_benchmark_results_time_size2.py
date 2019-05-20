@@ -226,10 +226,10 @@ def hop(entities, constraints, top_predicates, verbose=False, max_triples=500000
             return answers, na
 
         # if verbose:
-        print("Subgraph extracted:")
-        print("%d entities"%len(entities))
-        print("%d predicates"%len(predicate_ids))
-        print("Loading adjacencies..")
+        # print("Subgraph extracted:")
+        # print("%d entities"%len(entities))
+        # print("%d predicates"%len(predicate_ids))
+        # print("Loading adjacencies..")
 
         offset += max_triples
         # index entity ids global -> local
@@ -519,25 +519,25 @@ for i in ids:
     #                         else:
                             print(doc['SerialNumber'], doc['question'])
                             print(doc['sparql_query'])
-                            show spans
-                                print(p_spans1)
-                                print(p_spans2)
+                            # show spans
+                            print(p_spans1)
+                            print(p_spans2)
 
-                            show  matches
-                                print([{p_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in top_predicates_ids1+top_predicates_ids2 for _id, score in answer.items() if p_index.look_up_by_id(_id) ])
+                            # show  matches
+                            print([{p_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in top_predicates_ids1+top_predicates_ids2 for _id, score in answer.items() if p_index.look_up_by_id(_id) ])
 
-                            show answers before applying activation threshold
-                                print(answers_ids1)
+                            # show answers before applying activation threshold
+                            print(answers_ids1)
 
-                                # show intermediate answers if there was a second hop
-                                if top_predicates_ids2:
-                                    print([{e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers1 for _id, score in answer.items() if e_index.look_up_by_id(_id)])
+                            # show intermediate answers if there was a second hop
+                            if top_predicates_ids2:
+                                print([{e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers1 for _id, score in answer.items() if e_index.look_up_by_id(_id)])
 
-                                # show correct answers
-                                print([{e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers for _id, score in answer.items() if _id in gs_answer_ids if e_index.look_up_by_id(_id)])
+                            # show correct answers
+                            print([{e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers for _id, score in answer.items() if _id in gs_answer_ids if e_index.look_up_by_id(_id)])
 
-                                # show errors            
-                                print([{e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers for _id, score in answer.items() if _id not in gs_answer_ids if e_index.look_up_by_id(_id)])
+                            # show errors            
+                            print([{e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers for _id, score in answer.items() if _id not in gs_answer_ids if e_index.look_up_by_id(_id)])
                             print('\n')
 
             # add stats
