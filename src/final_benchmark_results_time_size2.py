@@ -346,7 +346,7 @@ new_answers = ['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
 # cursor = mongo.get_sample(train=False, limit=limit)
 ids = ['4107', '2957', '1078']
 for i in ids:
-    cursor = mongo.get_by_id('35', limit=1)
+    cursor = mongo.get_by_id(i, limit=1)
     with cursor:
         print("Evaluating...")
 
@@ -439,7 +439,7 @@ print(nes)
 print(nps)
 print(nas)
 
-print("--- %.2f seconds ---" % (float(time.time() - start)/999))
+# print("--- %.2f seconds ---" % (float(time.time() - start)/999))
 print("\nFin. Results for %d questions:"%len(ps))
 print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
 print("Number of errors: %d"%nerrors)
