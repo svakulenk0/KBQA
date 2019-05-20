@@ -343,87 +343,89 @@ n_missing_spans = 0
 
 new_answers = ['134', '1839', '2450', '3213', '3237', '3302', '4390', '4972']
 
-cursor = mongo.get_sample(train=False, limit=limit)
-# cursor = mongo.get_by_id('35', limit=1)
-with cursor:
-    print("Evaluating...")
+# cursor = mongo.get_sample(train=False, limit=limit)
+ids = ['4107', '2957', '1078']
+for i in ids:
+    cursor = mongo.get_by_id('35', limit=1)
+    with cursor:
+        print("Evaluating...")
 
-    # start = time.time()
-    for doc in cursor:
-        print(doc['SerialNumber'])
-        ns.append(doc['SerialNumber'])
-#         if doc_id not in new_answers:
-#             continue
-        
-        start_one = time.time()
-        q = doc['question']
-                
-        # parse question into words and embed
-        x_test_sent = np.zeros((model_settings['max_len'], model_settings['emb_dim']))
-        q_words = text_to_word_sequence(q)
-        for i, word in enumerate(q_words):
-            x_test_sent[i] = word_vectors.query(word)
-        
-        # predict question type
-        y_p = qt_model.predict(np.array([x_test_sent]))
-        y_p = np.argmax(y_p, axis=-1)[0]
-        p_qt = question_types[y_p]
-        ask_question = p_qt == 'ASK'
-        
-        # use GS spans + preprocess
-        y_p = ep_model.predict(np.array([x_test_sent]))
-        y_p = np.argmax(y_p, axis=-1)[0]
-        e_spans1 = collect_mentions(q_words, y_p, 1)
-        p_spans1 = collect_mentions(q_words, y_p, 2)
-        p_spans2 = collect_mentions(q_words, y_p, 3)
-
-#         c_spans1 = doc['c1_spans']
-#         c_spans2 = doc['c2_spans']
-        
-        # match predicates
-        top_predicates_ids1 = relation_detection(p_spans1, threshold=0)
-        top_predicates_ids2 = relation_detection(p_spans2, threshold=0)
-
-        # use GS classes
-#         classes1 = [{_id: 1} for _id in doc['classes_ids'] if _id in doc['1hop_ids'][0]]
-#         classes2 = [{_id: 1} for _id in doc['classes_ids'] if _id in doc['2hop_ids'][0]]
-        
-        top_entities_ids1 = entity_linking(e_spans1, threshold=0.7)
-
-        if ask_question:
-            a_threshold = 0.0
-        else:
-            a_threshold = 0.5
-
-        # MP
-        answers_ids = []
+        # start = time.time()
+        for doc in cursor:
+            print(doc['SerialNumber'])
+            ns.append(doc['SerialNumber'])
+    #         if doc_id not in new_answers:
+    #             continue
             
-        # 1st hop
-        answers_ids1, na = hop([], top_entities_ids1, top_predicates_ids1, verbose)
-        ne = len(e_spans1)
-#         if classes1:
-#             answers_ids1 = filter_answer_by_class(classes1, answers_ids1)
-        answers1 = [{a_id: a_score} for activations in answers_ids1 for a_id, a_score in activations.items() if a_score > a_threshold]
-        
-        # 2nd hop
-        if top_predicates_ids1 and top_predicates_ids2:
-            answers_ids, na2 = hop(answers1, [], top_predicates_ids2, verbose)
-            # ne += len(answers1)
-            na += na2
-#             if classes2:
-#                 answers_ids = filter_answer_by_class(classes2, answers_ids)
-            answers = [{a_id: a_score} for activations in answers_ids for a_id, a_score in activations.items() if a_score > a_threshold]
-        else:
-            answers = answers1
+            start_one = time.time()
+            q = doc['question']
+                    
+            # parse question into words and embed
+            x_test_sent = np.zeros((model_settings['max_len'], model_settings['emb_dim']))
+            q_words = text_to_word_sequence(q)
+            for i, word in enumerate(q_words):
+                x_test_sent[i] = word_vectors.query(word)
+            
+            # predict question type
+            y_p = qt_model.predict(np.array([x_test_sent]))
+            y_p = np.argmax(y_p, axis=-1)[0]
+            p_qt = question_types[y_p]
+            ask_question = p_qt == 'ASK'
+            
+            # use GS spans + preprocess
+            y_p = ep_model.predict(np.array([x_test_sent]))
+            y_p = np.argmax(y_p, axis=-1)[0]
+            e_spans1 = collect_mentions(q_words, y_p, 1)
+            p_spans1 = collect_mentions(q_words, y_p, 2)
+            p_spans2 = collect_mentions(q_words, y_p, 3)
 
-        answers_ids = [_id for a in answers for _id in a]
-        
-        nes.append(ne)
-        nps.append(len(p_spans1)+len(p_spans2))
-        nas.append(na)
+    #         c_spans1 = doc['c1_spans']
+    #         c_spans2 = doc['c2_spans']
+            
+            # match predicates
+            top_predicates_ids1 = relation_detection(p_spans1, threshold=0)
+            top_predicates_ids2 = relation_detection(p_spans2, threshold=0)
 
-        ts.append(time.time() - start_one)
-        print(time.time() - start_one)
+            # use GS classes
+    #         classes1 = [{_id: 1} for _id in doc['classes_ids'] if _id in doc['1hop_ids'][0]]
+    #         classes2 = [{_id: 1} for _id in doc['classes_ids'] if _id in doc['2hop_ids'][0]]
+            
+            top_entities_ids1 = entity_linking(e_spans1, threshold=0.7)
+
+            if ask_question:
+                a_threshold = 0.0
+            else:
+                a_threshold = 0.5
+
+            # MP
+            answers_ids = []
+                
+            # 1st hop
+            answers_ids1, na = hop([], top_entities_ids1, top_predicates_ids1, verbose)
+            ne = len(e_spans1)
+    #         if classes1:
+    #             answers_ids1 = filter_answer_by_class(classes1, answers_ids1)
+            answers1 = [{a_id: a_score} for activations in answers_ids1 for a_id, a_score in activations.items() if a_score > a_threshold]
+            
+            # 2nd hop
+            if top_predicates_ids1 and top_predicates_ids2:
+                answers_ids, na2 = hop(answers1, [], top_predicates_ids2, verbose)
+                # ne += len(answers1)
+                na += na2
+    #             if classes2:
+    #                 answers_ids = filter_answer_by_class(classes2, answers_ids)
+                answers = [{a_id: a_score} for activations in answers_ids for a_id, a_score in activations.items() if a_score > a_threshold]
+            else:
+                answers = answers1
+
+            answers_ids = [_id for a in answers for _id in a]
+            
+            nes.append(ne)
+            nps.append(len(p_spans1)+len(p_spans2))
+            nas.append(na)
+
+            ts.append(time.time() - start_one)
+            print(time.time() - start_one)
 
 # show basic stats
 min_len = min(ts)
@@ -437,11 +439,11 @@ print(nes)
 print(nps)
 print(nas)
 
-# print("--- %.2f seconds ---" % (float(time.time() - start)/999))
-# print("\nFin. Results for %d questions:"%len(ps))
-# print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
-# print("Number of errors: %d"%nerrors)
-# print(errors_ids)
-# print("Number of questions with missing entity matches: %d"%n_missing_entities)
-# print("Number of questions with incorrect question type detection: %d"%qt_errors)
-# print("Number of questions with missing spans: %d"%n_missing_spans)
+print("--- %.2f seconds ---" % (float(time.time() - start)/999))
+print("\nFin. Results for %d questions:"%len(ps))
+print("P: %.2f R: %.2f"%(np.mean(ps), np.mean(rs)))
+print("Number of errors: %d"%nerrors)
+print(errors_ids)
+print("Number of questions with missing entity matches: %d"%n_missing_entities)
+print("Number of questions with incorrect question type detection: %d"%qt_errors)
+print("Number of questions with missing spans: %d"%n_missing_spans)
