@@ -6,6 +6,7 @@
 * Tensorflow
 * Keras
 * elasticsearch
+* mongoDB
 
 ## Datasets
 
@@ -46,6 +47,11 @@ sudo service mongod start -->
 ## Run
 
 see notebooks
+
+## Benchmark
+
+python final_benchmark_results.py
+
 
 ## Results
 
