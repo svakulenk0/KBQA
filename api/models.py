@@ -13,7 +13,7 @@ Functions to load pre-trained models for KBQA
 from keras.models import Model, Input
 from keras.layers import LSTM, Embedding, Dense, Bidirectional, TimeDistributed
 from keras.optimizers import *
-from keras.preprocessing.text import text_to_word_sequence
+
 
 # define bi-LSTM model architecture (loose embeddings layer to do on-the-fly embedding at inference time)
 def build_qt_inference_model(model_settings):
