@@ -9,13 +9,15 @@ Created on Nov 8, 2019
 
 QA request-handling functions
 '''
+import pickle as pkl
 from collections import defaultdict
 import numpy as np
 import scipy.sparse as sp
 from sklearn.preprocessing import normalize, binarize
 
+from hdt import HDTDocument
+
 from setup import *
-import pickle as pkl
 from models import build_qt_inference_model, build_ep_inference_model
 
 # path to KG relations
