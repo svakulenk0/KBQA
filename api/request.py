@@ -316,12 +316,15 @@ class KBQA():
         if ask_question:
             # make sure the output matches every input basket
             all_entities_baskets = [set(e.keys()) for e in top_entities_ids1]
-            answer = all(x & set(answers_ids) for x in all_entities_baskets)
-            print(answer)
+            answers = all(x & set(answers_ids) for x in all_entities_baskets)
         else:
             # show answers
-            print([{self.e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers for _id, score in answer.items() if self.e_index.look_up_by_id(_id)][:top_n])
+            answers = [{self.e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in answers for _id, score in answer.items() if self.e_index.look_up_by_id(_id)][:top_n]
+        
+        if verbose:
+            print(answers)
 
+        return answers
 
     def test_request(self):
         question = "What are some other works of the author of The Phantom of the Opera?"
