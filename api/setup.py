@@ -153,32 +153,3 @@ embeddings = {'glove6B100d': "glove.6B.100d.magnitude", 'glove840B300d': "glove.
 
 def load_embeddings(embeddings_choice):
     return Magnitude(embeddings_path+embeddings[embeddings_choice])
-
-
-# MP functions
-def generate_adj_sp(adjacencies, n_entities, include_inverse):
-    '''
-    Build adjacency matrix
-    '''
-    adj_shape = (n_entities, n_entities)
-    # colect all predicate matrices separately into a list
-    sp_adjacencies = []
-
-    for edges in adjacencies:
-        # split subject (row) and object (col) node URIs
-        n_edges = len(edges)
-        row, col = np.transpose(edges)
-        
-        # duplicate edges in the opposite direction
-        if include_inverse:
-            _row = np.hstack([row, col])
-            col = np.hstack([col, row])
-            row = _row
-            n_edges *= 2
-        
-        # create adjacency matrix for this predicate
-        data = np.ones(n_edges)
-        adj = sp.csr_matrix((data, (row, col)), shape=adj_shape)
-        sp_adjacencies.append(adj)
-    
-    return np.asarray(sp_adjacencies)

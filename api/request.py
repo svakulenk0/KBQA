@@ -92,6 +92,34 @@ class KBQA():
             guessed_ids.append(span_ids)
         return guessed_ids
 
+    # MP functions
+    def generate_adj_sp(self, adjacencies, n_entities, include_inverse):
+        '''
+        Build adjacency matrix
+        '''
+        adj_shape = (n_entities, n_entities)
+        # colect all predicate matrices separately into a list
+        sp_adjacencies = []
+
+        for edges in adjacencies:
+            # split subject (row) and object (col) node URIs
+            n_edges = len(edges)
+            row, col = np.transpose(edges)
+            
+            # duplicate edges in the opposite direction
+            if include_inverse:
+                _row = np.hstack([row, col])
+                col = np.hstack([col, row])
+                row = _row
+                n_edges *= 2
+            
+            # create adjacency matrix for this predicate
+            data = np.ones(n_edges)
+            adj = sp.csr_matrix((data, (row, col)), shape=adj_shape)
+            sp_adjacencies.append(adj)
+        
+        return np.asarray(sp_adjacencies)
+
     def hop(self, entities, constraints, top_predicates, verbose=False, max_triples=500000, bl_p=[68655]):
         '''
         Extract the subgraph for the selected entities
@@ -133,7 +161,7 @@ class KBQA():
             # index entity ids global -> local
             entities_dict = {k: v for v, k in enumerate(entities)}
             # generate a list of adjacency matrices per predicate assuming the graph is undirected wo self-loops
-            A = generate_adj_sp(adjacencies, len(entities), include_inverse=True)
+            A = self.generate_adj_sp(adjacencies, len(entities), include_inverse=True)
     #         print(predicate_ids)
             # activate entities -- build sparse matrix
             row, col, data = [], [], []
