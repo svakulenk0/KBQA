@@ -1,13 +1,20 @@
-# KBQA
+# MPqa
+
+[Paper](https://arxiv.org/abs/1908.06917)
+
 
 ## Requirements
 
 * Python 3.6
 * tensorflow==1.11.0
 * keras==2.2.4
-* elasticsearch==5.5.3
-* pymongo
-* pyHDT
+
+* pyHDT (for accesssing the DBpedia Knowledge Graph)
+* elasticsearch==5.5.3 (for indexing entities and predicate labels of the Knowledge Graph)
+
+* pymongo (for storing the LC-QuAD dataset)
+* flask (for the API)
+
 
 ## Datasets
 

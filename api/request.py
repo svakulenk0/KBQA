@@ -244,6 +244,8 @@ class KBQA():
             x_test_sent[i] = self.word_vectors.query(word)
 
         # predict question type
+        if verbose:
+            print(x_test_sent)
         y_p = self.qt_model.predict(np.array([x_test_sent]))
         y_p = np.argmax(y_p, axis=-1)[0]
         p_qt = question_types[y_p]
