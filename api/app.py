@@ -23,7 +23,8 @@ def index():
 
 @app.route('/ask', methods=['GET'])
 def ask_qamp():
-    question = request.args.get('question')
+    question = request.args.get('question', type=str)
+    print(question)
     answers = service.request(question, verbose=False)
     return jsonify({'answers': answers})
 
