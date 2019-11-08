@@ -47,7 +47,7 @@ class KBQA():
         with open(model_path+'%s_%s_%s.pkl'%(modelname, dataset_name, embeddings_choice), 'rb') as f:
             self.model_settings = pkl.load(f)
         self.qt_model = build_qt_inference_model(self.model_settings)
-        self.qt_model.load_weights('checkpoints/_'+modelname+'_weights.best.hdf5', by_name=True)
+        self.qt_model.load_weights(model_path+'checkpoints/_'+modelname+'_weights.best.hdf5', by_name=True)
 
         # load pre-trained question parsing model
         with open(model_path+'%s_%s.pkl'%(dataset_name, embeddings_choice), 'rb') as f:
