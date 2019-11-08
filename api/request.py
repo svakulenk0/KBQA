@@ -15,10 +15,12 @@ import numpy as np
 import scipy.sparse as sp
 from sklearn.preprocessing import normalize, binarize
 
+from keras.preprocessing.text import text_to_word_sequence
+
 from hdt import HDTDocument
 
 from setup import *
-from models import build_qt_inference_model, build_ep_inference_model
+from models import *
 
 # path to KG relations
 hdt_path = '/mnt/ssd/sv/'
