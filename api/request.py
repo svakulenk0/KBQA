@@ -66,7 +66,7 @@ class KBQA():
     def request(self, question, verbose=False):
         # parse question into words and embed
         x_test_sent = np.zeros((self.model_settings['max_len'], self.model_settings['emb_dim']))
-        q_words = text_to_word_sequence(q)
+        q_words = text_to_word_sequence(question)
         for i, word in enumerate(q_words):
             x_test_sent[i] = self.word_vectors.query(word)
 
