@@ -25,7 +25,7 @@ def index():
 def ask_qamp():
     args = request.args
     print (args) # For debugging
-    question = args['question']
+    question = str(args['question'])
     answers = service.request(question, verbose=False)
     return jsonify({'answers': answers})
 
