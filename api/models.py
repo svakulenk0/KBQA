@@ -68,36 +68,6 @@ def build_ep_inference_model(model_settings):
     return model
 
 
-# functions for entity linking and relation detection
-def entity_linking(e_spans, verbose=False, cutoff=500, threshold=0): 
-    guessed_ids = []
-    for span in e_spans:
-        span_ids = e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3, max_degree=50000)
-        guessed_ids.append(span_ids)
-    return guessed_ids
-
-
-def relation_detection(p_spans, verbose=False, cutoff=500, threshold=0.0): 
-    guessed_ids = []
-    for span in p_spans:
-        span_ids = {}
-        guessed_labels = []
-        if span in p_vectors:
-            guessed_labels.append([span, 1])
-        for p, score in p_vectors.most_similar(span, topn=cutoff):
-            if score >= threshold:
-                guessed_labels.append([p, score])
-        for label, score in guessed_labels:
-            for match in p_index.look_up_by_label(label):
-                _id = match['_source']['id']
-                span_ids[_id] = score
-                if verbose:
-                    uri = match['_source']['uri']
-                    print(uri)
-                    print(score)
-        guessed_ids.append(span_ids)
-    return guessed_ids
-
 import re, string
 
 def preprocess_span(span):

@@ -63,6 +63,35 @@ class KBQA():
         # connect to the knowledge graph hdt file
         self.kg = HDTDocument(hdt_path+hdt_file)
 
+    # functions for entity linking and relation detection
+    def entity_linking(e_spans, verbose=False, cutoff=500, threshold=0): 
+        guessed_ids = []
+        for span in e_spans:
+            span_ids = self.e_index.label_scores(span, top=cutoff, threshold=threshold, verbose=verbose, scale=0.3, max_degree=50000)
+            guessed_ids.append(span_ids)
+        return guessed_ids
+
+    def relation_detection(p_spans, verbose=False, cutoff=500, threshold=0.0): 
+        guessed_ids = []
+        for span in p_spans:
+            span_ids = {}
+            guessed_labels = []
+            if span in self.p_vectors:
+                guessed_labels.append([span, 1])
+            for p, score in self.p_vectors.most_similar(span, topn=cutoff):
+                if score >= threshold:
+                    guessed_labels.append([p, score])
+            for label, score in guessed_labels:
+                for match in self.p_index.look_up_by_label(label):
+                    _id = match['_source']['id']
+                    span_ids[_id] = score
+                    if verbose:
+                        uri = match['_source']['uri']
+                        print(uri)
+                        print(score)
+            guessed_ids.append(span_ids)
+        return guessed_ids
+
     def request(self, question, verbose=False):
         # parse question into words and embed
         x_test_sent = np.zeros((self.model_settings['max_len'], self.model_settings['emb_dim']))
