@@ -19,10 +19,11 @@ import pickle as pkl
 from models import build_qt_inference_model, build_ep_inference_model
 
 # path to KG relations
-hdt_path = "/mnt/ssd/sv/"
+hdt_path = '/mnt/ssd/sv/'
 hdt_file = 'dbpedia2016-04en.hdt'
-namespace = "predef-dbpedia2016-04"
+namespace = 'predef-dbpedia2016-04'
 
+model_path = '/home/zola/Projects/temp/KBQA/src/'
 embeddings_choice='glove840B300d'
 question_types = ['SELECT', 'ASK', 'COUNT']
 
@@ -43,13 +44,13 @@ class KBQA():
         
         # load pre-trained question type classification model
         modelname = 'qtype'
-        with open('%s_%s_%s.pkl'%(modelname, dataset_name, embeddings_choice), 'rb') as f:
+        with open(model_path+'%s_%s_%s.pkl'%(modelname, dataset_name, embeddings_choice), 'rb') as f:
             self.model_settings = pkl.load(f)
         self.qt_model = build_qt_inference_model(self.model_settings)
         self.qt_model.load_weights('checkpoints/_'+modelname+'_weights.best.hdf5', by_name=True)
 
         # load pre-trained question parsing model
-        with open('%s_%s.pkl'%(dataset_name, embeddings_choice), 'rb') as f:
+        with open(model_path+'%s_%s.pkl'%(dataset_name, embeddings_choice), 'rb') as f:
             ep_model_settings = pkl.load(f)
         self.ep_model = build_ep_inference_model(ep_model_settings)
         # load weights
