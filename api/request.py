@@ -55,7 +55,7 @@ class KBQA():
         self.ep_model = build_ep_inference_model(ep_model_settings)
         # load weights
         # ep_model.load_weights('checkpoints/_'+modelname+'_weights.best.hdf5', by_name=True)
-        self.ep_model.load_weights('model/'+modelname+'.h5', by_name=True)
+        self.ep_model.load_weights(model_path+'model/'+modelname+'.h5', by_name=True)
 
         # connect to the knowledge graph hdt file
         self.kg = HDTDocument(hdt_path+hdt_file)
