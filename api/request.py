@@ -43,11 +43,10 @@ class KBQA():
         self.p_vectors = load_embeddings('fasttext_p_labels')
         
         # load pre-trained question type classification model
-        modelname = 'qtype'
         with open(model_path+'%s_%s_%s.pkl'%(modelname, dataset_name, embeddings_choice), 'rb') as f:
             self.model_settings = pkl.load(f)
         self.qt_model = build_qt_inference_model(self.model_settings)
-        self.qt_model.load_weights(model_path+'checkpoints/_'+modelname+'_weights.best.hdf5', by_name=True)
+        self.qt_model.load_weights(model_path+'checkpoints/_qtype_weights.best.hdf5', by_name=True)
 
         # load pre-trained question parsing model
         with open(model_path+'%s_%s.pkl'%(dataset_name, embeddings_choice), 'rb') as f:
@@ -55,7 +54,7 @@ class KBQA():
         self.ep_model = build_ep_inference_model(ep_model_settings)
         # load weights
         # ep_model.load_weights('checkpoints/_'+modelname+'_weights.best.hdf5', by_name=True)
-        self.ep_model.load_weights(model_path+'model/'+modelname+'.h5', by_name=True)
+        self.ep_model.load_weights(model_path+'model/2hops-types.h5', by_name=True)
 
         # connect to the knowledge graph hdt file
         self.kg = HDTDocument(hdt_path+hdt_file)
