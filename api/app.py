@@ -10,6 +10,8 @@ Created on Nov 8, 2019
 Flask-based RESTful API for KBQA on DBpedia
 '''
 from flask import Flask, jsonify, request
+import tensorflow as tf
+
 from request import KBQA
 
 app = Flask(__name__)
