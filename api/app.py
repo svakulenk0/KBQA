@@ -13,22 +13,18 @@ from flask import Flask, jsonify, request
 from request import KBQA
 
 app = Flask(__name__)
-model = None
-
-
-def load_model():
-    global model
-    model = KBQA()
+model = KBQA()
+global graph
+graph = tf.get_default_graph() 
 
 
 @app.route('/ask', methods=['GET'])
 def ask_qamp():
     question = request.args.get('question', type=str)
-    print(question)
-    answers = model.request(question, verbose=False)
+    with graph.as_default():
+        answers = model.request(question, verbose=False)
     return jsonify({'answers': answers})
 
 
 if __name__ == '__main__':
-    load_model()
     app.run()
