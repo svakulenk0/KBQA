@@ -9,7 +9,7 @@ Created on Nov 8, 2019
 
 Flask-based RESTful API for KBQA on DBpedia
 '''
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 
 from request import KBQA
