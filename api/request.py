@@ -31,6 +31,9 @@ model_path = '/home/zola/Projects/temp/KBQA/src/'
 embeddings_choice='glove840B300d'
 question_types = ['SELECT', 'ASK', 'COUNT']
 
+qt_model = None
+ep_model = None
+
 
 class KBQA():
     def __init__(self, dataset_name='lcquad'):
@@ -49,16 +52,20 @@ class KBQA():
         # load pre-trained question type classification model
         with open(model_path+'qtype_lcquad_%s.pkl'%(embeddings_choice), 'rb') as f:
             self.model_settings = pkl.load(f)
-        self.qt_model = build_qt_inference_model(self.model_settings)
-        self.qt_model.load_weights(model_path+'checkpoints/_qtype_weights.best.hdf5', by_name=True)
+        
+        global qt_model
+        global ep_model
+        
+        qt_model = build_qt_inference_model(self.model_settings)
+        qt_model.load_weights(model_path+'checkpoints/_qtype_weights.best.hdf5', by_name=True)
 
         # load pre-trained question parsing model
         with open(model_path+'lcquad_%s.pkl'%(embeddings_choice), 'rb') as f:
             ep_model_settings = pkl.load(f)
-        self.ep_model = build_ep_inference_model(ep_model_settings)
+        ep_model = build_ep_inference_model(ep_model_settings)
         # load weights
         # ep_model.load_weights('checkpoints/_'+modelname+'_weights.best.hdf5', by_name=True)
-        self.ep_model.load_weights(model_path+'model/2hops-types.h5', by_name=True)
+        ep_model.load_weights(model_path+'model/2hops-types.h5', by_name=True)
 
         # connect to the knowledge graph hdt file
         self.kg = HDTDocument(hdt_path+hdt_file)
@@ -246,14 +253,14 @@ class KBQA():
         # predict question type
         if verbose:
             print(x_test_sent)
-        y_p = self.qt_model.predict(np.array([x_test_sent]))
+        y_p = qt_model.predict(np.array([x_test_sent]))
         y_p = np.argmax(y_p, axis=-1)[0]
         p_qt = question_types[y_p]
         ask_question = p_qt == 'ASK'
         print(p_qt)
 
         # use GS spans + preprocess
-        y_p = self.ep_model.predict(np.array([x_test_sent]))
+        y_p = ep_model.predict(np.array([x_test_sent]))
         y_p = np.argmax(y_p, axis=-1)[0]
         e_spans1 = collect_mentions(q_words, y_p, 1)
         p_spans1 = collect_mentions(q_words, y_p, 2)
