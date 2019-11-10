@@ -14,9 +14,6 @@ from flask_restful import Resource, Api
 
 from request import KBQA
 
-app = Flask(__name__)
-api = Api(app)
-
 class KBQAPI(Resource):
     def __init__(self):
         self.service = KBQA()
@@ -27,7 +24,8 @@ class KBQAPI(Resource):
         answers = self.service.request(question, top_n, verbose=False)
         return jsonify({'answers': answers})
 
-api.add_resource(KBQAPI, '/')
-
 if __name__ == '__main__':
+    app = Flask(__name__)
+    api = Api(app)
+    api.add_resource(KBQAPI, '/')
     app.run(debug=True)
