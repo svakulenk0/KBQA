@@ -9,25 +9,25 @@ Created on Nov 8, 2019
 
 Flask-based RESTful API for KBQA on DBpedia
 '''
-from flask import Flask, request, jsonify
-from flask_restful import Resource, Api
-
+from flask import Flask, jsonify, request
 from request import KBQA
 
-class KBQAPI(Resource):
-    def setup(self):
-        self.service = KBQA()
+app = Flask(__name__)
+kbqa_service = KBQA()
 
-    def get(self):
-        question = request.args.get('question', type=str)
-        top_n = request.args.get('top_n', default=3, type=int)
-        answers = self.service.request(question, top_n, verbose=False)
-        return jsonify({'answers': answers})
+
+@app.route('/')
+def index():
+    return "Hello, World!"
+
+
+@app.route('/ask', methods=['GET'])
+def ask_qamp(service=kbqa_service):
+    question = request.args.get('question', type=str)
+    print(question)
+    answers = service.request(question, verbose=False)
+    return jsonify({'answers': answers})
+
 
 if __name__ == '__main__':
-    app = Flask(__name__)
-    api = Api(app)
-    kbqa = KBQAPI()
-    kbqa.setup()
-    api.add_resource(kbqa, '/')
     app.run(debug=True)
