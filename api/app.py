@@ -22,7 +22,7 @@ def index():
 
 
 @app.route('/ask', methods=['GET'])
-def ask_qamp(service=kbqa_service):
+def ask_qamp():
     question = request.args.get('question', type=str)
     print(question)
     answers = app.service.request(question, verbose=False)
