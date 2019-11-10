@@ -13,7 +13,7 @@ from flask import Flask, jsonify, request
 from request import KBQA
 
 app = Flask(__name__)
-kbqa_service = KBQA()
+app.service = KBQA()
 
 
 @app.route('/')
@@ -25,7 +25,7 @@ def index():
 def ask_qamp(service=kbqa_service):
     question = request.args.get('question', type=str)
     print(question)
-    answers = service.request(question, verbose=False)
+    answers = app.service.request(question, verbose=False)
     return jsonify({'answers': answers})
 
 
