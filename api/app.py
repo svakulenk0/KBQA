@@ -15,7 +15,7 @@ from flask_restful import Resource, Api
 from request import KBQA
 
 class KBQAPI(Resource):
-    def __init__(self):
+    def setup(self):
         self.service = KBQA()
 
     def get(self):
@@ -27,5 +27,7 @@ class KBQAPI(Resource):
 if __name__ == '__main__':
     app = Flask(__name__)
     api = Api(app)
-    api.add_resource(KBQAPI, '/')
+    kbqa = KBQAPI()
+    kbqa.setup()
+    api.add_resource(kbqa, '/')
     app.run(debug=True)
