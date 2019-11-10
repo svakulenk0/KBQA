@@ -13,7 +13,6 @@ from flask import Flask, jsonify, request
 from request import KBQA
 
 app = Flask(__name__)
-app.service = KBQA()
 
 
 @app.route('/')
@@ -30,4 +29,5 @@ def ask_qamp():
 
 
 if __name__ == '__main__':
+    app.service = KBQA()
     app.run(debug=True)
