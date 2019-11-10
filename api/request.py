@@ -236,7 +236,7 @@ class KBQA():
                         if e in activations1:
                             activations[e] += y[i]
 
-    def request(self, question, verbose=False):
+    def request(self, question, top_n=1, verbose=False):
         # parse question into words and embed
         x_test_sent = np.zeros((self.model_settings['max_len'], self.model_settings['emb_dim']))
         q_words = text_to_word_sequence(question)
@@ -304,7 +304,6 @@ class KBQA():
         print(p_spans2)
 
         # show  matches
-        top_n = 1
         print([{self.e_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in top_entities_ids1 for _id, score in answer.items() if self.e_index.look_up_by_id(_id)][:top_n])
         print([{self.p_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in top_predicates_ids1 for _id, score in answer.items() if self.p_index.look_up_by_id(_id)][:top_n])
         print([{self.p_index.look_up_by_id(_id)[0]['_source']['uri']: score} for answer in top_predicates_ids2 for _id, score in answer.items() if self.p_index.look_up_by_id(_id)][:top_n])
