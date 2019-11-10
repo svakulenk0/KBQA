@@ -13,21 +13,22 @@ from flask import Flask, jsonify, request
 from request import KBQA
 
 app = Flask(__name__)
+model = None
 
 
-@app.route('/')
-def index():
-    return "Hello, World!"
+def load_model():
+    global model
+    model = KBQA()
 
 
 @app.route('/ask', methods=['GET'])
 def ask_qamp():
     question = request.args.get('question', type=str)
     print(question)
-    answers = app.service.request(question, verbose=False)
+    answers = model.request(question, verbose=False)
     return jsonify({'answers': answers})
 
 
 if __name__ == '__main__':
-    app.service = KBQA()
-    app.run(debug=True)
+    load_model()
+    app.run()
