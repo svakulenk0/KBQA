@@ -73,7 +73,3 @@ see notebooks
 
 python final_benchmark_results.py
 
-
-## Results
-
-TODO
