@@ -417,6 +417,7 @@ with cursor:
             if ask_question:
                 # make sure the output matches every input basket
                 answer = all(x & set(answers_ids) for x in all_entities_baskets)
+                print(answer)
                 # compare with GS answer
                 gs_answer = doc['bool_answer']
                 gs_answer_ids = []
@@ -433,6 +434,7 @@ with cursor:
                 
                 # COUNT
                 if p_qt == 'COUNT':
+                    print(n_answers)
                     if n_answers == n_gs_answers:
                         p, r = 1, 1
                     else:
@@ -440,6 +442,7 @@ with cursor:
 
                 # SELECT
                 else:
+                    print(answers_ids)
                     n_correct = len(answers_ids & gs_answer_ids)
                     try:
                         r = float(n_correct) / n_gs_answers
