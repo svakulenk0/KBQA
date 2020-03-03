@@ -442,7 +442,10 @@ with cursor:
 
                 # SELECT
                 else:
-                    print(answers_ids)
+                    # print(answers_ids)
+                    #  if e_index.look_up_by_id(_id)
+                    print([e_index.look_up_by_id(_id)[0]['_source']['uri'] for answer in answers_ids])
+
                     n_correct = len(answers_ids & gs_answer_ids)
                     try:
                         r = float(n_correct) / n_gs_answers
