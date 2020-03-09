@@ -443,8 +443,8 @@ with cursor:
                 # SELECT
                 else:
                     # print(answers_ids)
-                    #  if e_index.look_up_by_id(_id)
-                    print([e_index.look_up_by_id(_id)[0]['_source']['uri'] for _id in answers_ids])
+                    #  
+                    print([e_index.look_up_by_id(_id)[0]['_source']['uri'] for _id in answers_ids if e_index.look_up_by_id(_id)])
 
                     n_correct = len(answers_ids & gs_answer_ids)
                     try:
