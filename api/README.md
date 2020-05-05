@@ -15,6 +15,7 @@ python request.py
 ## Start MPqa API
 
 ```
+python app.py
 ```
 
 ## Test MPqa API
