@@ -143,7 +143,6 @@ class Mongo_Connector():
 # python -m pymagnitude.converter -i komninos_english_embeddings.txt -o komninos_english_embeddings.magnitude
 from pymagnitude import *
 
-embeddings_path = "/home/zola/Projects/KBQA/data/embeddings/"
 
 embeddings = {'glove6B100d': "glove.6B.100d.magnitude", 'glove840B300d': "glove.840B.300d.magnitude",
               'komninos': "komninos_english_embeddings.magnitude",
@@ -151,5 +150,5 @@ embeddings = {'glove6B100d': "glove.6B.100d.magnitude", 'glove840B300d': "glove.
               'fasttext_e_labels': "terms_labels_fasttext.magnitude"}
 
 
-def load_embeddings(embeddings_choice):
+def load_embeddings(embeddings_path, embeddings_choice):
     return Magnitude(embeddings_path+embeddings[embeddings_choice])

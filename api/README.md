@@ -2,9 +2,19 @@
 
 ## Prerequisites
 
-* HDT
-* Embeddings
+* HDT: dbpedia2016-04en.hdt
 * ElasticSearch (sudo /etc/init.d/elasticsearch start)
+* 2 pre-trained models with weights: 1) for question type classification; 2) for question parsing
+* embeddings: glove840B300d
+
+## Setup
+
+```
+conda create --name mpqa python=3.6
+conda activate mpqa
+pip install pybind11
+pip install -r requirements.txt
+```
 
 ## Test QA models
 
@@ -31,3 +41,4 @@ TODO
 ## Resources
 
 * [Flask tutorial](https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask)
+

@@ -22,12 +22,15 @@ from hdt import HDTDocument
 from setup import *
 from models import *
 
-# path to KG relations
+# paths
 hdt_path = '/mnt/ssd/sv/'
+embeddings_path = "/home/zola/Projects/KBQA/api/resources/embeddings/"
+model_path = '/home/zola/Projects/KBQA/api/resources/models/'
+
+# KG
 hdt_file = 'dbpedia2016-04en.hdt'
 namespace = 'predef-dbpedia2016-04'
 
-model_path = '/home/zola/Projects/temp/KBQA/src/'
 embeddings_choice='glove840B300d'
 question_types = ['SELECT', 'ASK', 'COUNT']
 
@@ -43,14 +46,14 @@ class KBQA():
         self.p_index = IndexSearch('dbpedia201604p')
 
         # load embeddings
-        self.word_vectors = load_embeddings(embeddings_choice)
-        self.p_vectors = load_embeddings('fasttext_p_labels')
+        self.word_vectors = load_embeddings(embeddings_path, embeddings_choice)
+        self.p_vectors = load_embeddings(embeddings_path, 'fasttext_p_labels')
         
         # load pre-trained question type classification model
         with open(model_path+'qtype_lcquad_%s.pkl'%(embeddings_choice), 'rb') as f:
             self.model_settings = pkl.load(f)
         self.qt_model = build_qt_inference_model(self.model_settings)
-        self.qt_model.load_weights(model_path+'checkpoints/_qtype_weights.best.hdf5', by_name=True)
+        self.qt_model.load_weights(model_path+'_qtype_weights.best.hdf5', by_name=True)
 
         # load pre-trained question parsing model
         with open(model_path+'lcquad_%s.pkl'%(embeddings_choice), 'rb') as f:
@@ -58,7 +61,7 @@ class KBQA():
         self.ep_model = build_ep_inference_model(ep_model_settings)
         # load weights
         # ep_model.load_weights('checkpoints/_'+modelname+'_weights.best.hdf5', by_name=True)
-        self.ep_model.load_weights(model_path+'model/2hops-types.h5', by_name=True)
+        self.ep_model.load_weights(model_path+'2hops-types.h5', by_name=True)
 
         # connect to the knowledge graph hdt file
         self.kg = HDTDocument(hdt_path+hdt_file)
