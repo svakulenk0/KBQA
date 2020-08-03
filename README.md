@@ -74,3 +74,23 @@ see notebooks
 
 python final_benchmark_results.py
 
+## Citation
+
+```bibtex
+@inproceedings{DBLP:conf/cikm/VakulenkoGPRC19,
+  author    = {Svitlana Vakulenko and
+               Javier David Fernandez Garcia and
+               Axel Polleres and
+               Maarten de Rijke and
+               Michael Cochez},
+  title     = {Message Passing for Complex Question Answering over Knowledge Graphs},
+  booktitle = {Proceedings of the 28th {ACM} International Conference on Information
+               and Knowledge Management, {CIKM} 2019, Beijing, China, November 3-7,
+               2019},
+  pages     = {1431--1440},
+  year      = {2019},
+  url       = {https://doi.org/10.1145/3357384.3358026},
+  doi       = {10.1145/3357384.3358026},
+  timestamp = {Mon, 04 Nov 2019 11:09:32 +0100}
+}
+```
