@@ -41,9 +41,10 @@ cd pyHDT/
 ```
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
-4. Index entities and predicates into ElasticSearch
-5. Download LC-QuAD dataset from http://lc-quad.sda.tech
-6. Import LC-QuAD dataset into MongoDB
+4. Follow instructions in https://github.com/svakulenk0/hdt_tutorial to extract the list of entities (dbpedia201604_terms.txt) and predicates
+5. Index entities and predicates into ElasticSearch
+6. Download LC-QuAD dataset from http://lc-quad.sda.tech
+7. Import LC-QuAD dataset into MongoDB
 
 ```
 sudo service mongod start
