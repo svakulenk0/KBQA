@@ -1,4 +1,4 @@
-# MPqa API
+# QAmp API
 
 ## Prerequisites
 
@@ -7,11 +7,13 @@
 * 2 pre-trained models with weights: 1) for question type classification; 2) for question parsing
 * embeddings: glove840B300d
 
+Download embeddings and pre-trained models from https://zenodo.org/record/5218736#.YR1y19Mzau4
+
 ## Setup
 
 ```
-conda create --name mpqa python=3.6
-conda activate mpqa
+conda create --name qamp python=3.6
+conda activate qamp
 pip install pybind11
 pip install -r requirements.txt
 ```
