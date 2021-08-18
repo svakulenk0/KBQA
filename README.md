@@ -1,4 +1,4 @@
-# MPqa
+# QAmp
 
 [Svitlana Vakulenko, Javier D. Fernandez, Axel Polleres, Maarten de Rijke and Michael Cochez. Message Passing for Complex Question Answering over Knowledge Graphs. CIKM. 2019](https://arxiv.org/abs/1908.06917)
 
