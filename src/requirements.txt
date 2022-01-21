@@ -35,7 +35,7 @@ html5lib==0.9999999
 idna==2.7
 importlib-metadata==0.23
 ipykernel==4.10.0
-ipython==5.8.0
+ipython==7.16.3
 ipython-genutils==0.2.0
 itsdangerous==1.1.0
 Jinja2==2.10.3
