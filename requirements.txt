@@ -29,7 +29,7 @@ google-pasta==0.1.8
 grpcio==1.16.0
 h5py==2.8.0
 hdt==2.3
-html5lib==0.9999999
+html5lib==0.999999999
 idna==2.7
 importlib-metadata==0.23
 ipykernel==4.10.0
