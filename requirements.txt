@@ -12,7 +12,7 @@ boto3==1.9.37
 botocore==1.12.37
 bz2file==0.98
 cachetools==3.1.1
-certifi==2018.10.15
+certifi==2022.12.7
 chardet==3.0.4
 decorator==4.3.0
 docutils==0.14
